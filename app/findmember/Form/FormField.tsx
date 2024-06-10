@@ -1,6 +1,7 @@
 import { FormFieldProps } from "@/app/findmember/Form/types";
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import Temp from "./Temp";
 import SelectOption from "@/app/findmember/Form/SelectOption";
 import { Textarea } from "@/components/ui/textarea"
 
@@ -17,6 +18,7 @@ const FormField: React.FC<FormFieldProps> = ({
     options = [],
     isMulti = false,
 }) => (
+
     <div className="w-full h-[5rem] ">
         <div className="w-full h-[50%] flex flex-col gap-2 ">
             {type === 'text' && <>
@@ -55,6 +57,7 @@ const FormField: React.FC<FormFieldProps> = ({
                     clip-rule="evenodd"></path>
             </svg>
             {/* {helperText} */}
+
         </p>}
 
     </div>
