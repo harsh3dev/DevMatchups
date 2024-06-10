@@ -1,13 +1,13 @@
 @tailwind base;
   @tailwind components;
   @tailwind utilities;
-  
+
+*, body{
+ font-family: sans-serif;
+}
 
 input{
   text-decoration: none;
   background-color: transparent;
-  max-width: 400px;
   min-height: 50px;
-  border: 20px;
-  border-color: blue;
 }

@@ -1,11 +1,14 @@
 import React from 'react'
 import Form from './Form/Form'
+import Navbar from '../Navbar/Navbar'
+import Footer from '../Footer/Footer'
 
 const page = () => {
   return (
-    <div className='w-screen min-h-screen text-black'>
-      <div className='w-full h-10 bg-black text-white p-10 text-center'>NAVBAR</div>
+    <div className=' min-h-screen text-black dark:bg-gray-900 dark:text-white relative '>
+      <Navbar/>
       <Form/>
+      <Footer/>
     </div>
   )
 }
