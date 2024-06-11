@@ -13,6 +13,7 @@ import makeAnimated from 'react-select/animated';
 import { useEffect, useRef, useState } from "react";
 import ReactDatePicker from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker.css';
+import { IoCalendarOutline } from "react-icons/io5";
 
 
 
@@ -32,7 +33,7 @@ function Form() {
     } = useForm<FormData>({
         resolver: zodResolver(UserSchema), // Apply the zodResolver
         defaultValues: {
-            regDate: "", 
+            regDate: new Date(Date.now()), 
           },
     });
     const animatedComponents = makeAnimated();
@@ -51,11 +52,13 @@ function Form() {
     return (
         <form className="w-full min-h-screen my-10 " onSubmit={handleSubmit(onSubmit)}>
             <TracingBeam className="w-full  ">
+                {/* HEADER TEXT */}
                 <div className="w-full font-extrabold text-2xl" >
                     <h1 className="font-extrabold text-3xl bg-gradient-to-r from-cyan-500 to-blue-500 bg-clip-text text-transparent ">
                         Team Up Now: Register and Find Teammates Today!
                     </h1>
                 </div>
+
                 <div className="min-w-[50rem] w-full flex flex-col items-start justify-normal text-left ">
                     <h1 className=" mt-4  text-2xl w-full h-14 font-bold bg-sky-100 flex flex-col justify-center rounded-lg pl-5 rounded-b-none  ">
                         Hackathon Details
@@ -86,24 +89,12 @@ function Form() {
                             error={errors.regURL}
                         />
 
-                        {/* TODO: Select */}
-                        {/* <FormField
-                        type="text"
-                        placeholder="Online/Offline/Hybrid"
-                        label="Hackathon Mode *"
-                        name="hackathonMode"
-                        register={register}
-                        error={errors.hackathonMode}
-                        options={ModeOptions}
-                    /> */}
-
+                        {/* HACKATHON MODE RADIO INPUTS */}
                         <div className="flex justify-start items-center w-full gap-5 ">
                             <h2 className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
                                 Hackathon Mode *
                             </h2>
-                            <div className="flex focus-within:bg-sky-100 items-center px-4 rounded-full border border-sky-200 dark:border-sky-700"
-                           
-                            >
+                            <div className="flex focus-within:bg-sky-100 items-center px-4 rounded-full border border-sky-200 dark:border-sky-700">
                                 <input
                                     {...register("hackathonMode")}
                                     type="radio"
@@ -139,28 +130,32 @@ function Form() {
 
 
 
-                        {/* <Label >Last Date of Registration *</Label> */}
-                        {/* <Controller
+                        <Label >Last Date of Registration *</Label>
+                        <Controller
                             control={control}
                             name="regDate"
+                            
                             render={({ field: { onChange, onBlur, value, ref } }) => (
                             <ReactDatePicker
+                                dateFormat="dd/MM/yyyy"
                                 onChange={(date) => onChange(date)} // send value to hook form
                                 onBlur={onBlur} // notify when input is touched/blur
                                 selected={value}
+                                closeOnScroll={true}
+                                className="w-full"
                             />
                             )}
                         />
-                        {errors.regDate && <span className="error-message text-sm mb-5 font-semibold text-right w-full text-red-500 ">*{errors.regDate.message}</span>} */}
+                        {errors.regDate && <span className="error-message text-sm mb-5 font-semibold text-right w-full text-red-500 ">*{errors.regDate.message}</span>}
 
-                        <FormField
+                        {/* <FormField
                             type="text"
                             placeholder="Date of reg"
                             label="Last Date of Registration *"
                             name="regDate"
                             register={register}
                             error={errors.regDate}
-                        />
+                        /> */}
                         <FormField
                             type="text"
                             placeholder="Mumbai, Maharastra or Online *"

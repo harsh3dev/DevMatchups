@@ -13,7 +13,10 @@ export const UserSchema: ZodType<FormData> = z
     role: z.string().min(1, { message: "Role is required" }),
     experience: z.string().min(1, { message: "Experience is required" }),
     
-    regDate: z.string(),
+    regDate: z.date({
+      required_error: "Date is required.",
+      invalid_type_error: "Wrong date format.",
+    }),
     location: z.string().min(1, { message: "Location is required" }),
     description: z.string().optional(),
 });
@@ -29,7 +32,7 @@ export type FormData = {
   role: string;
   experience: string;
   
-  regDate: string;
+  regDate: Date | null;
   location: string;
   description?: string;
 };
