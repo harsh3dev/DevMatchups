@@ -1,8 +1,4 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
 
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
   provider = "prisma-client-js"
@@ -15,12 +11,49 @@ datasource db {
 
 
 model User {
-  id    Int     @id @default(autoincrement())
-  email String  @unique
-  username String @unique
-  password String 
-  name  String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id           Int          @id @default(autoincrement())
+  username     String
+  email        String       @unique
+  password     String
+  applications Application[]
+  hackathons   Hackathon[]
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
 }
 
+model Hackathon {
+  id             Int          @id @default(autoincrement())
+  hackathonName  String
+  regURL         String
+  hackathonMode  String
+  memberCount    Int
+  skills         String[]
+  role           String
+  experience     String
+  regDate        DateTime
+  location       String
+  description    String
+  Employer       User         @relation(fields: [Employerid], references: [id])
+  Employerid     Int
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+  applications   Application[]
+}
+
+model Application {
+  id          Int      @id @default(autoincrement())
+  candidate   User     @relation(fields: [candidateId], references: [id])
+  candidateId Int
+  post        Hackathon @relation(fields: [postId], references: [id])
+  postId      Int
+  skills      String
+  coverLetter String
+  status      ApplicationStatus @default(PENDING)
+  createdAt   DateTime @default(now())
+}
+
+enum ApplicationStatus {
+  PENDING
+  ACCEPTED
+  REJECTED
+}
