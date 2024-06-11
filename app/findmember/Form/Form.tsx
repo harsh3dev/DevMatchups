@@ -46,9 +46,9 @@ function Form() {
         <form className="w-full min-h-screen my-10 " onSubmit={handleSubmit(onSubmit)}>
             <TracingBeam className="w-full  ">
                 <div className="w-full font-extrabold text-2xl" >
-                        <h1 className="font-extrabold text-3xl bg-gradient-to-r from-cyan-500 to-blue-500 bg-clip-text text-transparent ">
-                            Team Up Now: Register and Find Teammates Today!
-                        </h1>
+                    <h1 className="font-extrabold text-3xl bg-gradient-to-r from-cyan-500 to-blue-500 bg-clip-text text-transparent ">
+                        Team Up Now: Register and Find Teammates Today!
+                    </h1>
                 </div>
                 <div className="min-w-[50rem] w-full flex flex-col items-start justify-normal text-left ">
                     <h1 className=" mt-4  text-2xl w-full h-14 font-bold bg-sky-100 flex flex-col justify-center rounded-lg pl-5 rounded-b-none  ">
@@ -151,7 +151,7 @@ function Form() {
                     <h1 className=" mt-4 text-2xl w-full h-14 font-bold bg-sky-100 flex flex-col justify-center rounded-lg pl-5 rounded-b-none  ">
                         Team member requirements
                     </h1>
-                    <div className="flex flex-col gap-4 w-full border border-t-0 rounded-t-none  border-gray-300 px-10 py-5 rounded-lg ">
+                    <div className="flex flex-col gap-4 w-full h-full border border-t-0 rounded-t-none  border-gray-300 px-10 py-5 rounded-lg ">
 
                         <FormField
                             type="number"
@@ -196,13 +196,27 @@ function Form() {
                             options={ExperienceOptions}
                         />
 
+                        <h1 className="text-2xl font-bold mb-4 ">
+                            Additional Details
+                        </h1>
+
+
+                        <FormField
+                            type="textArea"
+                            placeholder="Mention any additional details you feel is important..."
+                            label="Enter any additional details"
+                            name="description"
+                            register={register}
+                            error={errors.description}
+                        />
+
                     </div>
 
 
-                    <h1 className=" mt-4 text-2xl w-full h-14 font-bold bg-sky-100 flex flex-col justify-center rounded-lg pl-5 rounded-b-none  ">
+                    {/* <h1 className=" mt-4 text-2xl w-full h-14 font-bold bg-sky-100 flex flex-col justify-center rounded-lg pl-5 rounded-b-none  ">
                         Lead Details
-                    </h1>
-                    <div className="flex flex-col gap-4 w-full border border-t-0 rounded-t-none pb-5 border-gray-300 px-10 py-5 rounded-lg ">
+                    </h1> */}
+                    {/* <div className="flex flex-col gap-4 w-full border border-t-0 rounded-t-none pb-5 border-gray-300 px-10 py-5 rounded-lg ">
 
                         <FormField
                             type="text"
@@ -244,24 +258,7 @@ function Form() {
                             register={register}
                             error={errors.leadNumber}
                         />
-
-                        <h1 className="text-2xl font-bold mb-4 ">
-                            Additional Details
-                        </h1>
-
-
-                        <FormField
-                            type="textArea"
-                            placeholder="Mention any additional details you feel is important..."
-                            label="Enter any additional details"
-                            name="description"
-                            register={register}
-                            error={errors.description}
-                        />
-
-
-
-                    </div>
+                    </div> */}
                     {isSubmitting ?
                         <Button disabled className="mt-4 w-full ">
                             <ReloadIcon className="mr-2 h-4 w-4 animate-spin" /> Please wait
