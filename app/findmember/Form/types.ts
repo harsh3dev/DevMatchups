@@ -1,7 +1,7 @@
 import { FieldError, UseFormRegister, ControllerRenderProps, Control, UseControllerProps } from "react-hook-form";
 import { z, ZodType } from "zod";
 
-
+type skillType = { value: string; label: string; }[];
 export const UserSchema: ZodType<FormData> = z
 .object({
     teamName: z.string().min(1, { message: "Team name is required" }),
@@ -9,7 +9,11 @@ export const UserSchema: ZodType<FormData> = z
     regURL: z.string().url({ message: "Please enter a valid URL" }),
     hackathonMode: z.string().min(1, { message: "Hackathon mode is required" }),
     memberCount: z.string().min(1, { message: "Member count must be at least 1" }),
-    skills: z.string().min(1, { message: "Enter at least 1 skill" }),
+    // skills: z.string().min(1, { message: "Enter at least 1 skill" }),
+    skills: z.array(z.object({
+      value: z.string(),
+      label: z.string(),
+    })).nullable(),
     role: z.string().min(1, { message: "Role is required" }),
     experience: z.string().min(1, { message: "Experience is required" }),
     
@@ -28,7 +32,7 @@ export type FormData = {
   regURL: string;
   hackathonMode: string;
   memberCount: string;
-  skills: string | null;
+  skills: skillType | null;
   role: string;
   experience: string;
   

@@ -1,0 +1,49 @@
+These are the values/options for the Create Select component that I am passing.
+const SkillsOptions = [{ value: 'Javascript', label: 'Javascript' }, { value: 'Python', label: 'Python' }, { value: 'React JS', label: 'React JS' }, { value: 'Next JS', label: 'Next JS' }, { value: 'MongoDB', label: 'MongoDB' }, { value: 'SQL', label: 'SQL' }];
+
+const { register, handleSubmit,formState: { errors, isSubmitting },
+    setError,reset,control,} = useForm<FormData>({
+        resolver: zodResolver(UserSchema), // Apply the zodResolver
+        defaultValues: {
+            skills: [{ value: 'Javascript', label: 'Javascript' }],
+        },
+    });
+
+<Controller
+    name="skills"
+    control={control}
+    render={({field}) => (
+        <CreatableSelect
+            isMulti
+            options={SkillsOptions}
+            value={field.value || []}
+            onChange={(val)=>field.onChange(val?.values)}
+            placeholder="Javascript, Python, C# etc..."
+            id="skills"
+        />
+    )}
+    rules={{ required: true }}
+/>
+
+The above is the usage of the component with react hook form Controller.
+
+Below are the type declarations and zod schema:
+
+type skillType = { value: string; label: string; }[];
+export type FormData = {
+    skills: skillType | null;
+}
+const UserSchema: ZodType<FormData> = z.object({
+    skills: z.array(z.object({
+      value: z.string(),
+      label: z.string(),
+    })).nullable(),
+});
+
+The problem I am facing is:
+`Whenever I am interacting with the Select component in the UI, i.e whenever I am changing or choosing other option than that of the default option, I get this error: "Unhandled Runtime Error
+TypeError: Cannot convert undefined or null to object"`
+
+Considering my given part of code and problem solve the problem/
+
+The project is a NextJS project and written in typescript.

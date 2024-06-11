@@ -1,19 +1,23 @@
 "use client"
+import { useState } from "react";
+
 import { useForm, Controller } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+
 import { FormData, UserSchema } from "@/app/findmember/Form/types";
 import FormField from "./FormField";
-import { zodResolver } from "@hookform/resolvers/zod";
+
 import { Button } from "@/components/ui/button"
 import { ReloadIcon } from "@radix-ui/react-icons"
 import { TracingBeam } from "@/components/ui/tracing-beam";
 import { Label } from "@/components/ui/label"
-import Select, { SingleValue } from 'react-select';
+
+import Select from 'react-select';
 import CreatableSelect from 'react-select/creatable';
 import makeAnimated from 'react-select/animated';
-import { useEffect, useRef, useState } from "react";
+
 import ReactDatePicker from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker.css';
-import { IoCalendarOutline } from "react-icons/io5";
 
 
 
@@ -33,8 +37,10 @@ function Form() {
     } = useForm<FormData>({
         resolver: zodResolver(UserSchema), // Apply the zodResolver
         defaultValues: {
-            regDate: new Date(Date.now()), 
-          },
+            regDate: new Date(Date.now()),
+            skills: [],
+            experience: "",
+        },
     });
     const animatedComponents = makeAnimated();
 
@@ -128,34 +134,25 @@ function Form() {
                             </div>
                         </div>
 
-
-
+                        {/* Date Picker Component */}
                         <Label >Last Date of Registration *</Label>
                         <Controller
                             control={control}
                             name="regDate"
-                            
+
                             render={({ field: { onChange, onBlur, value, ref } }) => (
-                            <ReactDatePicker
-                                dateFormat="dd/MM/yyyy"
-                                onChange={(date) => onChange(date)} // send value to hook form
-                                onBlur={onBlur} // notify when input is touched/blur
-                                selected={value}
-                                closeOnScroll={true}
-                                className="w-full"
-                            />
+                                <ReactDatePicker
+                                    dateFormat="dd/MM/yyyy"
+                                    onChange={(date) => onChange(date)} // send value to hook form
+                                    onBlur={onBlur} // notify when input is touched/blur
+                                    selected={value}
+                                    closeOnScroll={true}
+                                    className="w-full"
+                                />
                             )}
                         />
                         {errors.regDate && <span className="error-message text-sm mb-5 font-semibold text-right w-full text-red-500 ">*{errors.regDate.message}</span>}
 
-                        {/* <FormField
-                            type="text"
-                            placeholder="Date of reg"
-                            label="Last Date of Registration *"
-                            name="regDate"
-                            register={register}
-                            error={errors.regDate}
-                        /> */}
                         <FormField
                             type="text"
                             placeholder="Mumbai, Maharastra or Online *"
@@ -181,7 +178,7 @@ function Form() {
                         />
 
                         {/* TODO: Select */}
-                        <FormField
+                        {/* <FormField
                             type="text"
                             placeholder="Javascript, Python, C# etc..."
                             label="What are the required skills? *"
@@ -190,9 +187,25 @@ function Form() {
                             error={errors.skills}
                             options={SkillsOptions}
                             isMulti={true}
+                        /> */}
+
+                        <Label htmlFor="skills" >What are the required skills? *</Label>
+                        <Controller
+                            name="skills"
+                            control={control}
+                            render={({field}) => (
+                                <CreatableSelect
+                                    isMulti
+                                    options={SkillsOptions}
+                                    value={field.value || []}
+                                    onChange={(val)=>field.onChange(val || [])}
+                                    placeholder="Javascript, Python, C# etc..."
+                                    id="skills"
+                                />
+                            )}
+                            rules={{ required: true }}
                         />
-
-
+                        {errors.skills && <span className="error-message text-sm mb-5 font-semibold text-right w-full text-red-500 ">*{errors.skills.message}</span>}
 
 
                         {/* TODO: Select */}
@@ -205,8 +218,27 @@ function Form() {
                             error={errors.role}
                         />
 
+
+                        <Label htmlFor="experience" >Experience level *</Label>
+                        <Controller
+                            name="experience"
+                            control={control}
+                            render={({field}) => (
+                                <Select
+                                    options={ExperienceOptions}
+                                    value={ExperienceOptions.find((c) => c.value === field.value)}
+                                    onChange={(val)=>field.onChange(val?.value)}
+                                    placeholder="Enter minimum experience level"
+                                    id="experience"
+                                />
+                            )}
+                            rules={{ required: true }}
+                        />
+                        {errors.experience && <span className="error-message text-sm mb-5 font-semibold text-right w-full text-red-500 ">*{errors.experience.message}</span>}
+
+
                         {/* TODO: Select */}
-                        <FormField
+                        {/* <FormField
                             type="text"
                             placeholder="Enter minimum experience level"
                             label="Experience level *"
@@ -214,7 +246,7 @@ function Form() {
                             register={register}
                             error={errors.experience}
                             options={ExperienceOptions}
-                        />
+                        /> */}
 
                         <h1 className="text-2xl font-bold mb-4 ">
                             Additional Details
