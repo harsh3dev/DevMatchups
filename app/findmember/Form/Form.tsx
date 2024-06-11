@@ -5,13 +5,15 @@ import FormField from "./FormField";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button"
 import { ReloadIcon } from "@radix-ui/react-icons"
-import { twMerge } from "tailwind-merge";
 import { TracingBeam } from "@/components/ui/tracing-beam";
 import { Label } from "@/components/ui/label"
-import { ControllerRenderProps, Control } from 'react-hook-form';
 import Select, { SingleValue } from 'react-select';
 import CreatableSelect from 'react-select/creatable';
 import makeAnimated from 'react-select/animated';
+import { useEffect, useRef, useState } from "react";
+import ReactDatePicker from "react-datepicker";
+import 'react-datepicker/dist/react-datepicker.css';
+
 
 
 interface Option {
@@ -29,18 +31,22 @@ function Form() {
         control,
     } = useForm<FormData>({
         resolver: zodResolver(UserSchema), // Apply the zodResolver
+        defaultValues: {
+            regDate: "", 
+          },
     });
     const animatedComponents = makeAnimated();
-
 
     const onSubmit = async (data: FormData) => {
         await new Promise((resolve) => setTimeout(resolve, 1000));
         console.log("SUCCESS", data);
+        // console.log("SUCCESS", JSON.stringify(data));
         reset();
     }
     const ModeOptions = [{ value: 'Offline', label: 'Offline' }, { value: 'Online', label: 'Online' }, { value: 'Hybrid', label: 'Hybrid' }]
     const SkillsOptions = [{ value: 'Javascript', label: 'Javascript' }, { value: 'Python', label: 'Python' }, { value: 'React JS', label: 'React JS' }, { value: 'Next JS', label: 'Next JS' }, { value: 'MongoDB', label: 'MongoDB' }, { value: 'SQL', label: 'SQL' }]
     const ExperienceOptions = [{ value: 'Beginner (0-1 years)', label: 'Beginner (0-1 years)' }, { value: 'Intermediate (1-2 years)', label: 'Intermediate (1-2 years)' }, { value: 'Expert (2+ years)', label: 'Expert (2+ years)' }]
+    const [date, setDate] = useState(new Date(Date.now()));
 
     return (
         <form className="w-full min-h-screen my-10 " onSubmit={handleSubmit(onSubmit)}>
@@ -95,40 +101,57 @@ function Form() {
                             <h2 className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
                                 Hackathon Mode *
                             </h2>
-                            <div className="flex items-center px-4 rounded-full border border-sky-200 dark:border-sky-700">
+                            <div className="flex focus-within:bg-sky-100 items-center px-4 rounded-full border border-sky-200 dark:border-sky-700"
+                           
+                            >
                                 <input
                                     {...register("hackathonMode")}
                                     type="radio"
                                     value="Online"
                                     id="Online"
-                                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300   dark:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600"
+                                    className=" text-blue-600 bg-gray-100 border-gray-300   dark:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600"
                                 />
                                 <label htmlFor="Online" className="w-full  ms-2 text-sm font-medium text-gray-900 dark:text-gray-300" > Online </label>
                             </div>
 
-                            <div className="flex items-center px-4 rounded-full border border-sky-200 dark:border-sky-700">
+                            <div className="flex focus-within:bg-sky-100 items-center px-4 rounded-full border border-sky-200 dark:border-sky-700">
                                 <input
                                     {...register("hackathonMode")}
                                     type="radio"
                                     value="Offline"
                                     id="Offline"
-                                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300  dark:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600"
+                                    className=" text-blue-600 bg-gray-100 border-gray-300  dark:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600"
                                 />
                                 <label htmlFor="Offline" className="w-full  ms-2 text-sm font-medium text-gray-900 dark:text-gray-300" > Offline </label>
                             </div>
 
-                            <div className="flex items-center px-4 rounded-full border border-sky-200 dark:border-sky-700">
+                            <div className="flex focus-within:bg-sky-100 active:bg-sky-100 items-center px-4 rounded-full border border-sky-200 dark:border-sky-700">
                                 <input
                                     {...register("hackathonMode")}
                                     type="radio"
                                     value="Hybrid"
                                     id="Hybrid"
-                                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300   dark:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600"
+                                    className=" text-blue-600 bg-gray-100 border-gray-300   dark:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600"
                                 />
-                                <label htmlFor="Hybrid" className="w-full  ms-2 text-sm font-medium text-gray-900 dark:text-gray-300" > Hybrid </label>
+                                <label htmlFor="Hybrid" className="w-full h-full  ms-2 text-sm font-medium text-gray-900 dark:text-gray-300" > Hybrid </label>
                             </div>
                         </div>
 
+
+
+                        {/* <Label >Last Date of Registration *</Label> */}
+                        {/* <Controller
+                            control={control}
+                            name="regDate"
+                            render={({ field: { onChange, onBlur, value, ref } }) => (
+                            <ReactDatePicker
+                                onChange={(date) => onChange(date)} // send value to hook form
+                                onBlur={onBlur} // notify when input is touched/blur
+                                selected={value}
+                            />
+                            )}
+                        />
+                        {errors.regDate && <span className="error-message text-sm mb-5 font-semibold text-right w-full text-red-500 ">*{errors.regDate.message}</span>} */}
 
                         <FormField
                             type="text"
@@ -173,6 +196,8 @@ function Form() {
                             options={SkillsOptions}
                             isMulti={true}
                         />
+
+
 
 
                         {/* TODO: Select */}
