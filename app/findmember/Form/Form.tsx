@@ -13,6 +13,7 @@ import makeAnimated from 'react-select/animated';
 import { useEffect, useRef, useState } from "react";
 import ReactDatePicker from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker.css';
+import { IoCalendarOutline } from "react-icons/io5";
 
 
 
@@ -133,13 +134,15 @@ function Form() {
                         <Controller
                             control={control}
                             name="regDate"
+                            
                             render={({ field: { onChange, onBlur, value, ref } }) => (
                             <ReactDatePicker
+                                dateFormat="dd/MM/yyyy"
                                 onChange={(date) => onChange(date)} // send value to hook form
                                 onBlur={onBlur} // notify when input is touched/blur
                                 selected={value}
-                                
-                                className=""
+                                closeOnScroll={true}
+                                className="w-full"
                             />
                             )}
                         />
