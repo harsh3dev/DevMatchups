@@ -4,7 +4,8 @@ import { Label } from "@/components/ui/label"
 import Temp from "./Temp";
 import SelectOption from "@/app/findmember/Form/SelectOption";
 import { Textarea } from "@/components/ui/textarea"
-
+import CreatableSelect from 'react-select/creatable';
+import { useForm, useController, UseControllerProps } from "react-hook-form";
 
 const FormField: React.FC<FormFieldProps> = ({
     type,
@@ -17,8 +18,10 @@ const FormField: React.FC<FormFieldProps> = ({
     valueAsNumber,
     options = [],
     isMulti = false,
-}) => (
+}) =>{ 
+    const SkillsOptions = [{ value: 'Javascript', label: 'Javascript' }, { value: 'Python', label: 'Python' }, { value: 'React JS', label: 'React JS' }, { value: 'Next JS', label: 'Next JS' }, { value: 'MongoDB', label: 'MongoDB' }, { value: 'SQL', label: 'SQL' }]
 
+return(
     <div className="w-full h-[5rem] ">
         <div className="w-full h-[50%] flex flex-col gap-2 ">
             {type === 'text' && <>
@@ -38,6 +41,14 @@ const FormField: React.FC<FormFieldProps> = ({
             {type === 'select' &&
             <>
                 <SelectOption className=" focus:border-b-2 border-blue-500 rounded-md bg-sky-100 " options={options} label={label} {...register(name, { valueAsNumber })}  />
+                {error && <span className="error-message text-sm mb-5 text-right w-full  font-semibold text-red-500 ">*{error.message}</span>}
+            </>
+            }
+            {type === 'selectMulti' &&
+            <>
+                <Label htmlFor={label}>{label}</Label>
+                <CreatableSelect isMulti options={options} className=" focus:border-b-2 border-blue-500 rounded-md bg-sky-100 " />
+                {/* <SelectOption className=" focus:border-b-2 border-blue-500 rounded-md bg-sky-100 " options={options} label={label} {...register(name, { valueAsNumber })}  /> */}
                 {error && <span className="error-message text-sm mb-5 text-right w-full  font-semibold text-red-500 ">*{error.message}</span>}
             </>
             }
@@ -61,5 +72,6 @@ const FormField: React.FC<FormFieldProps> = ({
         </p>}
 
     </div>
-);
+)
+};
 export default FormField;

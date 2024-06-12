@@ -62,17 +62,17 @@ export default function LoginForm() {
 
           <div className="grid grid-cols-1 gap-4">
             
-            <div className="space-y-2">
+            {/* <div className="space-y-2">
               <Label htmlFor="username">User ID</Label>
               <Input id="username" placeholder="Enter your username" className="focus:border-b-2 border-blue-500 rounded-md bg-sky-50" {...register("username")} required />
               {errors.username && <span className="error-message text-right w-full text-sm mb-5 font-semibold text-red-500 ">*{errors.username.message}</span>}
-            </div>
+            </div> */}
           </div>
-          {/* <div className="flex items-center space-x-2"> */}
-            {/* <Separator className="flex-1" /> */}
-            {/* <p className="text-sm text-center w-full font-medium text-gray-400">or</p> */}
-            {/* <Separator className="flex-1" /> */}
-          {/* </div> */}
+          <div className="flex items-center space-x-2"> 
+            <Separator className="flex-1" />
+            <p className="text-sm text-center w-full font-medium text-gray-400">or</p>
+            <Separator className="flex-1" />
+          </div>
           {/* <div className="space-y-2">
             <Label htmlFor="email">Email</Label>
             <Input id="email" type="email" placeholder="example@email.com" className="focus:border-b-2 border-blue-500 rounded-md bg-sky-50"  
