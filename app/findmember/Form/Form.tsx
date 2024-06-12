@@ -1,21 +1,16 @@
 "use client"
 import { useState } from "react";
-
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-
 import { FormData, UserSchema } from "@/app/findmember/Form/types";
 import FormField from "./FormField";
-
 import { Button } from "@/components/ui/button"
 import { ReloadIcon } from "@radix-ui/react-icons"
 import { TracingBeam } from "@/components/ui/tracing-beam";
 import { Label } from "@/components/ui/label"
-
 import Select from 'react-select';
 import CreatableSelect from 'react-select/creatable';
 import makeAnimated from 'react-select/animated';
-
 import ReactDatePicker from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker.css';
 
@@ -51,6 +46,7 @@ function Form() {
         // console.log("SUCCESS", JSON.stringify(data));
         reset();
     }
+
     const ModeOptions = [{ value: 'Offline', label: 'Offline' }, { value: 'Online', label: 'Online' }, { value: 'Hybrid', label: 'Hybrid' }]
     const SkillsOptions = [{ value: 'Javascript', label: 'Javascript' }, { value: 'Python', label: 'Python' }, { value: 'React JS', label: 'React JS' }, { value: 'Next JS', label: 'Next JS' }, { value: 'MongoDB', label: 'MongoDB' }, { value: 'SQL', label: 'SQL' }]
     const ExperienceOptions = [{ value: 'Beginner (0-1 years)', label: 'Beginner (0-1 years)' }, { value: 'Intermediate (1-2 years)', label: 'Intermediate (1-2 years)' }, { value: 'Expert (2+ years)', label: 'Expert (2+ years)' }]
@@ -265,58 +261,11 @@ function Form() {
 
                     </div>
 
-
-                    {/* <h1 className=" mt-4 text-2xl w-full h-14 font-bold bg-sky-100 flex flex-col justify-center rounded-lg pl-5 rounded-b-none  ">
-                        Lead Details
-                    </h1> */}
-                    {/* <div className="flex flex-col gap-4 w-full border border-t-0 rounded-t-none pb-5 border-gray-300 px-10 py-5 rounded-lg ">
-
-                        <FormField
-                            type="text"
-                            placeholder="Enter Team Lead's name"
-                            name="leadName"
-                            label="Team Lead Name *"
-                            register={register}
-                            error={errors.leadName}
-                        />
-                        <FormField
-                            type="text"
-                            placeholder="Enter Team Lead's email address"
-                            name="leadEmail"
-                            label="Team Lead's Email address *"
-                            register={register}
-                            error={errors.leadEmail}
-                        />
-                        <FormField
-                            type="text"
-                            placeholder="https://www.linkedin.com/in/youruserid/"
-                            name="leadLinkedin"
-                            label="Team Lead's LinkedIn URL *"
-                            register={register}
-                            error={errors.leadLinkedin}
-                        />
-                        <FormField
-                            type="text"
-                            placeholder="https://github.com/youruserid/"
-                            name="leadGithub"
-                            label="Team Lead's Github URL *"
-                            register={register}
-                            error={errors.leadGithub}
-                        />
-                        <FormField
-                            type="text"
-                            placeholder="include country code: eg: +918XXXXXXX9"
-                            name="leadNumber"
-                            label="Team Lead's contact Number"
-                            register={register}
-                            error={errors.leadNumber}
-                        />
-                    </div> */}
                     {isSubmitting ?
                         <Button disabled className="mt-4 w-full ">
                             <ReloadIcon className="mr-2 h-4 w-4 animate-spin" /> Please wait
                         </Button> :
-                        <Button type="submit" className="mt-4 w-full " >
+                        <Button type="submit" className="mt-4 w-full" >
                             Submit
                         </Button>}
                 </div>

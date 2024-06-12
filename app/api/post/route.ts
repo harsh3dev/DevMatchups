@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { hackathonSchema } from './Types';
+import { hackathonSchema } from './types';
 import { prisma } from '../../../lib/prisma';
 
 export async function POST(req: Request) {
