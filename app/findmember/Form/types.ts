@@ -8,15 +8,10 @@ export const UserSchema: ZodType<FormData> = z
     hackathonName: z.string().min(1, { message: "Hackathon name is required" }),
     regURL: z.string().url({ message: "Please enter a valid URL" }),
     hackathonMode: z.string().min(1, { message: "Hackathon mode is required" }),
-    memberCount: z.string().min(1, { message: "Member count must be at least 1" }),
-    // skills: z.string().min(1, { message: "Enter at least 1 skill" }),
-    skills: z.array(z.object({
-      value: z.string(),
-      label: z.string(),
-    })).nullable(),
+    memberCount: z.number().min(1, { message: "Member count must be at least 1" }),
+    skills: z.array(z.string().min(1, { message: "Enter atleast 1 skill" })),
     role: z.string().min(1, { message: "Role is required" }),
     experience: z.string().min(1, { message: "Experience is required" }),
-    
     regDate: z.date({
       required_error: "Date is required.",
       invalid_type_error: "Wrong date format.",
@@ -31,14 +26,14 @@ export type FormData = {
   hackathonName: string;
   regURL: string;
   hackathonMode: string;
-  memberCount: string;
-  skills: skillType | null;
+  memberCount: number;
+  skills: string[];
   role: string;
   experience: string;
-  
   regDate: Date | null;
   location: string;
   description?: string;
+  Employerid?: number
 };
 
 export type FormFieldProps = {

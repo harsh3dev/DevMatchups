@@ -15,6 +15,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Span } from "next/dist/trace"
 import { useEffect, useRef, useState } from "react"
+import axios from "axios"
 
 
 const LoginSchema = z.object({
@@ -34,10 +35,21 @@ export default function LoginForm() {
     const {
     register,
     handleSubmit,
+     reset,
     formState: { errors }
   } = useForm<LoginSchemaType>({ resolver: zodResolver(LoginSchema) });
 
-  const onSubmit: SubmitHandler<LoginSchemaType> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<LoginSchemaType> = async (data) => {
+    console.log(data);
+    try{
+    const response=await axios.post("/api/users/login",data);
+    console.log(response);
+    reset();
+    }
+    catch(error:any){
+     console.error("server error",error);
+    }
+  };
 //   useEffect(()=>{
 //     if(uidRef.current && !emailRef.current){
 //         setOptional(true)
@@ -73,12 +85,12 @@ export default function LoginForm() {
             <p className="text-sm text-center w-full font-medium text-gray-400">or</p>
             <Separator className="flex-1" />
           </div>
-          {/* <div className="space-y-2">
+           <div className="space-y-2">
             <Label htmlFor="email">Email</Label>
             <Input id="email" type="email" placeholder="example@email.com" className="focus:border-b-2 border-blue-500 rounded-md bg-sky-50"  
             {...register("email")} required />
             {errors.email && <span className="error-message text-right w-full text-sm mb-5 font-semibold text-red-500 ">*{errors.email.message}</span>}
-          </div> */}
+          </div> 
           <div className="space-y-2">
             <Label htmlFor="password">Password</Label>
             <Input id="password" type="password" placeholder="********" className="focus:border-b-2 border-blue-500 rounded-md bg-sky-50" {...register("password")} required />

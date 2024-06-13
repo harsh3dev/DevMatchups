@@ -13,7 +13,7 @@ import CreatableSelect from 'react-select/creatable';
 import makeAnimated from 'react-select/animated';
 import ReactDatePicker from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker.css';
-
+import axios from "axios";
 
 
 
@@ -21,7 +21,7 @@ interface Option {
     value: string;
     label: string;
 }
-
+type SkillOptions =  Option[];
 function Form() {
     const {
         register,
@@ -39,19 +39,27 @@ function Form() {
         },
     });
     const animatedComponents = makeAnimated();
-
     const onSubmit = async (data: FormData) => {
-        await new Promise((resolve) => setTimeout(resolve, 1000));
-        console.log("SUCCESS", data);
-        // console.log("SUCCESS", JSON.stringify(data));
+        console.log("Submitting data:", data);
+        try {
+           data.Employerid=1;
+          const response = await axios.post('/api/post', data);
+          console.log('SUCCESS', response.data);
+        } catch (error: any) {
+          if (axios.isAxiosError(error)) {
+            console.error('Axios error:', error.response?.data);
+          } else {
+            console.error('Unexpected error:', error);
+          }
+        }
         reset();
-    }
+      };
 
     const ModeOptions = [{ value: 'Offline', label: 'Offline' }, { value: 'Online', label: 'Online' }, { value: 'Hybrid', label: 'Hybrid' }]
-    const SkillsOptions = [{ value: 'Javascript', label: 'Javascript' }, { value: 'Python', label: 'Python' }, { value: 'React JS', label: 'React JS' }, { value: 'Next JS', label: 'Next JS' }, { value: 'MongoDB', label: 'MongoDB' }, { value: 'SQL', label: 'SQL' }]
+    const options: SkillOptions = [{ value: 'Javascript', label: 'Javascript' }, { value: 'Python', label: 'Python' }, { value: 'React JS', label: 'React JS' }, { value: 'Next JS', label: 'Next JS' }, { value: 'MongoDB', label: 'MongoDB' }, { value: 'SQL', label: 'SQL' }]
     const ExperienceOptions = [{ value: 'Beginner (0-1 years)', label: 'Beginner (0-1 years)' }, { value: 'Intermediate (1-2 years)', label: 'Intermediate (1-2 years)' }, { value: 'Expert (2+ years)', label: 'Expert (2+ years)' }]
     const [date, setDate] = useState(new Date(Date.now()));
-
+   
     return (
         <form className="w-full min-h-screen my-10 " onSubmit={handleSubmit(onSubmit)}>
             <TracingBeam className="w-full  ">
@@ -63,7 +71,7 @@ function Form() {
                 </div>
 
                 <div className="min-w-[50rem] w-full flex flex-col items-start justify-normal text-left ">
-                    <h1 className=" mt-4  text-2xl w-full h-14 font-bold bg-sky-100 flex flex-col justify-center rounded-lg pl-5 rounded-b-none  ">
+                    <h1 className=" mt-4  text-2xl w-full h-14 font-bold bg-sky-100 flex flex-col justify-center rounded-lg pl-5 rounded-b-none">
                         Hackathon Details
                     </h1>
                     <div className="flex flex-col gap-4 w-full border border-t-0 rounded-t-none  border-gray-300 px-10 py-5 rounded-lg ">
@@ -193,9 +201,9 @@ function Form() {
                             render={({field}) => (
                                 <CreatableSelect
                                     isMulti
-                                    options={SkillsOptions}
-                                    value={field.value || []}
-                                    onChange={(val)=>field.onChange(val || [])}
+                                    options = {options}
+                                    value={field.value?.map(skill => ({ value: skill, label: skill })) || []}
+                                    onChange={(val) => field.onChange(val.map(v => v.value))}
                                     placeholder="Javascript, Python, C# etc..."
                                     id="skills"
                                 />

@@ -14,6 +14,7 @@ import { z } from "zod";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Span } from "next/dist/trace"
+import axios from "axios"
 
 
 const SignUpSchema = z.object({
@@ -36,7 +37,11 @@ export default function SignupForm() {
     formState: { errors }
   } = useForm<SignUpSchemaType>({ resolver: zodResolver(SignUpSchema) });
 
-  const onSubmit: SubmitHandler<SignUpSchemaType> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<SignUpSchemaType> = async (data) =>{
+    console.log(data);
+    const response=await axios.post("/api/users/signup",{data});
+    console.log("response",response);
+  }
 
   return (
     <div className="flex h-screen w-full items-center justify-center ">      

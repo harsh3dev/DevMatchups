@@ -1,10 +1,11 @@
 import { NextResponse } from 'next/server';
-import { hackathonSchema } from './types';
+import { hackathonSchema } from './Types';
 import { prisma } from '../../../lib/prisma';
 
 export async function POST(req: Request) {
   try {
     const body = await req.json();
+    console.log("incoming",body);
     const validationResult = hackathonSchema.safeParse(body);
 
     if (!validationResult.success) {

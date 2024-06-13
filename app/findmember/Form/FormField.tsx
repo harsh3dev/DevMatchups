@@ -30,17 +30,17 @@ return(
                 {error && <span className="error-message text-right w-full text-sm mb-5 font-semibold text-red-500 ">*{error.message}</span>}
             </>
             }
-            {type === 'number' && <>
-
+            {type === "number" && <>
+                {console.log("number",label,name)}
                 <Label htmlFor={label}>{label}</Label>
-                <Input className=" focus:border-b-2 border-blue-500 rounded-md bg-sky-100 " type={type} id={label} placeholder={placeholder} {...register(name, { valueAsNumber })} />
+                <Input className=" focus:border-b-2 border-blue-500 rounded-md bg-sky-100 " type="number" id={label} placeholder={placeholder} {...register(name, {valueAsNumber:true})} />
                 {error && <span className="error-message text-sm mb-5 font-semibold text-right w-full text-red-500 ">*{error.message}</span>}
             </>
             }
             
             {type === 'select' &&
             <>
-                <SelectOption className=" focus:border-b-2 border-blue-500 rounded-md bg-sky-100 " options={options} label={label} {...register(name, { valueAsNumber })}  />
+                <SelectOption className=" focus:border-b-2 border-blue-500 rounded-md bg-sky-100 " options={options} label={label} {...register(name, {min: 18, max: 99})}  />
                 {error && <span className="error-message text-sm mb-5 text-right w-full  font-semibold text-red-500 ">*{error.message}</span>}
             </>
             }
