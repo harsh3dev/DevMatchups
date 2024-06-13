@@ -1,5 +1,6 @@
 "use client"
 import { useState } from "react";
+import '@/app/globals.css'
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormData, UserSchema } from "@/app/findmember/Form/types";
@@ -14,6 +15,7 @@ import makeAnimated from 'react-select/animated';
 import ReactDatePicker from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker.css';
 import axios from "axios";
+
 
 
 
@@ -39,6 +41,7 @@ function Form() {
         },
     });
     const animatedComponents = makeAnimated();
+
     const onSubmit = async (data: FormData) => {
         console.log("Submitting data:", data);
         try {
@@ -58,6 +61,7 @@ function Form() {
     const ModeOptions = [{ value: 'Offline', label: 'Offline' }, { value: 'Online', label: 'Online' }, { value: 'Hybrid', label: 'Hybrid' }]
     const options: SkillOptions = [{ value: 'Javascript', label: 'Javascript' }, { value: 'Python', label: 'Python' }, { value: 'React JS', label: 'React JS' }, { value: 'Next JS', label: 'Next JS' }, { value: 'MongoDB', label: 'MongoDB' }, { value: 'SQL', label: 'SQL' }]
     const ExperienceOptions = [{ value: 'Beginner (0-1 years)', label: 'Beginner (0-1 years)' }, { value: 'Intermediate (1-2 years)', label: 'Intermediate (1-2 years)' }, { value: 'Expert (2+ years)', label: 'Expert (2+ years)' }]
+
     const [date, setDate] = useState(new Date(Date.now()));
    
     return (
@@ -65,13 +69,14 @@ function Form() {
             <TracingBeam className="w-full  ">
                 {/* HEADER TEXT */}
                 <div className="w-full font-extrabold text-2xl" >
-                    <h1 className="font-extrabold text-3xl bg-gradient-to-r from-cyan-500 to-blue-500 bg-clip-text text-transparent ">
+                    <h1 className="font-extrabold text-3xl bg-gradient-to-r from-cyan-500 to-blue-500 bg-clip-text text-transparent dark:bg-gradient-to-t dark:from-sky-200 dark:to-cyan-400 ">
                         Team Up Now: Register and Find Teammates Today!
                     </h1>
                 </div>
 
                 <div className="min-w-[50rem] w-full flex flex-col items-start justify-normal text-left ">
-                    <h1 className=" mt-4  text-2xl w-full h-14 font-bold bg-sky-100 flex flex-col justify-center rounded-lg pl-5 rounded-b-none">
+
+                    <h1 className=" mt-4  text-2xl w-full h-14 font-bold bg-sky-100 dark:bg-sky-900 flex flex-col justify-center rounded-lg pl-5 rounded-b-none  ">
                         Hackathon Details
                     </h1>
                     <div className="flex flex-col gap-4 w-full border border-t-0 rounded-t-none  border-gray-300 px-10 py-5 rounded-lg ">
@@ -105,18 +110,18 @@ function Form() {
                             <h2 className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
                                 Hackathon Mode *
                             </h2>
-                            <div className="flex focus-within:bg-sky-100 items-center px-4 rounded-full border border-sky-200 dark:border-sky-700">
+                            <div className="flex focus-within:bg-sky-100 dark:focus-within:bg-sky-900 items-center px-4 rounded-full border border-sky-200 dark:border-sky-700">
                                 <input
                                     {...register("hackathonMode")}
                                     type="radio"
                                     value="Online"
                                     id="Online"
-                                    className=" text-blue-600 bg-gray-100 border-gray-300   dark:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600"
+                                    className=" text-blue-600 bg-gray-100 border-gray-300 dark:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600"
                                 />
                                 <label htmlFor="Online" className="w-full  ms-2 text-sm font-medium text-gray-900 dark:text-gray-300" > Online </label>
                             </div>
 
-                            <div className="flex focus-within:bg-sky-100 items-center px-4 rounded-full border border-sky-200 dark:border-sky-700">
+                            <div className="flex focus-within:bg-sky-100  dark:focus-within:bg-sky-900 items-center px-4 rounded-full border border-sky-200 dark:border-sky-700">
                                 <input
                                     {...register("hackathonMode")}
                                     type="radio"
@@ -127,7 +132,7 @@ function Form() {
                                 <label htmlFor="Offline" className="w-full  ms-2 text-sm font-medium text-gray-900 dark:text-gray-300" > Offline </label>
                             </div>
 
-                            <div className="flex focus-within:bg-sky-100 active:bg-sky-100 items-center px-4 rounded-full border border-sky-200 dark:border-sky-700">
+                            <div className="flex focus-within:bg-sky-100 dark:focus-within:bg-sky-900  active:bg-sky-100 items-center px-4 rounded-full border border-sky-200 dark:border-sky-700">
                                 <input
                                     {...register("hackathonMode")}
                                     type="radio"
@@ -152,7 +157,7 @@ function Form() {
                                     onBlur={onBlur} // notify when input is touched/blur
                                     selected={value}
                                     closeOnScroll={true}
-                                    className="w-full"
+                                    className="w-full focus:border-b-2 border-blue-500 rounded-md bg-sky-100 dark:bg-slate-800 dark:text-white"
                                 />
                             )}
                         />
@@ -168,7 +173,7 @@ function Form() {
                         />
                     </div>
 
-                    <h1 className=" mt-4 text-2xl w-full h-14 font-bold bg-sky-100 flex flex-col justify-center rounded-lg pl-5 rounded-b-none  ">
+                    <h1 className=" mt-4 text-2xl w-full h-14 font-bold dark:bg-sky-900 bg-sky-100 flex flex-col justify-center rounded-lg pl-5 rounded-b-none  ">
                         Team member requirements
                     </h1>
                     <div className="flex flex-col gap-4 w-full h-full border border-t-0 rounded-t-none  border-gray-300 px-10 py-5 rounded-lg ">
@@ -206,6 +211,8 @@ function Form() {
                                     onChange={(val) => field.onChange(val.map(v => v.value))}
                                     placeholder="Javascript, Python, C# etc..."
                                     id="skills"
+                                    className=" my-react-select focus:border-b-2 border-blue-500 rounded-md bg-sky-100 dark:bg-slate-800 dark:text-black "
+                                    classNamePrefix="my-react-select"
                                 />
                             )}
                             rules={{ required: true }}
@@ -235,6 +242,8 @@ function Form() {
                                     onChange={(val)=>field.onChange(val?.value)}
                                     placeholder="Enter minimum experience level"
                                     id="experience"
+                                    className="focus:border-b-2 border-blue-500 rounded-md bg-sky-100 dark:bg-slate-800 dark:text-black  "
+                                    classNamePrefix="my-react-select"
                                 />
                             )}
                             rules={{ required: true }}
@@ -281,5 +290,7 @@ function Form() {
         </form>
     );
 }
+
+
 
 export default Form;
