@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { hackathonSchema } from './types';
+import { hackathonSchema } from './Types';
 import { prisma } from '../../../lib/prisma';
 
 export async function POST(req: Request) {
@@ -28,6 +28,7 @@ export async function POST(req: Request) {
       description,
       Employerid,
     } = validationResult.data;
+    
 
     const hackathon = await prisma.hackathon.create({
       data: {
