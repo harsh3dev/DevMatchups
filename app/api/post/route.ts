@@ -5,6 +5,7 @@ import { prisma } from '../../../lib/prisma';
 export async function POST(req: Request) {
   try {
     const body = await req.json();
+    console.log("incoming",body);
     const validationResult = hackathonSchema.safeParse(body);
 
     if (!validationResult.success) {
@@ -28,7 +29,6 @@ export async function POST(req: Request) {
       description,
       Employerid,
     } = validationResult.data;
-    
 
     const hackathon = await prisma.hackathon.create({
       data: {

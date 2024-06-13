@@ -31,3 +31,5 @@ ALTER TABLE "Application" ADD CONSTRAINT "Application_candidateId_fkey" FOREIGN 
 
 -- AddForeignKey
 ALTER TABLE "Application" ADD CONSTRAINT "Application_postId_fkey" FOREIGN KEY ("postId") REFERENCES "Hackathon"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "User" ADD COLUMN "name" TEXT NOT NULL;
+
