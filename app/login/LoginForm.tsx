@@ -81,7 +81,7 @@ export default function LoginForm() {
             {errors.password && <span className="error-message text-right w-full text-sm mb-5 font-semibold text-red-500 ">*{errors.password.message}</span>}
           </div>
 
-          <Button type="submit" className="w-full">
+          <Button type="submit" className="w-full mt-2">
             Log In
           </Button>
           </form>

@@ -16,46 +16,37 @@ const FormField: React.FC<FormFieldProps> = ({
     error,
     helper = false,
     valueAsNumber,
-    options = [],
-    isMulti = false,
 }) =>{ 
-    const SkillsOptions = [{ value: 'Javascript', label: 'Javascript' }, { value: 'Python', label: 'Python' }, { value: 'React JS', label: 'React JS' }, { value: 'Next JS', label: 'Next JS' }, { value: 'MongoDB', label: 'MongoDB' }, { value: 'SQL', label: 'SQL' }]
+
+    const SkillsOptions = [
+        { value: 'Javascript', label: 'Javascript' },
+        { value: 'Python', label: 'Python' },
+        { value: 'React JS', label: 'React JS' },
+        { value: 'Next JS', label: 'Next JS' },
+        { value: 'MongoDB', label: 'MongoDB' },
+        { value: 'SQL', label: 'SQL' }
+    ]
 
 return(
     <div className="w-full h-[5rem] ">
         <div className="w-full h-[50%] flex flex-col gap-2 ">
             {type === 'text' && <>
                 <Label htmlFor={label}>{label}</Label>
-                <Input className=" focus:border-b-2 border-blue-500 rounded-md bg-sky-100 " type={type} id={label} placeholder={placeholder} {...register(name, { valueAsNumber })} />
+                <Input className=" focus:border-b-2 border-blue-500 dark:border-sky-300 rounded-md bg-sky-100 " type={type} id={label} placeholder={placeholder} {...register(name, { valueAsNumber })} />
                 {error && <span className="error-message text-right w-full text-sm mb-5 font-semibold text-red-500 ">*{error.message}</span>}
             </>
             }
             {type === 'number' && <>
 
                 <Label htmlFor={label}>{label}</Label>
-                <Input className=" focus:border-b-2 border-blue-500 rounded-md bg-sky-100 " type={type} id={label} placeholder={placeholder} {...register(name, { valueAsNumber })} />
+                <Input className=" focus:border-b-2 border-blue-500 dark:border-sky-300 rounded-md bg-sky-100 " type={type} id={label} placeholder={placeholder} {...register(name, { valueAsNumber })} />
                 {error && <span className="error-message text-sm mb-5 font-semibold text-right w-full text-red-500 ">*{error.message}</span>}
-            </>
-            }
-            
-            {type === 'select' &&
-            <>
-                <SelectOption className=" focus:border-b-2 border-blue-500 rounded-md bg-sky-100 " options={options} label={label} {...register(name, { valueAsNumber })}  />
-                {error && <span className="error-message text-sm mb-5 text-right w-full  font-semibold text-red-500 ">*{error.message}</span>}
-            </>
-            }
-            {type === 'selectMulti' &&
-            <>
-                <Label htmlFor={label}>{label}</Label>
-                <CreatableSelect isMulti options={options} className=" focus:border-b-2 border-blue-500 rounded-md bg-sky-100 " />
-                {/* <SelectOption className=" focus:border-b-2 border-blue-500 rounded-md bg-sky-100 " options={options} label={label} {...register(name, { valueAsNumber })}  /> */}
-                {error && <span className="error-message text-sm mb-5 text-right w-full  font-semibold text-red-500 ">*{error.message}</span>}
             </>
             }
             {type === 'textArea' &&
             <>
                 <Label htmlFor={label}>{label}</Label>
-                <Textarea className=" mb-4 focus:border-b-2 border-blue-500 rounded-md bg-sky-100 " placeholder={placeholder} id={label} {...register(name, { valueAsNumber })} />
+                <Textarea className=" mb-4 focus:border-b-2 border-blue-500 dark:border-sky-300 rounded-md bg-sky-100 " placeholder={placeholder} id={label} {...register(name, { valueAsNumber })} />
                 {error && <span className="error-message text-sm mb-5 text-right w-full  font-semibold text-red-500 ">*{error.message}</span>}
             </>
             }
@@ -68,9 +59,7 @@ return(
                     clip-rule="evenodd"></path>
             </svg>
             {/* {helperText} */}
-
         </p>}
-
     </div>
 )
 };
