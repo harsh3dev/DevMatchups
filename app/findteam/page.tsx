@@ -10,7 +10,7 @@ import PostsTab from './components/PostsTab';
 
 const page = () => {
   return (
-    <div className=' min-h-screen text-black dark:bg-gray-900 dark:text-white relative '>
+    <div className=' min-h-screen text-black dark:bg-background bg-background dark:text-white relative '>
       <Navbar />
       <div className='w-full relative h-[150px] text-white flex items-center justify-center text-center text-7xl font-extrabold mb-5 '>
         <WordFadeIn words="Participate in hackathons with other teams!" className='text-xl z-10 md:text-4xl text-white tracking-wide ' />
@@ -19,12 +19,12 @@ const page = () => {
       <div className='max-w-4xl w-full mx-auto'>
         <SearchFilter />
       </div>
-      <div className='grid grid-cols-3 h-full gap-2 max-w-[1260px] mx-auto mt-5 '>
+      {/* <div className='grid grid-cols-3 h-full gap-2 max-w-[1260px] mx-auto mt-5 '>
         <FilterTab />
         <div className='col-span-2'>
         <PostsTab />
         </div>
-      </div>
+      </div> */}
       <div className='h-screen' ></div>
       <Footer />
     </div>
