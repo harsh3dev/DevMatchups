@@ -14,6 +14,7 @@ const config = {
   ],
   prefix: "",
   theme: {
+    
     container: {
       center: true,
       padding: "2rem",
@@ -22,6 +23,13 @@ const config = {
       },
     },
     extend: {
+      colors: {
+        'text': 'var(--text)',
+        'background': 'var(--background)',
+        'primary': 'var(--primary)',
+        'secondary': 'var(--secondary)',
+        'accent': 'var(--accent)',
+       },
       keyframes: {
         "accordion-down": {
           from: { height: "0" },

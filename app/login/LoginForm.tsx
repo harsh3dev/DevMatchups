@@ -64,7 +64,7 @@ export default function LoginForm() {
   return (
     <div className="flex h-screen w-full items-center justify-center ">      
       {/* <form  className="w-full grid place-items-center h-[80vh] "  > */}
-      <Card className="w-full max-w-lg ">
+      <Card className="w-full max-w-lg backdrop-blur-lg ">
         <CardHeader className="space-y-1 text-center">
           <CardTitle className="text-2xl font-bold">Log In</CardTitle>
           <CardDescription>It's good to see you back here!</CardDescription>
@@ -81,11 +81,11 @@ export default function LoginForm() {
             </div> */}
           </div>
 
-          <div className="flex items-center space-x-2"> 
+          {/* <div className="flex items-center space-x-2"> 
             <Separator className="flex-1" />
             <p className="text-sm text-center w-full font-medium text-gray-400">or</p>
             <Separator className="flex-1" />
-          </div>
+          </div> */}
            <div className="space-y-2">
             <Label htmlFor="email">Email</Label>
             <Input id="email" type="email" placeholder="example@email.com" className="focus:border-b-2 border-blue-500 rounded-md bg-sky-50"  
@@ -120,9 +120,9 @@ export default function LoginForm() {
             </Button>
           </div>
         </CardContent>
-        <CardFooter className="text-center  w-full flex justify-center items-center text-sm text-gray-500">
+        <CardFooter className="text-center gap-2 w-full flex justify-center items-center text-sm text-gray-500">
           Don't have an account?{" "}
-          <Link href="/signup" className="font-medium text-blue-600 hover:underline" prefetch={false}>
+          <Link href="/signup" className="font-medium text-blue-600 dark:text-cyan-500 hover:underline" prefetch={false}>
             Sign Up
           </Link>
         </CardFooter>

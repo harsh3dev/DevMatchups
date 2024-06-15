@@ -2,72 +2,23 @@
   @tailwind components;
   @tailwind utilities;
 
-  @layer components {
-    /* .my-react-select-container {
-    } */
-    .my-react-select-container .my-react-select__control {
-      @apply bg-white dark:bg-neutral-700 border-2 border-neutral-300 dark:border-neutral-700 hover:border-neutral-400 dark:hover:border-neutral-500;
+  @layer base {
+    :root {
+      --text: #0b161e;
+      --background: #f3f7fc;
+      --primary: #154b79;
+      --secondary: #66aff0;
+      --accent: #056fcc;
     }
-  
-    .my-react-select-container .my-react-select__control--is-focused {
-      @apply border-neutral-500 hover:border-neutral-500 dark:border-neutral-400 dark:hover:border-neutral-400 shadow-none;
-    }
-  
-    .my-react-select-container .my-react-select__menu {
-      @apply bg-neutral-100 dark:bg-neutral-700 border-2 border-neutral-300 dark:border-neutral-600;
-    }
-  
-    .my-react-select-container .my-react-select__option {
-      @apply text-neutral-600 dark:text-neutral-200 bg-neutral-100 hover:bg-neutral-200 dark:bg-neutral-700 dark:hover:bg-neutral-800;
-    }
-    /* .my-react-select-container .my-react-select__option--is-focused {
-      @apply bg-neutral-200 dark:bg-neutral-800;
-    } */
-  
-    .my-react-select-container .my-react-select__indicator-separator {
-      @apply bg-neutral-400;
-    }
-  
-    .my-react-select-container .my-react-select__input-container,
-    .my-react-select-container .my-react-select__placeholder,
-    .my-react-select-container .my-react-select__single-value {
-      @apply text-neutral-600 dark:text-neutral-200;
-    }
-  
-      /* Multi-value container and labels */
-    .my-react-select-container .my-react-select__multi-value {
-      @apply bg-neutral-400 dark:bg-neutral-600 rounded-md;
-    }
-  
-    .my-react-select-container .my-react-select__multi-value__label {
-      @apply text-neutral-800 dark:text-neutral-100;
-    }
-  
-    /* Multi-value remove button and SVG */
-    .my-react-select-container .my-react-select__multi-value__remove {
-      @apply bg-neutral-500 dark:bg-neutral-700 hover:bg-neutral-600 dark:hover:bg-neutral-800 rounded-full;
-    }
-  
-    .my-react-select-container .my-react-select__multi-value__remove .css-tj5bde-Svg {
-      @apply text-neutral-200 dark:text-neutral-400;
-    }
-  
-    /* Clear and dropdown indicator */
-    .my-react-select-container .my-react-select__clear-indicator,
-    .my-react-select-container .my-react-select__dropdown-indicator {
-      @apply text-neutral-400 dark:text-neutral-600;
-    }
-  
-    .my-react-select-container .my-react-select__clear-indicator:hover,
-    .my-react-select-container .my-react-select__dropdown-indicator:hover {
-      @apply text-neutral-500 dark:text-neutral-500;
-    }
-  
-    .my-react-select-container .my-react-select__clear-indicator .css-tj5bde-Svg,
-    .my-react-select-container .my-react-select__dropdown-indicator .css-tj5bde-Svg {
-      @apply fill-current;
+    .dark {
+      --text: #e1ecf4;
+      --background: #131316;
+      --primary: #86bbea;
+      --secondary: #0f5999;
+      --accent: #339dfa;
     }
   }
+  
 
 *, body{
  font-family: sans-serif;

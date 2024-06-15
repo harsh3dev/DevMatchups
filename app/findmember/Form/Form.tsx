@@ -23,7 +23,7 @@ interface Option {
     value: string;
     label: string;
 }
-type SkillOptions =  Option[];
+type SkillOptions = Option[];
 function Form() {
     const {
         register,
@@ -45,25 +45,25 @@ function Form() {
     const onSubmit = async (data: FormData) => {
         console.log("Submitting data:", data);
         try {
-           data.Employerid=1;
-          const response = await axios.post('/api/post', data);
-          console.log('SUCCESS', response.data);
+            data.Employerid = 1;
+            const response = await axios.post('/api/post', data);
+            console.log('SUCCESS', response.data);
         } catch (error: any) {
-          if (axios.isAxiosError(error)) {
-            console.error('Axios error:', error.response?.data);
-          } else {
-            console.error('Unexpected error:', error);
-          }
+            if (axios.isAxiosError(error)) {
+                console.error('Axios error:', error.response?.data);
+            } else {
+                console.error('Unexpected error:', error);
+            }
         }
         reset();
-      };
+    };
 
     const ModeOptions = [{ value: 'Offline', label: 'Offline' }, { value: 'Online', label: 'Online' }, { value: 'Hybrid', label: 'Hybrid' }]
     const options: SkillOptions = [{ value: 'Javascript', label: 'Javascript' }, { value: 'Python', label: 'Python' }, { value: 'React JS', label: 'React JS' }, { value: 'Next JS', label: 'Next JS' }, { value: 'MongoDB', label: 'MongoDB' }, { value: 'SQL', label: 'SQL' }]
     const ExperienceOptions = [{ value: 'Beginner (0-1 years)', label: 'Beginner (0-1 years)' }, { value: 'Intermediate (1-2 years)', label: 'Intermediate (1-2 years)' }, { value: 'Expert (2+ years)', label: 'Expert (2+ years)' }]
 
     const [date, setDate] = useState(new Date(Date.now()));
-   
+
     return (
         <form className="w-full min-h-screen my-10 " onSubmit={handleSubmit(onSubmit)}>
             <TracingBeam className="w-full  ">
@@ -76,7 +76,7 @@ function Form() {
 
                 <div className="min-w-[50rem] w-full flex flex-col items-start justify-normal text-left ">
 
-                    <h1 className=" mt-4  text-2xl w-full h-14 font-bold bg-sky-100 dark:bg-sky-900 flex flex-col justify-center rounded-lg pl-5 rounded-b-none  ">
+                    <h1 className=" mt-4  text-2xl w-full h-14 font-bold text-white bg-accent dark:bg-accent flex flex-col justify-center rounded-lg pl-5 rounded-b-none  ">
                         Hackathon Details
                     </h1>
                     <div className="flex flex-col gap-4 w-full border border-t-0 rounded-t-none  border-gray-300 px-10 py-5 rounded-lg ">
@@ -110,7 +110,7 @@ function Form() {
                             <h2 className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
                                 Hackathon Mode *
                             </h2>
-                            <div className="flex focus-within:bg-sky-100 dark:focus-within:bg-sky-900 items-center px-4 rounded-full border border-sky-200 dark:border-sky-700">
+                            <div className="flex focus-within:bg-sky-200 dark:focus-within:bg-sky-900 items-center px-4 rounded-full border border-sky-200 dark:border-sky-700">
                                 <input
                                     {...register("hackathonMode")}
                                     type="radio"
@@ -121,7 +121,7 @@ function Form() {
                                 <label htmlFor="Online" className="w-full  ms-2 text-sm font-medium text-gray-900 dark:text-gray-300" > Online </label>
                             </div>
 
-                            <div className="flex focus-within:bg-sky-100  dark:focus-within:bg-sky-900 items-center px-4 rounded-full border border-sky-200 dark:border-sky-700">
+                            <div className="flex focus-within:bg-sky-200  dark:focus-within:bg-sky-900 items-center px-4 rounded-full border border-sky-200 dark:border-sky-700">
                                 <input
                                     {...register("hackathonMode")}
                                     type="radio"
@@ -132,7 +132,7 @@ function Form() {
                                 <label htmlFor="Offline" className="w-full  ms-2 text-sm font-medium text-gray-900 dark:text-gray-300" > Offline </label>
                             </div>
 
-                            <div className="flex focus-within:bg-sky-100 dark:focus-within:bg-sky-900  active:bg-sky-100 items-center px-4 rounded-full border border-sky-200 dark:border-sky-700">
+                            <div className="flex focus-within:bg-sky-200 dark:focus-within:bg-sky-900  active:bg-sky-100 items-center px-4 rounded-full border border-sky-200 dark:border-sky-700">
                                 <input
                                     {...register("hackathonMode")}
                                     type="radio"
@@ -142,6 +142,11 @@ function Form() {
                                 />
                                 <label htmlFor="Hybrid" className="w-full h-full  ms-2 text-sm font-medium text-gray-900 dark:text-gray-300" > Hybrid </label>
                             </div>
+                            {errors.hackathonMode && <span className="error-message text-sm mb-5 flex items-center justify-center font-semibold text-right w-full text-red-500 "><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4 -mt-px">
+                                <path fill-rule="evenodd"
+                                    d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm8.706-1.442c1.146-.573 2.437.463 2.126 1.706l-.709 2.836.042-.02a.75.75 0 01.67 1.34l-.04.022c-1.147.573-2.438-.463-2.127-1.706l.71-2.836-.042.02a.75.75 0 11-.671-1.34l.041-.022zM12 9a.75.75 0 100-1.5.75.75 0 000 1.5z"
+                                    clip-rule="evenodd"></path>
+                            </svg>{errors.hackathonMode.message}</span>}
                         </div>
 
                         {/* Date Picker Component */}
@@ -161,7 +166,11 @@ function Form() {
                                 />
                             )}
                         />
-                        {errors.regDate && <span className="error-message text-sm mb-5 font-semibold text-right w-full text-red-500 ">*{errors.regDate.message}</span>}
+                        {errors.regDate && <span className="error-message text-sm mb-5 flex items-center justify-center font-semibold text-right w-full text-red-500 "><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4 -mt-px">
+                            <path fill-rule="evenodd"
+                                d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm8.706-1.442c1.146-.573 2.437.463 2.126 1.706l-.709 2.836.042-.02a.75.75 0 01.67 1.34l-.04.022c-1.147.573-2.438-.463-2.127-1.706l.71-2.836-.042.02a.75.75 0 11-.671-1.34l.041-.022zM12 9a.75.75 0 100-1.5.75.75 0 000 1.5z"
+                                clip-rule="evenodd"></path>
+                        </svg>{errors.regDate.message}</span>}
 
                         <FormField
                             type="text"
@@ -173,7 +182,7 @@ function Form() {
                         />
                     </div>
 
-                    <h1 className=" mt-4 text-2xl w-full h-14 font-bold dark:bg-sky-900 bg-sky-100 flex flex-col justify-center rounded-lg pl-5 rounded-b-none  ">
+                    <h1 className=" mt-4 text-2xl w-full h-14 font-bold dark:bg-accent bg-accent text-white flex flex-col justify-center rounded-lg pl-5 rounded-b-none  ">
                         Team member requirements
                     </h1>
                     <div className="flex flex-col gap-4 w-full h-full border border-t-0 rounded-t-none  border-gray-300 px-10 py-5 rounded-lg ">
@@ -203,21 +212,76 @@ function Form() {
                         <Controller
                             name="skills"
                             control={control}
-                            render={({field}) => (
+                            render={({ field }) => (
                                 <CreatableSelect
                                     isMulti
-                                    options = {options}
+                                    options={options}
                                     value={field.value?.map(skill => ({ value: skill, label: skill })) || []}
-                                    onChange={(val) => field.onChange(val.map(v => v.value))}
+                                    onChange={val => field.onChange(val.map(v => v.value))}
                                     placeholder="Javascript, Python, C# etc..."
                                     id="skills"
-                                    className=" my-react-select focus:border-b-2 border-blue-500 rounded-md bg-sky-100 dark:bg-slate-800 dark:text-black "
+                                    className="my-react-select focus:border-b-2 border-blue-500 rounded-md bg-sky-100 dark:bg-slate-800 dark:text-black"
                                     classNamePrefix="my-react-select"
+                                    styles={{
+                                        singleValue: base => ({ ...base, color: "white" }),
+                                        valueContainer: base => ({
+                                            ...base,
+                                            color: "white",
+                                            width: "100%"
+                                        }),
+                                        control: (base, state) => ({
+                                            ...base,
+                                            background: "var(--background)"
+                                        }),
+                                        option: (styles, { data, isDisabled, isFocused, isSelected }) => ({
+                                            ...styles,
+                                            backgroundColor:"#083344",
+                                            color:"white",
+                                            ":active": {
+                                                ...styles[":active"],
+                                                backgroundColor: "#083344"
+                                            }
+                                        }),
+                                        multiValue: (styles, { data }) => ({
+                                            ...styles,
+                                            backgroundColor: "var(--primary)" // the bg color behind icon
+                                        }),
+                                        multiValueLabel: styles => ({
+                                            ...styles,
+                                            color: "var(--text)", // label text color
+                                            background: "var(--secondary)" // label bg behind selected
+                                        }),
+                                        multiValueRemove: styles => ({
+                                            ...styles,
+                                            color: "var(--secondary)",
+                                            ":hover": {
+                                                backgroundColor: "white", // on hover x bg color
+                                                color: "black" // on hover x icon color
+                                            }
+                                        })
+                                    }}
+                                    theme={theme => ({
+                                        ...theme,
+                                        colors: {
+                                            ...theme.colors,
+                                            neutral30: "hotpink", // control/borderColor(focused)
+                                            neutral50: "#ccc", // placeholder color
+                                            neutral80: "white", // input color
+                                            primary25: "#ccc", // option bg color focused
+                                            primary: "black", // option bg color selected
+                                            primary50: "white" // option bg color active (enabled or available)
+                                        }
+                                    })}
                                 />
                             )}
                             rules={{ required: true }}
                         />
-                        {errors.skills && <span className="error-message text-sm mb-5 font-semibold text-right w-full text-red-500 ">*{errors.skills.message}</span>}
+
+                        {errors.skills && <span className="error-message text-sm mb-5 font-semibold text-right flex items-center justify-center  w-full text-red-500 "><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4 -mt-px">
+                            <path fill-rule="evenodd"
+                                d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm8.706-1.442c1.146-.573 2.437.463 2.126 1.706l-.709 2.836.042-.02a.75.75 0 01.67 1.34l-.04.022c-1.147.573-2.438-.463-2.127-1.706l.71-2.836-.042.02a.75.75 0 11-.671-1.34l.041-.022zM12 9a.75.75 0 100-1.5.75.75 0 000 1.5z"
+                                clip-rule="evenodd"></path>
+                        </svg>{errors.skills.message}</span>}
 
 
                         {/* TODO: Select */}
@@ -235,20 +299,75 @@ function Form() {
                         <Controller
                             name="experience"
                             control={control}
-                            render={({field}) => (
+                            render={({ field }) => (
                                 <Select
                                     options={ExperienceOptions}
                                     value={ExperienceOptions.find((c) => c.value === field.value)}
-                                    onChange={(val)=>field.onChange(val?.value)}
+                                    onChange={(val) => field.onChange(val?.value)}
                                     placeholder="Enter minimum experience level"
                                     id="experience"
                                     className="focus:border-b-2 border-blue-500 rounded-md bg-sky-100 dark:bg-slate-800 dark:text-black  "
                                     classNamePrefix="my-react-select"
+                                    styles={{
+                                        singleValue: base => ({ ...base, color: "var(--text)" }),
+                                        valueContainer: base => ({
+                                            ...base,
+                                            color: "white",
+                                            width: "100%"
+                                        }),
+                                        control: (base, state) => ({
+                                            ...base,
+                                            background: "var(--background)"
+                                        }),
+                                        option: (styles, { data, isDisabled, isFocused, isSelected }) => ({
+                                            ...styles,
+                                            backgroundColor:"#083344",
+                                            color:"white",
+                                            ":active": {
+                                                ...styles[":active"],
+                                                backgroundColor: "#083344"
+                                            }
+                                        }),
+                                        multiValue: (styles, { data }) => ({
+                                            ...styles,
+                                            backgroundColor: "var(--primary)" // the bg color behind icon
+                                        }),
+                                        multiValueLabel: styles => ({
+                                            ...styles,
+                                            color: "black", // label text color
+                                            background: "var(--accent)" // label bg behind selected
+                                        }),
+                                        multiValueRemove: styles => ({
+                                            ...styles,
+                                            color: "var(--secondary)",
+                                            ":hover": {
+                                                backgroundColor: "white", // on hover x bg color
+                                                color: "black" // on hover x icon color
+                                            }
+                                        })
+                                    }}
+                                    theme={theme => ({
+                                        ...theme,
+                                        colors: {
+                                            ...theme.colors,
+                                            neutral30: "hotpink", // control/borderColor(focused)
+                                            neutral50: "#ccc", // placeholder color
+                                            neutral80: "white", // input color
+                                            primary25: "#ccc", // option bg color focused
+                                            primary: "black", // option bg color selected
+                                            primary50: "white" // option bg color active (enabled or available)
+                                        }
+                                    })}
                                 />
                             )}
                             rules={{ required: true }}
                         />
-                        {errors.experience && <span className="error-message text-sm mb-5 font-semibold text-right w-full text-red-500 ">*{errors.experience.message}</span>}
+                        {errors.experience && <span className="error-message text-sm mb-5 font-semibold flex items-center justify-center  text-right w-full text-red-500 "><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4 -mt-px">
+                            <path fill-rule="evenodd"
+                                d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm8.706-1.442c1.146-.573 2.437.463 2.126 1.706l-.709 2.836.042-.02a.75.75 0 01.67 1.34l-.04.022c-1.147.573-2.438-.463-2.127-1.706l.71-2.836-.042.02a.75.75 0 11-.671-1.34l.041-.022zM12 9a.75.75 0 100-1.5.75.75 0 000 1.5z"
+                                clip-rule="evenodd"></path>
+                        </svg>
+                            {errors.experience.message}</span>}
 
 
                         {/* TODO: Select */}
@@ -279,10 +398,10 @@ function Form() {
                     </div>
 
                     {isSubmitting ?
-                        <Button disabled className="mt-4 w-full ">
+                        <Button disabled className="mt-4 w-full bg-primary dark:bg-secondary hover:bg-secondary dark:hover:bg-primary hover:ring-2 ring-offset-1 text-white dark:text-white  ">
                             <ReloadIcon className="mr-2 h-4 w-4 animate-spin" /> Please wait
                         </Button> :
-                        <Button type="submit" className="mt-4 w-full" >
+                        <Button type="submit" className="mt-4 w-full bg-primary dark:bg-secondary hover:bg-secondary dark:hover:bg-primary hover:ring-2 ring-offset-1 text-white dark:text-white " >
                             Submit
                         </Button>}
                 </div>

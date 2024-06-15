@@ -5,7 +5,7 @@ import Footer from '../Footer/Footer'
 
 const page = () => {
   return (
-    <div className=' min-h-screen text-black dark:bg-gray-900 dark:text-white relative '>
+    <div className=' min-h-screen text-black dark:bg-background bg-background dark:text-white relative '>
       <Navbar/>
       <Form/>
       <Footer/>
