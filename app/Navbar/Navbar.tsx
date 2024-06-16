@@ -3,13 +3,7 @@ import React from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { ModeToggle } from './ModeToggle'
-import { FaAngleDown } from "react-icons/fa";
-import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+
 import { Button } from '@/components/ui/button'
 
 const Navbar = () => {
@@ -50,24 +44,6 @@ const Navbar = () => {
                                 Get Started
                             </Link>   
                         </Button>
-                        {/* <DropdownMenu>
-                            <DropdownMenuTrigger asChild>
-                                <span className="text-blue-700 hover:text-white dark:text-white border border-blue-700 hover:bg-blue-600 font-medium rounded-lg text-sm px-4 py-2 text-center dark:border-blue-600 dark:hover:bg-blue-700 mr-2 transition-colors ease-in-out flex items-center justify-center gap-1 "> Login/Signup <FaAngleDown /> </span>
-                            </DropdownMenuTrigger>
-                            <DropdownMenuContent align="center">
-                                
-                                <DropdownMenuItem>
-                                    <Link href={"/signup"} className="text-blue-700 hover:text-white dark:text-white border border-blue-700 hover:bg-blue-600 font-medium w-full text-sm px-4 py-2 text-center dark:border-blue-600 dark:hover:bg-blue-700 mr-2 transition-colors ease-in-out ">
-                                        Signup
-                                    </Link>
-                                </DropdownMenuItem>
-                                <DropdownMenuItem>
-                                    <Link href={"/login"} className="text-blue-700 hover:text-white dark:text-white border border-blue-700 hover:bg-blue-600 font-medium w-full text-sm px-4 py-2 text-center dark:border-blue-600 dark:hover:bg-blue-700 mr-2 transition-colors ease-in-out ">
-                                        Login
-                                    </Link>
-                                </DropdownMenuItem>
-                            </DropdownMenuContent>
-                        </DropdownMenu> */}
                         <ModeToggle />
                     </div>
 

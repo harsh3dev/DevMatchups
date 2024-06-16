@@ -6,14 +6,19 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area"
+
 
 
 
 
 const FilterTab = () => {
   return (
-    <div className='min-h-[50vh] bg-blue-700 rounded-xl  ' >
-      
+    <ScrollArea className='h-[70vh] bg-blue-700 rounded-xl  ' >
+      <ScrollArea className='w-full'>
+  <ScrollBar/>
+
+      </ScrollArea>
       <Select >
         <SelectTrigger>
           <SelectValue placeholder="Select a verified email to display" />
@@ -24,7 +29,8 @@ const FilterTab = () => {
           <SelectItem value="m@support.com">m@support.com</SelectItem>
         </SelectContent>
       </Select>
-    </div>
+      <ScrollBar/>
+    </ScrollArea>
   )
 }
 

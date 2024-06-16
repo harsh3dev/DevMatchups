@@ -13,24 +13,36 @@ export function ModeToggle() {
   const [themeToggle, setThemeToggle]=React.useState(false);
 
   useEffect(()=>{
-    setTheme("system");
+    const localTheme=localStorage.getItem("theme");
+    console.log(localTheme);
+    if(localTheme){
+      setTheme(localTheme)
+      if(localTheme==="light") setThemeToggle(true);
+    }
+    else setTheme("system")
+
+    // setTheme("system")
   },[]);
 
-  useEffect(()=>{
-    if(themeToggle)
+
+  const handleThemeToggle=()=>{
+    setThemeToggle((prev)=>!prev);
+
+    if(themeToggle){
       setTheme("light");
-    else
+      localStorage.setItem("theme", "light");
+    }
+    else{
       setTheme("dark")
-  },[themeToggle]);
-
-
-
+      localStorage.setItem("theme", "dark");
+    }
+  }
 
   return (
     <>
-      <Button variant="outline" size="icon" onClick={()=>setThemeToggle((prev)=>!prev)} >
-        {themeToggle && <SunIcon className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />}
-        { !themeToggle && <MoonIcon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />}
+      <Button variant="outline" size="icon" onClick={()=>handleThemeToggle()} >
+      <SunIcon className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+      <MoonIcon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
       </Button>
     </>
   )

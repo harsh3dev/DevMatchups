@@ -1,19 +1,21 @@
 "use client"
-import { useState } from "react";
 import '@/app/globals.css'
+
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormData, UserSchema } from "@/app/findmember/Form/types";
 import FormField from "./FormField";
+
 import { Button } from "@/components/ui/button"
 import { ReloadIcon } from "@radix-ui/react-icons"
 import { TracingBeam } from "@/components/ui/tracing-beam";
 import { Label } from "@/components/ui/label"
+
 import Select from 'react-select';
 import CreatableSelect from 'react-select/creatable';
-import makeAnimated from 'react-select/animated';
 import ReactDatePicker from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker.css';
+
 import axios from "axios";
 
 
@@ -40,7 +42,6 @@ function Form() {
             experience: "",
         },
     });
-    const animatedComponents = makeAnimated();
 
     const onSubmit = async (data: FormData) => {
         console.log("Submitting data:", data);
@@ -61,8 +62,6 @@ function Form() {
     const ModeOptions = [{ value: 'Offline', label: 'Offline' }, { value: 'Online', label: 'Online' }, { value: 'Hybrid', label: 'Hybrid' }]
     const options: SkillOptions = [{ value: 'Javascript', label: 'Javascript' }, { value: 'Python', label: 'Python' }, { value: 'React JS', label: 'React JS' }, { value: 'Next JS', label: 'Next JS' }, { value: 'MongoDB', label: 'MongoDB' }, { value: 'SQL', label: 'SQL' }]
     const ExperienceOptions = [{ value: 'Beginner (0-1 years)', label: 'Beginner (0-1 years)' }, { value: 'Intermediate (1-2 years)', label: 'Intermediate (1-2 years)' }, { value: 'Expert (2+ years)', label: 'Expert (2+ years)' }]
-
-    const [date, setDate] = useState(new Date(Date.now()));
 
     return (
         <form className="w-full min-h-screen my-10 " onSubmit={handleSubmit(onSubmit)}>
