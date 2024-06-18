@@ -4,27 +4,21 @@ import Footer from '../Footer/Footer'
 import { SearchFilter } from './components/SearchFilter'
 import WordFadeIn from "@/components/ui/word-fade-in";
 import LinearGradient from '@/components/ui/linear-gradient';
-import FilterTab from './components/FilterTab';
+// import FilterTab from './components/FilterTab2';
 import PostsTab from './components/PostsTab';
+import {FilterTab} from './components/FilterTab';
 
 
 const page = () => {
   return (
-    <div className=' min-h-screen text-black dark:bg-background bg-background dark:text-white relative '>
+    <div className='min-h-screen text-black dark:bg-background bg-background dark:text-white  '>
       <Navbar />
-      <div className='w-full relative h-[150px] text-white flex items-center justify-center text-center text-7xl font-extrabold mb-5 '>
-        <WordFadeIn words="Participate in hackathons with other teams!" className='text-xl z-10 md:text-4xl text-white tracking-wide ' />
-        <LinearGradient from='#7C3AED' to='#312E81' direction='right' />
-      </div>
-      <div className='max-w-4xl w-full mx-auto'>
-        <SearchFilter />
-      </div>
-      {/* <div className='grid grid-cols-3 h-full gap-2 max-w-[1260px] mx-auto mt-5 '>
+      <div className='grid grid-cols-4 gap-2 w-full mt-10  '>
         <FilterTab />
-        <div className='col-span-2'>
+        <div className='col-span-3'>
         <PostsTab />
         </div>
-      </div> */}
+      </div>
       <div className='h-screen' ></div>
       <Footer />
     </div>

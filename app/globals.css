@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap');
+
 @tailwind base;
   @tailwind components;
   @tailwind utilities;
@@ -12,16 +14,17 @@
     }
     .dark {
       --text: #e1ecf4;
-      --background: #09090B;
+      --background: #03070c;
       --primary: #86bbea;
       --secondary: #0f5999;
       --accent: #339dfa;
     }
   }
   
+  
 
 *, body{
- font-family: sans-serif;
+  font-family: "Nunito Sans", sans-serif;
 }
 
 input{

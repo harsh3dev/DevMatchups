@@ -2,8 +2,8 @@ import React from 'react'
 
 const PostsTab = () => {
   return (
-    <div className='w-full min-h-[50vh] rounded-xl bg-blue-700  '>
-      cards
+    <div className='w-full min-h-[50vh] border dark:border-white border-black '>
+      
     </div>
   )
 }

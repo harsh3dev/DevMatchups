@@ -153,7 +153,6 @@ function Form() {
                         <Controller
                             control={control}
                             name="regDate"
-
                             render={({ field: { onChange, onBlur, value, ref } }) => (
                                 <ReactDatePicker
                                     dateFormat="dd/MM/yyyy"
