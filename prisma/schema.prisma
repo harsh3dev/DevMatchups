@@ -22,6 +22,15 @@ model User {
   updatedAt      DateTime     @updatedAt
 }
 
+
+model Otp{
+   id        Int      @id @default(autoincrement())
+  email      String 
+  otp        String
+  createdAt  DateTime     @default(now())
+  @@unique([otp, email]) 
+}
+
 model Hackathon {
   id             Int          @id @default(autoincrement())
   hackathonName  String

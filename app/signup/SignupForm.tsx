@@ -4,17 +4,17 @@ import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
-
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa6";
-
 import Link from "next/link"
-
 import { z } from "zod";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Span } from "next/dist/trace"
 import axios from "axios"
+import { useRouter } from "next/navigation"
+import { setSignupData } from "@/redux/features/authSlice"
+import { useDispatch } from 'react-redux';
 
 
 const SignUpSchema = z.object({
@@ -23,24 +23,39 @@ const SignUpSchema = z.object({
   name: z.string()
   .min(1, { message: "Name is required" })
   .max(100, { message: "Name must be less than 100 characters" }),
-  password: z.string().min(1, { message: "Password is required" }).min(8, { message: "Password must be at least 8 characters long" })
+  password: z.string().min(1, { message: "Password is required" }).min(8, { message: "Password must be at least 8 characters long" }),
 });
 
 type SignUpSchemaType = z.infer<typeof SignUpSchema>;
 
 
 export default function SignupForm() {
-
+  const router=useRouter();
+  const dispatch=useDispatch();
   const {
     register,
     handleSubmit,
     formState: { errors }
   } = useForm<SignUpSchemaType>({ resolver: zodResolver(SignUpSchema) });
-
+  
+  
   const onSubmit: SubmitHandler<SignUpSchemaType> = async (data) =>{
     console.log(data);
-    const response=await axios.post("/api/users/signup",{data});
+    try{
+    const {email} = data;
+    const response=await axios.post("/api/users/otp",{email});
     console.log("response",response);
+    dispatch(setSignupData(data));
+    router.push('/verify-email');
+    }
+    catch(error){
+      if (axios.isAxiosError(error)) {
+        console.log('Axios error message:', error?.response?.data?.message || error?.message);
+       }
+      else{
+      console.log("Unexpected Error",error);
+      }
+    }
   }
 
   return (
@@ -95,7 +110,6 @@ export default function SignupForm() {
             <Input id="password" type="password" placeholder="********" className="focus:border-b-2 border-blue-500 rounded-md bg-sky-50" {...register("password")} required />
             {errors.password && <span className="error-message text-right w-full text-sm mb-5 font-semibold text-red-500 ">*{errors.password.message}</span>}
           </div>
-
           <Button type="submit" className="w-full">
             Sign Up
           </Button>
