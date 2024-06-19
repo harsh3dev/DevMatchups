@@ -12,6 +12,7 @@ import {FilterTab} from './components/FilterTab';
 const page = () => {
   return (
     <div className='min-h-screen text-black dark:bg-background bg-background dark:text-white  '>
+      
       <Navbar />
       <div className='grid grid-cols-4 gap-2 w-full mt-10  '>
         <FilterTab />
@@ -21,6 +22,7 @@ const page = () => {
       </div>
       <div className='h-screen' ></div>
       <Footer />
+      
     </div>
   )
 }
