@@ -160,7 +160,7 @@ function Form() {
                                     onBlur={onBlur} // notify when input is touched/blur
                                     selected={value}
                                     closeOnScroll={true}
-                                    className="w-full focus:border-b-2 border-blue-500 rounded-md bg-sky-100 dark:bg-slate-800 dark:text-white"
+                                    className="w-full focus:border-b-2 border-blue-500 rounded-md  dark:text-white"
                                 />
                             )}
                         />
@@ -218,43 +218,52 @@ function Form() {
                                     onChange={val => field.onChange(val.map(v => v.value))}
                                     placeholder="Javascript, Python, C# etc..."
                                     id="skills"
-                                    className="my-react-select focus:border-b-2 border-blue-500 rounded-md bg-sky-100 dark:bg-slate-800 dark:text-black"
-                                    classNamePrefix="my-react-select"
+                                    
                                     styles={{
-                                        singleValue: base => ({ ...base, color: "white" }),
+                                        singleValue: base => ({ ...base, color: "#154b79", paddingInline: "5px", }),
                                         valueContainer: base => ({
                                             ...base,
-                                            color: "white",
-                                            width: "100%"
+                                            color: "var(--text)",
+                                            width: "100%",
+                                            paddingInline: "5px",
+                                            borderColor: "var(--primary)",
                                         }),
                                         control: (base, state) => ({
                                             ...base,
-                                            background: "var(--background)"
+                                            color: "var(--text)",
+                                            background: "var(--background)",
+                                            borderRadius: "50px",
+                                            textDecorationColor: "var(--text)"
                                         }),
                                         option: (styles, { data, isDisabled, isFocused, isSelected }) => ({
                                             ...styles,
-                                            backgroundColor:"#083344",
-                                            color:"white",
+                                            backgroundColor:"var(--background)",
+                                            color:"var(--text)",
                                             ":active": {
                                                 ...styles[":active"],
-                                                backgroundColor: "#083344"
+                                                backgroundColor: "var(--secondary)"
                                             }
                                         }),
                                         multiValue: (styles, { data }) => ({
                                             ...styles,
-                                            backgroundColor: "var(--primary)" // the bg color behind icon
+                                            backgroundColor: "var(--secondary)",
+                                            borderRadius: "20px", // the bg color behind icon
+                                            padding: "5px"
                                         }),
                                         multiValueLabel: styles => ({
                                             ...styles,
                                             color: "var(--text)", // label text color
-                                            background: "var(--secondary)" // label bg behind selected
+                                            background: "var(--secondary)", // label bg behind selected
+                                            borderEndStartRadius: "20px",
+                                            borderTopLeftRadius: "20px",
                                         }),
                                         multiValueRemove: styles => ({
                                             ...styles,
-                                            color: "var(--secondary)",
+                                            color: "var(--text)",
                                             ":hover": {
-                                                backgroundColor: "white", // on hover x bg color
-                                                color: "black" // on hover x icon color
+                                                backgroundColor: "var(--secondary)", // on hover x bg color
+                                                color: "var(--text)", // on hover x icon color
+                                                borderRadius: "20px",
                                             }
                                         })
                                     }}
@@ -262,12 +271,12 @@ function Form() {
                                         ...theme,
                                         colors: {
                                             ...theme.colors,
-                                            neutral30: "hotpink", // control/borderColor(focused)
-                                            neutral50: "#ccc", // placeholder color
-                                            neutral80: "white", // input color
-                                            primary25: "#ccc", // option bg color focused
-                                            primary: "black", // option bg color selected
-                                            primary50: "white" // option bg color active (enabled or available)
+                                            neutral30: "", // control/borderColor(focused)
+                                            neutral50: "var(--accent)", // placeholder color
+                                            neutral80: "var(--text)", // input color
+                                            primary25: "", // option bg color focused
+                                            primary: "", // option bg color selected
+                                            primary50: "" // option bg color active (enabled or available)
                                         }
                                     })}
                                 />
@@ -304,43 +313,52 @@ function Form() {
                                     onChange={(val) => field.onChange(val?.value)}
                                     placeholder="Enter minimum experience level"
                                     id="experience"
-                                    className="focus:border-b-2 border-blue-500 rounded-md bg-sky-100 dark:bg-slate-800 dark:text-black  "
-                                    classNamePrefix="my-react-select"
+                                    
                                     styles={{
-                                        singleValue: base => ({ ...base, color: "var(--text)" }),
+                                        singleValue: base => ({ ...base, color: "white", paddingInline: "5px", }),
                                         valueContainer: base => ({
                                             ...base,
-                                            color: "white",
-                                            width: "100%"
+                                            color: "var(--text)",
+                                            width: "100%",
+                                            paddingInline: "5px",
+                                            borderColor: "var(--primary)",
                                         }),
                                         control: (base, state) => ({
                                             ...base,
-                                            background: "var(--background)"
+                                            color: "var(--text)",
+                                            background: "var(--background)",
+                                            borderRadius: "50px",
+                                            textDecorationColor: "var(--text)"
                                         }),
                                         option: (styles, { data, isDisabled, isFocused, isSelected }) => ({
                                             ...styles,
-                                            backgroundColor:"#083344",
-                                            color:"white",
+                                            backgroundColor:"var(--background)",
+                                            color:"var(--text)",
                                             ":active": {
                                                 ...styles[":active"],
-                                                backgroundColor: "#083344"
+                                                backgroundColor: "var(--secondary)"
                                             }
                                         }),
                                         multiValue: (styles, { data }) => ({
                                             ...styles,
-                                            backgroundColor: "var(--primary)" // the bg color behind icon
+                                            backgroundColor: "var(--secondary)",
+                                            borderRadius: "20px", // the bg color behind icon
+                                            padding: "5px"
                                         }),
                                         multiValueLabel: styles => ({
                                             ...styles,
-                                            color: "black", // label text color
-                                            background: "var(--accent)" // label bg behind selected
+                                            color: "var(--text)", // label text color
+                                            background: "var(--secondary)", // label bg behind selected
+                                            borderEndStartRadius: "20px",
+                                            borderTopLeftRadius: "20px",
                                         }),
                                         multiValueRemove: styles => ({
                                             ...styles,
-                                            color: "var(--secondary)",
+                                            color: "var(--text)",
                                             ":hover": {
-                                                backgroundColor: "white", // on hover x bg color
-                                                color: "black" // on hover x icon color
+                                                backgroundColor: "var(--secondary)", // on hover x bg color
+                                                color: "var(--text)", // on hover x icon color
+                                                borderRadius: "20px",
                                             }
                                         })
                                     }}
@@ -348,12 +366,12 @@ function Form() {
                                         ...theme,
                                         colors: {
                                             ...theme.colors,
-                                            neutral30: "hotpink", // control/borderColor(focused)
-                                            neutral50: "#ccc", // placeholder color
-                                            neutral80: "white", // input color
-                                            primary25: "#ccc", // option bg color focused
-                                            primary: "black", // option bg color selected
-                                            primary50: "white" // option bg color active (enabled or available)
+                                            neutral30: "", // control/borderColor(focused)
+                                            neutral50: "var(--accent)", // placeholder color
+                                            neutral80: "var(--text)", // input color
+                                            primary25: "", // option bg color focused
+                                            primary: "", // option bg color selected
+                                            primary50: "" // option bg color active (enabled or available)
                                         }
                                     })}
                                 />
@@ -367,22 +385,9 @@ function Form() {
                         </svg>
                             {errors.experience.message}</span>}
 
-
-                        {/* TODO: Select */}
-                        {/* <FormField
-                            type="text"
-                            placeholder="Enter minimum experience level"
-                            label="Experience level *"
-                            name="experience"
-                            register={register}
-                            error={errors.experience}
-                            options={ExperienceOptions}
-                        /> */}
-
                         <h1 className="text-2xl font-bold mb-4 ">
                             Additional Details
                         </h1>
-
 
                         <FormField
                             type="textArea"
@@ -396,10 +401,10 @@ function Form() {
                     </div>
 
                     {isSubmitting ?
-                        <Button disabled className="mt-4 w-full bg-primary dark:bg-secondary hover:bg-secondary dark:hover:bg-primary hover:ring-2 ring-offset-1 text-white dark:text-white  ">
+                        <Button disabled className="mt-4 w-full bg-primary dark:bg-secondary  hover:ring-2 ring-offset-1 text-white dark:text-white  ">
                             <ReloadIcon className="mr-2 h-4 w-4 animate-spin" /> Please wait
                         </Button> :
-                        <Button type="submit" className="mt-4 w-full bg-primary dark:bg-secondary hover:bg-secondary dark:hover:bg-primary hover:ring-2 ring-offset-1 text-white dark:text-white " >
+                        <Button type="submit" className="mt-4 w-full bg-primary dark:bg-secondary dark:hover:bg-slate-900/90 text-white dark:text-white " >
                             Submit
                         </Button>}
                 </div>

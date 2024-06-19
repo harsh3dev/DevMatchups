@@ -16,6 +16,8 @@ import {
     FormLabel,
     FormMessage,
 } from "@/components/ui/form"
+import { toast } from "@/components/ui/use-toast"
+
 import { SearchFilter } from "./SearchFilter"
 
 
@@ -87,8 +89,9 @@ export function FilterTab() {
 
     function onSubmit(data: z.infer<typeof FormSchema>) {
         console.log(data);
-        form.reset();
-
+        toast({
+            title: "Search filters applied successfully!"
+          })
     }
 
     return (
@@ -201,20 +204,40 @@ export function FilterTab() {
                                 placeholder="Javascript, Python, C# etc..."
                                 id="skills"
                                 styles={{
-                                    singleValue: base => ({ ...base, color: "#154b79", paddingInline: "5px", }),
+                                    singleValue: base => ({ ...base, color: "#154b79"}),
                                     valueContainer: base => ({
                                         ...base,
                                         color: "var(--text)",
                                         width: "100%",
-                                        paddingInline: "5px",
                                         borderColor: "var(--primary)",
                                     }),
                                     control: (base, state) => ({
                                         ...base,
                                         color: "var(--text)",
                                         background: "var(--background)",
-                                        borderRadius: "50px",
-                                        textDecorationColor: "var(--text)"
+                                        borderRadius: "10px",
+                                        borderTop: "2px",
+                                        borderLeft: "2px",
+                                        borderRight: "2px",
+                                        textDecorationColor: "var(--text)",
+                                        ":hover":{
+                                            borderRadius: "10px",
+                                            borderTop: "2px",
+                                            borderLeft: "2px",
+                                            borderRight: "2px",
+                                        },
+                                        ":active":{
+                                            borderRadius: "10px",
+                                            borderTop: "2px",
+                                            borderLeft: "2px",
+                                            borderRight: "2px",
+                                        },
+                                        ":focus":{
+                                            borderRadius: "10px",
+                                            borderTop: "2px",
+                                            borderLeft: "2px",
+                                            borderRight: "2px",
+                                        }
                                     }),
                                     option: (styles, { data, isDisabled, isFocused, isSelected }) => ({
                                         ...styles,

@@ -31,7 +31,7 @@ const FormField: React.FC<FormFieldProps> = ({
         <div className="w-full h-[5rem] ">
             <div className="w-full h-[50%] flex flex-col gap-2 ">
                 <Label htmlFor={label}>{label}</Label>
-                <Input className=" focus:border-b-2 border-blue-500 dark:border-sky-300 rounded-md " type={type} id={label} placeholder={placeholder} {...register(name, { valueAsNumber })} />
+                <Input className=" focus:border-b-4 border-blue-500 dark:border-sky-300 rounded-full border border-accent " type={type} id={label} placeholder={placeholder} {...register(name, { valueAsNumber })} />
                 {error && <span className="error-message text-right flex justify-end items-center w-full text-sm mb-5 text-red-500 ">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4 -mt-px">
                         <path fill-rule="evenodd"
