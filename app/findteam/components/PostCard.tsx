@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { IoLocationSharp } from "react-icons/io5";
 import { MdBugReport } from "react-icons/md";
 import { FaBusinessTime } from "react-icons/fa";
+import Link from 'next/link';
 
 
 interface HackathonEntry {
@@ -57,14 +58,14 @@ const PostCard: React.FC<PostCardProps> = ({ entry, className }) => {
           <h1 className='font-bold text-2xl ' >
             {entry.hackathonName}
           </h1>
-          <Capsule item={entry.hackathonMode} key={entry.hackathonMode} className='bg-green-700/80 dark:bg-green-300/50  text-white dark:text-black hover:bg-green-800/80 dark:hover:bg-green-600/80  ' />
+          <Capsule item={entry.hackathonMode} key={entry.hackathonMode} className='bg-green-700/80 dark:bg-green-300/50  text-white dark:text-black hover:bg-green-800/80 hover:dark:bg-green-600/80  ' />
         </div>
 
         <div className=' w-full flex justify-between items-center mt-4 '>
           <span className='text-xl'>
             {entry.teamName}
           </span>
-          <span className=' text-sm text-secondary '>
+          <span className=' text-sm text-secondary dark:text-primary '>
 
             Open: 2
           </span>
@@ -103,7 +104,11 @@ const PostCard: React.FC<PostCardProps> = ({ entry, className }) => {
           {timeDifference(entry.createdAt)}
         </span>
 
-        <Button className=' bg-primary dark:bg-primary hover:bg-secondary dark:hover:bg-secondary text-white dark:text-gray-950 dark:hover:text-white font-medium dark:font-bold transition-colors ease-in-out ' >Apply Now</Button>
+        <Button className=' bg-primary dark:bg-primary hover:bg-secondary dark:hover:bg-secondary text-white dark:text-gray-950 dark:hover:text-white font-medium dark:font-bold transition-colors ease-in-out ' >
+          <Link href={`/findteam/${entry.slug}`} >
+            Apply Now
+          </Link>
+        </Button>
       </div>
     </div>
   )
