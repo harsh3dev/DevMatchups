@@ -55,8 +55,7 @@ export async function POST(req: Request) {
         else{ 
             return NextResponse.json({ user: null, message: "Password is incorrect" }, { status: 409 });
         }
-
-        
+       
       
     } 
     catch (error) {

@@ -47,7 +47,7 @@ export async function POST(req: Request) {
             data: {
                 name:name,
                 email:email,
-                username:email,
+                username:username,
                 password: hashedPassword
             }
         });
@@ -55,7 +55,7 @@ export async function POST(req: Request) {
         // Return the new user
         return NextResponse.json({ user: newUser, message: "User created successfully" }, { status: 201 });
     } 
-    catch (error) {
+    catch (error){
         console.error('Error creating user:', error);
         return NextResponse.json({ user: null, message: "Internal Server Error" }, { status: 500 });
     }
