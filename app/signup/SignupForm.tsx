@@ -13,6 +13,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Span } from "next/dist/trace"
 import axios from "axios"
 import { useRouter } from "next/navigation"
+import { useAppDispatch } from "@/lib/store/hooks"
+import { setSignupData } from "@/lib/store/features/authSlice/authSlice"
 
 
 
@@ -30,6 +32,7 @@ type SignUpSchemaType = z.infer<typeof SignUpSchema>;
 
 export default function SignupForm() {
   const router=useRouter();
+  const dispatch=useAppDispatch();
   const {
     register,
     handleSubmit,
@@ -39,6 +42,7 @@ export default function SignupForm() {
   
   const onSubmit: SubmitHandler<SignUpSchemaType> = async (data) =>{
     console.log(data);
+    dispatch(setSignupData(data));
     try{
     const {email} = data;
     const response=await axios.post("/api/users/otp",{email});
