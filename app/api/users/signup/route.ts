@@ -7,7 +7,8 @@ const userSchema = z.object({
     name:z.string().min(1, { message: "Name is required" }),
     email: z.string().min(1, { message: "Email is required" }).email({ message: "Invalid email address" }),
     username: z.string().min(1, { message: "Username is required" }).max(100),
-    password: z.string().min(1, { message: "Password is required" }).min(8, { message: "Password must be at least 8 characters long" })
+    password: z.string().min(1, { message: "Password is required" }).min(8, { message: "Password must be at least 8 characters long" }),
+    otp: z.string().min(6,{message:"OTP is required"})
 });
 
 export async function POST(req: Request) {
@@ -15,7 +16,7 @@ export async function POST(req: Request) {
         const body = await req.json();
         console.log("incoming",body);
       //  const {email,password,name,username} =body.data;
-        const {name,email,username,password} = userSchema.parse(body.data);
+        const {name,email,username,password,otp} = userSchema.parse(body.data);
 
         // Check if username already exists
         const existingUserName = await prisma.user.findUnique({
@@ -38,7 +39,24 @@ export async function POST(req: Request) {
         if (existingEmail) {
             return NextResponse.json({ user: null, message: "Email already exists" }, { status: 409 });
         }
+       
 
+        const latestOTP = await prisma.otp.findFirst({
+            where: {
+              email: email,
+            },
+            orderBy: {
+                createdAt: 'desc', // Assuming 'createdAt' is the timestamp field in your OTP model
+              },
+          });
+        
+       
+        if(latestOTP){
+        console.log(latestOTP)
+        if(latestOTP.otp!=otp){
+             return NextResponse.json({ user: null, message: "OTP did not matched" }, { status: 409 });
+        }
+         
         // Hash the password
         const hashedPassword = await hash(password, 10);
         console.log("creating")
@@ -54,6 +72,11 @@ export async function POST(req: Request) {
 
         // Return the new user
         return NextResponse.json({ user: newUser, message: "User created successfully" }, { status: 201 });
+    }
+
+    else{
+        return NextResponse.json({ user: null, message: "OTP did not found" }, { status: 409 });
+      }
     } 
     catch (error){
         console.error('Error creating user:', error);

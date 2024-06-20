@@ -5,21 +5,28 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import ReactOtpInput from "react-otp-input";
 import { Button } from "@/components/ui/button"
+import { useAppSelector } from "@/lib/store/hooks";
+
 
 
 export default function VerifyForm() {
   const router = useRouter();
+  const signupdata=useAppSelector(state => state.auth.signupData);
   const [otp, setOtp] = useState(""); 
  
   
   const onSubmit = async (e:any) => {
     e.preventDefault();
+    const data={...signupdata,otp:otp};
+    console.log(data);
     try {
-      const response = await axios.post("/api/users/signup",{});
+      const response = await axios.post("/api/users/signup",{data});
       console.log("response", response);
-      // Navigate to another page if needed
-       router.push('/team');
-    } catch (error) {
+      if(response.status==201){
+         router.push('/findteam');
+      }
+    } 
+    catch (error) {
       if (axios.isAxiosError(error)) {
         console.log('Axios error message:', error?.response?.data?.message || error?.message);
       } else {
