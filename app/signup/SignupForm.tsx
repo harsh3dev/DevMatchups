@@ -13,8 +13,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Span } from "next/dist/trace"
 import axios from "axios"
 import { useRouter } from "next/navigation"
-import { setSignupData } from "@/redux/features/authSlice"
-import { useDispatch } from 'react-redux';
+
 
 
 const SignUpSchema = z.object({
@@ -31,7 +30,6 @@ type SignUpSchemaType = z.infer<typeof SignUpSchema>;
 
 export default function SignupForm() {
   const router=useRouter();
-  const dispatch=useDispatch();
   const {
     register,
     handleSubmit,
@@ -45,7 +43,6 @@ export default function SignupForm() {
     const {email} = data;
     const response=await axios.post("/api/users/otp",{email});
     console.log("response",response);
-    dispatch(setSignupData(data));
     router.push('/verify-email');
     }
     catch(error){

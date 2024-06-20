@@ -5,20 +5,17 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import ReactOtpInput from "react-otp-input";
 import { Button } from "@/components/ui/button"
-import { SignupData } from "@/redux/features/authSlice";
-import { useAppSelector } from "@/redux/hooks";
+
 
 export default function VerifyForm() {
   const router = useRouter();
   const [otp, setOtp] = useState(""); 
-  const signupdata=useAppSelector(state => state.auth.signupData);
+ 
   
   const onSubmit = async (e:any) => {
     e.preventDefault();
-    const data ={...signupdata,otp:otp};
-    console.log(data);
     try {
-      const response = await axios.post("/api/users/signup", {data});
+      const response = await axios.post("/api/users/signup",{});
       console.log("response", response);
       // Navigate to another page if needed
        router.push('/team');
