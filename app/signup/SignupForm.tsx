@@ -89,18 +89,18 @@ export default function SignupForm() {
           <div className="grid grid-cols-1 gap-4">
             <div className="space-y-2">
               <Label htmlFor="name">Full Name</Label>
-              <Input id="name" placeholder="Enter your full name" className="focus:border-b-2 border-blue-500 rounded-md bg-sky-50" {...register("name")} required />
+              <Input id="name" placeholder="Enter your full name" className="focus:border-b-2 border-blue-500 rounded-md " {...register("name")} required />
               {errors.name && <span className="error-message text-right w-full text-sm mb-5 font-semibold text-red-500 ">*{errors.name.message}</span>}
             </div>
             <div className="flex gap-2 items-center">
             <div className="space-y-2 w-1/2 ">
               <Label htmlFor="username">User name</Label>
-              <Input id="username" placeholder="Enter a unique username" className="focus:border-b-2 border-blue-500 rounded-md bg-sky-50" {...register("username")} required />
+              <Input id="username" placeholder="Enter a unique username" className="focus:border-b-2 border-blue-500 rounded-md " {...register("username")} required />
               {errors.username && <span className="error-message text-right w-full text-sm mb-5 font-semibold text-red-500 ">*{errors.username.message}</span>}
             </div>
           <div className="space-y-2 w-1/2 ">
             <Label htmlFor="email">Email</Label>
-            <Input id="email" type="email" placeholder="example@email.com" className="focus:border-b-2 border-blue-500 rounded-md bg-sky-50"  
+            <Input id="email" type="email" placeholder="example@email.com" className="focus:border-b-2 border-blue-500 rounded-md "  
             {...register("email")} />
             {errors.email && <span className="error-message text-right w-full text-sm mb-5 font-semibold text-red-500 ">*{errors.email.message}</span>}
           </div>
@@ -108,7 +108,7 @@ export default function SignupForm() {
             </div>
           <div className="space-y-2">
             <Label htmlFor="password">Password</Label>
-            <Input id="password" type="password" placeholder="********" className="focus:border-b-2 border-blue-500 rounded-md bg-sky-50" {...register("password")} required />
+            <Input id="password" type="password" placeholder="********" className="focus:border-b-2 border-blue-500 rounded-md " {...register("password")} required />
             {errors.password && <span className="error-message text-right w-full text-sm mb-5 font-semibold text-red-500 ">*{errors.password.message}</span>}
           </div>
           <Button type="submit" className="w-full">

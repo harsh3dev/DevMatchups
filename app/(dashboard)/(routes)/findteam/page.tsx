@@ -1,6 +1,4 @@
 import React from 'react'
-import Navbar from '../Navbar/Navbar'
-import Footer from '../Footer/Footer'
 import { SearchFilter } from './components/SearchFilter'
 import WordFadeIn from "@/components/ui/word-fade-in";
 import LinearGradient from '@/components/ui/linear-gradient';
@@ -13,7 +11,6 @@ const page = () => {
   return (
     <div className='min-h-screen text-black dark:bg-background bg-background dark:text-white  '>
       
-      <Navbar />
       <div className='grid grid-cols-4 gap-2 w-full mt-10  '>
         <FilterTab />
         <div className='col-span-3'>
@@ -21,7 +18,6 @@ const page = () => {
         </div>
       </div>
       <div className='h-screen' ></div>
-      <Footer />
       
     </div>
   )

@@ -1,11 +1,6 @@
-import { FormFieldProps } from "@/app/findmember/Form/types";
+import { FormFieldProps } from "./types";
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import Temp from "./Temp";
-import SelectOption from "@/app/findmember/Form/SelectOption";
-import { Textarea } from "@/components/ui/textarea"
-import CreatableSelect from 'react-select/creatable';
-import { useForm, useController, UseControllerProps } from "react-hook-form";
 
 const FormField: React.FC<FormFieldProps> = ({
     type,
