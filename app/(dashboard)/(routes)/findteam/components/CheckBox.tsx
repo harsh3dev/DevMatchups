@@ -2,7 +2,7 @@ import { Label } from '@/components/ui/label';
 import { Checkbox } from '@radix-ui/react-checkbox';
 import React from 'react'
 import { Controller, Control } from "react-hook-form";
-import { FormData } from '@/app/findmember/Form/types';
+import { FormData } from '@/app/(dashboard)/(routes)/findmember/Form/types';
 
 interface CheckBoxProps{
     control: Control<any>,
