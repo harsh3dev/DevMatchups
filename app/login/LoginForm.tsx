@@ -67,7 +67,7 @@ export default function LoginForm() {
       <Card className="w-full max-w-lg backdrop-blur-lg ">
         <CardHeader className="space-y-1 text-center">
           <CardTitle className="text-2xl font-bold">Log In</CardTitle>
-          <CardDescription>It's good to see you back here!</CardDescription>
+          <CardDescription>It{`&apos;`}s good to see you back here!</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
             <form onSubmit={handleSubmit(onSubmit)} >
@@ -109,7 +109,7 @@ export default function LoginForm() {
           </div>
         </CardContent>
         <CardFooter className="text-center gap-2 w-full flex justify-center items-center text-sm text-gray-500">
-          Don't have an account?{" "}
+          Don{`&apos;`}t have an account?{" "}
           <Link href="/signup" className="font-medium text-blue-600 dark:text-cyan-500 hover:underline" prefetch={false}>
             Sign Up
           </Link>
