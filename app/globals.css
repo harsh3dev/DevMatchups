@@ -1,10 +1,30 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap'); */
 
 @tailwind base;
-  @tailwind components;
-  @tailwind utilities;
+@tailwind components;
+@tailwind utilities;
 
-  @layer base {
+@layer base {
+  :root {
+    --text: #0b161e;
+    --background: #ffffff;
+    --primary: #154b79;
+    --secondary: #66aff0;
+    --accent: #056fcc;
+  }
+  .dark {
+    --text: #e1ecf4;
+    --background: #03070C;
+    --primary: #86bbea;
+    --secondary: #0f5999;
+    --accent: #339dfa;
+  }
+}
+
+
+
+
+  /* @layer base {
     :root {
       --text: #0b161e;
       --background: #f3f7fc;
@@ -19,9 +39,8 @@
       --secondary: #0f5999;
       --accent: #339dfa;
     }
-  }
-  
-  
+  } */
+
 
 *, body{
   font-family: "Nunito Sans", sans-serif;

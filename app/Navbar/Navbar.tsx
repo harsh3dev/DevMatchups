@@ -39,7 +39,7 @@ const Navbar = () => {
                             Login
                         </Link>
                         </Button>
-                        <Button className='bg-primary dark:bg-secondary hover:bg-secondary dark:hover:bg-primary hover:ring-2 ring-offset-1 text-white dark:text-white font-semibold ' >
+                        <Button className='bg-accent hover:bg-primary dark:bg-accent dark:hover:bg-secondary text-white dark:text-white font-semibold ' >
                             <Link href={"/signup"}>
                                 Get Started
                             </Link>   
@@ -51,7 +51,7 @@ const Navbar = () => {
                         <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg  md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0  dark:border-gray-700">
                             {navItems.map((item) => (
                                 <li key={item.name}>
-                                    <Link href={item.path} className={`block py-2 px-3 text-text rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-accent md:p-0 md:dark:hover:text-accent dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent `} aria-current="page"
+                                    <Link href={item.path} className={`block py-2 px-3 text-text rounded md:hover:text-accent md:p-0 md:dark:hover:text-accent dark:text-white  `} aria-current="page"
                                         style={{ color: pathname === item.path ? "var(--accent)" : "" }}
                                     >
                                         {item.name}

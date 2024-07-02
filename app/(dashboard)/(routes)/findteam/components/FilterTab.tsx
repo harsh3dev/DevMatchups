@@ -57,11 +57,11 @@ const expOptions = [
 ] as const;
 
 const skillOptions = [
-    { id: 'javascript', value: 'Javascript', label: 'Javascript' }, 
-    { id: 'python', value: 'Python', label: 'Python' }, 
-    { id: 'reactjs', value: 'React JS', label: 'React JS' }, 
-    { id: 'nextjs', value: 'Next JS', label: 'Next JS' }, 
-    { id: 'mongoDB', value: 'MongoDB', label: 'MongoDB' }, 
+    { id: 'javascript', value: 'Javascript', label: 'Javascript' },
+    { id: 'python', value: 'Python', label: 'Python' },
+    { id: 'reactjs', value: 'React JS', label: 'React JS' },
+    { id: 'nextjs', value: 'Next JS', label: 'Next JS' },
+    { id: 'mongoDB', value: 'MongoDB', label: 'MongoDB' },
     { id: 'sql', value: 'SQL', label: 'SQL' }
 ] as const;
 
@@ -91,7 +91,7 @@ export function FilterTab() {
         console.log(data);
         toast({
             title: "Search filters applied successfully!"
-          })
+        })
     }
 
     return (
@@ -100,13 +100,13 @@ export function FilterTab() {
                 <div className='max-w-4xl w-full mx-auto'>
                     <SearchFilter />
                 </div>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+                <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col items-center justify-evenly gap-5 w-full mt-5 ">
                     <FormField
                         control={form.control}
                         name="modeOptions"
                         render={() => (
                             <FormItem>
-                                <div className="flex w-full p-5 justify-around">
+                                <div className="flex max-w-full justify-between items-start gap-2">
 
                                     {modeOptions.map((item) => (
                                         <FormField
@@ -117,7 +117,7 @@ export function FilterTab() {
                                                 return (
                                                     <FormItem
                                                         key={item.id}
-                                                        className="flex flex-row items-start space-x-3 space-y-0"
+                                                        className="flex items-center gap-1 justify-between px-4 pb-2 rounded-full border border-gray-500 "
                                                     >
                                                         <FormControl>
                                                             <Checkbox
@@ -128,12 +128,13 @@ export function FilterTab() {
                                                                         : field.onChange(
                                                                             field.value?.filter(
                                                                                 (value) => value !== item.id
-                                                                            )
                                                                         )
+                                                                    )
                                                                 }}
+                                                                className=" w-4 h-4 rounded-full mt-1 "
                                                             />
                                                         </FormControl>
-                                                        <FormLabel className="text-sm font-normal">
+                                                        <FormLabel className="text-sm text-center font-normal ">
                                                             {item.label}
                                                         </FormLabel>
                                                     </FormItem>
@@ -151,7 +152,7 @@ export function FilterTab() {
                         name="expOptions"
                         render={() => (
                             <FormItem>
-                                <div className="flex w-full p-5 justify-around">
+                                <div className="flex max-w-full px-8 justify-around gap-2 flex-wrap ">
 
                                     {expOptions.map((item) => (
                                         <FormField
@@ -162,7 +163,7 @@ export function FilterTab() {
                                                 return (
                                                     <FormItem
                                                         key={item.id}
-                                                        className="flex flex-row items-start space-x-3 space-y-0"
+                                                        className="flex items-center gap-1 justify-between px-4 pb-2 rounded-full border border-gray-500"
                                                     >
                                                         <FormControl>
                                                             <Checkbox
@@ -176,6 +177,7 @@ export function FilterTab() {
                                                                             )
                                                                         )
                                                                 }}
+                                                                className=" w-4 h-4 rounded-full mt-1 "
                                                             />
                                                         </FormControl>
                                                         <FormLabel className="text-sm font-normal">
@@ -191,102 +193,104 @@ export function FilterTab() {
                             </FormItem>
                         )}
                     />
-
-                    <Controller
-                        name="skillOptions"
-                        control={form.control}
-                        render={({ field }) => (
-                            <CreatableSelect
-                                isMulti
-                                options={skillOptions}
-                                value={field.value?.map(skill => ({ value: skill, label: skill })) || []}
-                                onChange={val => field.onChange(val.map(v => v.value))}
-                                placeholder="Javascript, Python, C# etc..."
-                                id="skills"
-                                styles={{
-                                    singleValue: base => ({ ...base, color: "#154b79"}),
-                                    valueContainer: base => ({
-                                        ...base,
-                                        color: "var(--text)",
-                                        width: "100%",
-                                        borderColor: "var(--primary)",
-                                    }),
-                                    control: (base, state) => ({
-                                        ...base,
-                                        color: "var(--text)",
-                                        background: "var(--background)",
-                                        borderRadius: "10px",
-                                        borderTop: "2px",
-                                        borderLeft: "2px",
-                                        borderRight: "2px",
-                                        textDecorationColor: "var(--text)",
-                                        ":hover":{
+                    
+                    <div className="w-full " >
+                        <Controller
+                            name="skillOptions"
+                            control={form.control}
+                            render={({ field }) => (
+                                <CreatableSelect
+                                    isMulti
+                                    options={skillOptions}
+                                    value={field.value?.map(skill => ({ value: skill, label: skill })) || []}
+                                    onChange={val => field.onChange(val.map(v => v.value))}
+                                    placeholder="Javascript, Python, C# etc..."
+                                    id="skills"
+                                    styles={{
+                                        singleValue: base => ({ ...base, color: "#154b79" }),
+                                        valueContainer: base => ({
+                                            ...base,
+                                            color: "var(--text)",
+                                            width: "100%",
+                                            borderColor: "var(--primary)",
+                                        }),
+                                        control: (base, state) => ({
+                                            ...base,
+                                            color: "var(--text)",
+                                            background: "var(--background)",
                                             borderRadius: "10px",
                                             borderTop: "2px",
                                             borderLeft: "2px",
                                             borderRight: "2px",
-                                        },
-                                        ":active":{
-                                            borderRadius: "10px",
-                                            borderTop: "2px",
-                                            borderLeft: "2px",
-                                            borderRight: "2px",
-                                        },
-                                        ":focus":{
-                                            borderRadius: "10px",
-                                            borderTop: "2px",
-                                            borderLeft: "2px",
-                                            borderRight: "2px",
+                                            textDecorationColor: "var(--text)",
+                                            ":hover": {
+                                                borderRadius: "10px",
+                                                borderTop: "2px",
+                                                borderLeft: "2px",
+                                                borderRight: "2px",
+                                            },
+                                            ":active": {
+                                                borderRadius: "10px",
+                                                borderTop: "2px",
+                                                borderLeft: "2px",
+                                                borderRight: "2px",
+                                            },
+                                            ":focus": {
+                                                borderRadius: "10px",
+                                                borderTop: "2px",
+                                                borderLeft: "2px",
+                                                borderRight: "2px",
+                                            }
+                                        }),
+                                        option: (styles, { data, isDisabled, isFocused, isSelected }) => ({
+                                            ...styles,
+                                            backgroundColor: "var(--background)",
+                                            color: "var(--text)",
+                                            ":active": {
+                                                ...styles[":active"],
+                                                backgroundColor: "var(--secondary)"
+                                            }
+                                        }),
+                                        multiValue: (styles, { data }) => ({
+                                            ...styles,
+                                            backgroundColor: "var(--secondary)",
+                                            borderRadius: "20px", // the bg color behind icon
+                                            padding: "5px"
+                                        }),
+                                        multiValueLabel: styles => ({
+                                            ...styles,
+                                            color: "var(--text)", // label text color
+                                            background: "var(--secondary)", // label bg behind selected
+                                            borderEndStartRadius: "20px",
+                                            borderTopLeftRadius: "20px",
+                                        }),
+                                        multiValueRemove: styles => ({
+                                            ...styles,
+                                            color: "var(--text)",
+                                            ":hover": {
+                                                backgroundColor: "var(--secondary)", // on hover x bg color
+                                                color: "var(--text)", // on hover x icon color
+                                                borderRadius: "20px",
+                                            }
+                                        })
+                                    }}
+                                    theme={theme => ({
+                                        ...theme,
+                                        colors: {
+                                            ...theme.colors,
+                                            neutral30: "", // control/borderColor(focused)
+                                            neutral50: "var(--accent)", // placeholder color
+                                            neutral80: "var(--text)", // input color
+                                            primary25: "", // option bg color focused
+                                            primary: "", // option bg color selected
+                                            primary50: "" // option bg color active (enabled or available)
                                         }
-                                    }),
-                                    option: (styles, { data, isDisabled, isFocused, isSelected }) => ({
-                                        ...styles,
-                                        backgroundColor:"var(--background)",
-                                        color:"var(--text)",
-                                        ":active": {
-                                            ...styles[":active"],
-                                            backgroundColor: "var(--secondary)"
-                                        }
-                                    }),
-                                    multiValue: (styles, { data }) => ({
-                                        ...styles,
-                                        backgroundColor: "var(--secondary)",
-                                        borderRadius: "20px", // the bg color behind icon
-                                        padding: "5px"
-                                    }),
-                                    multiValueLabel: styles => ({
-                                        ...styles,
-                                        color: "var(--text)", // label text color
-                                        background: "var(--secondary)", // label bg behind selected
-                                        borderEndStartRadius: "20px",
-                                        borderTopLeftRadius: "20px",
-                                    }),
-                                    multiValueRemove: styles => ({
-                                        ...styles,
-                                        color: "var(--text)",
-                                        ":hover": {
-                                            backgroundColor: "var(--secondary)", // on hover x bg color
-                                            color: "var(--text)", // on hover x icon color
-                                            borderRadius: "20px",
-                                        }
-                                    })
-                                }}
-                                theme={theme => ({
-                                    ...theme,
-                                    colors: {
-                                        ...theme.colors,
-                                        neutral30: "", // control/borderColor(focused)
-                                        neutral50: "var(--accent)", // placeholder color
-                                        neutral80: "var(--text)", // input color
-                                        primary25: "", // option bg color focused
-                                        primary: "", // option bg color selected
-                                        primary50: "" // option bg color active (enabled or available)
-                                    }
-                                })}
-                            />
-                        )}
-                        rules={{ required: true }}
-                    />
+                                    })}
+                                />
+                            )}
+                            rules={{ required: true }}
+                        />
+                    </div>
 
                     <Button className="w-full" type="submit">Apply Filters</Button>
                 </form>
