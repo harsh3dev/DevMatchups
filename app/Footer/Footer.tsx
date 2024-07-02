@@ -10,7 +10,7 @@ import GitHubButton from 'react-github-btn'
 
 export default function Footer() {
   return (
-    <footer className="w-full bg-primary dark:bg-secondary text-white py-10 md:py-10 lg:py-10">
+    <footer className="w-full bg-gradient-to-r from-cyan-500 to-blue-500 text-white py-10 md:py-10 lg:py-10">
       <div className="container mx-auto px-4 md:px-6 lg:px-8 flex justify-between items-center gap-8 ">
         <div className="space-y-4">
           <h3 className="text-2xl font-bold">Subscribe to our newsletter</h3>
