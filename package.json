@@ -35,6 +35,7 @@
     "jsonwebtoken": "^9.0.2",
     "lucide-react": "^0.379.0",
     "next": "14.2.3",
+    "next-auth": "^4.24.7",
     "next-themes": "^0.3.0",
     "nodemailer": "^6.9.14",
     "otp-generator": "^4.0.1",

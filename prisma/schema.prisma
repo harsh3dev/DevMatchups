@@ -33,10 +33,11 @@ model Otp{
 
 model Hackathon {
   id             Int          @id @default(autoincrement())
+  teamName      String
   hackathonName  String
   regURL         String
   hackathonMode  String
-  memberCount    Int
+  memberCount    String
   skills         String[]
   role           String
   experience     String
