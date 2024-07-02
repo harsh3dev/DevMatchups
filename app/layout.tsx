@@ -6,6 +6,8 @@ import "./globals.css";
 import { Toaster } from "@/components/ui/toaster"
 import { ThemeProvider } from "@/components/theme-provider"
 import StoreProvider from "./StoreProvider";
+import { SessionProvider } from "next-auth/react";
+import { NextAuthProvider } from "./provider";
 
 
 
@@ -31,9 +33,11 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
+           <NextAuthProvider>
             <StoreProvider>
             {children}
             </StoreProvider>
+            </NextAuthProvider>
             <Toaster />
           </ThemeProvider>
       </body>

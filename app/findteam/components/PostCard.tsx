@@ -17,6 +17,7 @@ interface HackathonEntry {
   location: string;
   regDate: string;
   teamName: string;
+  memberCount: string;
   hackathonMode: string;
   slug: string;
   createdAt: string;
@@ -67,7 +68,7 @@ const PostCard: React.FC<PostCardProps> = ({ entry, className }) => {
           </span>
           <span className=' text-sm text-secondary dark:text-primary '>
 
-            Open: 2
+            Open: {entry.memberCount}
           </span>
         </div>
 

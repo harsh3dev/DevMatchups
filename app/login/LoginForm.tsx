@@ -16,6 +16,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Span } from "next/dist/trace"
 import { useEffect, useRef, useState } from "react"
 import axios from "axios"
+import { useRouter } from "next/navigation"
+import { signIn, useSession } from "next-auth/react"
 
 
 const LoginSchema = z.object({
@@ -32,18 +34,26 @@ export default function LoginForm() {
     // const [optional, setOptional] = useState(false);
     // const emailRef = useRef(null);
     // const uidRef = useRef(null);
+    const router=useRouter();
     const {
     register,
     handleSubmit,
      reset,
     formState: { errors }
   } = useForm<LoginSchemaType>({ resolver: zodResolver(LoginSchema) });
+  
 
+
+  const {data : session , status} = useSession();
+  console.log(session);
   const onSubmit: SubmitHandler<LoginSchemaType> = async (data) => {
     console.log(data);
     try{
     const response=await axios.post("/api/users/login",data);
     console.log(response);
+    if(response.status==201){
+      router.push('/findteam');
+   }
     reset();
     }
     catch(error:any){
@@ -114,7 +124,7 @@ export default function LoginForm() {
               <FcGoogle className="mr-2 h-5 w-5" />
               Login with Google
             </Button>
-            <Button variant="outline" className="w-full">
+            <Button variant="outline" className="w-full" onClick={()=>signIn('github')}>
               <FaGithub className="mr-2 h-5 w-5" />
               Login with GitHub
             </Button>
