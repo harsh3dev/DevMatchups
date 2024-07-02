@@ -28,6 +28,9 @@ export async function POST(req: Request) {
           return NextResponse.json({ user: null, message: "Email is not registered" }, { status: 409 });
         }
 
+
+        console.log("password and user ",password,user.password);
+
         if(await compare(password,user.password)){
                const tokendata={
                    id:user.id,
@@ -39,7 +42,8 @@ export async function POST(req: Request) {
 				expires: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
 				httpOnly: true,
 			};
-
+           
+   
             const response=NextResponse.json({
 				token:token,
 				user:user,

@@ -17,6 +17,7 @@ export async function POST(req: Request) {
     }
 
     const {
+      teamName,
       hackathonName,
       regURL,
       hackathonMode,
@@ -32,6 +33,7 @@ export async function POST(req: Request) {
 
     const hackathon = await prisma.hackathon.create({
       data: {
+        teamName,
         hackathonName,
         regURL,
         hackathonMode,
