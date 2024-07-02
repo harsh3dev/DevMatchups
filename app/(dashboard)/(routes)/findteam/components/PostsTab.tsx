@@ -22,7 +22,6 @@ const PostsTab = () => {
       
       {
          data.map((entry, index)=>(
-          <>
             <PostCard entry={entry} key={index} />
         ))
       }
