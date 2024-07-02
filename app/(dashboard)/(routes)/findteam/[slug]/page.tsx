@@ -84,7 +84,7 @@ const page = ({ params }: { params: { slug: string } }) => {
                             <h1>Minimum experience level: <span className='font-extrabold text-xl '>{demoData.experience}</span></h1>
                             
                             <h1 className='flex items-center justify-start gap-2 flex-wrap '>Required Skills: {demoData.skills.map((skill, index)=>(
-                                <span className='p-2 rounded-full border border-text dark:border-text'>{skill}</span>
+                                <span key={index} className='p-2 rounded-full border border-text dark:border-text'>{skill}</span>
                             ))}</h1>
                             
                             <p className='border border-gray-700 dark:border-gray-400 rounded-lg my-3 p-2 mr-1 '>Description: Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolore accusantium consectetur, ut laudantium a cumque reiciendis beatae dicta qui rem. Inventore aspernatur harum explicabo repudiandae eum totam quaerat veniam voluptatem.</p>
@@ -105,7 +105,7 @@ const page = ({ params }: { params: { slug: string } }) => {
                             </h1>
                         </div>
                         <div className='flex flex-col justify-between items-start text-xl  '>
-                            <h1>Team Lead's Contact</h1>
+                            <h1>Team Lead Contact</h1>
                             
                             <div className=' w-full flex justify-start items-center gap-2 hover:border hover:border-accent hover:bg-blue-500/30 dark:hover:bg-sky-300/10 transition-all ease-linear p-2 '>
                                 <MdAlternateEmail />

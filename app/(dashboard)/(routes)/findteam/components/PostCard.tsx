@@ -1,13 +1,12 @@
 
 import React from 'react'
-
+import Capsule from './Capsule';
+import { Button } from '@/components/ui/button';
 
 import { IoLocationSharp } from "react-icons/io5";
 import { MdBugReport } from "react-icons/md";
 import { FaBusinessTime } from "react-icons/fa";
 import Link from 'next/link';
-import Capsule from '@/app/(dashboard)/(routes)/findteam/components/Capsule';
-import { Button } from '@/components/ui/button';
 
 
 interface HackathonEntry {
@@ -54,7 +53,7 @@ const PostCard: React.FC<PostCardProps> = ({ entry, className }) => {
   }
   return (
     
-    <div className='min-w-[350px] min-h-[250px] px-5 py-4 flex flex-col justify-between items-start rounded-lg border border-accent dark:border-accent dark:backdrop-blur-xl transition-all ease-linear dark:bg-gradient-to-tr dark:from-indigo-800/30 dark:via-slate-800/30 dark:to-slate-900/30 dark:hover:from-indigo-800/50 dark:hover:via-indigo-900/50 dark:hover:to-slate-900/50 bg-gradient-to-tr from-cyan-100 via-sky-100 to-slate-100 hover:from-cyan-300 hover:via-emerald-100 hover:to-slate-100  '>      
+    <div className='min-w-[350px] min-h-[250px] px-5 py-4 flex flex-col justify-between items-start rounded-lg border border-accent dark:border-accent dark:backdrop-blur-xl transition-all ease-linear dark:bg-gradient-to-tr dark:from-indigo-800/20 dark:via-slate-800/20 dark:to-slate-900/20 dark:hover:from-indigo-800/50 dark:hover:via-indigo-900/50 dark:hover:to-slate-900/50 bg-gradient-to-tr from-cyan-100/20 via-sky-100/20 to-slate-100/20 hover:from-cyan-300/50 hover:via-emerald-100/50 hover:to-slate-100/50  '>      
       <div className='w-full flex flex-col justify-between items-start rounded-lg '>
         <div className=' w-full flex justify-between items-center'>
           <h1 className='font-bold text-2xl ' >

@@ -3,7 +3,7 @@ import '@/app/globals.css'
 
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { FormData, UserSchema } from "@/app/findmember/Form/types";
+import { FormData, UserSchema } from "./types";
 import FormField from "./FormField";
 
 import { Button } from "@/components/ui/button"
