@@ -11,6 +11,7 @@
     --primary: #154b79;
     --secondary: #66aff0;
     --accent: #056fcc;
+    --inputGray: #e5e7eb;
   }
   .dark {
     --text: #e1ecf4;
@@ -18,30 +19,9 @@
     --primary: #86bbea;
     --secondary: #0f5999;
     --accent: #339dfa;
+    --inputGray: #111827;
   }
 }
-
-
-
-
-  /* @layer base {
-    :root {
-      --text: #0b161e;
-      --background: #f3f7fc;
-      --primary: #154b79;
-      --secondary: #66aff0;
-      --accent: #056fcc;
-    }
-    .dark {
-      --text: #e1ecf4;
-      --background: #03070c;
-      --primary: #86bbea;
-      --secondary: #0f5999;
-      --accent: #339dfa;
-    }
-  } */
-
-
 *, body{
   font-family: "Nunito Sans", sans-serif;
 }

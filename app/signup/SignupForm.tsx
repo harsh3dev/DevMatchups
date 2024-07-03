@@ -3,14 +3,20 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter }
 import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
+import { toast } from "@/components/ui/use-toast"
 import { Separator } from "@/components/ui/separator"
+
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa6";
+import { ReloadIcon } from "@radix-ui/react-icons"
+
 import Link from "next/link"
+import { useEffect, useState } from "react"
+
 import { z } from "zod";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Span } from "next/dist/trace"
+
 import axios from "axios"
 import { useRouter } from "next/navigation"
 import { useAppDispatch } from "@/lib/store/hooks"
@@ -31,37 +37,57 @@ type SignUpSchemaType = z.infer<typeof SignUpSchema>;
 
 
 export default function SignupForm() {
+
   const router=useRouter();
   const dispatch=useAppDispatch();
+
   const {
     register,
     handleSubmit,
     formState: { errors }
   } = useForm<SignUpSchemaType>({ resolver: zodResolver(SignUpSchema) });
-  
+
+  const [loading, setLoading] = useState(false);
+  const [signupError, setSignupError] = useState("");
+
+  useEffect(()=>{
+    function showError(){
+      if(signupError.length){
+        toast({
+          title: `${signupError}`,
+        })
+      }
+    }
+  },[])
   
   const onSubmit: SubmitHandler<SignUpSchemaType> = async (data) =>{
     console.log(data);
     dispatch(setSignupData(data));
     try{
-    const {email} = data;
-    const response=await axios.post("/api/users/otp",{email});
-    console.log("response",response);
-    router.push('/verify-email');
+      setLoading(true);
+      const {email} = data;
+      const response=await axios.post("/api/users/otp",{email});
+      console.log("response",response);
+      router.push('/verify-email');
+      
     }
     catch(error){
       if (axios.isAxiosError(error)) {
         console.log('Axios error message:', error?.response?.data?.message || error?.message);
+        setSignupError(error?.response?.data?.message || error?.message)
        }
       else{
       console.log("Unexpected Error",error);
       }
     }
+
+    setLoading(false);
+    
   }
 
   return (
     <div className="flex h-screen w-full items-center justify-center ">      
-      <form onSubmit={handleSubmit(onSubmit)} className="w-full grid place-items-center h-[80vh] "  >
+      <div className="w-full grid place-items-center h-[80vh] "  >
       <Card className="w-full max-w-lg ">
         <CardHeader className="space-y-1 text-center">
           <CardTitle className="text-2xl font-bold">Sign Up</CardTitle>
@@ -86,35 +112,45 @@ export default function SignupForm() {
           </div>
 
           {/* FORM */}
-          <div className="grid grid-cols-1 gap-4">
-            <div className="space-y-2">
-              <Label htmlFor="name">Full Name</Label>
-              <Input id="name" placeholder="Enter your full name" className="focus:border-b-2 border-blue-500 rounded-md " {...register("name")} required />
-              {errors.name && <span className="error-message text-right w-full text-sm mb-5 font-semibold text-red-500 ">*{errors.name.message}</span>}
-            </div>
-            <div className="flex gap-2 items-center">
+          <form  onSubmit={handleSubmit(onSubmit)} >
+            <div className="grid grid-cols-1 gap-4">
+              <div className="space-y-2">
+                <Label htmlFor="name">Full Name</Label>
+                <Input id="name" placeholder="Enter your full name" className="focus:border-b-2 border-blue-500 rounded-md bg-slate-900/30 " {...register("name")} required />
+                {errors.name && <span className="error-message text-right w-full text-sm mb-5 font-semibold text-red-500 ">*{errors.name.message}</span>}
+              </div>
+              <div className="flex gap-2 items-center">
+              <div className="space-y-2 w-1/2 ">
+                <Label htmlFor="username">User name</Label>
+                <Input id="username" placeholder="Enter a unique username" className="focus:border-b-2 border-blue-500 rounded-md bg-slate-900/30 " {...register("username")} required />
+                {errors.username && <span className="error-message text-right w-full text-sm mb-5 font-semibold text-red-500 ">*{errors.username.message}</span>}
+              </div>
             <div className="space-y-2 w-1/2 ">
-              <Label htmlFor="username">User name</Label>
-              <Input id="username" placeholder="Enter a unique username" className="focus:border-b-2 border-blue-500 rounded-md " {...register("username")} required />
-              {errors.username && <span className="error-message text-right w-full text-sm mb-5 font-semibold text-red-500 ">*{errors.username.message}</span>}
+              <Label htmlFor="email">Email</Label>
+              <Input id="email" type="email" placeholder="example@email.com" className="focus:border-b-2 border-blue-500 rounded-md bg-slate-900/30 "  
+              {...register("email")} />
+              {errors.email && <span className="error-message text-right w-full text-sm mb-5 font-semibold text-red-500 ">*{errors.email.message}</span>}
             </div>
-          <div className="space-y-2 w-1/2 ">
-            <Label htmlFor="email">Email</Label>
-            <Input id="email" type="email" placeholder="example@email.com" className="focus:border-b-2 border-blue-500 rounded-md "  
-            {...register("email")} />
-            {errors.email && <span className="error-message text-right w-full text-sm mb-5 font-semibold text-red-500 ">*{errors.email.message}</span>}
-          </div>
+              </div>
+              </div>
+            <div className="space-y-2">
+              <Label htmlFor="password">Password</Label>
+              <Input id="password" type="password" placeholder="********" className="focus:border-b-2 border-blue-500 rounded-md bg-slate-900/30 " {...register("password")} required />
+              {errors.password && <span className="error-message text-right w-full text-sm mb-5 font-semibold text-red-500 ">*{errors.password.message}</span>}
             </div>
-            </div>
-          <div className="space-y-2">
-            <Label htmlFor="password">Password</Label>
-            <Input id="password" type="password" placeholder="********" className="focus:border-b-2 border-blue-500 rounded-md " {...register("password")} required />
-            {errors.password && <span className="error-message text-right w-full text-sm mb-5 font-semibold text-red-500 ">*{errors.password.message}</span>}
-          </div>
-          <Button type="submit" className="w-full">
-            Sign Up
-          </Button>
+            {
+              loading?
+              <Button disabled className="w-full mt-4 ">
+                <ReloadIcon className="mr-2 h-4 w-4 animate-spin" /> Signing up
+              </Button>
+             :
+             <Button type="submit" className="w-full mt-4 ">
+              Sign Up
+            </Button>
+            }
+          </form>
         </CardContent>
+
         <CardFooter className="text-center gap-2 w-full flex justify-center items-center text-sm text-gray-500">
           Already have an account?{" "}
           <Link href="/login" className="font-medium text-blue-600 dark:text-cyan-500 hover:underline" prefetch={false}>
@@ -122,7 +158,7 @@ export default function SignupForm() {
           </Link>
         </CardFooter>
       </Card>
-      </form>
+      </div>
     </div>
   )
 }

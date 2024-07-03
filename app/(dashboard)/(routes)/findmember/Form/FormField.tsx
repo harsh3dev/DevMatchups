@@ -13,15 +13,6 @@ const FormField: React.FC<FormFieldProps> = ({
     valueAsNumber,
 }) => {
 
-    const SkillsOptions = [
-        { value: 'Javascript', label: 'Javascript' },
-        { value: 'Python', label: 'Python' },
-        { value: 'React JS', label: 'React JS' },
-        { value: 'Next JS', label: 'Next JS' },
-        { value: 'MongoDB', label: 'MongoDB' },
-        { value: 'SQL', label: 'SQL' }
-    ]
-
     return (
         <div className="w-full h-[5rem] ">
             <div className="w-full h-[50%] flex flex-col gap-2 ">

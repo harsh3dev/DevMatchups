@@ -193,19 +193,7 @@ function Form() {
                             register={register}
                             error={errors.memberCount}
                         />
-
-                        {/* TODO: Select */}
-                        {/* <FormField
-                            type="text"
-                            placeholder="Javascript, Python, C# etc..."
-                            label="What are the required skills? *"
-                            name="skills"
-                            register={register}
-                            error={errors.skills}
-                            options={SkillsOptions}
-                            isMulti={true}
-                        /> */}
-
+                        
                         <Label htmlFor="skills" >What are the required skills? *</Label>
                         <Controller
                             name="skills"

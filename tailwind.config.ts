@@ -29,6 +29,7 @@ const config = {
         'primary': 'var(--primary)',
         'secondary': 'var(--secondary)',
         'accent': 'var(--accent)',
+        'inputGray': 'var(--inputGray)',
        },
       keyframes: {
         "accordion-down": {

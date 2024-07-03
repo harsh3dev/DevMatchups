@@ -2,10 +2,11 @@
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ReactOtpInput from "react-otp-input";
 import { Button } from "@/components/ui/button"
 import { useAppSelector } from "@/lib/store/hooks";
+import { toast } from "@/components/ui/use-toast";
 
 
 
@@ -13,7 +14,18 @@ export default function VerifyForm() {
   const router = useRouter();
   const signupdata=useAppSelector(state => state.auth.signupData);
   const [otp, setOtp] = useState(""); 
- 
+  const [loading, setLoading] = useState(false);
+  const [signupError, setSignupError] = useState("");
+  
+  useEffect(()=>{
+    function showError(){
+      if(signupError.length){
+        toast({
+          title: `${signupError}`,
+        })
+      }
+    }
+  },[])
   
   const onSubmit = async (e:any) => {
     e.preventDefault();
@@ -23,12 +35,14 @@ export default function VerifyForm() {
       const response = await axios.post("/api/users/signup",{data});
       console.log("response", response);
       if(response.status==201){
-         router.push('/findteam');
+         router.push('/signup/onboarding');
+
       }
     } 
     catch (error) {
       if (axios.isAxiosError(error)) {
         console.log('Axios error message:', error?.response?.data?.message || error?.message);
+        setSignupError(error?.response?.data?.message || error?.message)
       } else {
         console.log("Unexpected Error", error);
       }
