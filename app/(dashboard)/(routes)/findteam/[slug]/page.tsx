@@ -127,8 +127,6 @@ const page = ({ params }: { params: { slug: string } }) => {
                 </div>
             </div>
 
-
-            <Footer />
         </main>
     )
 }
