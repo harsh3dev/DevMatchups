@@ -21,8 +21,6 @@ interface HackathonEntry {
   createdAt: string;
 }
 
-
-
 const PostsTab = () => {
   const { search, mode, experience, skills } = useSelector((state: RootState) => state.filter);
   const dispatch = useDispatch();
@@ -39,8 +37,12 @@ const PostsTab = () => {
    fetch();
   },[])
 
+  const matchSearch = (val:string) =>{
+    return val.toLowerCase().includes(search.toLowerCase())
+  }
+
   const filteredPosts = posts.filter((post) => {
-    const matchesSearch = post.teamName.toLowerCase().includes(search.toLowerCase());
+    const matchesSearch = matchSearch(post.teamName) || matchSearch(post.hackathonName) || matchSearch(post.location) || matchSearch(post.experience) || matchSearch(post.hackathonMode) || matchSearch(post.role);
     const matchesMode = mode.length ? mode.every(m => post.hackathonMode.includes(m)) : true;
     const matchesRole = experience.length ? experience.every(e => post.experience.includes(e)) : true;
     const matchesSkills = skills.length ? skills.every(skill => post.skills.includes(skill)) : true;
