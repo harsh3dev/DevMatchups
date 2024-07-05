@@ -1,8 +1,12 @@
 "use client";
 
 import { PlaceholdersAndVanishInput } from "@/components/ui/placeholders-and-vanish-input";
-
+import { setSearch } from "@/lib/store/features/filterSlice/filterSlice";
+import { useDispatch, UseDispatch } from "react-redux";
 export function SearchFilter() {
+    
+    const dispatch = useDispatch();
+
     const placeholders = [
         "Backend Developer/Devops Engineer...",
         "Django, Backend Dev - Delhi...",
@@ -18,6 +22,7 @@ export function SearchFilter() {
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         console.log(e.target.value);
+        dispatch(setSearch(e.target.value));
     };
     const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -32,3 +37,4 @@ export function SearchFilter() {
     </div>
     );
 }
+

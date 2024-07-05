@@ -3,6 +3,8 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { cn } from "@/utils/cn";
+import { setSearch } from "@/lib/store/features/filterSlice/filterSlice";
+import { useDispatch, UseDispatch } from "react-redux";
 
 export function PlaceholdersAndVanishInput({
   placeholders,
@@ -14,6 +16,8 @@ export function PlaceholdersAndVanishInput({
   onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
 }) {
   const [currentPlaceholder, setCurrentPlaceholder] = useState(0);
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     let interval: any;
@@ -144,6 +148,7 @@ export function PlaceholdersAndVanishInput({
     draw();
 
     const value = inputRef.current?.value || "";
+    dispatch(setSearch(''));
     if (value && inputRef.current) {
       const maxX = newDataRef.current.reduce(
         (prev, current) => (current.x > prev ? current.x : prev),
@@ -170,7 +175,7 @@ export function PlaceholdersAndVanishInput({
       
       <canvas
         className={cn(
-          "absolute pointer-events-none  text-base transform scale-50 top-[20%] left-2 sm:left-8 origin-top-left filter invert dark:invert-0 pr-20",
+          "absolute pointer-events-none  text-base transform scale-50 top-[20%] left-2 sm:left-10 origin-top-left filter invert dark:invert-0 pr-20",
           
           !animating ? "opacity-0" : "opacity-100"
         )}
@@ -212,6 +217,9 @@ export function PlaceholdersAndVanishInput({
           className="text-cyan-200 h-4 w-4"
         >
           <g id="SVGRepo_bgCarrier" strokeWidth="0"/>
+
+
+          
           <motion.g
             id="SVGRepo_tracerCarrier" 
             strokeLinecap="round" 
@@ -228,7 +236,7 @@ export function PlaceholdersAndVanishInput({
               ease: "linear",
             }}
           />
-         <g id="SVGRepo_iconCarrier"> <path fillRule="evenodd" clipRule="evenodd" d="M15 10.5C15 12.9853 12.9853 15 10.5 15C8.01472 15 6 12.9853 6 10.5C6 8.01472 8.01472 6 10.5 6C12.9853 6 15 8.01472 15 10.5ZM14.1793 15.2399C13.1632 16.0297 11.8865 16.5 10.5 16.5C7.18629 16.5 4.5 13.8137 4.5 10.5C4.5 7.18629 7.18629 4.5 10.5 4.5C13.8137 4.5 16.5 7.18629 16.5 10.5C16.5 11.8865 16.0297 13.1632 15.2399 14.1792L20.0304 18.9697L18.9697 20.0303L14.1793 15.2399Z" fill="#99F6E4"/> </g>
+         <g id="SVGRepo_iconCarrier"> <path d="M8 8L16 16" stroke="#ffffff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/> <path d="M16 8L8 16" stroke="#ffffff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/> </g>
         </motion.svg>
       </button>
 
@@ -253,7 +261,7 @@ export function PlaceholdersAndVanishInput({
                 duration: 0.3,
                 ease: "linear",
               }}
-              className="text-slate-600 text-sm sm:text-base font-normal dark:text-gray-300 pl-4 sm:px-14 text-left w-[calc(100%-2rem)] truncate"
+              className="text-slate-600 text-sm sm:text-base font-normal dark:text-gray-300 pl-4 sm:px-10 text-left w-[calc(100%-2rem)] truncate"
             >
               {placeholders[currentPlaceholder]}
             </motion.p>

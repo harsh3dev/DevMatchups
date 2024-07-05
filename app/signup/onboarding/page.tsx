@@ -12,10 +12,11 @@ const page = () => {
         
         <Navbar />
         <div className='min-h-screen flex flex-col justify-start items-center '>
-            <div className='w-full mt-5 p-5 rounded-2xl border border-dashed border-accent dark:border-accent grid place-items-center  '>
+            <div className='w-full mt-5 p-10 rounded-2xl border border-dashed border-accent dark:border-accent grid place-items-center  '>
                 <h1 className=' w-full p-2 text-2xl text-start font-bold '>
                     Just fill-up some necessary details!
                 </h1>
+                <hr className='text-text w-full my-4' />
                 <FormComponent/>
             </div>
         </div>

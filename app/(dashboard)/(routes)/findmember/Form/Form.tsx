@@ -208,27 +208,34 @@ function Form() {
                                     id="skills"
                                     
                                     styles={{
-                                        singleValue: base => ({ ...base, color: "#154b79", paddingInline: "5px", }),
+                                        singleValue: base => ({ ...base, color: "#154b79", }),
                                         valueContainer: base => ({
                                             ...base,
-                                            color: "var(--text)",
+                                            color: "var(--secondary)",
                                             width: "100%",
-                                            paddingInline: "5px",
-                                            borderColor: "var(--primary)",
                                         }),
                                         control: (base, state) => ({
                                             ...base,
                                             color: "var(--text)",
-                                            background: "var(--background)",
+                                            background: "var(--inputGray)",
                                             borderRadius: "50px",
-                                            textDecorationColor: "var(--text)"
+                                            border:"0px",
+                                            outline: "none",
+                                            ":isFocused": {
+                                                borderBlockColor: "var(--accent)",
+                                                borderInlineColor: "var(--accent)"
+                                            }
                                         }),
                                         option: (styles, { data, isDisabled, isFocused, isSelected }) => ({
                                             ...styles,
-                                            backgroundColor:"var(--background)",
+                                            backgroundColor:"var(--inputGray)",
                                             color:"var(--text)",
                                             ":active": {
                                                 ...styles[":active"],
+                                                backgroundColor: "var(--secondary)"
+                                            },
+                                            ":hover": {
+                                                ...styles[":hover"],
                                                 backgroundColor: "var(--secondary)"
                                             }
                                         }),
@@ -303,27 +310,34 @@ function Form() {
                                     id="experience"
                                     
                                     styles={{
-                                        singleValue: base => ({ ...base, color: "white", paddingInline: "5px", }),
+                                        singleValue: base => ({ ...base, color: "", }),
                                         valueContainer: base => ({
                                             ...base,
                                             color: "var(--text)",
                                             width: "100%",
-                                            paddingInline: "5px",
-                                            borderColor: "var(--primary)",
                                         }),
                                         control: (base, state) => ({
                                             ...base,
                                             color: "var(--text)",
-                                            background: "var(--background)",
+                                            background: "var(--inputGray)",
                                             borderRadius: "50px",
-                                            textDecorationColor: "var(--text)"
+                                            border:"0px",
+                                            outline: "none",
+                                            ":isFocused": {
+                                                borderBlockColor: "var(--accent)",
+                                                borderInlineColor: "var(--accent)"
+                                            }
                                         }),
                                         option: (styles, { data, isDisabled, isFocused, isSelected }) => ({
                                             ...styles,
-                                            backgroundColor:"var(--background)",
+                                            backgroundColor:"var(--inputGray)",
                                             color:"var(--text)",
                                             ":active": {
                                                 ...styles[":active"],
+                                                backgroundColor: "var(--secondary)"
+                                            },
+                                            ":hover": {
+                                                ...styles[":hover"],
                                                 backgroundColor: "var(--secondary)"
                                             }
                                         }),
