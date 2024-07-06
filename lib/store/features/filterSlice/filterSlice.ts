@@ -2,17 +2,18 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface FilterState {
   search: string;
-  mode: string[];
-  experience: string[];
-  skills: string[];
+  modeOptions: string[];
+  expOptions: string[];
+  skillOptions: string[];
 }
 
 const initialState: FilterState = {
-  search: "",
-  mode: [],
-  experience: [],
-  skills: [],
+  search: '',
+  modeOptions: [],
+  expOptions: [],
+  skillOptions: [],
 };
+
 
 const filterSlice = createSlice({
   name: 'filter',
@@ -21,23 +22,19 @@ const filterSlice = createSlice({
     setSearch(state, action: PayloadAction<string>) {
       state.search = action.payload;
     },
-    setMode(state, action: PayloadAction<string>) {
-      state.mode.push(action.payload);
-    },
-    setExperience(state, action: PayloadAction<string>) {
-      state.experience.push(action.payload);
-    },
-    setSkills(state, action: PayloadAction<string>) {
-      state.skills.push(action.payload);
+    updateFilters(state, action: PayloadAction<Omit<FilterState, 'search'>>) {
+      state.modeOptions = action.payload.modeOptions;
+      state.expOptions = action.payload.expOptions;
+      state.skillOptions = action.payload.skillOptions;
     },
     resetFilters(state) {
       state.search = '';
-      state.mode = [];
-      state.experience = [];
-      state.skills = [];
+      state.modeOptions = [];
+      state.skillOptions = [];
+      state.skillOptions = [];
     },
   },
 });
 
-export const { setSearch, setMode, setExperience, setSkills, resetFilters } = filterSlice.actions;
+export const { setSearch, updateFilters, resetFilters } = filterSlice.actions;
 export default filterSlice.reducer;

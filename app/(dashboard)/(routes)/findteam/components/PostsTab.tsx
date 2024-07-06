@@ -22,17 +22,22 @@ interface HackathonEntry {
 }
 
 const PostsTab = () => {
-  const { search, mode, experience, skills } = useSelector((state: RootState) => state.filter);
+  const { search, modeOptions, expOptions, skillOptions } = useSelector((state: RootState) => state.filter);
   const dispatch = useDispatch();
   const [data,setData]=useState([]);
   const [posts, setPosts] = useState<HackathonEntry[]>([]);
 
+  const [loading, setLoading] = useState(false);
+
   useEffect(()=>{
    const fetch=async()=>{
+      setLoading(true);
       const res=await axios.get('/api/teams');
       console.log(res.data.Hackathon);
       setData(res.data.Hackathon);
       setPosts(res.data.Hackathon);
+
+      setLoading(false)
    }
    fetch();
   },[])
@@ -42,17 +47,19 @@ const PostsTab = () => {
   }
 
   const filteredPosts = posts.filter((post) => {
-    const matchesSearch = matchSearch(post.teamName) || matchSearch(post.hackathonName) || matchSearch(post.location) || matchSearch(post.experience) || matchSearch(post.hackathonMode) || matchSearch(post.role);
-    const matchesMode = mode.length ? mode.every(m => post.hackathonMode.includes(m)) : true;
-    const matchesRole = experience.length ? experience.every(e => post.experience.includes(e)) : true;
-    const matchesSkills = skills.length ? skills.every(skill => post.skills.includes(skill)) : true;
+    const matchesSearch = matchSearch(post.teamName) || matchSearch(post.hackathonName) || matchSearch(post.location) || matchSearch(post.experience) || matchSearch(post.hackathonMode) || matchSearch(post.role) || post.skills.some(s => matchSearch(s));
+    const matchesMode = modeOptions.length ? modeOptions.some(m => post.hackathonMode.toLowerCase().includes(m.toLowerCase())) : true;
+    const matchesRole = expOptions.length ? expOptions.some(e => post.experience.toLowerCase().includes(e.toLowerCase())) : true;
+    const matchesSkills = skillOptions.length ? skillOptions.some(skill => post.skills.some(s => s.toLowerCase().includes(skill.toLowerCase()))) : true;
 
-    return matchesSearch && matchesMode && matchesRole && matchesSkills;
+    return matchesSearch && (matchesMode && matchesRole && matchesSkills);
   });
 
   return (
-    <div className='w-full min-h-[50vh] grid grid-cols-1 lg:grid-cols-3 gap-4 flex-wrap '>
-      
+    <div className='w-full min-h-[50vh] grid grid-cols-2 lg:grid-cols-3 gap-4 flex-wrap '>
+
+      {loading && <h1 className='text-xl text-text dark:text-text font-extrabold '>Loading...</h1>}
+
       {
          filteredPosts.map((entry, index)=>(
             <PostCard entry={entry} key={index} />
