@@ -129,6 +129,7 @@ export default function Page({ params }: { params: { id: string } }) {
                     </div>
                 </div>
             </div>
+
         </main>
     </>
     )
