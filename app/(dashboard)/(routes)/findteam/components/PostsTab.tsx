@@ -6,6 +6,7 @@ import axios from 'axios'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from '@/lib/store/store'
 import { setPosts } from '@/lib/store/features/postSlice/postSlice'
+import Loading from './Loading'
 
 interface HackathonEntry {
   hackathonName: string;
@@ -65,7 +66,7 @@ useEffect(() => {
   return (
     <div className='w-full min-h-[50vh] grid grid-cols-2 lg:grid-cols-3 gap-4 flex-wrap '>
 
-      {loading && <h1 className='text-xl text-text dark:text-text font-extrabold '>Loading...</h1>}
+      {loading && <Loading/> }
 
       {
          filteredPosts.map((entry, index)=>(
