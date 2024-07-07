@@ -17,6 +17,7 @@ import ReactDatePicker from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker.css';
 
 import axios from "axios";
+import { getSession, useSession } from 'next-auth/react';
 
 
 
@@ -27,6 +28,9 @@ interface Option {
 }
 type SkillOptions = Option[];
 function Form() {
+
+  
+  
     const {
         register,
         handleSubmit,
@@ -43,8 +47,13 @@ function Form() {
         },
     });
 
+
+  
+
     const onSubmit = async (data: FormData) => {
         console.log("Submitting data:", data);
+        const session = getSession();
+        console.log("client session",session);
         try {
             data.Employerid = 1;
             const response = await axios.post('/api/post', data);
