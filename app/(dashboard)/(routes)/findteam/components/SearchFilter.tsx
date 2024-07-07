@@ -18,6 +18,16 @@ export function SearchFilter() {
         "Unstop/Devfolio...",
         "Online - Web 3...",
         "Rust, Python, Open AI, Javascript...",
+        "Full-stack Developer - Bangalore...",
+        "Node.js, Express - Remote...",
+        "Hybrid, React Native - Chennai...",
+        "Java Developer - Kolkata...",
+        "Frontend Engineer - Mumbai...",
+        "Python, Django - Remote...",
+        "Blockchain Developer - Delhi...",
+        "UI/UX Designer - Pune...",
+        "Data Scientist - Hyderabad...",
+        "React, TypeScript - Bengaluru...",
     ];
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

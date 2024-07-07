@@ -7,8 +7,8 @@ import { FaGithub } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
 import { FaCalendarAlt } from "react-icons/fa";
 import { notFound, useRouter } from 'next/navigation';
-import { useSelector } from 'react-redux';
-import { useAppSelector } from '@/lib/store/hooks';
+
+import { useAppDispatch, useAppSelector } from '@/lib/store/hooks';
 import { RootState } from '@/lib/store/store';
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
@@ -17,7 +17,7 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 
 import { HackathonEntry } from '@/app/(dashboard)/(routes)/findmember/Form/types';
-import { IoGitPullRequestSharp } from 'react-icons/io5';
+
 
 
 export default function Page({ params }: { params: { id: string } }) {

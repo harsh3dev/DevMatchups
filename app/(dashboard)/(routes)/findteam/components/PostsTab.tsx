@@ -24,7 +24,7 @@ interface HackathonEntry {
 const PostsTab = () => {
   const { search, modeOptions, expOptions, skillOptions } = useSelector((state: RootState) => state.filter);
   const dispatch = useDispatch<AppDispatch>();
-  // const [data,setData]=useState([]);
+  const [data,setData]=useState([]);
   // const [posts, setPostss] = useState<HackathonEntry[]>([]);
   const posts = useSelector((state: RootState) => state.post.posts);
   const [loading, setLoading] = useState(false);
