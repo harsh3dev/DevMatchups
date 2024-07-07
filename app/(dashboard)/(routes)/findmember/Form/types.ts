@@ -21,6 +21,25 @@ export const UserSchema: ZodType<FormData> = z
 });
 
 
+export interface HackathonEntry {
+  id: number;
+  teamName: string;
+  hackathonName: string;
+  regURL: string;
+  hackathonMode: string;
+  memberCount: string;
+  skills: string[] ;
+  role: string;
+  experience: string;
+  regDate: string;
+  location: string;
+  description: string;
+  Employerid: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
+
 export type FormData = {
   teamName: string;
   hackathonName: string;

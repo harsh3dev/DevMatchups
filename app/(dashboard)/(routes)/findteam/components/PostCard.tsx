@@ -8,20 +8,10 @@ import { MdBugReport } from "react-icons/md";
 import { FaBusinessTime } from "react-icons/fa";
 import Link from 'next/link';
 
+import { HackathonEntry } from '@/app/(dashboard)/(routes)/findmember/Form/types';
 
-interface HackathonEntry {
-  hackathonName: string;
-  skills: string[];
-  role: string;
-  experience: string;
-  location: string;
-  regDate: string;
-  teamName: string;
-  memberCount: string;
-  hackathonMode: string;
-  id: Number;
-  createdAt: string;
-}
+
+
 
 interface PostCardProps {
   entry: HackathonEntry;

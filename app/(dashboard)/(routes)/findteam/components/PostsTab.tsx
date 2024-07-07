@@ -4,8 +4,8 @@ import mockData from "./mock-data.json"
 import PostCard from './PostCard'
 import axios from 'axios'
 import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from '@/lib/store/store'
-
+import { AppDispatch, RootState } from '@/lib/store/store'
+import { setPosts } from '@/lib/store/features/postSlice/postSlice'
 
 interface HackathonEntry {
   hackathonName: string;
@@ -23,24 +23,31 @@ interface HackathonEntry {
 
 const PostsTab = () => {
   const { search, modeOptions, expOptions, skillOptions } = useSelector((state: RootState) => state.filter);
-  const dispatch = useDispatch();
-  const [data,setData]=useState([]);
-  const [posts, setPosts] = useState<HackathonEntry[]>([]);
-
+  const dispatch = useDispatch<AppDispatch>();
+  // const [data,setData]=useState([]);
+  // const [posts, setPostss] = useState<HackathonEntry[]>([]);
+  const posts = useSelector((state: RootState) => state.post.posts);
   const [loading, setLoading] = useState(false);
 
-  useEffect(()=>{
-   const fetch=async()=>{
-      setLoading(true);
-      const res=await axios.get('/api/teams');
-      console.log(res.data.Hackathon);
-      setData(res.data.Hackathon);
-      setPosts(res.data.Hackathon);
+  useEffect(() => {
+    const fetch = async () => {
+        setLoading(true);
+        try {
+            const res = await axios.get('/api/teams');
+            console.log(res.data.Hackathon);
+            dispatch(setPosts(res.data.Hackathon));
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        } finally {
+            setLoading(false);
+        }
+    };
+    fetch();
+}, [dispatch]);
 
-      setLoading(false)
-   }
-   fetch();
-  },[])
+useEffect(() => {
+    console.log("POSTSS", posts);
+}, [posts]);
 
   const matchSearch = (val:string) =>{
     return val.toLowerCase().includes(search.toLowerCase())

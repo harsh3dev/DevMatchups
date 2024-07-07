@@ -1,55 +1,59 @@
-import React from 'react'
-
-import Footer from '@/app/Footer/Footer'
-import Navbar from '@/app/Navbar/Navbar'
+"use client"
+import React, { useEffect } from 'react'
 
 import { MdAlternateEmail } from "react-icons/md";
 import { FaLinkedin } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
 import { FaCalendarAlt } from "react-icons/fa";
+import { notFound, useRouter } from 'next/navigation';
+import { useSelector } from 'react-redux';
+import { useAppSelector } from '@/lib/store/hooks';
+import { RootState } from '@/lib/store/store';
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-
 
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 
+import { HackathonEntry } from '@/app/(dashboard)/(routes)/findmember/Form/types';
+import { IoGitPullRequestSharp } from 'react-icons/io5';
 
-//   location: string;
-//   description?: string;
 
-const demoData = {
-    "hackathonName": "CodeSprint 2024",
-    "skills": ["JavaScript", "React", "Node.js", "Kubernetes", "Docker", "Django"],
-    "role": "Front-end Developer",
-    "experience": "Beginner",
-    "location": "Mumbai, India",
-    "regDate": "2024-02-01T09:30:00Z",
-    "teamName": "TechTitans",
-    "hackathonMode": "Offline",
-    "slug": "TechTitans-5e6f7g8h",
-    "createdAt": "2024-06-19T00:00:00Z"
-} as const
+export default function Page({ params }: { params: { id: string } }) {
 
-const page = ({ params }: { params: { slug: string } }) => {
+    const router = useRouter();
 
     function formatDate(inputDate: string): string {
         const date = new Date(inputDate);
-    
         const day = date.getUTCDate();
         const month = date.toLocaleString('default', { month: 'long' });
         const year = date.getUTCFullYear();
-    
         return `${day} ${month} ${year}`;
     }
 
+    const posts = useAppSelector((state: RootState) => state.post.posts);
+
+    useEffect(() => {
+        setTimeout(() => {
+            console.log("POSTSS", posts);
+        }, 2000);
+    }, [posts]);
+
+    const getSPostData = (id: string): HackathonEntry => {
+        const post = posts.find((p: HackathonEntry) => id == p.id.toString());
+        if(!post) notFound();
+        return post;
+    };
+    const post = getSPostData(params.id);
+    console.log(post); 
+
     return (
+    <>
         <main className="flex min-h-screen flex-col items-center justify-between bg-background ">
-            
             <div className='--outerbox rounded-md border border-gray-700 w-full dark:border-gray-400 max-w-[80%] text-text dark:text-text my-14 p-10 bg-gradient-to-tr from-violet-300 via-violet-200 to-slate-100 dark:from-violet-600 dark:via-indigo-900 dark:to-slate-900 '>
                 <h1 className=' font-extrabold text-3xl mb-2 '>
-                    {demoData.hackathonName} - {demoData.teamName}
+                    {post?.hackathonName} - {post?.teamName}
                 </h1>
 
                 <hr className=' border-t border-text  ' />
@@ -58,32 +62,31 @@ const page = ({ params }: { params: { slug: string } }) => {
                     <div className='h-full  col-span-3 mr-2 '>
                         <h1 className='flex justify-start items-center gap-1 text-base text-gray-800 dark:text-gray-300 '>
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4 -mt-px">
-                            <path fill-rule="evenodd"
-                                d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm8.706-1.442c1.146-.573 2.437.463 2.126 1.706l-.709 2.836.042-.02a.75.75 0 01.67 1.34l-.04.022c-1.147.573-2.438-.463-2.127-1.706l.71-2.836-.042.02a.75.75 0 11-.671-1.34l.041-.022zM12 9a.75.75 0 100-1.5.75.75 0 000 1.5z"
-                                clip-rule="evenodd"></path>
+                            <path fillRule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm8.706-1.442c1.146-.573 2.437.463 2.126 1.706l-.709 2.836.042-.02a.75.75 0 01.67 1.34l-.04.022c-1.147.573-2.438-.463-2.127-1.706l.71-2.836-.042.02a.75.75 0 11-.671-1.34l.041-.022zM12 9a.75.75 0 100-1.5.75.75 0 000 1.5z"
+                                clipRule="evenodd"></path>
                             </svg> There are {2} open applications for this team!</h1>
 
                         <div className='w-full flex flex-col justify-center items-start gap-2 '>
                             <h1 className='text-2xl my-2 '>Hackathon Details</h1>
 
-                            <h1>Name of the hackathon: <span className='font-extrabold text-xl '>{demoData.hackathonName}</span></h1>
+                            <h1>Name of the hackathon: <span className='font-extrabold text-xl '>{post?.hackathonName}</span></h1>
 
                             <div className='w-full flex justify-start items-center gap-3 '>
-                                <span className='font-extrabold text-xl '>Mode: {demoData.hackathonMode}</span> | <span className=' font-extrabold text-xl  flex justify-center items-center gap-1'>Location: <FaLocationDot /> {demoData.location}</span>
+                                <span className='font-extrabold text-xl '>Mode: {post?.hackathonMode}</span> | <span className=' font-extrabold text-xl  flex justify-center items-center gap-1'>Location: <FaLocationDot /> {post?.location}</span>
                             </div>
 
-                            <h1>Registration Link: <Link  className='text-primary hover:underline hover:underline-offset-1 dark:text-primary transition-all ease-linear' href={'https://unstop.com/hackathons/idea-ignite-codebyte-1046358'}>https://unstop.com/hackathons/idea-ignite-codebyte-1046358</Link> </h1>
+                            <h1>Registration Link: <Link  className='text-primary hover:underline hover:underline-offset-1 dark:text-primary transition-all ease-linear' href={post?.regURL}>{post?.regURL}</Link> </h1>
 
                             <h1 className='w-full flex justify-start items-center gap-3 ' >Last Date of Registration:<span className=' font-extrabold text-xl  flex justify-center items-center gap-1'>
-                                <FaCalendarAlt /> {formatDate(demoData.regDate)}
+                                <FaCalendarAlt /> {formatDate(post?.regDate)}
                                 </span> 
                             </h1>
 
-                            <h1>Looking for position: <span className='font-extrabold text-xl '>{demoData.role}</span></h1>
+                            <h1>Looking for position: <span className='font-extrabold text-xl '>{post?.role}</span></h1>
 
-                            <h1>Minimum experience level: <span className='font-extrabold text-xl '>{demoData.experience}</span></h1>
+                            <h1>Minimum experience level: <span className='font-extrabold text-xl '>{post?.experience}</span></h1>
                             
-                            <h1 className='flex items-center justify-start gap-2 flex-wrap '>Required Skills: {demoData.skills.map((skill, index)=>(
+                            <h1 className='flex items-center justify-start gap-2 flex-wrap '>Required Skills: {post?.skills.map((skill:string, index:number)=>(
                                 <span key={index} className='p-2 rounded-full border border-text dark:border-text'>{skill}</span>
                             ))}</h1>
                             
@@ -101,7 +104,7 @@ const page = ({ params }: { params: { slug: string } }) => {
                                 <AvatarFallback>CT</AvatarFallback>
                             </Avatar>
                             <h1 className='text-3xl font-medium text-accent '>
-                                {demoData.teamName}
+                                {post?.teamName}
                             </h1>
                         </div>
                         <div className='flex flex-col justify-between items-start text-xl  '>
@@ -126,11 +129,7 @@ const page = ({ params }: { params: { slug: string } }) => {
                     </div>
                 </div>
             </div>
-
         </main>
+    </>
     )
 }
-
-export default page
-
-
