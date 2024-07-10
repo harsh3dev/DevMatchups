@@ -10,7 +10,7 @@ import { devpostData } from './mock_data'
 import Posts from './Posts'
 
 
-const page = () => {
+const Page = () => {
   const [unstopClicked, setUnstopClicked] = useState(true);
   const [devpostClicked, setdevpostClicked] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -97,4 +97,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page
