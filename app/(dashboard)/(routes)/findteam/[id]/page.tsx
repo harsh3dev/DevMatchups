@@ -1,30 +1,27 @@
 "use client"
-import React, { useEffect } from 'react'
-
+import React, { useEffect, useState } from 'react'
 import { MdAlternateEmail } from "react-icons/md";
 import { FaLinkedin } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
 import { FaCalendarAlt } from "react-icons/fa";
 import { notFound, useRouter } from 'next/navigation';
-
-import { useAppDispatch, useAppSelector } from '@/lib/store/hooks';
 import { RootState } from '@/lib/store/store';
-
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-
 import { HackathonEntry } from '@/app/(dashboard)/(routes)/findmember/Form/types';
+import { IoGitPullRequestSharp } from 'react-icons/io5';
+import axios from 'axios';
+
 
 
 
 export default function Page({ params }: { params: { id: string } }) {
 
     const router = useRouter();
-
-    function formatDate(inputDate: string): string {
+    const [post,setPost] = useState<HackathonEntry>();
+    function formatDate(inputDate: any): string {
         const date = new Date(inputDate);
         const day = date.getUTCDate();
         const month = date.toLocaleString('default', { month: 'long' });
@@ -32,25 +29,31 @@ export default function Page({ params }: { params: { id: string } }) {
         return `${day} ${month} ${year}`;
     }
 
-    const posts = useAppSelector((state: RootState) => state.post.posts);
+   
+    useEffect(()=>{
+        getSPostData();
+    },[]);
 
-    useEffect(() => {
-        setTimeout(() => {
-            console.log("POSTSS", posts);
-        }, 2000);
-    }, [posts]);
 
-    const getSPostData = (id: string): HackathonEntry => {
-        const post = posts.find((p: HackathonEntry) => id == p.id.toString());
-        if(!post) notFound();
-        return post;
-    };
-    const post = getSPostData(params.id);
-    console.log(post); 
-
+    const getSPostData = async ()  => {
+        try {
+          const id = params.id;
+          const res = await axios.post('/api/id', { id: id });
+          console.log("response",res);
+          if (!res.data) {
+              return;
+          }
+           console.log("posts",res.data.hackathon); 
+           setPost(res.data.hackathon);
+        } 
+        catch (error) {
+          console.error('Error fetching post data:', error);
+        }
+      };
+   
     return (
     <>
-        <main className="flex min-h-screen flex-col items-center justify-between bg-background ">
+      <main className="flex min-h-screen flex-col items-center justify-between bg-background ">
             <div className='--outerbox rounded-md border border-gray-700 w-full dark:border-gray-400 max-w-[80%] text-text dark:text-text my-14 p-10 bg-gradient-to-tr from-violet-300 via-violet-200 to-slate-100 dark:from-violet-600 dark:via-indigo-900 dark:to-slate-900 '>
                 <h1 className=' font-extrabold text-3xl mb-2 '>
                     {post?.hackathonName} - {post?.teamName}
@@ -75,12 +78,12 @@ export default function Page({ params }: { params: { id: string } }) {
                                 <span className='font-extrabold text-xl '>Mode: {post?.hackathonMode}</span> | <span className=' font-extrabold text-xl  flex justify-center items-center gap-1'>Location: <FaLocationDot /> {post?.location}</span>
                             </div>
 
-                            <h1>Registration Link: <Link  className='text-primary hover:underline hover:underline-offset-1 dark:text-primary transition-all ease-linear' href={post?.regURL}>{post?.regURL}</Link> </h1>
+                            <h1>Registration Link: <Link  className='text-primary hover:underline hover:underline-offset-1 dark:text-primary transition-all ease-linear' href={post?.regURL || ""}>{post?.regURL}</Link> </h1> 
 
-                            <h1 className='w-full flex justify-start items-center gap-3 ' >Last Date of Registration:<span className=' font-extrabold text-xl  flex justify-center items-center gap-1'>
+                           <h1 className='w-full flex justify-start items-center gap-3 ' >Last Date of Registration:<span className=' font-extrabold text-xl  flex justify-center items-center gap-1'>
                                 <FaCalendarAlt /> {formatDate(post?.regDate)}
                                 </span> 
-                            </h1>
+                            </h1>  
 
                             <h1>Looking for position: <span className='font-extrabold text-xl '>{post?.role}</span></h1>
 

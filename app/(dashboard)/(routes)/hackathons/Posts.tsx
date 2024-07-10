@@ -12,7 +12,8 @@ interface PostsProps{
 }
 
 const Posts:React.FC<PostsProps> = ({title, url, logo, platform}) => {
-    const URL = platform==='unstop' ? `https://unstop.com/${url}` : url
+    const URL = platform==='unstop' ? `https://unstop.com/${url}` : url;
+    
   return (
     <a href={URL} target='_blank' className=' group min-w-[20vw] min-h-[20vh] px-5 py-4 flex flex-col justify-between items-start rounded-lg border border-gray-500 dark:border-gray-800 dark:backdrop-blur-xl transition-all ease-linear hover:border-accent hover:dark:border-accent dark:bg-gray-900/60 hover:dark:bg-blue-900/30 bg-sky-100/70 hover:bg-sky-300/40  '>
         <div className='flex justify-between p-2 items-center w-full ' >

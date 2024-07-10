@@ -5,17 +5,14 @@ import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormData, UserSchema } from "./types";
 import FormField from "./FormField";
-
 import { Button } from "@/components/ui/button"
 import { ReloadIcon } from "@radix-ui/react-icons"
 import { TracingBeam } from "@/components/ui/tracing-beam";
 import { Label } from "@/components/ui/label"
-
 import Select from 'react-select';
 import CreatableSelect from 'react-select/creatable';
 import ReactDatePicker from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker.css';
-
 import axios from "axios";
 import { getSession, useSession } from 'next-auth/react';
 

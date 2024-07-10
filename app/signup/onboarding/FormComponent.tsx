@@ -350,8 +350,7 @@ const FormComponent: React.FC = () => {
                     </span>
                     <span
                         className="relative w-full text-left transition-colors duration-200 ease-in-out group-hover:text-white dark:group-hover:text-gray-200"
-                    >Lets Go</span
-                    >
+                    >Lets Go</span>
                 </Button>
                 </div>
             </div>

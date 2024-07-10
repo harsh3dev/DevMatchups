@@ -5,44 +5,46 @@ import Image from 'next/image'
 import unstop from '@/app/assets/unstop.png'
 import devpost from '@/app/assets/devpost.svg'
 import axios from 'axios'
-import {unstopData} from './mock_data'
 import { devpostData } from './mock_data'
 import Posts from './Posts'
+import { UnstopPost } from './types'
 
 
 const Page = () => {
   const [unstopClicked, setUnstopClicked] = useState(true);
   const [devpostClicked, setdevpostClicked] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [unstopPost, setUnstopPost] = useState([]);
-  const [devpostPost, setDevpostPost] = useState([]);
+  const [unstopPost, setUnstopPost] = useState<UnstopPost[]>([]);
+  const [devposts, setDevposts] = useState([]);
 
-  const unstopURL = 'https://unstop.com/api/public/opportunity/search-result?opportunity=hackathons&oppstatus=recent'
-  const devpostURL = 'https://devpost.com/api/hackathons?order_by=recently-added'
 
   function handleClick() {
     setUnstopClicked((prev)=>(!prev))
     setdevpostClicked((prev)=>(!prev))
   }
 
-  // useEffect(()=>{
-  //   const fetch = async () => {
-  //     // setLoading(true);
-  //     try {
-  //       const res1 = await axios.get(unstopURL);
-  //       const res2 = await axios.get(devpostURL);
-  //       setTimeout(() => {
-  //         console.log(res1.data);
-  //         console.log(res2.data);
-  //       }, 2000);
-  //     } catch (error) {
-  //         console.error('Error fetching data:', error);
-  //     } finally {
-  //         // setLoading(false);
-  //     }
-  // };
-  // fetch();
-  // },[])
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true);
+      try {
+        const res1 = await  axios.get("/api/unstopHackathon");
+        const res2 = await axios.get("/api/devpostHackathon");
+        console.log(res2.data.hackathon.hackathons);
+        setDevposts(res2?.data?.hackathon?.hackathons);
+        console.log(res1?.data?.hackathon?.data?.data);
+        setUnstopPost(res1?.data?.hackathon?.data?.data);
+      } 
+      catch (error) {
+        console.error('Error fetching data:', error);
+      } 
+      finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
 
 
   return (
@@ -54,7 +56,7 @@ const Page = () => {
         </TabsList>
         <TabsContent value="unstop">Make changes to your unstop here.</TabsContent>
         <TabsContent value="devpost">Change your devpost here.</TabsContent>
-      </Tabs> */}
+      </Tabs>  */}
 
       <div className='w-full mt-16 flex flex-col justify-start items-start gap-5'>
         <div className='w-full flex justify-start items-center gap-5 rounded-lg px-10' >
@@ -70,22 +72,20 @@ const Page = () => {
           </div>
         </div>
         <hr className='w-full text-text dark:text-text h-4' />
-        {
+         {
           unstopClicked &&
           <div className='w-full min-h-[50vh] grid grid-cols-2 lg:grid-cols-3 gap-4 flex-wrap px-10 '>
-            {
-              unstopData.data.data.map((entry)=>(
-                <Posts key={entry.id} title={entry.title} url={entry.public_url} logo={entry.logoUrl2} platform='unstop' />
-              ))
-            }
+             {unstopPost  && unstopPost.map && unstopPost.map((entry) => (
+              <Posts key={entry.id} title={entry.title} url={entry.public_url} logo={entry.logoUrl2} platform='unstop' />
+             ))}
           </div>
-        }
+          } 
 
         {
           devpostClicked && 
           <div className='w-full min-h-[50vh] grid grid-cols-2 lg:grid-cols-3 gap-4 flex-wrap px-10 '>
             {
-              devpostData.hackathons.map((entry)=>(
+              devposts.map((entry:any)=>(
                 <Posts key={entry.id} title={entry.title} url={entry.url} logo={entry.thumbnail_url} platform='devpost' />
               ))
             }

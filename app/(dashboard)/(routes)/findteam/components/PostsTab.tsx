@@ -17,6 +17,7 @@ interface HackathonEntry {
   regDate: string;
   teamName: string;
   memberCount: string;
+  regURL: string;
   hackathonMode: string;
   id: Number;
   createdAt: string;
