@@ -101,7 +101,7 @@ export default function SignupForm() {
               Sign up with Google
             </Button>
             <Button variant="outline" className="w-full">
-              <FaGithub className="mr-2 h-5 w-5" />
+            <FaGithub className="mr-2 h-5 w-5" />
               Sign up with GitHub
             </Button>
           </div>
