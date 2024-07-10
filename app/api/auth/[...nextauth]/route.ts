@@ -29,8 +29,6 @@ const handler = NextAuth({
       if (session.user) {
         session.user.id = token.id as string; // Add user ID to the session
       }
-
-      console.log("api session",session);
       return session;
     },
   },
