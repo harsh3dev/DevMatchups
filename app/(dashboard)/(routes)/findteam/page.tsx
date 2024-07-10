@@ -1,8 +1,4 @@
 import React from 'react'
-import { SearchFilter } from './components/SearchFilter'
-import WordFadeIn from "@/components/ui/word-fade-in";
-import LinearGradient from '@/components/ui/linear-gradient';
-// import FilterTab from './components/FilterTab2';
 import PostsTab from './components/PostsTab';
 import {FilterTab} from './components/FilterTab';
 
@@ -16,9 +12,7 @@ const page = () => {
         <div className='col-span-3 px-5 lg:px-0 pt-4'>
         <PostsTab />
         </div>
-      </div>
-      <div className='h-screen' ></div>
-      
+      </div>      
     </div>
   )
 }

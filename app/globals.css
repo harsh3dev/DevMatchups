@@ -12,6 +12,7 @@
     --secondary: #66aff0;
     --accent: #056fcc;
     --inputGray: #e5e7eb;
+    --clickWhite: #bababa;
   }
   .dark {
     --text: #e1ecf4;
@@ -19,7 +20,7 @@
     --primary: #86bbea;
     --secondary: #0f5999;
     --accent: #339dfa;
-    --inputGray: #111827;
+    --clickWhite: #ececec;
   }
 }
 
