@@ -1,4 +1,4 @@
-/* @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -12,7 +12,8 @@
     --secondary: #66aff0;
     --accent: #056fcc;
     --inputGray: #e5e7eb;
-    --clickWhite: #bababa;
+    --clickWhite: #c6ebff;
+    --bgActive: #ace2ff;
   }
   .dark {
     --text: #e1ecf4;
@@ -20,7 +21,9 @@
     --primary: #86bbea;
     --secondary: #0f5999;
     --accent: #339dfa;
-    --clickWhite: #ececec;
+    --clickWhite: #ffffff;
+    --inputGray: #111827;
+    --bgActive: #002a4071;
   }
 }
 

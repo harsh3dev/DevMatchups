@@ -97,6 +97,8 @@ const PostCard: React.FC<PostCardProps> = ({ entry, className }) => {
             Apply Now
           </Link>
         </Button>
+        {/* create a map of array of numbers from 1 to 10 and render div with key=index */}
+
       </div>
     </div>
   )

@@ -58,7 +58,7 @@ export default function SignupForm() {
         })
       }
     }
-  },[])
+  },[signupError])
   
   const onSubmit: SubmitHandler<SignUpSchemaType> = async (data) =>{
     console.log(data);

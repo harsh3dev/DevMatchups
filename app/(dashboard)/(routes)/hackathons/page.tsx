@@ -8,6 +8,8 @@ import axios from 'axios'
 import { devpostData } from './mock_data'
 import Posts from './Posts'
 import { UnstopPost } from './types'
+import Loading from '../teams/components/Loading'
+import { Skeleton } from '@/components/ui/skeleton'
 
 
 const Page = () => {
@@ -49,35 +51,40 @@ const Page = () => {
 
   return (
     <div className='min-h-screen w-full text-black dark:bg-background bg-background dark:text-white mb-20 '>
-      {/* <Tabs defaultValue="unstop" className=" mt-10 w-full  ">
-        <TabsList className='w-full'>
-          <TabsTrigger value="unstop">unstop</TabsTrigger>
-          <TabsTrigger value="devpost">devpost</TabsTrigger>
-        </TabsList>
-        <TabsContent value="unstop">Make changes to your unstop here.</TabsContent>
-        <TabsContent value="devpost">Change your devpost here.</TabsContent>
-      </Tabs>  */}
-
       <div className='w-full mt-16 flex flex-col justify-start items-start gap-5'>
         <div className='w-full flex justify-start items-center gap-5 rounded-lg px-10' >
-          <div onClick={handleClick} className="p-2 flex items-center justify-center gap-4 rounded-md border w-[200px] h-[70px] border-text border-dashed dark:border-text dark:hover:bg-gray-200/80 cursor-pointer  " 
+          <div onClick={handleClick} className="p-2 flex items-center justify-center gap-4 rounded-md border w-[200px] h-[70px] border-text border-dashed dark:border-text dark:hover:bg-gray-200/80 cursor-pointer transition-colors ease-linear " 
           style={{backgroundColor: unstopClicked ? "var(--clickWhite)" : ""}}
           >
             <Image src={unstop} height={50} width={70} alt='unstop_icon' />
           </div>
-          <div onClick={handleClick} className="p-2 flex items-center justify-center gap-4 rounded-md border w-[200px] h-[70px] border-text border-dashed dark:border-text dark:hover:bg-gray-200/80 cursor-pointer  " 
+          <div onClick={handleClick} className="p-2 flex items-center justify-center gap-4 rounded-md border w-[200px] h-[70px] border-text border-dashed dark:border-text dark:hover:bg-gray-200/80 cursor-pointer transition-colors ease-linear " 
           style={{backgroundColor: devpostClicked ? "var(--clickWhite)" : ""}}
           >
             <Image src={devpost} height={50} width={100} alt='devpost_icon' />
           </div>
         </div>
-        <hr className='w-full text-text dark:text-text h-4' />
-         {
+        {/* <hr className='w-full text-text dark:text-text h-4' /> */}
+
+        {
+          loading && <div className='w-full grid grid-cols-2 lg:grid-cols-3 gap-2 flex-wrap px-10 '>
+            <Skeleton className=" min-w-[20vw] min-h-[20vh] px-5 py-4 rounded-lg" />
+            <Skeleton className=" min-w-[20vw] min-h-[20vh] px-5 py-4 rounded-lg" />
+            <Skeleton className=" min-w-[20vw] min-h-[20vh] px-5 py-4 rounded-lg" />
+            <Skeleton className=" min-w-[20vw] min-h-[20vh] px-5 py-4 rounded-lg" />
+            <Skeleton className=" min-w-[20vw] min-h-[20vh] px-5 py-4 rounded-lg" />
+            <Skeleton className=" min-w-[20vw] min-h-[20vh] px-5 py-4 rounded-lg" />
+            <Skeleton className=" min-w-[20vw] min-h-[20vh] px-5 py-4 rounded-lg" />
+            <Skeleton className=" min-w-[20vw] min-h-[20vh] px-5 py-4 rounded-lg" />
+            <Skeleton className=" min-w-[20vw] min-h-[20vh] px-5 py-4 rounded-lg" />
+          </div>
+        }
+        {
           unstopClicked &&
           <div className='w-full min-h-[50vh] grid grid-cols-2 lg:grid-cols-3 gap-4 flex-wrap px-10 '>
-             {unstopPost  && unstopPost.map && unstopPost.map((entry) => (
+            {unstopPost && unstopPost.map && unstopPost.map((entry) => (
               <Posts key={entry.id} title={entry.title} url={entry.public_url} logo={entry.logoUrl2} platform='unstop' />
-             ))}
+            ))}
           </div>
           } 
 
