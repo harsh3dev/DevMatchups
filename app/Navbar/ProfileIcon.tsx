@@ -1,11 +1,13 @@
-
+"use client"
 import { RiAccountBoxFill } from "react-icons/ri";
 import { MdDashboard } from "react-icons/md";
 import { MdEmail } from "react-icons/md";
 import { IoMdLogOut } from "react-icons/io";
 import { IoLogoGithub } from "react-icons/io";
+
 import Link from "next/link";
 import { useSession } from "next-auth/react"
+import { signOut } from "next-auth/react"
 
 import {
     DropdownMenu,
@@ -27,6 +29,10 @@ export function ProfileIcon() {
     const {data : session} = useSession();
 
     const img = session?.user?.image ? session?.user?.image : `https://robohash.org/${session?.user?.name}`;
+
+    const handleLogout = async () => {
+        await signOut({ callbackUrl: '/' });
+    };
 
     return (
         <DropdownMenu>
@@ -65,7 +71,7 @@ export function ProfileIcon() {
 
                 <DropdownMenuSeparator />
 
-                <DropdownMenuItem className=" w-full flex justify-between items-center cursor-pointer ">
+                <DropdownMenuItem onClick={handleLogout} className=" w-full flex justify-between items-center cursor-pointer ">
                     <span> Log out </span>
                     <span> <IoMdLogOut /> </span>
                 </DropdownMenuItem>

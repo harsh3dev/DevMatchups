@@ -1,5 +1,6 @@
 "use client"
 import React from 'react'
+
 import { Button } from '@/components/ui/button'
 import { Sheet, SheetTrigger, SheetContent, SheetClose } from "@/components/ui/sheet"
 import { Separator } from "@/components/ui/separator"
@@ -18,15 +19,15 @@ import { TbUserSearch } from 'react-icons/tb'
 import { FaCodeBranch } from 'react-icons/fa6'
 import { GoCodescan } from 'react-icons/go'
 import { RiEdit2Fill } from "react-icons/ri";
-import { DiTerminal } from "react-icons/di";
 import { FaCheckCircle } from "react-icons/fa";
 import { PiGitPullRequestBold } from "react-icons/pi";
+import { IoLogoGithub, IoMdLogOut } from 'react-icons/io'
+import { MdEmail } from 'react-icons/md'
 
 import Link from 'next/link'
 import { useSession } from "next-auth/react"
 import { usePathname } from 'next/navigation';
-import { IoLogoGithub, IoMdLogOut } from 'react-icons/io'
-import { MdEmail } from 'react-icons/md'
+import { signOut } from 'next-auth/react';
 
 const navLinks = [
     {
@@ -68,6 +69,10 @@ const navItems = [
 const MobileNav = () => {
     const {data : session , status} = useSession();
     const path = usePathname();
+
+    const handleLogout = async () => {
+        await signOut({ callbackUrl: '/' });
+    }
 
     return (
         <>
@@ -157,7 +162,7 @@ const MobileNav = () => {
                             Support
                             </Button>
                         </div>
-                        <Button variant="destructive" className=' w-full flex justify-center items-center gap-2 ' >
+                        <Button onClick={handleLogout} variant="destructive" className=' w-full flex justify-center items-center gap-2 ' >
                             Logout
                             <IoMdLogOut />
                         </Button>
