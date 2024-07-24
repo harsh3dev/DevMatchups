@@ -71,6 +71,21 @@ const Navbar = () => {
                         <span className="self-center text-lg lg:text-2xl font-semibold whitespace-nowrap dark:text-white">Dev Matchups</span>
                     </Link>
 
+                        {/* DESKTOP NAVIGATION BAR */}
+                        <nav className="items-center justify-between hidden w-full md:flex md:w-auto " id="navbar-sticky">
+                        <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg  md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0  dark:border-gray-700">
+                            {navItems.map((item) => (
+                                <li key={item.name}>
+                                    <Link href={item.path} className={`block py-2 px-3 text-text rounded text-sm lg:text-base md:hover:text-accent md:p-0 md:dark:hover:text-accent dark:text-white  `} aria-current="page"
+                                        style={{ color: pathname === item.path ? "var(--accent)" : "" }}
+                                    >
+                                        {item.name}
+                                    </Link>
+                                </li>
+                            ))}
+                        </ul>
+                    </nav>
+
                     <div className=" hidden md:flex justify-between gap-2 md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
                     { status==='unauthenticated' &&
                         <div className='flex justify-center items-center gap-4'>
@@ -92,20 +107,6 @@ const Navbar = () => {
                         </div>
                     </div>
                         
-                        {/* DESKTOP NAVIGATION BAR */}
-                    <nav className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
-                        <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg  md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0  dark:border-gray-700">
-                            {navItems.map((item) => (
-                                <li key={item.name}>
-                                    <Link href={item.path} className={`block py-2 px-3 text-text rounded text-sm lg:text-base md:hover:text-accent md:p-0 md:dark:hover:text-accent dark:text-white  `} aria-current="page"
-                                        style={{ color: pathname === item.path ? "var(--accent)" : "" }}
-                                    >
-                                        {item.name}
-                                    </Link>
-                                </li>
-                            ))}
-                        </ul>
-                    </nav>
 
                     {/* MOBILE NAVIGATION SIDEBAR */}
                 <div className='flex justify-center items-center gap-5'>
