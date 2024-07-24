@@ -19,7 +19,7 @@ export const BreadcrumbComp = () => {
   return (
     <Breadcrumb>
       <BreadcrumbList>
-        <BreadcrumbItem>
+        <BreadcrumbItem className=" text-primary " >
             <Link href="/">
               <RiHome5Fill />
             </Link>
@@ -31,7 +31,7 @@ export const BreadcrumbComp = () => {
           return(
           <>
             {pathNames.length !== index + 1 && <>
-              <BreadcrumbItem>
+              <BreadcrumbItem className=" text-primary " >
                 <Link href={href}>{itemLink}</Link>
               </BreadcrumbItem>
               {pathNames.length !== index + 1 && <BreadcrumbSeparator />}
