@@ -1,5 +1,6 @@
 "use client"
 import Link from "next/link"
+import React from "react"
 
 import {
   Breadcrumb,
@@ -20,25 +21,29 @@ export const BreadcrumbComp = () => {
     <Breadcrumb>
       <BreadcrumbList>
         <BreadcrumbItem className=" text-primary " >
-            <Link href="/">
-              <RiHome5Fill />
-            </Link>
+          <Link href="/">
+            <RiHome5Fill />
+          </Link>
         </BreadcrumbItem>
         <BreadcrumbSeparator />
         {pathNames.map( (link, index) => {
           let href = `/${pathNames.slice(0, index + 1).join('/')}`;
-          let itemLink = link[0].toUpperCase() + link.slice(1, link.length)
-          return(
-          <>
-            {pathNames.length !== index + 1 && <>
-              <BreadcrumbItem className=" text-primary " >
-                <Link href={href}>{itemLink}</Link>
-              </BreadcrumbItem>
-              {pathNames.length !== index + 1 && <BreadcrumbSeparator />}
-            </>}
-            {pathNames.length === index + 1 &&
-              <BreadcrumbPage>{itemLink}</BreadcrumbPage>}
-          </>
+          let itemLink = link[0].toUpperCase() + link.slice(1, link.length);
+          
+          return (
+            <React.Fragment key={index}>
+              {pathNames.length !== index + 1 && (
+                <>
+                  <BreadcrumbItem key={`item-${index}`} className=" text-primary " >
+                    <Link href={href}>{itemLink}</Link>
+                  </BreadcrumbItem>
+                  <BreadcrumbSeparator key={`separator-${index}`} />
+                </>
+              )}
+              {pathNames.length === index + 1 && (
+                <BreadcrumbPage key={`page-${index}`} >{itemLink}</BreadcrumbPage>
+              )}
+            </React.Fragment>
           )
         })}
       </BreadcrumbList>

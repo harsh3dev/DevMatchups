@@ -1,8 +1,10 @@
 "use client"
 import React from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { useSession } from "next-auth/react"
 import { usePathname } from 'next/navigation'
+import { signOut } from 'next-auth/react';
 
 import { Button } from '@/components/ui/button'
 import { Sheet, SheetTrigger, SheetContent, SheetClose } from "@/components/ui/sheet"
@@ -20,8 +22,7 @@ import { TbUserSearch } from "react-icons/tb";
 import { IoLogoGithub, IoMdLogOut } from 'react-icons/io'
 import { MdDashboard, MdEmail } from 'react-icons/md'
 
-import { signOut } from 'next-auth/react';
-
+import Logo from '@/app/assets/Devmatchups.svg'
 
 
 const Navbar = () => {
@@ -68,6 +69,10 @@ const Navbar = () => {
             <div className="bg-background dark:bg-background fixed w-full z-20 top-0 start-0 border-b border-gray-200 dark:border-gray-600">
                 <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
                     <Link href={"/"} className="flex items-center space-x-3 rtl:space-x-reverse" >
+                        <div className=' w-10 h-10 grid place-items-center '>
+                            <Image src={Logo} alt="Dev Matchups" width={20} height={20} className=' w-full h-full object-cover ' />
+                        </div>
+                        
                         <span className="self-center text-lg lg:text-2xl font-semibold whitespace-nowrap dark:text-white">Dev Matchups</span>
                     </Link>
 
@@ -78,6 +83,7 @@ const Navbar = () => {
                                 <li key={item.name}>
                                     <Link href={item.path} className={`block py-2 px-3 text-text rounded text-sm lg:text-base md:hover:text-accent md:p-0 md:dark:hover:text-accent dark:text-white  `} aria-current="page"
                                         style={{ color: pathname === item.path ? "var(--accent)" : "" }}
+                                        key={`list-${item.name}`}
                                     >
                                         {item.name}
                                     </Link>
@@ -175,7 +181,7 @@ const Navbar = () => {
                                 <nav className="grid gap-4 px-4 py-6">
                                     {
                                         navLinks.map((item, index) => (
-                                            <>
+                                            <React.Fragment key={`index-${index}`}>
                                                 <Link
                                                     href={item.link}
                                                     className="group flex items-center gap-2 rounded-md bg-muted px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted/50 hover:text-primary"
@@ -185,10 +191,10 @@ const Navbar = () => {
                                                     {item.icon}
                                                     <span className='text-text dark:text-text transition-all ease-linear'
                                                         style={{ color: pathname === item.link ? "var(--primary)" : "" }}
-                                                        key={index}
+                                                        key={item.title}
                                                     >{item.title}</span>
                                                 </Link>
-                                            </>
+                                            </React.Fragment>
                                         ))
                                     }
                                 </nav>

@@ -76,7 +76,7 @@ const Sidebar = () => {
           </Button>
         </div>
 
-        {/* <ModeToggle/> */}
+        <ModeToggle/>
     </div>
   )
 }

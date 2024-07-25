@@ -81,7 +81,7 @@ const Page = () => {
         }
         {
           unstopClicked &&
-          <div className='w-full min-h-[50vh] grid grid-cols-2 lg:grid-cols-3 gap-4 flex-wrap px-10 '>
+          <div className='w-full min-h-[50vh] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 flex-wrap px-10 '>
             {unstopPost && unstopPost.map && unstopPost.map((entry) => (
               <Posts key={entry.id} title={entry.title} url={entry.public_url} logo={entry.logoUrl2} platform='unstop' />
             ))}
@@ -90,7 +90,7 @@ const Page = () => {
 
         {
           devpostClicked && 
-          <div className='w-full min-h-[50vh] grid grid-cols-2 lg:grid-cols-3 gap-4 flex-wrap px-10 '>
+          <div className='w-full min-h-[50vh] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 flex-wrap px-10 '>
             {
               devposts.map((entry:any)=>(
                 <Posts key={entry.id} title={entry.title} url={entry.url} logo={entry.thumbnail_url} platform='devpost' />

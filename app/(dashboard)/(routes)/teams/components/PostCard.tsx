@@ -76,7 +76,7 @@ const PostCard: React.FC<PostCardProps> = ({ entry, className }) => {
 
         <div className='w-full flex flex-wrap justify-start items-center gap-2'>
           {entry.skills.slice(0, 5).map((skill, index) => (
-            <Capsule item={skill} key={index} className='border border-accent dark:border-secondary text-black hover:text-white ' />
+            <Capsule item={skill} key={index} className='border border-accent dark:border-accent text-black hover:text-white ' />
           ))}
 
           {entry.skills.length > 5 && <div className='flex justify-between items-center gap-1 '>

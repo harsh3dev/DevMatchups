@@ -20,7 +20,7 @@ export function ModeToggle() {
       if(localTheme==="light") setThemeToggle(true);
     }
     else setTheme("dark")
-  },[setTheme]);
+  },[]);
 
 
   useEffect(()=>{
@@ -32,13 +32,11 @@ export function ModeToggle() {
       setTheme("dark")
       localStorage.setItem("theme", "dark");
     }
-  },[themeToggle, setTheme])
+  },[themeToggle])
 
 
   const handleThemeToggle=()=>{
     setThemeToggle((prev)=>!prev);
-
-    
   }
 
   return (

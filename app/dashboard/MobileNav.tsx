@@ -133,7 +133,6 @@ const MobileNav = () => {
                     <nav className="grid gap-4 px-4 py-6">
                         {
                             navLinks.map((item, index) => (
-                                <>
                                 <Link
                                     href={item.link}
                                     className="group flex items-center gap-2 rounded-md bg-muted px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted/50 hover:text-primary"
@@ -146,7 +145,6 @@ const MobileNav = () => {
                                     key={index}
                                     >{item.title}</span>
                                 </Link>
-                                </>
                             ))
                         }
                     </nav>
