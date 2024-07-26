@@ -14,6 +14,7 @@ import { ScrollArea } from "@/components/ui/scroll-area"
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
+import { toast } from '@/components/ui/use-toast';
 
 type Inputs = Omit<UserState, 'loading' | 'error'>;
 
@@ -30,6 +31,9 @@ const EditProfileForm = () => {
     }, [user, reset]);
 
     const onSubmit: SubmitHandler<Inputs> = (data) => {
+        toast({
+            title: "Profile Updated Succesfully successfully!"
+        })
         dispatch(setUser(data));
     };
     return (

@@ -33,9 +33,9 @@ export default function Footer() {
 
         <div className="flex flex-wrap justify-normal md:justify-between gap-20 h-full " >
         <div className=" flex justify-between items-center h-full gap-4  ">
-          <Link href="https://vercel.com/docs" target="_blank" className=" text-base md:text-lg ">Powered by {"\t"}
-            <Image src={VercelDark} height={70} width={80} alt="vercel-dark" className=" dark:hidden inline-block ml-2 " />
-          <Image src={VercelLight} height={70} width={100} alt="vercel-light" className=" dark:inline-block hidden ml-2 " />
+          <Link href="https://vercel.com/docs" target="_blank" className=" text-sm md:text-base ">Powered by {"\t"}
+            <Image src={VercelDark} height={70} width={60} alt="vercel-dark" className=" dark:hidden inline-block ml-2 " />
+          <Image src={VercelLight} height={70} width={60} alt="vercel-light" className=" dark:inline-block hidden ml-2 " />
           </Link>
         </div>
         </div>
