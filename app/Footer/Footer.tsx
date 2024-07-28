@@ -15,9 +15,9 @@ import { Separator } from "@/components/ui/separator";
 
 export default function Footer() {
   return (
-    <footer className="w-full border border-t border-r-0 border-b-0 border-l-0 border-gray-500 text-text pt-[0.1rem] " >
+    <footer className="w-full border border-t border-r-0 border-b-0 border-l-0 border-gray-500 text-text pt-[0.1rem] bg-background " >
       <div className="container mx-auto px-4 md:px-6 py-8 flex flex-col lg:flex-row justify-between items-start lg:items-start gap-8 ">
-        <div className=" relative h-full flex gap-4" >
+        <div className=" relative h-full flex gap-4 " >
           <div className="gap-5 flex flex-col justify-between items-start h-full">
             <Link href='/' className=" flex justify-center items-center gap-4 ">
               <div className=' w-8 h-8 md:w-12 md:h-12 '>
@@ -28,7 +28,6 @@ export default function Footer() {
             <p className="  text-wrap text-lg font-medium py-2 ">Team up for success in every hackathon<br/> Build your dream hackathon team with DevMatchups!</p>
             <h1 className=" text-lg lg:text-sm text-gray-700/90 dark:text-[#888] " >Created by <Link href={'https://www.linkedin.com/in/harsh3dev/'} target="_blank" className="font-semibold hover:text-accent transition-all ease-linear scale-[0.2] " >Harsh Pandey</Link> & <Link href={'https://www.linkedin.com/in/yash-gupta-64956b246/'} target="_blank" className="font-semibold hover:text-accent transition-all ease-linear scale-[0.2] " >Yash Gupta</Link> </h1>
           </div>
-          <Separator orientation="vertical" className=" hidden lg:block absolute right-0 top-0 translate-x-7 -translate-y-8 h-full min-h-[240px] " />
         </div>
 
         <div className="flex flex-wrap justify-normal md:justify-between gap-20 h-full " >
