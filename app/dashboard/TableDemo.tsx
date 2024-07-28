@@ -71,7 +71,7 @@ export function TableDemo() {
                             <Link href={data.url} target="_blank" className=" group-hover:text-primary transition-colors ease-linear flex justify-start items-center gap-2" >
                             Visit <span className="  transition-color ease-linear  "> <RiExternalLinkFill /> </span></Link>
                         </TableCell>
-                        <TableCell className={` text-right ${statusColor} `} > <span className="border border-gray-500 dark:border-gray-700 rounded-full px-2 py-1 text-xs "> {status} </span></TableCell>
+                        <TableCell className={` text-right ${statusColor} `} > <span className=" dark:bg-gray-700/20 bg-gray-300/40 rounded-full px-2 py-1 text-xs shadow-sm "> {status} </span></TableCell>
                     </TableRow>
                     )
                 })}
