@@ -9,19 +9,19 @@
 @layer base {
   :root {
     --text: #0b161e;
-    --background: hsl(0 0% 100%);
+    --background: #EBEBEB;
+    --primary: #154b79;
+    --secondary: #66aff0;
+    --accent: #056fcc;
     --foreground: hsl(222.2 84% 4.9%);
     --card: hsl(0 0% 100%);
     --card-foreground: hsl(222.2 84% 4.9%);
     --popover: hsl(0 0% 100%);
     --popover-foreground: hsl(222.2 84% 4.9%);
-    --primary: #2563eb;
     --primary-foreground: hsl(210, 56%, 77%);
-    --secondary: hsl(210 40% 96.1%);
     --secondary-foreground: hsl(222.2 47.4% 11.2%);
     --muted: hsl(210 40% 96.1%);
     --muted-foreground: hsl(215.4 16.3% 46.9%);
-    --accent: #056fcc;
     --accent-foreground: hsl(222.2 47.4% 11.2%);
     --destructive: hsl(0 84.2% 60.2%);
     --destructive-foreground: hsl(210 40% 98%);
@@ -41,19 +41,19 @@
 
   .dark {
     --text: #e1ecf4;
-    --background: #03070C;
+    --background: #03070c;
+    --primary: #86bbea;
+    --secondary: #0f5999;
+    --accent: #339dfa;
     --foreground: hsl(210 40% 98%);
     --card: hsl(222.2 84% 4.9%);
     --card-foreground: hsl(210 40% 98%);
     --popover: hsl(222.2 84% 4.9%);
     --popover-foreground: hsl(210 40% 98%);
-    --primary: hsl(217.2 91.2% 59.8%);
     --primary-foreground: #041234;
-    --secondary: #1e293b;
     --secondary-foreground: hsl(210 40% 98%);
     --muted: hsl(217.2 32.6% 17.5%);
     --muted-foreground: hsl(215 20.2% 65.1%);
-    --accent: #339dfa;
     --accent-foreground: hsl(210 40% 98%);
     --destructive: hsl(0 62.8% 30.6%);
     --destructive-foreground: hsl(210 40% 98%);
@@ -70,30 +70,6 @@
     --bgActive: #002a4071;
   }
 }
-
-/* 
-@layer base {
-  :root {
-    --text: #0b161e;
-    --background: #eff6f6;
-    --primary: #154b79;
-    --secondary: #66aff0;
-    --accent: #056fcc;
-    --inputGray: #e5e7eb;
-    --clickWhite: #c6ebff;
-    --bgActive: #ace2ff;
-  }
-  .dark {
-    --text: #e1ecf4;
-    --background: #03070C;
-    --primary: #86bbea;
-    --secondary: #0f5999;
-    --accent: #339dfa;
-    --clickWhite: #ffffff;
-    --inputGray: #111827;
-    --bgActive: #002a4071;
-  }
-} */
 
 @layer components {
   .button-86::after,

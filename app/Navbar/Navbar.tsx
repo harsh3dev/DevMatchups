@@ -69,7 +69,7 @@ const Navbar = () => {
             <div className="bg-background dark:bg-background fixed w-full z-20 top-0 start-0 border-b border-gray-200 dark:border-gray-600">
                 <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
                     <Link href={"/"} className="flex items-center space-x-3 rtl:space-x-reverse" >
-                        <div className=' w-10 h-10 grid place-items-center '>
+                        <div className=' w-10 h-10 grid place-items-center p-1 '>
                             <Image src={Logo} alt="Dev Matchups" width={20} height={20} className=' w-full h-full object-cover ' />
                         </div>
                         
@@ -94,21 +94,24 @@ const Navbar = () => {
 
                     <div className=" hidden md:flex justify-between gap-2 md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
                     { status==='unauthenticated' &&
-                        <div className='flex justify-center items-center gap-4'>
-                            <Button variant={"ghost"} >
-                            <Link href={"/login"} className='text-accent rounded-lg border border-accent p-2 lg:text-text lg:border-0' >
-                                Login
-                            </Link>
-                        </Button>
-                        <Button className='bg-accent hidden lg:inline-block hover:bg-primary dark:bg-accent dark:hover:bg-secondary text-white dark:text-white font-semibold ' >
+                        <div className='flex justify-center items-center gap-2'>
+                        
+                        <Button className='bg-primary hidden lg:inline-block hover:bg-accent dark:bg-secondary dark:hover:bg-accent text-white dark:text-white font-semibold ' >
                             <Link href={"/signup"}>
                                 Get Started
+                            </Link>
+                        </Button>
+
+                        <Button variant={"ghost"} className=' group dark:hover:bg-accent hover:bg-accent hover:text-white ' >
+                            <Link href={"/login"} className='text-accent rounded-lg border border-accent p-2 lg:text-text lg:border-0 group-hover:text-white ' >
+                                Login
                             </Link>
                         </Button>
                         </div>
                     }
                         <div className='flex justify-center items-center gap-4'>
                         <ModeToggle />
+                            
                         {status==='authenticated' && session && <ProfileIcon />}
                         </div>
                     </div>
@@ -164,14 +167,16 @@ const Navbar = () => {
                             { status==='unauthenticated' &&
                             <div className=' flex flex-col gap-4 '>
                             <div className=" flex  md:hidden justify-center gap-2 md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-                                <Button variant={"ghost"} className='w-full outline outline-1 outline-accent' >
-                                    <Link href={"/login"} >
-                                        Login
-                                    </Link>
-                                </Button>
+                                
                                 <Button className=' w-full bg-accent hover:bg-primary dark:bg-accent dark:hover:bg-secondary text-white dark:text-white font-semibold ' >
                                     <Link href={"/signup"}>
                                         Get Started
+                                    </Link>
+                                </Button>
+
+                                <Button variant={"ghost"} className='w-full outline outline-1 outline-accent' >
+                                    <Link href={"/login"} >
+                                        Login
                                     </Link>
                                 </Button>
                             </div>

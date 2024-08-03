@@ -24,20 +24,23 @@ const config = {
     },
     extend: {
       colors: {
-        text: 'var(--text)',
-        background: 'var(--background)',
+        'text': 'var(--text)',
+        'background': 'var(--background)',
+        'primary': 'var(--primary)',
+        'secondary': 'var(--secondary)',
+        'accent': 'var(--accent)',
         foreground: 'var(--foreground)',
         card: 'var(--card)',
         cardForeground: 'var(--card-foreground)',
         popover: 'var(--popover)',
         popoverForeground: 'var(--popover-foreground)',
-        primary: 'var(--primary)',
+       
         primaryForeground: 'var(--primary-foreground)',
-        secondary: 'var(--secondary)',
+        
         secondaryForeground: 'var(--secondary-foreground)',
         muted: 'var(--muted)',
         mutedForeground: 'var(--muted-foreground)',
-        accent: 'var(--accent)',
+        
         accentForeground: 'var(--accent-foreground)',
         destructive: 'var(--destructive)',
         destructiveForeground: 'var(--destructive-foreground)',
