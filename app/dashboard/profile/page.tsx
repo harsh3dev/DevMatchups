@@ -4,8 +4,8 @@ import React, { useEffect, useState } from 'react'
 import { useSession } from "next-auth/react"
 import Link from 'next/link';
 
-import { MdOutlineAlternateEmail } from "react-icons/md";
-import { FaGithub } from "react-icons/fa6";
+import { MdBugReport, MdOutlineAlternateEmail } from "react-icons/md";
+import { FaBusinessTime, FaGithub } from "react-icons/fa6";
 import { FaLinkedinIn } from "react-icons/fa";
 import { HiOutlineGlobeAlt } from "react-icons/hi2";
 import { MdModeEdit } from "react-icons/md";
@@ -87,9 +87,23 @@ const Page = () => {
                         { loading === 'authenticated' && session &&
                         <div className='flex justify-center items-center gap-5'>
                             <UserImage />
-                            <div className=' h-full flex flex-col gap-2 items-start justify-normal lg:justify-between'>
+                            <div className=' h-full flex flex-col gap-2 items-start justify-normal lg:justify-start '>
                                 <h1 className=' text-base sm:text-xl md:text-2xl font-semibold text-text flex justify-center items-center gap-2 '> {userData.name}</h1>
-                                <h1 className=' text-sm sm:text-lg md:text-lg font-semibold text-text flex justify-center items-center gap-2 '> <MdOutlineAlternateEmail /> {userData.email}</h1>
+                                <h1 className=' text-base font-semibold text-text flex justify-center items-center gap-2 '> <MdOutlineAlternateEmail /> {userData.email}</h1>
+                                { userData.experience && userData.role &&
+                                <div className=' w-full flex justify-start items-center gap-2 mb-4 mt-1 flex-wrap '>
+                                    <span className=' rounded-full text-sm flex justify-center items-center gap-1'>
+                                    <FaBusinessTime />
+                                        {userData.role}
+                                    </span>
+                                    
+                                    <span className=' rounded-full text-sm flex justify-center items-center gap-1'>
+                                    <MdBugReport />
+                                        {userData.experience}
+                                    </span>
+                                    
+                                </div>
+}
                             </div>
                         </div>}
 
@@ -172,6 +186,11 @@ const Page = () => {
                 </div>
                 <div className='my-8 w-full lg:max-w-[70%]  '>
                     <h1 className=' text-lg md:text-3xl font-bold mb-5 text-gray-700 dark:text-gray-400  '>About Me</h1>
+                    {
+                        loading==='loading' && <Skeleton className=' min-h-[100px] min-w-full rounded-lg ' />
+                    }
+
+                    { loading==='authenticated' &&
                     <div className='w-full  gap-2 '>
                         { 
                         userData.bio ? 
@@ -179,7 +198,7 @@ const Page = () => {
                             : 
                             <p className=' text-base md:text-lg min-h-[100px] min-w-full border border-dashed border-gray-700 dark:border-gray-500/50 rounded-lg flex justify-center items-center gap-2 text-gray-700 dark:text-gray-500 '><IoIosAddCircleOutline /> Describe something interesting about yourself here!</p> 
                         }
-                    </div>
+                    </div>}
                 </div>
             </div>
 

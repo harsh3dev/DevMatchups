@@ -9,6 +9,10 @@ import { Separator } from "@/components/ui/separator"
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa6";
 import { ReloadIcon } from "@radix-ui/react-icons"
+import { IoMailOutline } from "react-icons/io5";
+import { IoIosArrowBack } from "react-icons/io";
+import { MdOutlineRemoveRedEye } from "react-icons/md";
+import { RiEyeCloseLine } from "react-icons/ri";
 
 import Link from "next/link"
 import { useEffect, useState } from "react"
@@ -25,12 +29,12 @@ import { setSignupData } from "@/lib/store/features/authSlice/authSlice"
 
 
 const SignUpSchema = z.object({
-  email: z.string().min(1, { message: "Email is required" }).email({ message: "Invalid email address" }),
-  username: z.string().min(1, { message: "Username is required" }).max(100),
-  name: z.string()
-  .min(1, { message: "Name is required" })
-  .max(100, { message: "Name must be less than 100 characters" }),
-  password: z.string().min(1, { message: "Password is required" }).min(8, { message: "Password must be at least 8 characters long" }),
+    email: z.string().min(1, { message: "Email is required" }).email({ message: "Invalid email address" }),
+    username: z.string().min(1, { message: "Username is required" }).max(100),
+    name: z.string()
+        .min(1, { message: "Name is required" })
+        .max(100, { message: "Name must be less than 100 characters" }),
+    password: z.string().min(1, { message: "Password is required" }).min(8, { message: "Password must be at least 8 characters long" }),
 });
 
 type SignUpSchemaType = z.infer<typeof SignUpSchema>;
@@ -38,128 +42,162 @@ type SignUpSchemaType = z.infer<typeof SignUpSchema>;
 
 export default function SignupForm() {
 
-  const router=useRouter();
-  const dispatch=useAppDispatch();
+    const router = useRouter();
+    const dispatch = useAppDispatch();
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors }
-  } = useForm<SignUpSchemaType>({ resolver: zodResolver(SignUpSchema) });
+    const [emailSignup, setEmailSignup] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
+    const [passwordType, setPasswordType] = useState("password");
 
-  const [loading, setLoading] = useState(false);
-  const [signupError, setSignupError] = useState("");
+    const {
+        register,
+        handleSubmit,
+        formState: { errors }
+    } = useForm<SignUpSchemaType>({ resolver: zodResolver(SignUpSchema) });
 
-  useEffect(()=>{
-    function showError(){
-      if(signupError.length){
-        toast({
-          title: `${signupError}`,
-        })
-      }
-    }
-  },[signupError])
-  
-  const onSubmit: SubmitHandler<SignUpSchemaType> = async (data) =>{
-    console.log(data);
-    dispatch(setSignupData(data));
-    try{
-      setLoading(true);
-      const {email} = data;
-      const response=await axios.post("/api/users/otp",{email});
-      console.log("response",response);
-      router.push('/verify-email');
-      
-    }
-    catch(error){
-      if (axios.isAxiosError(error)) {
-        console.log('Axios error message:', error?.response?.data?.message || error?.message);
-        setSignupError(error?.response?.data?.message || error?.message)
-       }
-      else{
-      console.log("Unexpected Error",error);
-      }
-    }
+    const [loading, setLoading] = useState(false);
+    const [signupError, setSignupError] = useState("");
 
-    setLoading(false);
     
-  }
+    const handleShowPassword = () => {
+        setShowPassword((prev)=>(!prev));
+    }
 
-  return (
-    <div className="flex h-screen w-full items-center justify-center ">      
-      <div className="w-full grid place-items-center h-[80vh] "  >
-      <Card className="w-full max-w-lg ">
-        <CardHeader className="space-y-1 text-center">
-          <CardTitle className="text-2xl font-bold">Sign Up</CardTitle>
-          <CardDescription>Create your account to get started.</CardDescription>
-        </CardHeader>
-        <CardContent className="space-y-4">
-            {/* 3rd party signup */}
-          <div className="grid grid-cols-2 gap-2">
-            <Button variant="outline" className="w-full">
-              <FcGoogle className="mr-2 h-5 w-5" />
-              Sign up with Google
-            </Button>
-            <Button variant="outline" className="w-full">
-            <FaGithub className="mr-2 h-5 w-5" />
-              Sign up with GitHub
-            </Button>
-          </div>
-          <div className="flex items-center space-x-2">
-            <Separator className="flex-1" />
-            <p className="text-sm font-medium text-gray-400">or</p>
-            <Separator className="flex-1" />
-          </div>
+    useEffect(()=>{
+        if(showPassword){
+            setPasswordType("text")
+        } else{
+            setPasswordType("password")
+        }
+    },[showPassword])
+    
 
-          {/* FORM */}
-          <form  onSubmit={handleSubmit(onSubmit)} >
-            <div className="grid grid-cols-1 gap-4">
-              <div className="space-y-2">
-                <Label htmlFor="name">Full Name</Label>
-                <Input id="name" placeholder="Enter your full name" className="focus:border-b-2 border-blue-500 rounded-md bg-slate-900/30 " {...register("name")} required />
-                {errors.name && <span className="error-message text-right w-full text-sm mb-5 font-semibold text-red-500 ">*{errors.name.message}</span>}
-              </div>
-              <div className="flex gap-2 items-center">
-              <div className="space-y-2 w-1/2 ">
-                <Label htmlFor="username">User name</Label>
-                <Input id="username" placeholder="Enter a unique username" className="focus:border-b-2 border-blue-500 rounded-md bg-slate-900/30 " {...register("username")} required />
-                {errors.username && <span className="error-message text-right w-full text-sm mb-5 font-semibold text-red-500 ">*{errors.username.message}</span>}
-              </div>
-            <div className="space-y-2 w-1/2 ">
-              <Label htmlFor="email">Email</Label>
-              <Input id="email" type="email" placeholder="example@email.com" className="focus:border-b-2 border-blue-500 rounded-md bg-slate-900/30 "  
-              {...register("email")} />
-              {errors.email && <span className="error-message text-right w-full text-sm mb-5 font-semibold text-red-500 ">*{errors.email.message}</span>}
-            </div>
-              </div>
-              </div>
-            <div className="space-y-2">
-              <Label htmlFor="password">Password</Label>
-              <Input id="password" type="password" placeholder="********" className="focus:border-b-2 border-blue-500 rounded-md bg-slate-900/30 " {...register("password")} required />
-              {errors.password && <span className="error-message text-right w-full text-sm mb-5 font-semibold text-red-500 ">*{errors.password.message}</span>}
-            </div>
-            {
-              loading?
-              <Button disabled className="w-full mt-4 ">
-                <ReloadIcon className="mr-2 h-4 w-4 animate-spin" /> Signing up
-              </Button>
-             :
-             <Button type="submit" className="w-full mt-4 ">
-              Sign Up
-            </Button>
+    useEffect(() => {
+        function showError() {
+            if (signupError.length) {
+                toast({
+                    title: `${signupError}`,
+                })
             }
-          </form>
-        </CardContent>
+        }
+    }, [signupError])
 
-        <CardFooter className="text-center gap-2 w-full flex justify-center items-center text-sm text-gray-500">
-          Already have an account?{" "}
-          <Link href="/login" className="font-medium text-blue-600 dark:text-cyan-500 hover:underline" prefetch={false}>
-            Log in
-          </Link>
-        </CardFooter>
-      </Card>
-      </div>
-    </div>
-  )
+    const onSubmit: SubmitHandler<SignUpSchemaType> = async (data) => {
+        console.log(data);
+        dispatch(setSignupData(data));
+        try {
+            setLoading(true);
+            const { email } = data;
+            const response = await axios.post("/api/users/otp", { email });
+            console.log("response", response);
+            router.push('/verify-email');
+
+        }
+        catch (error) {
+            if (axios.isAxiosError(error)) {
+                console.log('Axios error message:', error?.response?.data?.message || error?.message);
+                setSignupError(error?.response?.data?.message || error?.message)
+            }
+            else {
+                console.log("Unexpected Error", error);
+            }
+        }
+
+        setLoading(false);
+
+    }
+
+    return (
+        <div className="flex h-screen w-full items-center justify-center ">
+            <div className=" w-[90%] sm:w-full grid place-items-center h-[80vh] "  >
+                <Card className="w-full max-w-lg backdrop-blur-lg bg-background dark:bg-background border-gray-800/50 dark:border-gray-400/30 ">
+                    <CardHeader className="sm:space-y-1 text-left sm:text-center px-8 py-4 sm:p-6 ">
+                        { emailSignup && 
+                        <Button variant="link" 
+                            onClick={()=> setEmailSignup((pr)=>(!pr))} 
+                            className="sm:w-full text-left sm:flex items-center justify-start gap-2 pl-0 text-gray-700 dark:text-gray-400 ">
+                            <IoIosArrowBack /> 
+                            Back
+                        </Button>}
+                        <CardTitle className=" text-lg sm:text-2xl font-bold">Sign Up</CardTitle>
+                        <CardDescription>Create your account to get started.</CardDescription>
+                    </CardHeader>
+                    <CardContent className="space-y-4">
+                        {/* 3rd party signup */}
+                        { !emailSignup &&
+                        <div className="grid grid-rows-2 gap-2">
+                            <Button variant="outline" className="w-full bg-transparent dark:bg-transparent border-gray-600 py-6 ">
+                                <FaGithub className="mr-2 h-5 w-5" />
+                                Sign up with GitHub
+                            </Button>
+                            <Button variant="outline" className="w-full bg-transparent dark:bg-transparent border-gray-600 py-6 ">
+                                <FcGoogle className="mr-2 h-5 w-5" />
+                                Continue with Google
+                            </Button>
+                            <div className="flex items-center space-x-2">
+                                <Separator className="flex-1" />
+                                <p className="text-sm font-medium text-gray-400">or</p>
+                                <Separator className="flex-1" />
+                            </div>
+                            <Button onClick={()=> setEmailSignup((pr)=>(!pr))} variant="outline" className="w-full bg-transparent dark:bg-transparent border-gray-600 py-6 ">
+                                <IoMailOutline className="mr-2 h-5 w-5 dark:text-gray-400 " />
+                                Continue using Email
+                            </Button>
+                        </div>}
+                        
+                        {/* FORM */}
+                        { emailSignup &&
+                        <form onSubmit={handleSubmit(onSubmit)} >
+                            <div className="grid grid-cols-1 gap-4">
+                                <div className="space-y-2 mb-1">
+                                    <Label htmlFor="name">Full Name</Label>
+                                    <Input id="name" placeholder="Enter your full name" className="focus:border-b-2 border-blue-500 rounded-md bg-inputGray  " {...register("name")} required />
+                                    {errors.name && <span className="error-message text-right w-full text-sm mb-5 font-semibold text-red-500 ">*{errors.name.message}</span>}
+                                </div>
+                                <div className="flex gap-2 items-center">
+                                    <div className="space-y-2 mb-1 w-1/2 ">
+                                        <Label htmlFor="username">User name</Label>
+                                        <Input id="username" placeholder="Enter a unique username" className="focus:border-b-2 border-blue-500 rounded-md bg-inputGray " {...register("username")} required />
+                                        {errors.username && <span className="error-message text-right w-full text-sm mb-5 font-semibold text-red-500 ">*{errors.username.message}</span>}
+                                    </div>
+                                    <div className="space-y-2 mb-1 w-1/2 ">
+                                        <Label htmlFor="email">Email</Label>
+                                        <Input id="email" type="email" placeholder="example@email.com" className="focus:border-b-2 border-blue-500 rounded-md bg-inputGray "
+                                            {...register("email")} />
+                                        {errors.email && <span className="error-message text-right w-full text-sm mb-5 font-semibold text-red-500 ">*{errors.email.message}</span>}
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="space-y-2 mb-1">
+                                <Label htmlFor="password">Password</Label>
+                                    <div className=" flex relative items-center ">
+                                        <Input id="password" type={passwordType} placeholder="********" className="focus:border-b-2 border-blue-500 rounded-md bg-inputGray " {...register("password")} required />
+                                        <div onClick={handleShowPassword} className="absolute inset-y-0 right-0 flex items-center px-4  mt-1 mr-1 cursor-pointer text-lg "> {showPassword ? <RiEyeCloseLine/> : <MdOutlineRemoveRedEye/> } </div>
+                                    </div>
+                                {errors.password && <span className="error-message text-right w-full text-sm mb-5 font-semibold text-red-500 ">*{errors.password.message}</span>}
+                            </div>
+                            {
+                                loading ?
+                                    <Button disabled className="w-full mt-4 ">
+                                        <ReloadIcon className="mr-2 h-4 w-4 animate-spin" /> Signing up
+                                    </Button>
+                                    :
+                                    <Button type="submit" className="w-full mt-4 ">
+                                        Sign Up
+                                    </Button>
+                            }
+                        </form>}
+                    </CardContent>
+
+                    <CardFooter className="text-center gap-2 w-full flex justify-center items-center text-sm text-gray-500">
+                        Already have an account?{" "}
+                        <Link href="/login" className="font-medium text-blue-600 dark:text-cyan-500 hover:underline" prefetch={false}>
+                            Log in
+                        </Link>
+                    </CardFooter>
+                </Card>
+            </div>
+        </div>
+    )
 }
 
