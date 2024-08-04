@@ -70,16 +70,16 @@ useEffect(() => {
 
       {loading && <Loading/> }
 
-      {
+      {/* {
          mockData.map((entry, index)=>(
             <PostCard entry={entry} key={index} />
         ))
-      }
-      {/* {
-         filteredPosts.map((entry, index)=>(
+      } */}
+      {
+        filteredPosts.map((entry, index)=>(
             <PostCard entry={entry} key={index} />
         ))
-      } */}
+      }
     </div>
   )
 }
