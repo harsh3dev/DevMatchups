@@ -28,7 +28,7 @@ const initialState: UserState = {
 
 export const fetchUser = createAsyncThunk(
     'user/fetchUser',
-    async ({ userId, email }: { userId: string; email: string }, { rejectWithValue }) => {
+    async ({ userId, email }: { userId: string; email: string | null | undefined }, { rejectWithValue }) => {
         try {
         const response = await axios.get(`https://api.github.com/user/${userId}`);
         return { ...response.data, email };
