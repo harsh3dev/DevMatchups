@@ -175,7 +175,7 @@ export function PlaceholdersAndVanishInput({
       
       <canvas
         className={cn(
-          "absolute pointer-events-none  text-base transform scale-50 top-[20%] left-2 sm:left-10 origin-top-left filter invert dark:invert-0 pr-20",
+          "absolute pointer-events-none  text-base transform scale-50 top-[20%] left-10 origin-top-left filter invert dark:invert-0 pr-20",
           
           !animating ? "opacity-0" : "opacity-100"
         )}
@@ -196,7 +196,7 @@ export function PlaceholdersAndVanishInput({
         value={value}
         type="text"
         className={cn(
-          "w-full relative text-sm sm:text-base z-50 border-none dark:text-white bg-transparent text-black h-full rounded-full focus:outline-none focus:ring-0 pl-4 sm:pl-10 pr-20",
+          "w-full relative text-sm sm:text-base z-50 border-none dark:text-white bg-transparent text-black h-full rounded-full focus:outline-none focus:ring-0 pl-10 pr-20",
           animating && "text-transparent dark:text-transparent"
         )}
       />
@@ -265,7 +265,7 @@ export function PlaceholdersAndVanishInput({
                 duration: 0.3,
                 ease: "linear",
               }}
-              className="text-slate-600 text-sm sm:text-base font-normal dark:text-gray-300 pl-4 sm:px-10 text-left w-[calc(100%-2rem)] truncate"
+              className="text-slate-600 text-sm sm:text-base font-normal dark:text-gray-300 px-10 text-left w-[calc(100%-2rem)] truncate"
             >
               {placeholders[currentPlaceholder]}
             </motion.p>

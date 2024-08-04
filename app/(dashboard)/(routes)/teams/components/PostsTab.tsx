@@ -21,6 +21,7 @@ interface HackathonEntry {
   hackathonMode: string;
   id: Number;
   createdAt: string;
+  description: string;
 }
 
 const PostsTab = () => {
@@ -65,15 +66,20 @@ useEffect(() => {
   });
 
   return (
-    <div className='w-full min-h-[50vh] grid grid-cols-2 lg:grid-cols-3 gap-4 flex-wrap '>
+    <div className='w-full min-h-[50vh] grid sm:grid-cols-2 lg:grid-cols-3 gap-2 md:gap-4 flex-wrap '>
 
       {loading && <Loading/> }
 
       {
-         filteredPosts.map((entry, index)=>(
+         mockData.map((entry, index)=>(
             <PostCard entry={entry} key={index} />
         ))
       }
+      {/* {
+         filteredPosts.map((entry, index)=>(
+            <PostCard entry={entry} key={index} />
+        ))
+      } */}
     </div>
   )
 }

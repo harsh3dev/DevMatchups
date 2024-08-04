@@ -33,8 +33,8 @@ export interface HackathonEntry {
   experience: string;
   regDate: string;
   location: string;
-  description: string;
-  Employerid: number;
+  description?: string;
+  Employerid?: number;
   createdAt: string;
   updatedAt: string;
 }

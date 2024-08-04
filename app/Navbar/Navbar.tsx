@@ -130,7 +130,7 @@ const Navbar = () => {
                                     status==='authenticated' && session && <UserAvatar />
                                 }
                                 {
-                                    status==='unauthenticated' && <RiMenu3Fill />
+                                    status==='unauthenticated' && <RiMenu3Fill className='sm:w-8 sm:h-8 w-6 h-6 ' />
                                 }
                                 
                                 <span className="sr-only">Toggle navigation menu</span>

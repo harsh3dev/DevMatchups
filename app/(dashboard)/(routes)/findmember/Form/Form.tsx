@@ -23,9 +23,6 @@ interface Option {
 }
 type SkillOptions = Option[];
 function Form() {
-
-  
-  
     const {
         register,
         handleSubmit,
@@ -41,9 +38,6 @@ function Form() {
             experience: "",
         },
     });
-
-
-  
 
     const onSubmit = async (data: FormData) => {
         console.log("Submitting data:", data);
@@ -68,21 +62,20 @@ function Form() {
     const ExperienceOptions = [{ value: 'Beginner (0-1 years)', label: 'Beginner (0-1 years)' }, { value: 'Intermediate (1-2 years)', label: 'Intermediate (1-2 years)' }, { value: 'Expert (2+ years)', label: 'Expert (2+ years)' }]
 
     return (
-        <form className="w-full min-h-screen my-10 " onSubmit={handleSubmit(onSubmit)}>
-            <TracingBeam className="w-full  ">
+        <form className="w-full min-h-screen my-10 px-4  " onSubmit={handleSubmit(onSubmit)}>
                 {/* HEADER TEXT */}
                 <div className="w-full font-extrabold text-2xl" >
-                    <h1 className="font-extrabold text-3xl bg-gradient-to-r from-cyan-500 to-blue-500 bg-clip-text text-transparent dark:bg-gradient-to-t dark:from-sky-200 dark:to-cyan-400 ">
+                    <h1 className="font-extrabold text-lg md:text-3xl bg-gradient-to-r from-cyan-500 to-blue-500 bg-clip-text text-transparent dark:bg-gradient-to-t dark:from-sky-200 dark:to-cyan-400 ">
                         Team Up Now: Register and Find Teammates Today!
                     </h1>
                 </div>
 
-                <div className="min-w-[50rem] w-full flex flex-col items-start justify-normal text-left ">
+                <div className="md:min-w-[50rem] w-full flex flex-col items-start justify-normal text-left ">
 
-                    <h1 className=" mt-4  text-2xl w-full h-14 font-bold text-white bg-accent dark:bg-accent flex flex-col justify-center rounded-lg pl-5 rounded-b-none  ">
+                    <h1 className=" mt-4 text-lg md:text-2xl w-full h-14 font-bold text-white bg-accent dark:bg-accent flex flex-col justify-center rounded-lg pl-5 rounded-b-none  ">
                         Hackathon Details
                     </h1>
-                    <div className="flex flex-col gap-4 w-full border border-t-0 rounded-t-none  border-gray-300 px-10 py-5 rounded-lg ">
+                    <div className="flex flex-col gap-4 w-full border border-t-0 rounded-t-none  border-gray-300 px-4 sm:px-10 py-5 rounded-lg ">
                         <FormField
                             type="text"
                             placeholder="Enter team's name"
@@ -109,7 +102,7 @@ function Form() {
                         />
 
                         {/* HACKATHON MODE RADIO INPUTS */}
-                        <div className="flex justify-start items-center w-full gap-5 ">
+                        <div className="flex flex-wrap justify-start items-center w-full gap-5 ">
                             <h2 className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
                                 Hackathon Mode *
                             </h2>
@@ -124,7 +117,7 @@ function Form() {
                                 <label htmlFor="Online" className="w-full  ms-2 text-sm font-medium text-gray-900 dark:text-gray-300" > Online </label>
                             </div>
 
-                            <div className="flex focus-within:bg-sky-200  dark:focus-within:bg-sky-900 items-center px-4 rounded-full border border-sky-200 dark:border-sky-700">
+                            <div className="flex  focus-within:bg-sky-200  dark:focus-within:bg-sky-900 items-center px-4 rounded-full border border-sky-200 dark:border-sky-700">
                                 <input
                                     {...register("hackathonMode")}
                                     type="radio"
@@ -414,7 +407,6 @@ function Form() {
                             Submit
                         </Button>}
                 </div>
-            </TracingBeam>
         </form>
     );
 }

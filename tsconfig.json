@@ -21,6 +21,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/(dashboard)/(routes)/teams/components/DrawerFilter.jsx", "app/(dashboard)/(routes)/teams/components/FiltersComponent.jsx"],
   "exclude": ["node_modules"]
 }

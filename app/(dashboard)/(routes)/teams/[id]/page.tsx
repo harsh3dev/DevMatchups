@@ -32,7 +32,7 @@ export default function Page({ params }: { params: { id: string } }) {
    
     useEffect(()=>{
         getSPostData();
-    },[]);
+    });
 
 
     const getSPostData = async ()  => {
@@ -93,7 +93,9 @@ export default function Page({ params }: { params: { id: string } }) {
                                 <span key={index} className='p-2 rounded-full border border-text dark:border-text'>{skill}</span>
                             ))}</h1>
                             
-                            <p className='border border-gray-700 dark:border-gray-400 rounded-lg my-3 p-2 mr-1 '>Description: Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolore accusantium consectetur, ut laudantium a cumque reiciendis beatae dicta qui rem. Inventore aspernatur harum explicabo repudiandae eum totam quaerat veniam voluptatem.</p>
+                            <p className='border border-gray-700 dark:border-gray-400 rounded-lg my-3 p-2 mr-1 '>
+                                {post?.description}
+                            </p>
 
                         </div>
                         <Button className='bg-primary  font-medium dark:font-bold transition-colors ease-in-out w-full '>Apply as a teammate</Button>

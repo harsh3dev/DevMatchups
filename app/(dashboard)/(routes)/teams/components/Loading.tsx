@@ -6,12 +6,12 @@ const Loading = () => {
     
     return (
         <>
-            <Skeleton className="w-[20rem] h-[20rem] rounded-lg" />
-            <Skeleton className="w-[20rem] h-[20rem] rounded-lg" />
-            <Skeleton className="w-[20rem] h-[20rem] rounded-lg" />
-            <Skeleton className="w-[20rem] h-[20rem] rounded-lg" />
-            <Skeleton className="w-[20rem] h-[20rem] rounded-lg" />
-            <Skeleton className="w-[20rem] h-[20rem] rounded-lg" />
+            <Skeleton className=" min-w-[20vw] min-h-[20vh] px-5 py-4 rounded-lg" />
+            <Skeleton className=" min-w-[20vw] min-h-[20vh] px-5 py-4 rounded-lg" />
+            <Skeleton className=" min-w-[20vw] min-h-[20vh] px-5 py-4 rounded-lg" />
+            <Skeleton className=" min-w-[20vw] min-h-[20vh] px-5 py-4 rounded-lg" />
+            <Skeleton className=" min-w-[20vw] min-h-[20vh] px-5 py-4 rounded-lg" />
+            <Skeleton className=" min-w-[20vw] min-h-[20vh] px-5 py-4 rounded-lg" />
         </>
     )
 }
