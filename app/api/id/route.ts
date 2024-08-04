@@ -18,7 +18,7 @@ export async function POST(req: Request) {
 
     const hackathon = await prisma.hackathon.findUnique({
       where: {
-        id: id,
+        id: id.toString(),
       },
     });
 
