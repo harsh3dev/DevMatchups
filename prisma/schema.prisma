@@ -10,16 +10,98 @@ datasource db {
 }
 
 
+enum UserRole{
+    ADMIN
+    USER
+}
+
 model User {
-  id           Int          @id @default(autoincrement())
-  name         String
-  username     String       @unique
-  email        String       @unique
-  password     String
+  id           String         @id @default(cuid())
+  name         String?
+  username     String?       @unique
+  email        String?       @unique
+  emailVerified DateTime?
+  image        String?
+  password     String?
+  role         UserRole      @default(USER)
   applications Application[]
   hackathons   Hackathon[]
+  accounts     Account[]
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Hackathon {
+  id             String       @id @default(cuid())
+  teamName       String
+  hackathonName  String
+  regURL         String
+  hackathonMode  String
+  memberCount    String
+  skills         String[]
+  role           String
+  experience     String
+  regDate        DateTime
+  location       String
+  description    String       
+  userId         String
   createdAt      DateTime     @default(now())
   updatedAt      DateTime     @updatedAt
+  applications   Application[]
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Application {
+  id          String   @id @default(cuid())
+  candidateId String
+  postId      String
+  skills      String
+  coverLetter String
+  status      ApplicationStatus @default(PENDING)
+  createdAt   DateTime @default(now())
+
+  post Hackathon @relation(fields: [postId], references: [id])
+  user User     @relation(fields: [candidateId], references: [id], onDelete: Cascade)
+}
+
+
+
+model PasswordResetToken {
+  id      String   @id @default(cuid())
+  email   String
+  token   String   @unique
+  expires DateTime
+
+  @@unique([email, token])
+}
+
+enum ApplicationStatus {
+  PENDING
+  ACCEPTED
+  REJECTED
 }
 
 
@@ -31,40 +113,14 @@ model Otp{
   @@unique([otp, email]) 
 }
 
-model Hackathon {
-  id             Int          @id @default(autoincrement())
-  teamName      String
-  hackathonName  String
-  regURL         String
-  hackathonMode  String
-  memberCount    String
-  skills         String[]
-  role           String
-  experience     String
-  regDate        DateTime
-  location       String
-  description    String
-  Employer       User         @relation(fields: [Employerid], references: [id])
-  Employerid     Int
-  createdAt      DateTime     @default(now())
-  updatedAt      DateTime     @updatedAt
-  applications   Application[]
+
+
+model VerificationToken {
+  id      String   @id @default(cuid())
+  email   String
+  token   String   @unique
+  expires DateTime
+
+  @@unique([email, token])
 }
 
-model Application {
-  id          Int      @id @default(autoincrement())
-  candidate   User     @relation(fields: [candidateId], references: [id])
-  candidateId Int
-  post        Hackathon @relation(fields: [postId], references: [id])
-  postId      Int
-  skills      String
-  coverLetter String
-  status      ApplicationStatus @default(PENDING)
-  createdAt   DateTime @default(now())
-}
-
-enum ApplicationStatus {
-  PENDING
-  ACCEPTED
-  REJECTED
-}

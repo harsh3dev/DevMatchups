@@ -5,7 +5,6 @@ import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { toast } from "@/components/ui/use-toast"
 import { Separator } from "@/components/ui/separator"
-
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa6";
 import { ReloadIcon } from "@radix-ui/react-icons"
@@ -13,18 +12,18 @@ import { IoMailOutline } from "react-icons/io5";
 import { IoIosArrowBack } from "react-icons/io";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { RiEyeCloseLine } from "react-icons/ri";
-
 import Link from "next/link"
-import { useEffect, useState } from "react"
-
+import { startTransition, useEffect, useState } from "react"
 import { z } from "zod";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-
 import axios from "axios"
 import { useRouter } from "next/navigation"
 import { useAppDispatch } from "@/lib/store/hooks"
 import { setSignupData } from "@/lib/store/features/authSlice/authSlice"
+import { RegisterUser } from "@/Actions/register"
+import { signIn } from "next-auth/react"
+import { DEFAULT_LOGIN_REDIRECT } from "@/routes"
 
 
 
@@ -49,19 +48,19 @@ export default function SignupForm() {
     const [showPassword, setShowPassword] = useState(false);
     const [passwordType, setPasswordType] = useState("password");
 
+
     const {
         register,
         handleSubmit,
         formState: { errors }
     } = useForm<SignUpSchemaType>({ resolver: zodResolver(SignUpSchema) });
 
-    const [loading, setLoading] = useState(false);
-    const [signupError, setSignupError] = useState("");
-
+   
     
     const handleShowPassword = () => {
         setShowPassword((prev)=>(!prev));
     }
+
 
     useEffect(()=>{
         if(showPassword){
@@ -72,41 +71,62 @@ export default function SignupForm() {
     },[showPassword])
     
 
-    useEffect(() => {
-        function showError() {
-            if (signupError.length) {
-                toast({
-                    title: `${signupError}`,
-                })
-            }
-        }
-    }, [signupError])
+    
+  const [loading, setLoading] = useState(false);
+  const [signupError, setSignupError] = useState("");
+  const [error, setError] = useState<string>("");
+  const [success, setSuccess] = useState<string>("");
 
-    const onSubmit: SubmitHandler<SignUpSchemaType> = async (data) => {
-        console.log(data);
-        dispatch(setSignupData(data));
-        try {
-            setLoading(true);
-            const { email } = data;
-            const response = await axios.post("/api/users/otp", { email });
-            console.log("response", response);
-            router.push('/verify-email');
 
-        }
-        catch (error) {
-            if (axios.isAxiosError(error)) {
-                console.log('Axios error message:', error?.response?.data?.message || error?.message);
-                setSignupError(error?.response?.data?.message || error?.message)
-            }
-            else {
-                console.log("Unexpected Error", error);
-            }
-        }
+  useEffect(()=>{
+    function showError(){
+      if(signupError.length){
+        toast({
+          title: `${signupError}`,
+        })
+      }
+    }
+  },[])
 
-        setLoading(false);
 
+
+  const onClick = (provider: "github" | "google") => {
+    signIn(provider, {
+      callbackUrl: DEFAULT_LOGIN_REDIRECT
+    })
+  }
+  
+  const onSubmit: SubmitHandler<SignUpSchemaType> = async (values) =>{
+    console.log(values);
+    dispatch(setSignupData(values));
+      startTransition(() => {
+        console.log("entered")
+        RegisterUser(values).then((res) => {
+          console.log("res",res)
+          if (res?.error) {
+            console.log(res?.error);
+            setError(res?.error);
+          } else {
+            setSuccess(res?.success);
+            console.log(res?.success);
+          }
+        });
+      });
     }
 
+
+    useEffect(()=>{
+        if(showPassword){
+            setPasswordType("text")
+        } else{
+            setPasswordType("password")
+        }
+    },[showPassword])
+    
+
+   
+
+   
     return (
         <div className="flex h-screen w-full items-center justify-center ">
             <div className=" w-[90%] sm:w-full grid place-items-center h-[80vh] "  >
@@ -126,11 +146,11 @@ export default function SignupForm() {
                         {/* 3rd party signup */}
                         { !emailSignup &&
                         <div className="grid grid-rows-2 gap-2">
-                            <Button variant="outline" className="w-full bg-transparent dark:bg-transparent border-gray-600 py-6 ">
+                            <Button variant="outline" className="w-full bg-transparent dark:bg-transparent border-gray-600 py-6 " onClick={() => onClick('github')}>
                                 <FaGithub className="mr-2 h-5 w-5" />
                                 Sign up with GitHub
                             </Button>
-                            <Button variant="outline" className="w-full bg-transparent dark:bg-transparent border-gray-600 py-6 ">
+                            <Button variant="outline" className="w-full bg-transparent dark:bg-transparent border-gray-600 py-6 " onClick={() => onClick('google')}>
                                 <FcGoogle className="mr-2 h-5 w-5" />
                                 Continue with Google
                             </Button>
