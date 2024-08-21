@@ -81,7 +81,7 @@ const Navbar = () => {
                         <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg  md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0  dark:border-gray-700">
                             {navItems.map((item) => (
                                 <li key={item.name}>
-                                    <Link href={item.path} className={`block py-2 px-3 text-text rounded text-sm lg:text-base md:hover:text-accent md:p-0 md:dark:hover:text-accent dark:text-white  `} aria-current="page"
+                                    <Link href={item.path} className={`block py-2 px-3 text-text rounded text-sm  md:hover:text-accent md:p-0 md:dark:hover:text-accent dark:text-white  `} aria-current="page"
                                         style={{ color: pathname === item.path ? "var(--accent)" : "" }}
                                         key={`list-${item.name}`}
                                     >

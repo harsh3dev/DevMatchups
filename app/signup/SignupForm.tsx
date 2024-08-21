@@ -48,15 +48,12 @@ export default function SignupForm() {
     const [showPassword, setShowPassword] = useState(false);
     const [passwordType, setPasswordType] = useState("password");
 
-
     const {
         register,
         handleSubmit,
-        formState: { errors }
+        formState: { errors, isSubmitting }
     } = useForm<SignUpSchemaType>({ resolver: zodResolver(SignUpSchema) });
 
-   
-    
     const handleShowPassword = () => {
         setShowPassword((prev)=>(!prev));
     }
@@ -69,49 +66,53 @@ export default function SignupForm() {
             setPasswordType("password")
         }
     },[showPassword])
-    
 
-    
-  const [loading, setLoading] = useState(false);
-  const [signupError, setSignupError] = useState("");
-  const [error, setError] = useState<string>("");
-  const [success, setSuccess] = useState<string>("");
+    const [loading, setLoading] = useState(false);
+    const [signupError, setSignupError] = useState("");
+    const [error, setError] = useState<string>("");
+    const [success, setSuccess] = useState<string>("");
 
 
-  useEffect(()=>{
-    function showError(){
-      if(signupError.length){
-        toast({
-          title: `${signupError}`,
+    useEffect(()=>{
+        function showError(){
+        if(signupError.length){
+            toast({
+            title: `${signupError}`,
+            })
+        }
+        }
+    },[signupError])
+
+
+
+    const onClick = (provider: "github" | "google") => {
+        signIn(provider, {
+            callbackUrl: DEFAULT_LOGIN_REDIRECT
         })
-      }
     }
-  },[])
 
-
-
-  const onClick = (provider: "github" | "google") => {
-    signIn(provider, {
-      callbackUrl: DEFAULT_LOGIN_REDIRECT
-    })
-  }
-  
-  const onSubmit: SubmitHandler<SignUpSchemaType> = async (values) =>{
-    console.log(values);
-    dispatch(setSignupData(values));
-      startTransition(() => {
-        console.log("entered")
-        RegisterUser(values).then((res) => {
-          console.log("res",res)
-          if (res?.error) {
-            console.log(res?.error);
-            setError(res?.error);
-          } else {
-            setSuccess(res?.success);
-            console.log(res?.success);
-          }
-        });
-      });
+    const onSubmit: SubmitHandler<SignUpSchemaType> = async (values) => {
+        console.table(values);
+        dispatch(setSignupData(values));
+        try {
+            setLoading(true);
+            console.log("entered")
+            RegisterUser(values).then((res) => {
+                console.log("res", res)
+                if (res?.error) {
+                    console.log(res?.error);
+                    setError(res?.error);
+                } else {
+                    setSuccess(res?.success);
+                    console.log(res?.success);
+                    router.push("/signup/verify");
+                }
+            });
+        } catch (error) {
+            console.log(error);
+        } finally {
+            setLoading(false);
+        }
     }
 
 
@@ -140,7 +141,7 @@ export default function SignupForm() {
                             Back
                         </Button>}
                         <CardTitle className=" text-lg sm:text-2xl font-bold">Sign Up</CardTitle>
-                        <CardDescription>Create your account to get started.</CardDescription>
+                        <CardDescription>Sign up to join the developer community.</CardDescription>
                     </CardHeader>
                     <CardContent className="space-y-4">
                         {/* 3rd party signup */}
@@ -198,11 +199,11 @@ export default function SignupForm() {
                             </div>
                             {
                                 loading ?
-                                    <Button disabled className="w-full mt-4 ">
-                                        <ReloadIcon className="mr-2 h-4 w-4 animate-spin" /> Signing up
+                                    <Button disabled className="w-full mt-4 bg-primary dark:bg-primary dark:hover:bg-accent hover:bg-accent ">
+                                        <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
                                     </Button>
                                     :
-                                    <Button type="submit" className="w-full mt-4 ">
+                                    <Button type="submit" className="w-full mt-4 bg-primary dark:bg-primary dark:hover:bg-accent hover:bg-accent ">
                                         Sign Up
                                     </Button>
                             }

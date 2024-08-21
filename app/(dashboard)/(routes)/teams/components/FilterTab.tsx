@@ -105,7 +105,7 @@ export function FilterTab() {
                 <div className="lg:hidden">
                     <DrawerFilter form={form} modeOptions={modeOptions} expOptions={expOptions} skillOptions={skillOptions} handleReset={handleReset} onSubmit={onSubmit}  />
                 </div>
-                <div className="lg:inline-block hidden">
+                <div className="lg:inline-block hidden w-full  rounded-lg ">
                     <FiltersComponent form={form} modeOptions={modeOptions} expOptions={expOptions} skillOptions={skillOptions} handleReset={handleReset} onSubmit={onSubmit} />
                 </div>
             </div>

@@ -65,7 +65,7 @@ export function ResetForm() {
                     <Input
                       {...field}
                       disabled={isPending}
-                      placeholder="john.doe@example.com"
+                      placeholder="Enter your registered email"
                       type="email"
                     />
                   </FormControl>
@@ -76,7 +76,7 @@ export function ResetForm() {
           </div>
           <FormError message={error} />
           <FormSuccess message={success} />
-          <Button disabled={isPending} type="submit" className="w-full">
+          <Button disabled={isPending} type="submit" className="w-full font-bold bg-primary hover:bg-accent dark:bg-primary dark:hover:bg-accent ">
             Send reset email
           </Button>
         </form>

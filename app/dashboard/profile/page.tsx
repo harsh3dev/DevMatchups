@@ -53,6 +53,8 @@ const Page = () => {
             role: user.role,
             experience: user.experience,
         })
+        console.log(userData);
+        
     },[user, loading])
 
     return (
