@@ -37,6 +37,7 @@
     --inputGray: #e5e7eb;
     --clickWhite: #c6ebff;
     --bgActive: #ace2ff;
+    --ellipse: #ffffff;
   }
 
   .dark {
@@ -68,6 +69,7 @@
     --clickWhite: #ffffff;
     --inputGray: #111827;
     --bgActive: #002a4071;
+    --ellipse: #000000;
   }
 }
 
@@ -125,4 +127,41 @@ input{
   text-decoration: none;
   background-color: var(--inputGray);
   min-height: 50px;
+}
+
+.background-shape {
+  --color: var(--accent);
+  width: 100%;
+  pointer-events: none; 
+  position: relative;
+  z-index: -2;
+  margin: 0 auto;
+  height: 45rem;
+  overflow: hidden;
+  background-color: var(--background);
+  mask-image: radial-gradient(ellipse at center center, #000 , transparent 50%);
+  margin-top: -18.8rem;
+}
+
+.background-shape::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0.4;
+  background-image: radial-gradient(circle at bottom center, var(--color), transparent 65%);
+  background-color: var(--background);
+}
+
+.background-shape::after {
+  content: '';
+  position: absolute;
+  left: -50%;
+  top: 50%;
+  aspect-ratio: 1 / 0.7;
+  width: 200%;
+  border-top: 1px solid hsl(var(--border));
+  background-color: var(--background);
+  border-radius: 50%;
 }
