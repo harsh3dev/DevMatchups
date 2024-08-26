@@ -28,7 +28,7 @@ export async function POST(req: Request) {
       regDate,
       location,
       description,
-      Employerid,
+      userId,
     } = validationResult.data;
 
     const hackathon = await prisma.hackathon.create({
@@ -44,7 +44,7 @@ export async function POST(req: Request) {
         regDate: new Date(regDate),
         location,
         description,
-        Employerid,
+        user: userId,
       },
     });
 

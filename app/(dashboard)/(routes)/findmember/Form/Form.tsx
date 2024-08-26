@@ -7,9 +7,10 @@ import { FormData, UserSchema } from "./types";
 import FormField from "./FormField";
 import { Button } from "@/components/ui/button"
 import { ReloadIcon } from "@radix-ui/react-icons"
-import { TracingBeam } from "@/components/ui/tracing-beam";
+
 import { Label } from "@/components/ui/label"
 import Select from 'react-select';
+
 import CreatableSelect from 'react-select/creatable';
 import ReactDatePicker from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker.css';
@@ -31,7 +32,7 @@ function Form() {
         reset,
         control,
     } = useForm<FormData>({
-        resolver: zodResolver(UserSchema), // Apply the zodResolver
+        resolver: zodResolver(UserSchema),
         defaultValues: {
             regDate: new Date(Date.now()),
             skills: [],
@@ -41,12 +42,14 @@ function Form() {
 
     const onSubmit = async (data: FormData) => {
         console.log("Submitting data:", data);
-        const session = getSession();
+        const session = await getSession();
         console.log("client session",session);
         try {
-            data.Employerid = 1;
-            const response = await axios.post('/api/post', data);
-            console.log('SUCCESS', response.data);
+            data.userId = 1;
+            // const response = await axios.post('/api/post', data);
+            // console.log('SUCCESS', response.data);
+            console.log('SUCCESS', data);
+            
         } catch (error: any) {
             if (axios.isAxiosError(error)) {
                 console.error('Axios error:', error.response?.data);
@@ -57,139 +60,165 @@ function Form() {
         reset();
     };
 
-    const ModeOptions = [{ value: 'Offline', label: 'Offline' }, { value: 'Online', label: 'Online' }, { value: 'Hybrid', label: 'Hybrid' }]
+    const hackathonModes = ["Online", "Offline", "Hybrid"]
     const options: SkillOptions = [{ value: 'Javascript', label: 'Javascript' }, { value: 'Python', label: 'Python' }, { value: 'React JS', label: 'React JS' }, { value: 'Next JS', label: 'Next JS' }, { value: 'MongoDB', label: 'MongoDB' }, { value: 'SQL', label: 'SQL' }]
     const ExperienceOptions = [{ value: 'Beginner (0-1 years)', label: 'Beginner (0-1 years)' }, { value: 'Intermediate (1-2 years)', label: 'Intermediate (1-2 years)' }, { value: 'Expert (2+ years)', label: 'Expert (2+ years)' }]
+    const hackathonDetails = [
+        {
+            type: "text",
+            placeholder: "Enter team's name",
+            label: "Team Name *",
+            name: "teamName",
+            error: errors.teamName,
+        },
+        {
+            type: "text",
+            placeholder: "Enter the name of the Hackathon",
+            label: "Hackathon's Name *",
+            name: "hackathonName",
+            error: errors.hackathonName,
+        },
+        {
+            type: "text",
+            placeholder: "Enter Registration Link",
+            label: "Registration Link *",
+            name: "regURL",
+            error: errors.regURL,
+        },
+    ] as const;
 
     return (
-        <form className="w-full min-h-screen my-10 px-4  " onSubmit={handleSubmit(onSubmit)}>
+        <form className="w-full md:w-[60%] min-h-screen my-10 px-4 z-[1] " onSubmit={handleSubmit(onSubmit)}>
+
                 {/* HEADER TEXT */}
-                <div className="w-full font-extrabold text-2xl" >
-                    <h1 className="font-extrabold text-lg md:text-3xl bg-gradient-to-r from-cyan-500 to-blue-500 bg-clip-text text-transparent dark:bg-gradient-to-t dark:from-sky-200 dark:to-cyan-400 ">
+                <div className="w-full font-extrabold text-2xl my-4 " >
+                    <h1 className=" w-full text-lg md:text-3xl bg-gradient-to-r from-cyan-500 to-blue-500 bg-clip-text text-transparent dark:bg-gradient-to-t dark:from-sky-200 dark:to-cyan-400 ">
                         Team Up Now: Register and Find Teammates Today!
                     </h1>
                 </div>
 
-                <div className="md:min-w-[50rem] w-full flex flex-col items-start justify-normal text-left ">
+                <div className="md:min-w-[50rem] w-full flex flex-col items-start justify-normal  bg-background shadow-md  text-left ">
 
-                    <h1 className=" mt-4 text-lg md:text-2xl w-full h-14 font-bold text-white bg-accent dark:bg-accent flex flex-col justify-center rounded-lg pl-5 rounded-b-none  ">
+                    <h1 className=" text-lg md:text-2xl w-full h-14 font-bold text-white bg-accent dark:bg-accent flex flex-col justify-center rounded-lg pl-5 rounded-b-none  ">
                         Hackathon Details
                     </h1>
-                    <div className="flex flex-col gap-4 w-full border border-t-0 rounded-t-none  border-gray-300 px-4 sm:px-10 py-5 rounded-lg ">
-                        <FormField
-                            type="text"
-                            placeholder="Enter team's name"
-                            label="Team Name *"
-                            name="teamName"
-                            register={register}
-                            error={errors.teamName}
-                        />
-                        <FormField
-                            type="text"
-                            placeholder="Enter the name of the Hackathon"
-                            label="Hackathon's Name *"
-                            name="hackathonName"
-                            register={register}
-                            error={errors.hackathonName}
-                        />
-                        <FormField
-                            type="text"
-                            placeholder="Enter Registration Link"
-                            label="Registration Link *"
-                            name="regURL"
-                            register={register}
-                            error={errors.regURL}
-                        />
+                    <div className="flex flex-col gap-4 w-full border border-t-0 rounded-t-none mb-4 border-gray-300 px-4 sm:px-10 py-5 rounded-lg ">
+                        {
+                            hackathonDetails.map((detail) => (
+                                <FormField
+                                    key={detail.name}
+                                    type={detail.type}
+                                    placeholder={detail.placeholder}
+                                    label={detail.label}
+                                    name={detail.name}
+                                    register={register}
+                                    error={detail.error}
+                                />
+                            ))
+                        }
 
                         {/* HACKATHON MODE RADIO INPUTS */}
                         <div className="flex flex-wrap justify-start items-center w-full gap-5 ">
                             <h2 className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
                                 Hackathon Mode *
                             </h2>
-                            <div className="flex focus-within:bg-sky-200 dark:focus-within:bg-sky-900 items-center px-4 rounded-full border border-sky-200 dark:border-sky-700">
+                        {hackathonModes.map((mode) => (
+                            <div
+                                key={mode}
+                                className="flex items-center px-4 rounded-full border border-sky-200 dark:border-sky-700 focus-within:bg-sky-200 dark:focus-within:bg-sky-900"
+                            >
                                 <input
                                     {...register("hackathonMode")}
                                     type="radio"
-                                    value="Online"
-                                    id="Online"
-                                    className=" text-blue-600 bg-gray-100 border-gray-300 dark:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600"
+                                    value={mode}
+                                    id={mode}
+                                    className="text-blue-600 bg-gray-100 border-gray-300 dark:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600"
                                 />
-                                <label htmlFor="Online" className="w-full  ms-2 text-sm font-medium text-gray-900 dark:text-gray-300" > Online </label>
+                                <label
+                                    htmlFor={mode}
+                                    className="w-full ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                                >
+                                    {mode}
+                                </label>
                             </div>
+                        ))}
+                        {errors.hackathonMode && (
+                            <span className="error-message text-sm mb-5 flex items-center justify-center font-semibold text-right w-full text-red-500">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 24 24"
+                                    fill="currentColor"
+                                    className="w-4 h-4 -mt-px"
+                                >
+                                    <path
+                                        fillRule="evenodd"
+                                        d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm8.706-1.442c1.146-.573 2.437.463 2.126 1.706l-.709 2.836.042-.02a.75.75 0 01.67 1.34l-.04.022c-1.147.573-2.438-.463-2.127-1.706l.71-2.836-.042.02a.75.75 0 11-.671-1.34l.041-.022zM12 9a.75.75 0 100-1.5.75.75 0 000 1.5z"
+                                        clipRule="evenodd"
+                                    />
+                                </svg>
+                                {errors.hackathonMode.message}
+                            </span>
+                        )}
 
-                            <div className="flex  focus-within:bg-sky-200  dark:focus-within:bg-sky-900 items-center px-4 rounded-full border border-sky-200 dark:border-sky-700">
-                                <input
-                                    {...register("hackathonMode")}
-                                    type="radio"
-                                    value="Offline"
-                                    id="Offline"
-                                    className=" text-blue-600 bg-gray-100 border-gray-300  dark:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600"
-                                />
-                                <label htmlFor="Offline" className="w-full  ms-2 text-sm font-medium text-gray-900 dark:text-gray-300" > Offline </label>
-                            </div>
-
-                            <div className="flex focus-within:bg-sky-200 dark:focus-within:bg-sky-900  active:bg-sky-100 items-center px-4 rounded-full border border-sky-200 dark:border-sky-700">
-                                <input
-                                    {...register("hackathonMode")}
-                                    type="radio"
-                                    value="Hybrid"
-                                    id="Hybrid"
-                                    className=" text-blue-600 bg-gray-100 border-gray-300   dark:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600"
-                                />
-                                <label htmlFor="Hybrid" className="w-full h-full  ms-2 text-sm font-medium text-gray-900 dark:text-gray-300" > Hybrid </label>
-                            </div>
-                            {errors.hackathonMode && <span className="error-message text-sm mb-5 flex items-center justify-center font-semibold text-right w-full text-red-500 "><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4 -mt-px">
-                                <path fill-rule="evenodd"
-                                    d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm8.706-1.442c1.146-.573 2.437.463 2.126 1.706l-.709 2.836.042-.02a.75.75 0 01.67 1.34l-.04.022c-1.147.573-2.438-.463-2.127-1.706l.71-2.836-.042.02a.75.75 0 11-.671-1.34l.041-.022zM12 9a.75.75 0 100-1.5.75.75 0 000 1.5z"
-                                    clip-rule="evenodd"></path>
-                            </svg>{errors.hackathonMode.message}</span>}
                         </div>
 
-                        {/* Date Picker Component */}
-                        <Label >Last Date of Registration *</Label>
-                        <Controller
-                            control={control}
-                            name="regDate"
-                            render={({ field: { onChange, onBlur, value, ref } }) => (
-                                <ReactDatePicker
-                                    dateFormat="dd/MM/yyyy"
-                                    onChange={(date) => onChange(date)} // send value to hook form
-                                    onBlur={onBlur} // notify when input is touched/blur
-                                    selected={value}
-                                    closeOnScroll={true}
-                                    className="w-full focus:border-b-2 border-blue-500 rounded-md  dark:text-white"
+                        <div className=' w-full flex sm:flex-row flex-col justify-between items-center gap-4 '>
+                            <div className=' '>
+                                {/* Date Picker Component */}
+                                <Label>Last Date of Registration *</Label>
+                                <Controller
+                                    control={control}
+                                    name="regDate"
+                                    render={({ field: { onChange, onBlur, value, ref } }) => (
+                                        <ReactDatePicker
+                                            dateFormat="dd/MM/yyyy"
+                                            onChange={(date) => onChange(date)} // send value to hook form
+                                            onBlur={onBlur} // notify when input is touched/blur
+                                            selected={value}
+                                            closeOnScroll={true}
+                                            className=" focus:border-b-2 border-blue-500 px-5 w-fit rounded-full mb-2 mt-1 dark:text-white"
+                                        />
+                                    )}
                                 />
-                            )}
-                        />
-                        {errors.regDate && <span className="error-message text-sm mb-5 flex items-center justify-center font-semibold text-right w-full text-red-500 "><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4 -mt-px">
-                            <path fill-rule="evenodd"
-                                d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm8.706-1.442c1.146-.573 2.437.463 2.126 1.706l-.709 2.836.042-.02a.75.75 0 01.67 1.34l-.04.022c-1.147.573-2.438-.463-2.127-1.706l.71-2.836-.042.02a.75.75 0 11-.671-1.34l.041-.022zM12 9a.75.75 0 100-1.5.75.75 0 000 1.5z"
-                                clip-rule="evenodd"></path>
-                        </svg>{errors.regDate.message}</span>}
-
-                        <FormField
-                            type="text"
-                            placeholder="Mumbai, Maharastra or Online *"
-                            label="Location of the event? *"
-                            name="location"
-                            register={register}
-                            error={errors.location}
-                        />
+                                {errors.regDate && <span className="error-message text-sm mb-5 flex items-center justify-center font-semibold text-right w-full text-red-500 "><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4 -mt-px">
+                                    <path fill-rule="evenodd"
+                                        d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm8.706-1.442c1.146-.573 2.437.463 2.126 1.706l-.709 2.836.042-.02a.75.75 0 01.67 1.34l-.04.022c-1.147.573-2.438-.463-2.127-1.706l.71-2.836-.042.02a.75.75 0 11-.671-1.34l.041-.022zM12 9a.75.75 0 100-1.5.75.75 0 000 1.5z"
+                                        clip-rule="evenodd"></path>
+                                </svg>{errors.regDate.message}</span>}
+                            </div>
+                            <FormField
+                                type="text"
+                                placeholder="Mumbai, Maharastra or Online *"
+                                label="Location of the event? *"
+                                name="location"
+                                register={register}
+                                error={errors.location}
+                            />
+                        </div>
                     </div>
 
-                    <h1 className=" mt-4 text-2xl w-full h-14 font-bold dark:bg-accent bg-accent text-white flex flex-col justify-center rounded-lg pl-5 rounded-b-none  ">
+                    <h1 className="  text-2xl w-full h-14 font-bold dark:bg-accent bg-accent text-white flex flex-col justify-center rounded-lg pl-5 rounded-b-none  ">
                         Team member requirements
                     </h1>
                     <div className="flex flex-col gap-4 w-full h-full border border-t-0 rounded-t-none  border-gray-300 px-10 py-5 rounded-lg ">
-
-                        <FormField
-                            type="number"
-                            placeholder="01"
-                            label="How many team members are you looking for? *"
-                            name="memberCount"
-                            register={register}
-                            error={errors.memberCount}
-                        />
+                        <div className=' w-full flex md:flex-row flex-col justify-between items-center gap-4 mb-4 '>
+                            <FormField
+                                type="number"
+                                placeholder="Enter a number between 1 and 5"
+                                label="How many team members are you looking for? *"
+                                name="memberCount"
+                                register={register}
+                                error={errors.memberCount}
+                            />
+                            <FormField
+                                type="text"
+                                placeholder="Backend, Frontend, Devops etc..."
+                                label="What role the member will serve in the team? *"
+                                name="role"
+                                register={register}
+                                error={errors.role}
+                            />
+                        </div>
                         
                         <Label htmlFor="skills" >What are the required skills? *</Label>
                         <Controller
@@ -205,34 +234,56 @@ function Form() {
                                     id="skills"
                                     
                                     styles={{
-                                        singleValue: base => ({ ...base, color: "#154b79", }),
+                                        singleValue: base => ({ ...base, color: "#154b79" }),
                                         valueContainer: base => ({
                                             ...base,
-                                            color: "var(--secondary)",
+                                            color: "var(--text)",
                                             width: "100%",
+                                            borderColor: "var(--primary)",
+                                            padding: "0 8px",
                                         }),
+                                        dropdownIndicator: (base) => ({
+                                            ...base,
+                                            // display: "none", // Hides the dropdown arrow
+                                            }),
+                                            indicatorSeparator: () => ({
+                                            display: "none", // Hides the separator line
+                                            }),
                                         control: (base, state) => ({
                                             ...base,
                                             color: "var(--text)",
                                             background: "var(--inputGray)",
-                                            borderRadius: "50px",
-                                            border:"0px",
-                                            outline: "none",
-                                            ":isFocused": {
-                                                borderBlockColor: "var(--accent)",
-                                                borderInlineColor: "var(--accent)"
+                                            borderRadius: "10px",
+                                            borderTop: "2px",
+                                            borderLeft: "2px",
+                                            borderRight: "2px",
+                                            borderBottom: "2px",
+                                            textDecorationColor: "var(--text)",
+                                            ":hover": {
+                                                borderRadius: "10px",
+                                                borderTop: "2px",
+                                                borderLeft: "2px",
+                                                borderRight: "2px",
+                                            },
+                                            ":active": {
+                                                borderRadius: "10px",
+                                                borderTop: "2px",
+                                                borderLeft: "2px",
+                                                borderRight: "2px",
+                                            },
+                                            ":focus": {
+                                                borderRadius: "10px",
+                                                borderTop: "2px",
+                                                borderLeft: "2px",
+                                                borderRight: "2px",
                                             }
                                         }),
                                         option: (styles, { data, isDisabled, isFocused, isSelected }) => ({
                                             ...styles,
-                                            backgroundColor:"var(--inputGray)",
-                                            color:"var(--text)",
+                                            backgroundColor: "var(--background)",
+                                            color: "var(--text)",
                                             ":active": {
                                                 ...styles[":active"],
-                                                backgroundColor: "var(--secondary)"
-                                            },
-                                            ":hover": {
-                                                ...styles[":hover"],
                                                 backgroundColor: "var(--secondary)"
                                             }
                                         }),
@@ -259,18 +310,17 @@ function Form() {
                                             }
                                         })
                                     }}
-                                    theme={theme => ({
+                                    theme={(theme) => ({
                                         ...theme,
                                         colors: {
                                             ...theme.colors,
-                                            neutral30: "", // control/borderColor(focused)
-                                            neutral50: "var(--accent)", // placeholder color
-                                            neutral80: "var(--text)", // input color
-                                            primary25: "", // option bg color focused
-                                            primary: "", // option bg color selected
-                                            primary50: "" // option bg color active (enabled or available)
-                                        }
-                                    })}
+                                            primary25: "var(--hover-background)",
+                                            primary: "var(--primary)",
+                                            neutral30: "var(--border)",
+                                          neutral50: "var(--accent)", // placeholder color
+                                          neutral80: "var(--text)", // input text color
+                                        },
+                                        })}
                                 />
                             )}
                             rules={{ required: true }}
@@ -281,17 +331,6 @@ function Form() {
                                 d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm8.706-1.442c1.146-.573 2.437.463 2.126 1.706l-.709 2.836.042-.02a.75.75 0 01.67 1.34l-.04.022c-1.147.573-2.438-.463-2.127-1.706l.71-2.836-.042.02a.75.75 0 11-.671-1.34l.041-.022zM12 9a.75.75 0 100-1.5.75.75 0 000 1.5z"
                                 clip-rule="evenodd"></path>
                         </svg>{errors.skills.message}</span>}
-
-
-                        {/* TODO: Select */}
-                        <FormField
-                            type="text"
-                            placeholder="Backend, Frontend, Devops etc..."
-                            label="What role the member will serve in the team? *"
-                            name="role"
-                            register={register}
-                            error={errors.role}
-                        />
 
 
                         <Label htmlFor="experience" >Experience level *</Label>
@@ -307,34 +346,56 @@ function Form() {
                                     id="experience"
                                     
                                     styles={{
-                                        singleValue: base => ({ ...base, color: "", }),
+                                        singleValue: base => ({ ...base, color: "#ffffff" }),
                                         valueContainer: base => ({
                                             ...base,
                                             color: "var(--text)",
                                             width: "100%",
+                                            borderColor: "var(--primary)",
+                                            padding: "0 8px",
                                         }),
+                                        dropdownIndicator: (base) => ({
+                                            ...base,
+                                            // display: "none", // Hides the dropdown arrow
+                                            }),
+                                            indicatorSeparator: () => ({
+                                            display: "none", // Hides the separator line
+                                            }),
                                         control: (base, state) => ({
                                             ...base,
                                             color: "var(--text)",
                                             background: "var(--inputGray)",
-                                            borderRadius: "50px",
-                                            border:"0px",
-                                            outline: "none",
-                                            ":isFocused": {
-                                                borderBlockColor: "var(--accent)",
-                                                borderInlineColor: "var(--accent)"
+                                            borderRadius: "10px",
+                                            borderTop: "2px",
+                                            borderLeft: "2px",
+                                            borderRight: "2px",
+                                            borderBottom: "2px",
+                                            textDecorationColor: "var(--text)",
+                                            ":hover": {
+                                                borderRadius: "10px",
+                                                borderTop: "2px",
+                                                borderLeft: "2px",
+                                                borderRight: "2px",
+                                            },
+                                            ":active": {
+                                                borderRadius: "10px",
+                                                borderTop: "2px",
+                                                borderLeft: "2px",
+                                                borderRight: "2px",
+                                            },
+                                            ":focus": {
+                                                borderRadius: "10px",
+                                                borderTop: "2px",
+                                                borderLeft: "2px",
+                                                borderRight: "2px",
                                             }
                                         }),
                                         option: (styles, { data, isDisabled, isFocused, isSelected }) => ({
                                             ...styles,
-                                            backgroundColor:"var(--inputGray)",
-                                            color:"var(--text)",
+                                            backgroundColor: "var(--background)",
+                                            color: "var(--text)",
                                             ":active": {
                                                 ...styles[":active"],
-                                                backgroundColor: "var(--secondary)"
-                                            },
-                                            ":hover": {
-                                                ...styles[":hover"],
                                                 backgroundColor: "var(--secondary)"
                                             }
                                         }),
@@ -361,18 +422,17 @@ function Form() {
                                             }
                                         })
                                     }}
-                                    theme={theme => ({
+                                    theme={(theme) => ({
                                         ...theme,
                                         colors: {
                                             ...theme.colors,
-                                            neutral30: "", // control/borderColor(focused)
-                                            neutral50: "var(--accent)", // placeholder color
-                                            neutral80: "var(--text)", // input color
-                                            primary25: "", // option bg color focused
-                                            primary: "", // option bg color selected
-                                            primary50: "" // option bg color active (enabled or available)
-                                        }
-                                    })}
+                                            primary25: "var(--hover-background)",
+                                            primary: "var(--primary)",
+                                            neutral30: "var(--border)",
+                                          neutral50: "var(--accent)", // placeholder color
+                                          neutral80: "var(--text)", // input text color
+                                        },
+                                        })}
                                 />
                             )}
                             rules={{ required: true }}
@@ -389,7 +449,7 @@ function Form() {
                         </h1>
 
                         <FormField
-                            type="textArea"
+                            type="textarea"
                             placeholder="Mention any additional details you feel is important..."
                             label="Enter any additional details"
                             name="description"
