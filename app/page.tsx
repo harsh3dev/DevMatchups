@@ -4,6 +4,7 @@ import Hero from "./Hero/Hero";
 import Logos from "./Hero/Logos";
 import GlobeComponent from "./Hero/GlobeComponent";
 import Faqs from "@/app/Hero/Faqs";
+import ProcessFlow from "./Hero/ProcessFlow";
 
 
 export default function Home() {
@@ -14,7 +15,9 @@ export default function Home() {
 			<Logos/>
 			<div className="background-shape"></div>
 			<GlobeComponent/>
-			<div className="h-40 w-full" ></div>
+			<div className="w-full md:w-[80%] grid place-items-center " >
+				<ProcessFlow/>
+			</div>
 			<Faqs/>
 			<Footer/>
 		</main>

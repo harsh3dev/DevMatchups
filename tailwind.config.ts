@@ -81,6 +81,16 @@ const config = {
 					from: { opacity: "0" },
 					to: { opacity: "1" },
 				},
+        spotlight: {
+          "0%": {
+            opacity: "0",
+            transform: "translate(50%, -50%) scale(0.8)",
+          },
+          "100%": {
+            opacity: "1",
+            transform: "translate(0%, 0%) scale(1)",
+          },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -88,6 +98,7 @@ const config = {
         shimmer: "shimmer 8s infinite",
         grid: "grid 15s linear infinite",
         fade: 'fadeIn .5s ease-in-out',
+        spotlight: "spotlight 1.2s ease .75s 1 forwards",
       },
     },
   },

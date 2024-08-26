@@ -10,7 +10,7 @@ const World = dynamic(() => import("@/components/ui/globe").then((m) => m.World)
 export function GlobeDemo() {
     const globeConfig = {
         pointSize: 4,
-        globeColor: "#0a24c9",
+        globeColor: "#00094d",
         showAtmosphere: true,
         atmosphereColor: "#ffffff",
         atmosphereAltitude: 0.1,
@@ -395,8 +395,8 @@ export function GlobeDemo() {
   ];
 
   return (
-        <div className="flex flex-row items-center justify-center md:h-auto relative w-full aspect-square">
-            <div className="absolute w-full h-auto aspect-square z-10 m-0 -mt-10 ">
+        <div className="flex flex-row items-center justify-center md:h-auto relative w-[70%] aspect-square">
+            <div className="absolute w-full h-full aspect-square z-10 m-0 -mt-10 ">
                 <World data={sampleArcs} globeConfig={globeConfig} />
             </div>
         </div>

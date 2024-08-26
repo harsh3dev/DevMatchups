@@ -9,18 +9,19 @@ import Link from 'next/link'
 
 const Hero = () => {
 	return (
-		<div className='w-full pt-20 flex flex-col justify-normal items-center gap-4 bg-background '>
+		<div className='w-full h-[90vh] pt-20 flex flex-col justify-normal items-center gap-4 '>
 			<AnimatedShinyTextDemo/>
-			<div className=' relative w-full min-h-[75vh] flex flex-col px-2 sm:px-0 justify-normal items-center gap-4 overflow-hidden '>
-				<h1 className="bg-gradient-to-br dark:from-white from-[#6254f4] from-30% dark:to-white/40 to-[#056fcc]/40 bg-clip-text py-6  font-semibold leading-none tracking-tighter text-transparent text-balance text-4xl sm:text-5xl md:text-6xl lg:text-7xl translate-y-[-1rem] animate-fade [--animation-delay:500ms] text-center ">Build Your Dream <br className="hidden md:block"/>  <span className=' text-5xl sm:text-6xl md:text-7xl lg:text-8xl  '>Hackathon Team</span></h1>
+			{/* <div className='bg-[linear-gradient(15deg,_#7effd8,_#9affdf,_#b3ffe5,_#caffec,_#dffef3,_#f3fefa,_#fdfdfd,_#fdfdfd,_#fdfdfd,_#fdfdfd,_#fdfdfd,_#fdfdfd)]  dark:bg-[linear-gradient(15deg,_#03070c,_#03070c,_#03070c,_#03070c,_#03070c,_#03070c,_#020a12,_#030d1c,_#061025,_#0a122e,_#0f1336,_#18123d)] animate-fade pointer-events-none absolute w-full h-[75vh]  -mt-[30rem] '></div> */}
+			<div className=' relative w-full h-full flex flex-col px-2 sm:px-0 justify-normal items-center gap-4 overflow-hidden z-[1] '>
+				<h1 className="bg-gradient-to-br dark:from-white from-[#6254f4] from-30% dark:to-white/40 to-[#056fcc]/40 bg-clip-text py-6  font-semibold leading-none tracking-tighter text-transparent text-balance text-4xl sm:text-5xl md:text-6xl lg:text-7xl translate-y-[-1rem] animate-fade [--animation-delay:500ms] text-center ">Build Your Dream <br className="hidden md:block"/>  <span className=' text-5xl sm:text-6xl md:text-7xl lg:text-8xl z-[1]  '>Hackathon Team</span></h1>
 				
-				<p className="mb-12 text-lg tracking-tight text-gray-800 dark:text-gray-400 md:text-xl text-balance translate-y-[-1rem] animate-fade-in  
+				<p className="mb-12 text-lg tracking-tight text-gray-800 dark:text-gray-400 md:text-xl text-balance translate-y-[-1rem] animate-fade-in   z-[1]
 				[--animation-delay:400ms] text-center "> Connect with skilled developers around the world to build winning hackathon teams.
 				<br className="block"/> 
 				Leverage your skills, collaborate with experts, and turn your innovative ideas into reality.
 				</p>
 
-				<div className=' -mt-8 flex sm:flex-row flex-col justify-center items-center gap-5 '>
+				<div className=' -mt-8 flex sm:flex-row flex-col justify-center items-center gap-5 z-[1] '>
 					<Link href={'/signup'} target='_blank' >					
 						<Button className=" group dark:hover:shadow-[0_4px_14px_0_rgba(20,_243,_232,_0.2)] hover:shadow-[0_6px_20px_rgba(20,_79,_243,_0.5)] px-8 py-6 rounded-md text-white dark:text-slate-900 font-semibold text-lg transition duration-200 ease-linear bg-[rgb(20,175,255)] bg-gradient-to-br dark:from-[rgba(20,175,255,1)] dark:to-rgba(39,116,254,1) from-[rgba(0,198,255,1)] to-[rgba(0,91,255,1)] flex justify-center items-center gap-1 active:outline  active:outline-offset-2 active:outline-2 active:outline-white">
 							Get Started
@@ -35,6 +36,9 @@ const Hero = () => {
 					</Link>
 				</div>
 				<RetroGrid/>
+				<div className=" absolute inset-0 bottom-0 w-full h-full  bg-gradient-to-b from-transparent via-transparent   to-background  " >
+				</div>
+
 			</div>
 		</div>
 	)

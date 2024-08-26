@@ -1,12 +1,12 @@
 "use client"
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { ChevronDown } from 'lucide-react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence, useInView } from 'framer-motion'
 
 import { FaQ } from "react-icons/fa6";
 
 export default function Faqs() {
-    const [openIndex, setOpenIndex] = useState(null)
+    const [openIndex, setOpenIndex] = useState(null);
 
     const faqs = [
         {
@@ -30,10 +30,6 @@ export default function Faqs() {
         answer: "Explore the “Explore Hackathons” section, where you can find upcoming and active hackathons to participate in which are listed on various hackathon listing platforms."
         },
         {
-        question: "Is there a verification process for skills?",
-        answer: "While we don't require formal verification, you can showcase your experience through your profile, including past projects, certifications, and linked GitHub repositories."
-        },
-        {
         question: "What types of hackathons are featured?",
         answer: "We feature a wide range of hackathons, from beginner-friendly events to expert-level competitions, across various tech stacks and domains."
         }
@@ -44,9 +40,9 @@ export default function Faqs() {
     }
 
     return (
-        <div className=" w-full sm:w-[80%] flex items-center justify-center p-4 my-[10rem] ">
+        <div className=" w-full sm:w-[80%] flex items-center justify-center p-4 my-10 ">
         <div className="w-full  space-y-4">
-            <h2 className=" text-xl sm:text-2xl font-bold text-text text-center md:text-left mb-8 flex justify-start items-center gap-4 divide-x"><FaQ />Frequently Asked Questions</h2>
+            <h2 className=" text-xl sm:text-2xl font-bold text-text text-center md:text-left mb-8 flex justify-start items-center gap-4 divide-x"><FaQ />FAQs</h2>
             {faqs.map((faq, index) => (
             <FAQItem 
                 key={index} 
@@ -62,6 +58,7 @@ export default function Faqs() {
     }
 
     function FAQItem({ question, answer, isOpen, toggleFAQ }: { question: string, answer: string, isOpen: boolean, toggleFAQ: () => void }) {
+
     return (
         <div className="bg-transparent backdrop-blur-md rounded-lg overflow-hidden">
         <button
