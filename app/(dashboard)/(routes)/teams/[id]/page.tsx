@@ -32,8 +32,13 @@ export default function Page({ params }: { params: { id: string } }) {
    
     useEffect(()=>{
         getSPostData();
-    });
+    },[]);
+    
 
+    const applied = async () => {
+        const id = params.id;
+        const res = await axios.post('/api/apply', { id: id });
+    }
 
     const getSPostData = async ()  => {
         try {
@@ -98,7 +103,7 @@ export default function Page({ params }: { params: { id: string } }) {
                             </p>
 
                         </div>
-                        <Button className='bg-primary  font-medium dark:font-bold transition-colors ease-in-out w-full '>Apply as a teammate</Button>
+                        <Button onClick={applied} className='bg-primary  font-medium dark:font-bold transition-colors ease-in-out w-full '>Apply as a teammate</Button>
                     </div>
 
 
