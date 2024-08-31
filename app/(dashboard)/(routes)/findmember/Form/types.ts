@@ -34,7 +34,7 @@ export interface HackathonEntry {
   regDate: string;
   location: string;
   description?: string;
-  Employerid?: number;
+  userId?: number;
   createdAt: string;
   updatedAt: string;
 }
@@ -52,7 +52,7 @@ export type FormData = {
   regDate: Date | null;
   location: string;
   description?: string;
-  Employerid?: number
+  userId?: number
 };
 
 export type FormFieldProps = {

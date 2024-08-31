@@ -7,11 +7,16 @@ import { CardWrapper } from "./Card-wrapper";
 import { FormSuccess } from "./form-success";
 import { FormError } from "./form-error";
 import { newVerification } from "@/Actions/new-verification";
+import { useRouter } from "next/navigation";
+
+
 
 
 export function NewVerificationForm() {
   const [error, setError] = useState<string | undefined>();
   const [success, setSuccess] = useState<string | undefined>();
+
+  const router = useRouter();
 
   const searchParams = useSearchParams();
   const token = searchParams.get("token");
@@ -27,9 +32,12 @@ export function NewVerificationForm() {
     newVerification(token)
       .then((data) => {
         setSuccess(data.success);
-        setError(data.error);
+        console.log(success);
+        console.log("data", data);
+        if(!data.success) setError(data.error);
+        console.log("error", error);
       })
-      .catch(() => {
+      .catch((e) => {
         setError("Something went wrong!");
       });
   }, [token, success, error]);
@@ -38,16 +46,26 @@ export function NewVerificationForm() {
     onsubmit();
   }, [onsubmit]);
 
+  useEffect(()=>{
+    if(success){
+      setTimeout(() => {
+        router.push("/login");
+      }, 2000);
+    }
+  }, [success]);
+
   return (
     <CardWrapper
-      headerLabel="Confirming your verification"
+      headerLabel="Verifying your email..."
       backButtonHref="/login"
       backButtonLabel="Back to login"
     >
       <div className="flex w-full items-center justify-center">
         {!success && !error && <BeatLoader />}
-        <FormSuccess message={success} />
-        {!success && <FormError message={error} />}
+        { success &&
+          <FormSuccess message={success} />
+        }
+        {error && !success && <FormError message={error} />}
       </div>
     </CardWrapper>
   );

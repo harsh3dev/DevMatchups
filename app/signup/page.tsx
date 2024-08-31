@@ -1,10 +1,13 @@
-"use client"
 import React from 'react'
 import Navbar from '../Navbar/Navbar'
 import SignupForm from './SignupForm'
-import Lottie from "lottie-react";
 import Footer from '../Footer/Footer'
-import SIgnupAnimation from "@/app/assets/Signup.json"
+import type { Metadata } from 'next'
+ 
+export const metadata: Metadata = {
+  title: 'Signup',
+}
+
 
 const page = () => {
     return (
