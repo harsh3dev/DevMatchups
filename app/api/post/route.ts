@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { hackathonSchema } from './Types';
 import { prisma } from '../../../lib/prisma';
 
+
 export async function POST(req: Request) {
   try {
     const body = await req.json();
@@ -28,7 +29,7 @@ export async function POST(req: Request) {
       regDate,
       location,
       description,
-      userId,
+      Employerid,
     } = validationResult.data;
 
     const hackathon = await prisma.hackathon.create({
@@ -44,7 +45,7 @@ export async function POST(req: Request) {
         regDate: new Date(regDate),
         location,
         description,
-        user: userId,
+        user: {connect: { id: Employerid.toString() }},
       },
     });
 

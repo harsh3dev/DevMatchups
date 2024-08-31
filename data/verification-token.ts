@@ -8,7 +8,8 @@ export const getVerificationTokenByToken = async (token: string) => {
     });
 
     return verificationToken;
-  } catch {
+  } catch(e) {
+    console.log(e, "path: data/verification-token.ts");
     return null;
   }
 };
@@ -20,7 +21,8 @@ export const getVerificationTokenByEmail = async (email: string) => {
     });
 
     return verificationToken;
-  } catch {
+  } catch(e) {
+    console.log(e, "path: data/verification-token.ts");
     return null;
   }
 };

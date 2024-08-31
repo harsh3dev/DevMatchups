@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button"
 import Image from "next/image";
 import Mail from "@/app/assets/mail-svgrepo-com.svg";
 import { IoMdArrowForward } from "react-icons/io";
+import Link from "next/link";
 
 export default function VerifyUI() {
 
@@ -32,12 +33,14 @@ export default function VerifyUI() {
             </div>
             
             <div className="mt-6">
-            <Button
-                className="w-full flex items-center justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium   "
-            >
-                Continue to Login 
-                <IoMdArrowForward  className="ml-2 h-4 w-4" />
-            </Button>
+            <Link href={'/login'}>
+                <Button
+                    className="w-full flex items-center justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium   "
+                >
+                    Continue to Login
+                    <IoMdArrowForward  className="ml-2 h-4 w-4" />
+                </Button>
+            </Link>
             </div>
             
             <div className="mt-4 text-center">

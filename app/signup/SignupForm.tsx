@@ -24,6 +24,7 @@ import { setSignupData } from "@/lib/store/features/authSlice/authSlice"
 import { RegisterUser } from "@/Actions/register"
 import { signIn } from "next-auth/react"
 import { DEFAULT_LOGIN_REDIRECT } from "@/routes"
+import ButtonWithLoading from "@/components/ui/ButtonWithLoading"
 
 
 
@@ -197,7 +198,7 @@ export default function SignupForm() {
                                     </div>
                                 {errors.password && <span className="error-message text-right w-full text-sm mb-5 font-semibold text-red-500 ">*{errors.password.message}</span>}
                             </div>
-                            {
+                            {/* {
                                 loading ?
                                     <Button disabled className="w-full mt-4 bg-primary dark:bg-primary dark:hover:bg-accent hover:bg-accent ">
                                         <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
@@ -206,7 +207,13 @@ export default function SignupForm() {
                                     <Button type="submit" className="w-full mt-4 bg-primary dark:bg-primary dark:hover:bg-accent hover:bg-accent ">
                                         Sign Up
                                     </Button>
-                            }
+                            } */}
+
+                            <ButtonWithLoading loading={loading} type="submit" className="w-full mt-4 bg-primary text-black dark:bg-primary dark:hover:bg-accent hover:bg-accent " >
+                                Sign Up
+                            </ButtonWithLoading>
+
+
                         </form>}
                     </CardContent>
 

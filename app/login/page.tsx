@@ -1,10 +1,13 @@
-"use client"
 import React from 'react'
 import Navbar from '../Navbar/Navbar'
-import Lottie from "lottie-react";
 import Footer from '../Footer/Footer'
 import LoginForm from './LoginForm'
-import LoginAnimation from "@/app/assets/Login.json"
+import type { Metadata } from 'next'
+ 
+export const metadata: Metadata = {
+  title: 'Login',
+}
+
 
 const page = () => {
   return (
