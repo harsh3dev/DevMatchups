@@ -1,13 +1,17 @@
 import { NextResponse } from 'next/server';
 import { hackathonSchema } from './Types';
 import { prisma } from '../../../lib/prisma';
+import { auth } from '@/auth';
 
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    console.log("incoming",body);
+    const session = await auth();
+    console.log("incoming",body,session);
     const validationResult = hackathonSchema.safeParse(body);
-
+    if(!session?.user.id){
+       return NextResponse.json({ error: "Please login to post a hackathon" }, { status: 400 });
+    }
     if (!validationResult.success) {
       const errorMessages = validationResult.error.errors.map(err => ({
         field: err.path.join('.'),
@@ -44,7 +48,7 @@ export async function POST(req: Request) {
         regDate: new Date(regDate),
         location,
         description,
-        Employerid,
+        userId:session?.user?.id,
       },
     });
 
