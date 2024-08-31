@@ -60,6 +60,7 @@
     "react-select": "^5.8.0",
     "react-spinners": "^0.14.1",
     "redux": "^5.0.1",
+    "sharp": "^0.33.5",
     "tailwind-merge": "^2.5.2",
     "tailwindcss-animate": "^1.0.7",
     "three": "^0.167.1",
