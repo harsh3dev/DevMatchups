@@ -15,6 +15,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import axios from "axios";
 import { auth } from '@/auth';
 import Spinner from "@/app/assets/spinner.svg"
+import { getSession } from 'next-auth/react';
 
 
 interface Option {
