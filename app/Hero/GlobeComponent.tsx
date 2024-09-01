@@ -87,7 +87,7 @@ const GlobeComponent = () => {
             </div>
 
                 </div>
-                <div className=" grid place-items-center w-full h-full -mt-10 ">
+                <div className=" grid place-items-center w-full h-full md:-mt-10 ">
                     <GlobeDemo />
                 </div>
             </div>
