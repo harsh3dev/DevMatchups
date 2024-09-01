@@ -1,5 +1,6 @@
+"use client"
 import '@/app/globals.css'
-import { useForm, Controller } from "react-hook-form";
+import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormData, UserSchema } from "./types";
 import FormField from "./FormField";
