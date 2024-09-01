@@ -1,12 +1,10 @@
-"use client"
-import '@/app/globals.css'
 
+import '@/app/globals.css'
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormData, UserSchema } from "./types";
 import FormField from "./FormField";
 import { Button } from "@/components/ui/button"
-import { ReloadIcon } from "@radix-ui/react-icons"
 
 import { Label } from "@/components/ui/label"
 import Select from 'react-select';
@@ -15,7 +13,9 @@ import CreatableSelect from 'react-select/creatable';
 import ReactDatePicker from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker.css';
 import axios from "axios";
-import { getSession, useSession } from 'next-auth/react';
+import { auth } from '@/auth';
+import Spinner from "@/app/assets/spinner.svg"
+import { getSession } from 'next-auth/react';
 
 
 interface Option {
@@ -23,7 +23,7 @@ interface Option {
     label: string;
 }
 type SkillOptions = Option[];
-function Form() {
+const Form =  () => {
     const {
         register,
         handleSubmit,
@@ -42,8 +42,10 @@ function Form() {
 
     const onSubmit = async (data: FormData) => {
         console.log("Submitting data:", data);
+
         const session = await getSession();
         console.log("client session",session);
+
         try {
             data.userId = 1;
             // const response = await axios.post('/api/post', data);
@@ -461,7 +463,7 @@ function Form() {
 
                     {isSubmitting ?
                         <Button disabled className="mt-4 w-full bg-primary dark:bg-secondary  hover:ring-2 ring-offset-1 text-white dark:text-white  ">
-                            <ReloadIcon className="mr-2 h-4 w-4 animate-spin" /> Please wait
+                            <Spinner className="mr-2 h-4 w-4 animate-spin text-text " /> 
                         </Button> :
                         <Button type="submit" className="mt-4 w-full bg-primary dark:bg-secondary dark:hover:bg-slate-900/90 text-white dark:text-white " >
                             Submit

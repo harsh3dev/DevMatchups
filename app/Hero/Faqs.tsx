@@ -62,7 +62,7 @@ export default function Faqs() {
     return (
         <div className="bg-transparent backdrop-blur-md rounded-lg overflow-hidden">
         <button
-            className="w-full px-6 py-4 text-left flex justify-between items-center focus:outline-none border-b border-blue-700/50 dark:border-blue-500/50"
+            className="w-full px-6 py-4 text-left transition-all ease-linear flex justify-between items-center focus:outline-none border-b border-blue-700/50 dark:border-blue-500/50"
             onClick={toggleFAQ}
             aria-expanded={isOpen}
         >

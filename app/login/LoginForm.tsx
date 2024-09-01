@@ -19,6 +19,8 @@ import { LoginUser } from "@/Actions/login"
 import { LoginSchema } from "@/validation"
 import { DEFAULT_LOGIN_REDIRECT } from "@/routes"
 import { z } from "zod"
+import Spinner from "@/app/assets/spinner.svg"
+
 
 
 
@@ -38,7 +40,7 @@ export default function LoginForm() {
 		register,
 		handleSubmit,
 		reset,
-		formState: { errors }
+		formState: { errors, isSubmitting }
 	} = useForm<LoginSchemaType>({ resolver: zodResolver(LoginSchema) });
 
 	const handleShowPassword = () => {
@@ -117,9 +119,18 @@ export default function LoginForm() {
 							</div>
 							{errors.password && <span className="error-message text-right w-full text-sm mb-5 font-semibold text-red-500 ">*{errors.password.message}</span>}
 						</div>
-						<Button type="submit" className="w-full mt-4 bg-primary dark:bg-primary hover:bg-accent font-bold dark:hover:bg-accent ">
-							Log In
-						</Button>
+						{
+							isSubmitting ? (
+								<Button disabled className="mt-4 w-full bg-primary dark:bg-secondary  hover:ring-2 ring-offset-1 text-white dark:text-white  ">
+									<Spinner className="mr-2 h-4 w-4 animate-spin text-text " /> 
+								</Button>
+							) : (
+								<Button type="submit" className="w-full mt-4 bg-primary dark:bg-primary hover:bg-accent font-bold dark:hover:bg-accent ">
+									Log In
+								</Button>
+							)
+						}
+						
 						<div className="w-full text-right ">
 							
 							<Button className="mt-2 text-sm text-accent dark:text-accent " variant="link" size="sm"><Link href="/forgot-password">Forgot Password?</Link></Button>

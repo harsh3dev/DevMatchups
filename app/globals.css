@@ -38,6 +38,7 @@
     --clickWhite: #c6ebff;
     --bgActive: #ace2ff;
     --ellipse: #ffffff;
+    --bgShapeColor: #0600b0;
   }
 
   .dark {
@@ -70,6 +71,7 @@
     --inputGray: #111827;
     --bgActive: #002a4071;
     --ellipse: #000000;
+    --bgShapeColor: #5feaff;
   }
 }
 
@@ -119,7 +121,6 @@
   }
 
 *, body{
-  /* font-family: "Nunito Sans", sans-serif; */
   font-family: "Manrope", sans-serif;
 }
 
@@ -130,7 +131,9 @@ input{
 }
 
 .background-shape {
-  --color: var(--accent);
+  --color: var(--bgShapeColor);
+  /* --color: #5feaff;
+  --color: #0600b0; */
   width: 100%;
   pointer-events: none; 
   position: relative;
@@ -143,6 +146,9 @@ input{
   margin-top: -18.8rem;
 }
 
+/* 339dfa */
+/* 056fcc */
+
 .background-shape::before {
   content: '';
   position: absolute;
@@ -150,7 +156,7 @@ input{
   height: 100%;
   width: 100%;
   opacity: 0.4;
-  background-image: radial-gradient(circle at bottom center, var(--color), transparent 65%);
+  background-image: radial-gradient(circle at bottom center, var(--color), transparent 85%);
   background-color: var(--background);
 }
 

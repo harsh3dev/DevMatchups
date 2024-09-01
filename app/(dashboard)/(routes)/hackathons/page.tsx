@@ -31,7 +31,8 @@ const Page = () => {
       try {
         const res1 = await  axios.get("/api/unstopHackathon");
         const res2 = await axios.get("/api/devpostHackathon");
-        console.log(res2.data.hackathon.hackathons);
+        console.log("devpost", res2.data.hackathon.hackathons);
+        console.log("devpost URL", res2.data.hackathon.hackathons[0].thumbnail_url);
         setDevposts(res2?.data?.hackathon?.hackathons);
         console.log(res1?.data?.hackathon?.data?.data);
         setUnstopPost(res1?.data?.hackathon?.data?.data);
