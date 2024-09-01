@@ -49,7 +49,6 @@ export async function POST(req: Request) {
         regDate: new Date(regDate),
         location,
         description,
-        userId:session?.user?.id,
         user: {connect: { id: Employerid.toString() }}
       },
     });
