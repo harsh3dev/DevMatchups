@@ -31,7 +31,7 @@ export async function POST(req: Request) {
 
         console.log("password and user ",password,user.password);
 
-        if(await compare(password,user.password)){
+        if(await compare(password,user.password!)){
                const tokendata={
                    id:user.id,
                    email:user.email,

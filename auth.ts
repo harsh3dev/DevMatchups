@@ -33,7 +33,7 @@ export const {
             if (account?.provider !== "credentials") return true;
             const existingUser = await GetUserByEmail(user.email as string);
             // if credentials provider and email not verified 
-            if(!existingUser.emailVerified){
+            if(!existingUser?.emailVerified){
                 return false;
             }
             return true;
@@ -59,7 +59,7 @@ export const {
             if(!existinguser){
                  return token;
             }
-
+            // @ts-ignore
             token.role=existinguser.role as UserRole; 
             return token;
         }

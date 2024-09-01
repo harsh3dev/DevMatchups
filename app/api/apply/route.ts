@@ -15,13 +15,16 @@ export async function POST(req: Request) {
 
     const hackathon = await prisma.hackathon.findUnique({
       where: {
-        id: id.toString(),
+        id: id,
       },
     });
 
     if (!hackathon) {
       return NextResponse.json({ error: 'Hackathon not found' }, { status: 404 });
     }
+
+
+    
 
     return NextResponse.json({ hackathon: hackathon }, { status: 200 });
   } catch (error: any) {
