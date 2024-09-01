@@ -1,6 +1,5 @@
-"use client"
-import '@/app/globals.css'
 
+import '@/app/globals.css'
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormData, UserSchema } from "./types";
@@ -14,7 +13,7 @@ import CreatableSelect from 'react-select/creatable';
 import ReactDatePicker from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker.css';
 import axios from "axios";
-import { getSession, useSession } from 'next-auth/react';
+import { auth } from '@/auth';
 import Spinner from "@/app/assets/spinner.svg"
 
 
@@ -23,7 +22,7 @@ interface Option {
     label: string;
 }
 type SkillOptions = Option[];
-function Form() {
+const Form =  () => {
     const {
         register,
         handleSubmit,
@@ -42,8 +41,10 @@ function Form() {
 
     const onSubmit = async (data: FormData) => {
         console.log("Submitting data:", data);
+
         const session = await getSession();
         console.log("client session",session);
+
         try {
             data.userId = 1;
             // const response = await axios.post('/api/post', data);
