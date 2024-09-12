@@ -56,7 +56,7 @@ useEffect(() => {
     return val.toLowerCase().includes(search.toLowerCase())
   }
 
-  const filteredPosts = posts.filter((post) => {
+  const filteredPosts = posts?.filter((post) => {
     const matchesSearch = matchSearch(post.teamName) || matchSearch(post.hackathonName) || matchSearch(post.location) || matchSearch(post.experience) || matchSearch(post.hackathonMode) || matchSearch(post.role) || post.skills.some(s => matchSearch(s));
     const matchesMode = modeOptions.length ? modeOptions.some(m => post.hackathonMode.toLowerCase().includes(m.toLowerCase())) : true;
     const matchesRole = expOptions.length ? expOptions.some(e => post.experience.toLowerCase().includes(e.toLowerCase())) : true;
@@ -76,7 +76,7 @@ useEffect(() => {
         ))
       } */}
       {
-        filteredPosts.map((entry, index)=>(
+        filteredPosts?.map((entry, index)=>(
             <PostCard entry={entry} key={index} />
         ))
       }
