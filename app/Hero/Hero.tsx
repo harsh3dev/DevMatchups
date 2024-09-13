@@ -9,11 +9,8 @@ import Link from 'next/link'
 
 const Hero = () => {
 	return (
-		<div className='w-full h-[90vh] pt-20 flex flex-col justify-normal items-center gap-4 '
-		style={{ backgroundImage: 'url("./assets/Gradient.svg")', backgroundSize: 'cover', backgroundPosition: 'center', backgroundAttachment: 'fixed', transform: 'rotate(180deg)' }}
-		>
+		<div className='w-full h-[90vh] pt-20 relative flex flex-col justify-normal items-center gap-4 ' >
 			<AnimatedShinyTextDemo/>
-			{/* <div className='bg-[linear-gradient(15deg,_#7effd8,_#9affdf,_#b3ffe5,_#caffec,_#dffef3,_#f3fefa,_#fdfdfd,_#fdfdfd,_#fdfdfd,_#fdfdfd,_#fdfdfd,_#fdfdfd)]  dark:bg-[linear-gradient(15deg,_#03070c,_#03070c,_#03070c,_#03070c,_#03070c,_#03070c,_#020a12,_#030d1c,_#061025,_#0a122e,_#0f1336,_#18123d)] animate-fade pointer-events-none absolute w-full h-[75vh]  -mt-[30rem] '></div> */}
 			<div className=' relative w-full h-full flex flex-col px-2 sm:px-0 justify-normal items-center gap-4 overflow-hidden z-[1] '>
 				<h1 className="bg-gradient-to-br dark:from-white from-[#6254f4] from-30% dark:to-white/40 to-[#056fcc]/40 bg-clip-text py-6  font-semibold leading-none tracking-tighter text-transparent text-balance text-4xl sm:text-5xl md:text-6xl lg:text-7xl translate-y-[-1rem] animate-fade [--animation-delay:500ms] text-center ">Build Your Dream <br className="hidden md:block"/>  <span className=' text-5xl sm:text-6xl md:text-7xl lg:text-8xl z-[1]  '>Hackathon Team</span></h1>
 				
@@ -38,8 +35,8 @@ const Hero = () => {
 					</Link>
 				</div>
 				<RetroGrid/>
-				<div className=" absolute inset-0 bottom-0 w-full h-full  bg-gradient-to-b from-transparent via-transparent   to-background  " >
-				</div>
+				{/* <div className=" absolute inset-0 bottom-0 w-full h-full  bg-gradient-to-b from-transparent via-transparent   to-background  " >
+				</div> */}
 
 			</div>
 		</div>

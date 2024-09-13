@@ -1,4 +1,4 @@
-export const publicRoutes = ["/", "/new-verification",'/hackathons', '/teams'];
+export const publicRoutes = ["/", "/new-verification",'/hackathons', '/teams', '/findmember'];
 
 export const authRoutes = [
     "/login",

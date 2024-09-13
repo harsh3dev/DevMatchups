@@ -5,6 +5,7 @@ import { FiCode } from "react-icons/fi";
 import { IoTriangleSharp } from "react-icons/io5";
 import { IoFilter } from "react-icons/io5";
 import { GlobeDemo } from "./GlobeDemo";
+import { Search } from 'lucide-react';
 
 
 const GlobeComponent = () => {
@@ -28,7 +29,7 @@ const GlobeComponent = () => {
     };
 
     return (
-        <div className=" w-full min-h-[250px] grid place-items-center  -mt-48 ">
+        <div className=" w-full min-h-[250px] grid place-items-center mb-10 -mt-48 ">
             <div className=" sm:max-w-[80%] h-full grid grid-cols-1 lg:grid-cols-2 gap-6 p-4  ">
                 <div ref={ref} className="flex flex-col lg:text-left text-center justify-normal lg:items-start items-center gap-5 ">
                     <motion.h1
@@ -83,11 +84,21 @@ const GlobeComponent = () => {
                             <IoFilter className=" text-[rgb(0,0,255)] dark:text-[rgb(0,255,255)] " />
                             Filter by role, experience, and tech stack.
                         </motion.span>
+                        <motion.span
+                        initial="hidden"
+                        animate={isInView ? "visible" : "hidden"}
+                        variants={spanVariants}
+                        transition={{ duration: 1, delay: 6 }} 
+                        style={{ marginBottom: "10px" }} 
+                        className=" py-2 px-4 text-text border border-accent rounded-full  flex justify-center items-center gap-2 divide-x  ">
+                            <Search className=" text-[rgb(0,0,255)] dark:text-[rgb(0,255,255)] w-4 h-4 " />
+                            Explore worldwide hackathons.
+                        </motion.span>
                     </div>
             </div>
 
                 </div>
-                <div className=" grid place-items-center w-full h-full md:-mt-10 ">
+                <div className=" relative grid place-items-center w-full h-full  ">
                     <GlobeDemo />
                 </div>
             </div>

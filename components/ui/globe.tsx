@@ -14,7 +14,7 @@ declare module "@react-three/fiber" {
 extend({ ThreeGlobe });
 
 const RING_PROPAGATION_SPEED = 3;
-const aspect = 1.2;
+const aspect = 1.0;
 const cameraZ = 300;
 
 type Position = {

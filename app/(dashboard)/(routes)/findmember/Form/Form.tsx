@@ -1,29 +1,32 @@
 "use client"
+
+// Global styles and static assets import
 import '@/app/globals.css'
+import Spinner from "@/app/assets/spinner.svg"
+
+// React and zod imports
 import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from "@hookform/resolvers/zod";
+
+// Types and constants
 import { FormData, UserSchema } from "./types";
+import  {hackathonModes, options, ExperienceOptions} from "./constants";
+
+// FormField and UI component
 import FormField from "./FormField";
 import { Button } from "@/components/ui/button"
-
 import { Label } from "@/components/ui/label"
-import Select from 'react-select';
 
+// Select and DatePicker components
+import Select from 'react-select';
 import CreatableSelect from 'react-select/creatable';
 import ReactDatePicker from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker.css';
-import axios from "axios";
 
-import Spinner from "@/app/assets/spinner.svg"
+import axios from "axios";
 import { useSession } from 'next-auth/react';
 
-
-interface Option {
-    value: string;
-    label: string;
-}
-type SkillOptions = Option[];
-const Form =  () => {
+const Form = () => {
     const {
         register,
         handleSubmit,
@@ -39,7 +42,9 @@ const Form =  () => {
             experience: "",
         },
     });
+
     const session =  useSession();
+    
     console.log("client session",session);
 
     const onSubmit = async (data: FormData) => {
@@ -61,9 +66,6 @@ const Form =  () => {
         reset();
     };
 
-    const hackathonModes = ["Online", "Offline", "Hybrid"]
-    const options: SkillOptions = [{ value: 'Javascript', label: 'Javascript' }, { value: 'Python', label: 'Python' }, { value: 'React JS', label: 'React JS' }, { value: 'Next JS', label: 'Next JS' }, { value: 'MongoDB', label: 'MongoDB' }, { value: 'SQL', label: 'SQL' }]
-    const ExperienceOptions = [{ value: 'Beginner (0-1 years)', label: 'Beginner (0-1 years)' }, { value: 'Intermediate (1-2 years)', label: 'Intermediate (1-2 years)' }, { value: 'Expert (2+ years)', label: 'Expert (2+ years)' }]
     const hackathonDetails = [
         {
             type: "text",
