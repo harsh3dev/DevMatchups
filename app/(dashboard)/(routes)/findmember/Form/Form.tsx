@@ -1,6 +1,6 @@
-
+"use client"
 import '@/app/globals.css'
-import { useForm, Controller } from "react-hook-form";
+import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormData, UserSchema } from "./types";
 import FormField from "./FormField";
@@ -13,7 +13,7 @@ import CreatableSelect from 'react-select/creatable';
 import ReactDatePicker from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker.css';
 import axios from "axios";
-import { auth } from '@/auth';
+
 import Spinner from "@/app/assets/spinner.svg"
 import { useSession } from 'next-auth/react';
 

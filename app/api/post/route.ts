@@ -1,7 +1,7 @@
-import { NextResponse } from 'next/server';
 import { hackathonSchema } from './Types';
 import { prisma } from '../../../lib/prisma';
 import { auth } from '@/auth';
+import { NextResponse } from 'next/server';
 
 
 export async function POST(req: Request) {
@@ -49,7 +49,7 @@ export async function POST(req: Request) {
         regDate: new Date(regDate),
         location,
         description,
-        userId:session?.user?.id,
+        userId:session?.user?.id
       },
     });
 
