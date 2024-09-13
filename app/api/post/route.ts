@@ -50,7 +50,6 @@ export async function POST(req: Request) {
         location,
         description,
         userId:session?.user?.id,
-        user: {connect: { id: Employerid.toString() }}
       },
     });
 

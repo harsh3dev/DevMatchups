@@ -15,7 +15,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import axios from "axios";
 import { auth } from '@/auth';
 import Spinner from "@/app/assets/spinner.svg"
-import { getSession } from 'next-auth/react';
+import { useSession } from 'next-auth/react';
 
 
 interface Option {
@@ -39,18 +39,17 @@ const Form =  () => {
             experience: "",
         },
     });
+    const session =  useSession();
+    console.log("client session",session);
 
     const onSubmit = async (data: FormData) => {
         console.log("Submitting data:", data);
 
-        const session = await getSession();
-        console.log("client session",session);
-
         try {
-            data.userId = 1;
-            // const response = await axios.post('/api/post', data);
-            // console.log('SUCCESS', response.data);
-            console.log('SUCCESS', data);
+            data.userId = Number(session.data?.user.id);
+            const response = await axios.post('/api/post', data);
+            console.log('SUCCESS', response.data);
+            // console.log('SUCCESS', data);
             
         } catch (error: any) {
             if (axios.isAxiosError(error)) {

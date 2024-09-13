@@ -9,7 +9,9 @@ import Link from 'next/link'
 
 const Hero = () => {
 	return (
-		<div className='w-full h-[90vh] pt-20 flex flex-col justify-normal items-center gap-4 '>
+		<div className='w-full h-[90vh] pt-20 flex flex-col justify-normal items-center gap-4 '
+		style={{ backgroundImage: 'url("./assets/Gradient.svg")', backgroundSize: 'cover', backgroundPosition: 'center', backgroundAttachment: 'fixed', transform: 'rotate(180deg)' }}
+		>
 			<AnimatedShinyTextDemo/>
 			{/* <div className='bg-[linear-gradient(15deg,_#7effd8,_#9affdf,_#b3ffe5,_#caffec,_#dffef3,_#f3fefa,_#fdfdfd,_#fdfdfd,_#fdfdfd,_#fdfdfd,_#fdfdfd,_#fdfdfd)]  dark:bg-[linear-gradient(15deg,_#03070c,_#03070c,_#03070c,_#03070c,_#03070c,_#03070c,_#020a12,_#030d1c,_#061025,_#0a122e,_#0f1336,_#18123d)] animate-fade pointer-events-none absolute w-full h-[75vh]  -mt-[30rem] '></div> */}
 			<div className=' relative w-full h-full flex flex-col px-2 sm:px-0 justify-normal items-center gap-4 overflow-hidden z-[1] '>
