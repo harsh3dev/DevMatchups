@@ -2,6 +2,7 @@ import React from 'react'
 import Form from './Form/Form'
 
 
+
 const page = () => {
 	return (
 		<main className='min-h-screen text-text dark:text-text relative flex flex-col items-center justify-between w-full '>

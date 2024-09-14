@@ -7,8 +7,6 @@ import { UserRole } from "@prisma/client";
 import { User } from "./lib/types/User";
 
 
-
-
 export const {
     handlers: { GET, POST },
     auth,
@@ -45,7 +43,7 @@ export const {
                 session.user.id = token.sub;
             }
             if(token.role && session.user){
-                 session.user.role = token.role as UserRole;
+                    session.user.role = token.role as UserRole;
             }
             return session;
         },      
