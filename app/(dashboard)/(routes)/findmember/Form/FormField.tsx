@@ -1,8 +1,9 @@
 import { FormFieldProps } from "./types";
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { Textarea } from "@/components/ui/textarea";
 
-const FormField: React.FC<FormFieldProps> = ({
+export const FormField: React.FC<FormFieldProps> = ({
     type,
     placeholder,
     name,
@@ -14,10 +15,11 @@ const FormField: React.FC<FormFieldProps> = ({
 }) => {
 
     return (
-        <div className="w-full h-[5rem] ">
+        <div className="w-full h-[5rem] mb-4 ">
             <div className="w-full h-[50%] flex flex-col gap-2 ">
                 <Label htmlFor={label}>{label}</Label>
-                <Input className="dark:bg-gray-900 bg-gray-200 border-accent focus:border focus:border-b-2 rounded-full" type={type} id={label} placeholder={placeholder} {...register(name, { valueAsNumber })} />
+                { type==='textarea' ? (<Textarea className={`dark:bg-gray-900 bg-gray-200 border-accent focus:border focus:border-b-2 ${type !== 'textarea' ? 'rounded-full' : 'rounded-md'}`} id={label} placeholder={placeholder} {...register(name, { valueAsNumber })} />) :
+                (<Input className={`dark:bg-gray-900 bg-gray-200 border-accent focus:border focus:border-b-2 ${type !== 'textarea' ? 'rounded-full' : 'rounded-md'}`} type={type} id={label} placeholder={placeholder} {...register(name, { valueAsNumber })} />)}
                 {error && <span className="error-message text-right flex justify-end items-center w-full text-sm mb-5 text-red-500 ">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4 -mt-px">
                         <path fill-rule="evenodd"
@@ -38,4 +40,3 @@ const FormField: React.FC<FormFieldProps> = ({
         </div>
     )
 };
-export default FormField;

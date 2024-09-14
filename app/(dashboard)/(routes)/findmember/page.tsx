@@ -1,9 +1,7 @@
 import React from 'react'
 import Form from './Form/Form'
 
-
-
-const page = () => {
+const Page = () => {
 	return (
 		<main className='min-h-screen text-text dark:text-text relative flex flex-col items-center justify-between w-full '>
 			<div className="absolute dark:hidden inset-0 h-full w-full z-0 bg-backgrou bg-[linear-gradient(to_right,#f0f0f0_1px,transparent_1px),linear-gradient(to_bottom,#f0f0f0_1px,transparent_1px)] bg-[size:6rem_4rem]"></div>
@@ -13,4 +11,4 @@ const page = () => {
 	)
 }
 
-export default page
+export default Page

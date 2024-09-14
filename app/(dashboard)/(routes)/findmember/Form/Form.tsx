@@ -13,8 +13,8 @@ import { FormData, UserSchema } from "./types";
 import  {hackathonModes, options, ExperienceOptions} from "./constants";
 
 // FormField and UI component
-import FormField from "./FormField";
-import { Button } from "@/components/ui/button"
+import { FormField } from './FormField';
+// import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
 
 // Select and DatePicker components
@@ -26,7 +26,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import axios from "axios";
 import { useSession } from 'next-auth/react';
 
-const Form = () => {
+export default function Form (){
     const {
         register,
         handleSubmit,
@@ -51,10 +51,10 @@ const Form = () => {
         console.log("Submitting data:", data);
 
         try {
-            data.userId = Number(session.data?.user.id);
+            data.userId = Number(session.data?.user.id) || 1;
             const response = await axios.post('/api/post', data);
             console.log('SUCCESS', response.data);
-            // console.log('SUCCESS', data);
+            console.log('SUCCESS', data);
             
         } catch (error: any) {
             if (axios.isAxiosError(error)) {
@@ -463,12 +463,12 @@ const Form = () => {
                     </div>
 
                     {isSubmitting ?
-                        <Button disabled className="mt-4 w-full bg-primary dark:bg-secondary  hover:ring-2 ring-offset-1 text-white dark:text-white  ">
+                        <button disabled className="mt-4 w-full bg-primary dark:bg-secondary  hover:ring-2 ring-offset-1 text-white dark:text-white  ">
                             <Spinner className="mr-2 h-4 w-4 animate-spin text-text " /> 
-                        </Button> :
-                        <Button type="submit" className="mt-4 w-full bg-primary dark:bg-secondary dark:hover:bg-slate-900/90 text-white dark:text-white " >
+                        </button> :
+                        <button type="submit" className="mt-4 w-full bg-primary dark:bg-secondary dark:hover:bg-slate-900/90 text-white dark:text-white " >
                             Submit
-                        </Button>}
+                        </button>}
                 </div>
         </form>
     );
@@ -476,4 +476,3 @@ const Form = () => {
 
 
 
-export default Form;
