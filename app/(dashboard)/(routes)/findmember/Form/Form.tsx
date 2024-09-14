@@ -16,9 +16,6 @@ import 'react-datepicker/dist/react-datepicker.css';
 import axios from "axios";
 import { getSession } from 'next-auth/react';
 import Spinner from '@/app/assets/Spinner';
-
-
-import axios from "axios";
 import { useSession } from 'next-auth/react';
 
 const Form = () => {
