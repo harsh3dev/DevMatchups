@@ -16,7 +16,6 @@ import 'react-datepicker/dist/react-datepicker.css';
 import axios from "axios";
 import { getSession } from 'next-auth/react';
 import Spinner from '@/app/assets/Spinner';
-import { useSession } from 'next-auth/react';
 
 const Form = () => {
     const {
@@ -35,13 +34,13 @@ const Form = () => {
         },
     });
 
-    const session =  useSession();
-    
-    console.log("client session",session);
+
+  
 
     const onSubmit = async (data: FormData) => {
         console.log("Submitting data:", data);
-
+        const session = await getSession();
+        console.log("client session",session);
         try {
 
              data.userId = session?.user.id;
