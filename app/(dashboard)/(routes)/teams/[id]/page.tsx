@@ -59,12 +59,12 @@ export default function Page({ params }: { params: { id: string } }) {
     return (
     <>
       <main className="flex min-h-screen flex-col items-center justify-between bg-background ">
-            <div className='--outerbox rounded-md border border-gray-700 w-full dark:border-gray-400 max-w-[80%] text-text dark:text-text my-14 p-10 bg-gradient-to-tr from-violet-300 via-violet-200 to-slate-100 dark:from-violet-600 dark:via-indigo-900 dark:to-slate-900 '>
+            <div className='--outerbox rounded-md border border-gray-700 w-full dark:border-gray-400 max-w-[90%] text-text dark:text-text my-14 p-10 bg-gradient-to-tr from-violet-300 via-violet-200 to-slate-100 dark:from-violet-600 dark:via-indigo-900 dark:to-slate-900 '>
                 <h1 className=' font-extrabold text-3xl mb-2 '>
                     {post?.hackathonName} - {post?.teamName}
                 </h1>
 
-                <hr className=' border-t border-text  ' />
+                <hr className=' border-t border-text' />
 
                 <div className='w-full grid grid-cols-4 mx-auto my-2'>
                     <div className='h-full  col-span-3 mr-2 '>

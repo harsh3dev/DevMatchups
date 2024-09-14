@@ -7,7 +7,7 @@ import { toast } from "@/components/ui/use-toast"
 import { Separator } from "@/components/ui/separator"
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa6";
-import Spinner from "@/app/assets/spinner.svg"
+
 
 import { IoMailOutline } from "react-icons/io5";
 import { IoIosArrowBack } from "react-icons/io";
@@ -26,6 +26,7 @@ import { RegisterUser } from "@/Actions/register"
 import { signIn } from "next-auth/react"
 import { DEFAULT_LOGIN_REDIRECT } from "@/routes"
 import ButtonWithLoading from "@/components/ui/ButtonWithLoading"
+import Spinner from "../assets/Spinner"
 
 
 

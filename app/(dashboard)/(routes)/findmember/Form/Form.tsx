@@ -2,26 +2,21 @@
 
 // Global styles and static assets import
 import '@/app/globals.css'
-import Spinner from "@/app/assets/spinner.svg"
-
-// React and zod imports
 import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from "@hookform/resolvers/zod";
-
-// Types and constants
 import { FormData, UserSchema } from "./types";
 import  {hackathonModes, options, ExperienceOptions} from "./constants";
-
-// FormField and UI component
 import FormField from "./FormField";
 import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
-
-// Select and DatePicker components
 import Select from 'react-select';
 import CreatableSelect from 'react-select/creatable';
 import ReactDatePicker from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker.css';
+import axios from "axios";
+import { getSession } from 'next-auth/react';
+import Spinner from '@/app/assets/Spinner';
+
 
 import axios from "axios";
 import { useSession } from 'next-auth/react';
@@ -51,10 +46,10 @@ const Form = () => {
         console.log("Submitting data:", data);
 
         try {
-            data.userId = Number(session.data?.user.id);
-            const response = await axios.post('/api/post', data);
-            console.log('SUCCESS', response.data);
-            // console.log('SUCCESS', data);
+
+             data.userId = session?.user.id;
+             const response = await axios.post('/api/post', data);
+             console.log('SUCCESS', response.data);
             
         } catch (error: any) {
             if (axios.isAxiosError(error)) {
