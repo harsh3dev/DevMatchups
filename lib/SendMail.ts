@@ -2,7 +2,7 @@ import { mailSender } from "./mailSender";
 
 export async function sendVerificationEmail(email:string, token:string) {
 
-	const confirmLink = `http://localhost:3000/new-verification?token=${token}`;
+	const confirmLink = `https://dev-matchups.vercel.app/new-verification?token=${token}`;
 
 	try {
 		const mailResponse = await mailSender(

@@ -14,8 +14,9 @@ import ReactDatePicker from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker.css';
 import axios from "axios";
 
-import Spinner from "@/app/assets/spinner.svg"
+
 import { getSession } from 'next-auth/react';
+import Spinner from '@/app/assets/Spinner';
 
 
 interface Option {
@@ -47,10 +48,9 @@ const Form =  () => {
         console.log("client session",session);
 
         try {
-            data.userId = 1;
-            // const response = await axios.post('/api/post', data);
-            // console.log('SUCCESS', response.data);
-            console.log('SUCCESS', data);
+             data.userId = session?.user.id;
+             const response = await axios.post('/api/post', data);
+             console.log('SUCCESS', response.data);
             
         } catch (error: any) {
             if (axios.isAxiosError(error)) {
