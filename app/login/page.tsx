@@ -1,8 +1,9 @@
 import React from 'react'
 import Navbar from '../Navbar/Navbar'
 import Footer from '../Footer/Footer'
-import LoginForm from './LoginForm'
+
 import type { Metadata } from 'next'
+import LoginForm from './LoginForm'
  
 export const metadata: Metadata = {
   title: 'Login',

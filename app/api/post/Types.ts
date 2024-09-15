@@ -16,7 +16,7 @@ export const hackathonSchema = z.object({
   }),
   location: z.string().min(1, { message: "Location is required" }),
   description: z.string().min(1, { message: "Description is required" }),
-  Employerid: z.number().int().positive({ message: "Employer ID must be a positive integer" }),
+  userId: z.string().min(1,{ message: "Employer ID must be a positive integer" }),
   createdAt: z.date().optional(), 
   updatedAt: z.date().optional()  
 });

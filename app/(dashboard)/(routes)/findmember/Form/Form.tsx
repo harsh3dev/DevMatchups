@@ -2,13 +2,8 @@
 
 // Global styles and static assets import
 import '@/app/globals.css'
-import Spinner from "@/app/assets/spinner.svg"
-
-// React and zod imports
 import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from "@hookform/resolvers/zod";
-
-// Types and constants
 import { FormData, UserSchema } from "./types";
 import  {hackathonModes, options, ExperienceOptions} from "./constants";
 
@@ -16,13 +11,10 @@ import  {hackathonModes, options, ExperienceOptions} from "./constants";
 import { FormField } from './FormField';
 // import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
-
-// Select and DatePicker components
 import Select from 'react-select';
 import CreatableSelect from 'react-select/creatable';
 import ReactDatePicker from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker.css';
-
 import axios from "axios";
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
@@ -45,13 +37,13 @@ export default function Form (){
         },
     });
 
-    const session =  useSession();
-    
-    console.log("client session",session);
+
+  
 
     const onSubmit = async (data: FormData) => {
         console.log("Submitting data:", data);
-
+        const session = await getSession();
+        console.log("client session",session);
         try {
             data.userId = Number(session.data?.user.id) || 1;
             const response = await axios.post('/api/post', data);

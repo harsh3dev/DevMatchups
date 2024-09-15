@@ -1,4 +1,5 @@
 "use server"
+
 import { signIn } from "@/auth";
 import { GetUserByEmail } from "@/data/user";
 import { sendVerificationEmail } from "@/lib/SendMail";
@@ -20,7 +21,6 @@ export async function LoginUser(values: z.infer<typeof LoginSchema>) {
     const existingUser = await GetUserByEmail(email);
 
     if (!existingUser || !existingUser.email || !existingUser.password) {
-      // Either user/email does not exist or user signed in with OAuth
       return { error: "Email does not exist! / Please sign in with OAuth!" };
     }
 

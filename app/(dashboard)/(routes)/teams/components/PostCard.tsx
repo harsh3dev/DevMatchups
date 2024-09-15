@@ -93,7 +93,7 @@ const PostCard: React.FC<PostCardProps> = ({ entry, className }) => {
         </span>
 
         <Button className=' bg-primary dark:bg-primary hover:bg-secondary dark:hover:bg-secondary text-white dark:text-gray-950 dark:hover:text-white font-medium dark:font-bold transition-colors ease-in-out ' >
-          <Link href={`/findteam/${entry.id}`} >
+          <Link href={`/teams/${entry.id}`} >
             Apply Now
           </Link>
         </Button>
