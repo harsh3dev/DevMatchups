@@ -16,7 +16,7 @@ import CreatableSelect from 'react-select/creatable';
 import ReactDatePicker from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker.css';
 import axios from "axios";
-import { useSession } from 'next-auth/react';
+import { getSession, useSession } from 'next-auth/react';
 import Image from 'next/image';
 import { FormButton } from '@/components/ui/FormButton';
 
@@ -45,7 +45,7 @@ export default function Form (){
         const session = await getSession();
         console.log("client session",session);
         try {
-            data.userId = Number(session.data?.user.id) || 1;
+            data.userId = session?.user.id;
             const response = await axios.post('/api/post', data);
             console.log('SUCCESS', response.data);
             console.log('SUCCESS', data);
