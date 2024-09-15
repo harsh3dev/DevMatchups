@@ -25,6 +25,8 @@ import 'react-datepicker/dist/react-datepicker.css';
 
 import axios from "axios";
 import { useSession } from 'next-auth/react';
+import Image from 'next/image';
+import { FormButton } from '@/components/ui/FormButton';
 
 export default function Form (){
     const {
@@ -463,12 +465,10 @@ export default function Form (){
                     </div>
 
                     {isSubmitting ?
-                        <button disabled className="mt-4 w-full bg-primary dark:bg-secondary  hover:ring-2 ring-offset-1 text-white dark:text-white  ">
-                            <Spinner className="mr-2 h-4 w-4 animate-spin text-text " /> 
-                        </button> :
-                        <button type="submit" className="mt-4 w-full bg-primary dark:bg-secondary dark:hover:bg-slate-900/90 text-white dark:text-white " >
-                            Submit
-                        </button>}
+                        <FormButton label="Submit" isLoader={true} />
+                        :
+                        <FormButton label="Submit"  />
+                    }
                 </div>
         </form>
     );

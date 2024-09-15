@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { Toaster } from "@/components/ui/toaster";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import { ThemeProvider } from "@/components/theme-provider";
 import StoreProvider from "./StoreProvider";
 import { NextAuthProvider } from "./provider";
@@ -59,7 +61,8 @@ export default function RootLayout({
               {children}
             </StoreProvider>
           </NextAuthProvider>
-          <Toaster />
+          <ToastContainer />
+
         </ThemeProvider>
       </body>
     </html>
