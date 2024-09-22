@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import { Analytics } from "@vercel/analytics/react"
 import { ThemeProvider } from "@/components/theme-provider";
 import StoreProvider from "./StoreProvider";
 import { NextAuthProvider } from "./provider";
@@ -59,6 +59,7 @@ export default function RootLayout({
           <NextAuthProvider>
             <StoreProvider>
               {children}
+              <Analytics />
             </StoreProvider>
           </NextAuthProvider>
           <ToastContainer />
