@@ -9,19 +9,19 @@ const World = dynamic(() => import("@/components/ui/globe").then((m) => m.World)
 
 export function GlobeDemo() {
 	const globeConfig = {
-		pointSize: 4,
+		pointSize: 5,
 		globeColor: "#0243ab", 
 		showAtmosphere: true,
 		atmosphereColor: "#1a73e8",
 		atmosphereAltitude: 0.1,
 		emissive: "#05699c",
 		emissiveIntensity: 0.3, 
-		shininess: 0.3,
+		shininess: 0.5,
 		polygonColor: "rgba(255,255,255,0.2)", 
 		ambientLight: "#1a66cc", 
 		directionalLeftLight: "#6699ff", 
 		directionalTopLight: "#6699cc", 
-		pointLight: "#01172e", 
+		pointLight: "#ffffff", 
 		arcTime: 1000,
 		arcLength: 0.9,
 		rings: 1,
@@ -397,7 +397,7 @@ export function GlobeDemo() {
 	];
 
 	return (
-		<div className="absolute w-full aspect-square z-10  ">
+		<div className="absolute w-full  aspect-square z-10  ">
 			<World data={sampleArcs} globeConfig={globeConfig} />
 		</div>
 		);

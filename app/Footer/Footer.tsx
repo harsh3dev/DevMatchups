@@ -4,13 +4,11 @@ import Link from "next/link"
 import Image from "next/image"
 
 import { FaGithub } from "react-icons/fa";
-import { SiGithubsponsors } from "react-icons/si";
 import { MdArrowOutward } from "react-icons/md";
 import { FaXTwitter } from "react-icons/fa6";
 import { FaProductHunt } from "react-icons/fa";
 
 import Logo from '@/app/assets/Devmatchups.svg'
-import PoweredByVercel from "./PoweredByVercel";
 
 export default function Footer() {
     return (
@@ -25,9 +23,9 @@ export default function Footer() {
                     </Link>
                     <p className="  text-wrap text-base font-medium py-2 ">Team up for success in every hackathon <br/> Build your dream hackathon team with DevMatchups!</p>
                 </div>
-                <div className="flex sm:flex-wrap lg:flex-nowrap w-full md:w-fit px-5 sm:p-0 sm:justify-around lg:justify-between gap-5 sm:gap-20  lg:h-full " >
+                <div className="flex sm:flex-wrap lg:flex-nowrap w-full md:w-fit md:px-5 sm:p-0 sm:justify-around lg:justify-between gap-5 sm:gap-20  lg:h-full " >
 
-                    <div className=" flex flex-col justify-between lg:h-full gap-4  ">
+                    <div className=" flex flex-col justify-start items-start lg:h-full gap-4  ">
                         <h3 className=" text-base md:text-lg font-semibold ml-1 ">Contribute</h3>
                         <ul className=" flex flex-col lg:justify-between items-start gap-2 text-gray-200 text-xs md:text-base ">
                             <li>
@@ -64,12 +62,19 @@ export default function Footer() {
                                     <MdArrowOutward className="opacity-0 group-hover:opacity-100 transition-opacity duration-75 ease-linear " />
                                 </Link>
                             </li>
+                            <li>
+                                <Link className="flex justify-center items-center p-1 gap-2 hover:underline underline-offset-4 rounded-md transition-all duration-150 ease-linear  group  " href="https://forms.gle/BsppX1H3HGbA6ioaA" target="_blank">
+                                    {/* <MdEmail /> */}
+                                    Report a bug!
+                                    <MdArrowOutward className="opacity-0 group-hover:opacity-100 transition-opacity duration-75 ease-linear " />
+                                </Link>
+                            </li>
                         </ul>
                     </div>
 
                 </div>
             </div>
-            {/* <div className=" w-full h-[1px] bg-gray-500 "></div> */}
+
             <div className=" max-h-7 min-h-4 py-12 md:py-8 w-full sm:w-[80%] flex md:flex-row flex-col md:justify-between items-center justify-center  gap-4 text-text font-semibold  text-base   ">
                 <h1 className=" text-gray-700/90 dark:text-[#888] " >
                     Created by {" "}
@@ -84,8 +89,8 @@ export default function Footer() {
                     </Link>
                 </h1>
                 <span className=" flex justify-center items-center gap-5   text-xl group ">
-                    <Link target="_blank" href="" className=" opacity-60 hover:opacity-100 " ><FaProductHunt /></Link>
-                    <Link target="_blank" href="" className=" opacity-60 hover:opacity-100 " ><FaXTwitter /></Link>
+                    <Link target="_blank" href="https://www.producthunt.com/posts/devmatchups" className=" opacity-60 hover:opacity-100 " ><FaProductHunt /></Link>
+                    <Link target="_blank" href="https://twitter.com/devmatchups" className=" opacity-60 hover:opacity-100 " ><FaXTwitter /></Link>
                     <Link target="_blank" href="https://github.com/harsh3dev/DevMatchups" className=" opacity-60 hover:opacity-100 " ><FaGithub /></Link>
                 </span>
             </div>

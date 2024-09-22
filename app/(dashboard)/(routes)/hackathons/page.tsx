@@ -35,9 +35,15 @@ const Page = () => {
     const fetchData = async () => {
       setLoading(true);
       try {
-        const res1 = await  axios.get("/api/unstopHackathon");
-        const res2 = await axios.get("/api/devpostHackathon");
-        const res3 = await axios.get("/api/devfolioHackathon");
+
+        const [res1, res2, res3] = await Promise.all([
+          axios.get("/api/unstopHackathon"),
+          axios.get("/api/devpostHackathon"),
+          axios.get("/api/devfolioHackathon")
+        ]);
+        // const res1 = await  axios.get("/api/unstopHackathon");
+        // const res2 = await axios.get("/api/devpostHackathon");
+        // const res3 = await axios.get("/api/devfolioHackathon");
         // console.log("devpost", res2.data.hackathon.hackathons);
         console.log("devfolio", res3.data.hackathon.hits.hits);
         console.log("devfolio logo", res3.data.hackathon.hits.hits[0]._source.hackathon_setting.logo);
@@ -64,8 +70,8 @@ const Page = () => {
     <div className='min-h-screen w-full text-black dark:bg-background bg-background dark:text-white mb-20 '>
       <div className='w-full mt-16 flex flex-col justify-start items-start gap-5'>
 
-        <div className=" md:ml-10 sm:max-md:w-full ">
-          <div className="flex justify-center items-center md:items-start space-x-4 w-full ">
+        <div className=" md:ml-10 w-full flex justify-center items-center md:justify-start ">
+          <div className="flex justify-center items-center md:items-start space-x-4 mx-auto w-full ">
             {platforms.map((platform) => (
               <motion.button
                 key={platform.name}

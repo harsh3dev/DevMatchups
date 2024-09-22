@@ -6,9 +6,9 @@ import { z } from 'zod';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import CreatableSelect from 'react-select/creatable';
-import Select from 'react-select';
 import { useRouter } from 'next/navigation';
+import ErrorMessage from '@/app/(dashboard)/(routes)/findmember/Form/ErrorMessage';
+import MultiSelect from '@/app/(dashboard)/(routes)/findmember/Form/MultiSelect';
 
 // Define the schema using Zod
 const schema = z.object({
@@ -69,11 +69,7 @@ const FormComponent: React.FC = () => {
                             {...register("githubID", { required: true })}
                         />
                     </div>
-                    {errors.githubID && <span className="error-message text-right flex justify-end items-center w-full text-sm mb-5 text-red-500 "><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4 -mt-px">
-                        <path fillRule="evenodd"
-                            d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm8.706-1.442c1.146-.573 2.437.463 2.126 1.706l-.709 2.836.042-.02a.75.75 0 01.67 1.34l-.04.022c-1.147.573-2.438-.463-2.127-1.706l.71-2.836-.042.02a.75.75 0 11-.671-1.34l.041-.022zM12 9a.75.75 0 100-1.5.75.75 0 000 1.5z"
-                            clipRule="evenodd"></path>
-                    </svg>{errors.githubID.message}</span>}
+                    {errors.githubID &&  <ErrorMessage message={errors.githubID.message} /> }
 
                 </div>
                 <div className="flex flex-col gap-6 text-lg ">
@@ -93,11 +89,7 @@ const FormComponent: React.FC = () => {
                                 {...register("linkedinID", { required: true })}
                             />
                         </div>
-                        {errors.linkedinID && <span className="error-message text-right flex justify-end items-center w-full text-sm mb-5 text-red-500 "><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4 -mt-px">
-                            <path fillRule="evenodd"
-                                d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm8.706-1.442c1.146-.573 2.437.463 2.126 1.706l-.709 2.836.042-.02a.75.75 0 01.67 1.34l-.04.022c-1.147.573-2.438-.463-2.127-1.706l.71-2.836-.042.02a.75.75 0 11-.671-1.34l.041-.022zM12 9a.75.75 0 100-1.5.75.75 0 000 1.5z"
-                                clipRule="evenodd"></path>
-                        </svg>{errors.linkedinID.message}</span>}
+                        {errors.linkedinID &&  <ErrorMessage message={errors.linkedinID.message} /> }
                     </div>
                 </div>
             </div>
@@ -120,186 +112,34 @@ const FormComponent: React.FC = () => {
                                 {...register("role", { required: true })}
                             />
                         </div>
-                        {errors.role && <span className="error-message text-right flex justify-end items-center w-full text-sm mb-5 text-red-500 "><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4 -mt-px">
-                            <path fillRule="evenodd"
-                                d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm8.706-1.442c1.146-.573 2.437.463 2.126 1.706l-.709 2.836.042-.02a.75.75 0 01.67 1.34l-.04.022c-1.147.573-2.438-.463-2.127-1.706l.71-2.836-.042.02a.75.75 0 11-.671-1.34l.041-.022zM12 9a.75.75 0 100-1.5.75.75 0 000 1.5z"
-                                clipRule="evenodd"></path>
-                        </svg>{errors.role.message}</span>}
+                        {errors.role &&  <ErrorMessage message={errors.role.message} /> }
 
                 </div>
             </div>
 
             <div className="flex flex-col w-full gap-2 text-sm ">
-            <Label htmlFor="experience" >Experience level *</Label>
-                        <Controller
-                            name="experience"
-                            control={control}
-                            render={({ field }) => (
-                                <Select
-                                    options={ExperienceOptions}
-                                    value={ExperienceOptions.find((c) => c.value === field.value)}
-                                    onChange={(val) => field.onChange(val?.value)}
-                                    placeholder="Enter minimum experience level"
-                                    id="experience"
-                                    
-                                    styles={{
-                                        singleValue: base => ({ ...base, color: "", }),
-                                        valueContainer: base => ({
-                                            ...base,
-                                            color: "var(--text)",
-                                            width: "100%",
-                                        }),
-                                        control: (base, state) => ({
-                                            ...base,
-                                            color: "var(--text)",
-                                            background: "var(--inputGray)",
-                                            borderRadius: "50px",
-                                            border:"0px",
-                                            outline: "none",
-                                            ":isFocused": {
-                                                borderBlockColor: "var(--accent)",
-                                                borderInlineColor: "var(--accent)"
-                                            }
-                                        }),
-                                        option: (styles, { data, isDisabled, isFocused, isSelected }) => ({
-                                            ...styles,
-                                            backgroundColor:"var(--inputGray)",
-                                            color:"var(--text)",
-                                            ":active": {
-                                                ...styles[":active"],
-                                                backgroundColor: "var(--secondary)"
-                                            },
-                                            ":hover": {
-                                                ...styles[":hover"],
-                                                backgroundColor: "var(--secondary)"
-                                            }
-                                        }),
-                                        multiValue: (styles, { data }) => ({
-                                            ...styles,
-                                            backgroundColor: "var(--secondary)",
-                                            borderRadius: "20px", // the bg color behind icon
-                                            padding: "5px"
-                                        }),
-                                        multiValueLabel: styles => ({
-                                            ...styles,
-                                            color: "var(--text)", // label text color
-                                            background: "var(--secondary)", // label bg behind selected
-                                            borderEndStartRadius: "20px",
-                                            borderTopLeftRadius: "20px",
-                                        }),
-                                        multiValueRemove: styles => ({
-                                            ...styles,
-                                            color: "var(--text)",
-                                            ":hover": {
-                                                backgroundColor: "var(--secondary)", // on hover x bg color
-                                                color: "var(--text)", // on hover x icon color
-                                                borderRadius: "20px",
-                                            }
-                                        })
-                                    }}
-                                    theme={theme => ({
-                                        ...theme,
-                                        colors: {
-                                            ...theme.colors,
-                                            neutral30: "", // control/borderColor(focused)
-                                            neutral50: "var(--accent)", // placeholder color
-                                            neutral80: "var(--text)", // input color
-                                            primary25: "", // option bg color focused
-                                            primary: "", // option bg color selected
-                                            primary50: "" // option bg color active (enabled or available)
-                                        }
-                                    })}
-                                />
-                            )}
-                            rules={{ required: true }}
-                        />
+                <MultiSelect
+                    control={control}
+                    options={ExperienceOptions}
+                    errors={errors.experience}
+                    name='experience'
+                    placeholder='Enter minimum experience level'
+                    label='Experience level *'
+                    isMulti={false}
+                />
+
             </div>
 
             <div className="flex flex-col w-full gap-2 text-sm ">
-                <Label htmlFor="skills" >Add some skills *</Label>
-                    <Controller
-                        name="skills"
-                        control={control}
-                        render={({ field }) => (
-                            <CreatableSelect
-                                isMulti
-                                options={skillOptions}
-                                value={field.value?.map(skill => ({ value: skill, label: skill })) || []}
-                                onChange={val => field.onChange(val.map(v => v.value))}
-                                placeholder="Search for a skill..."
-                                id="skills"
-                                
-                                styles={{
-                                    singleValue: base => ({ ...base, color: "#154b79", }),
-                                    valueContainer: base => ({
-                                        ...base,
-                                        color: "var(--secondary)",
-                                        width: "100%",
-                                    }),
-                                    control: (base, state) => ({
-                                        ...base,
-                                        color: "var(--text)",
-                                        background: "var(--inputGray)",
-                                        borderRadius: "50px",
-                                        border:"0px",
-                                        outline: "none",
-                                        ":isFocused": {
-                                            borderBlockColor: "var(--accent)",
-                                            borderInlineColor: "var(--accent)"
-                                        }
-                                    }),
-                                    option: (styles, { data, isDisabled, isFocused, isSelected }) => ({
-                                        ...styles,
-                                        backgroundColor:"var(--inputGray)",
-                                        color:"var(--text)",
-                                        ":active": {
-                                            ...styles[":active"],
-                                            backgroundColor: "var(--secondary)"
-                                        },
-                                        ":hover": {
-                                            ...styles[":hover"],
-                                            backgroundColor: "var(--secondary)"
-                                        }
-                                    }),
-                                    multiValue: (styles, { data }) => ({
-                                        ...styles,
-                                        backgroundColor: "var(--secondary)",
-                                        borderRadius: "20px", // the bg color behind icon
-                                        padding: "5px"
-                                    }),
-                                    multiValueLabel: styles => ({
-                                        ...styles,
-                                        color: "var(--text)", // label text color
-                                        background: "var(--secondary)", // label bg behind selected
-                                        borderEndStartRadius: "20px",
-                                        borderTopLeftRadius: "20px",
-                                    }),
-                                    multiValueRemove: styles => ({
-                                        ...styles,
-                                        color: "var(--text)",
-                                        ":hover": {
-                                            backgroundColor: "var(--secondary)", // on hover x bg color
-                                            color: "var(--text)", // on hover x icon color
-                                            borderRadius: "20px",
-                                        }
-                                    })
-                                }}
-                                theme={theme => ({
-                                    ...theme,
-                                    colors: {
-                                        ...theme.colors,
-                                        neutral30: "", // control/borderColor(focused)
-                                        neutral50: "var(--accent)", // placeholder color
-                                        neutral80: "var(--text)", // input color
-                                        primary25: "", // option bg color focused
-                                        primary: "", // option bg color selected
-                                        primary50: "" // option bg color active (enabled or available)
-                                    }
-                                })}
-                            />
-                        )}
-                        rules={{ required: true }}
-                    />
+                <MultiSelect
+                    control={control}
+                    options={skillOptions}
+                    errors={errors.skills}
+                    name='skills'
+                    placeholder='Search for a skill...'
+                    label='Add some skills *'
+                    isMulti={true}
+                />
             </div>
 
             <div className=' w-full flex justify-between items-center gap-4'>
@@ -309,48 +149,7 @@ const FormComponent: React.FC = () => {
                 <div className='w-full mt-3 '>
                 <Button type='submit' className="relative w-full inline-flex items-center justify-start py-3 pl-4 pr-12 overflow-hidden font-semibold shadow text-indigo-600 transition-all duration-150 ease-in-out rounded hover:pl-10 hover:pr-6 bg-gray-50 dark:bg-gray-700 dark:text-white dark:hover:text-gray-200 dark:shadow-none group"
                 >
-                    <span
-                        className="absolute bottom-0 left-0 w-full h-1 transition-all duration-150 ease-in-out bg-indigo-600 group-hover:h-full"
-                    ></span>
-                    <span
-                        className="absolute right-0 pr-4 duration-200 ease-out group-hover:translate-x-12"
-                    >
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                            fill="none"
-                            className="w-5 h-5 text-green-400"
-                        >
-                            <path
-                                d="M14 5l7 7m0 0l-7 7m7-7H3"
-                                stroke-width="2"
-                                stroke-linejoin="round"
-                                stroke-linecap="round"
-                            ></path>
-                        </svg>
-                    </span>
-                    <span
-                        className="absolute left-0 pl-2.5 -translate-x-12 group-hover:translate-x-0 ease-out duration-200"
-                    >
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                            fill="none"
-                            className="w-5 h-5 text-green-400"
-                        >
-                            <path
-                                d="M14 5l7 7m0 0l-7 7m7-7H3"
-                                stroke-width="2"
-                                stroke-linejoin="round"
-                                stroke-linecap="round"
-                            ></path>
-                        </svg>
-                    </span>
-                    <span
-                        className="relative w-full text-left transition-colors duration-200 ease-in-out group-hover:text-white dark:group-hover:text-gray-200"
-                    >Lets Go</span>
+                    <SpecialButton text="Let's Go" />
                 </Button>
                 </div>
             </div>
@@ -360,3 +159,50 @@ const FormComponent: React.FC = () => {
 };
 
 export default FormComponent;
+
+
+const SpecialButton = ({text}:{text:string}) => {
+    return (<>
+        <span
+            className="absolute bottom-0 left-0 w-full h-1 transition-all duration-150 ease-in-out bg-indigo-600 group-hover:h-full"
+        ></span>
+        <span
+            className="absolute right-0 pr-4 duration-200 ease-out group-hover:translate-x-12" >
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                fill="none"
+                className="w-5 h-5 text-green-400"
+            >
+                <path
+                    d="M14 5l7 7m0 0l-7 7m7-7H3"
+                    stroke-width="2"
+                    stroke-linejoin="round"
+                    stroke-linecap="round"
+                ></path>
+            </svg>
+        </span>
+        <span
+            className="absolute left-0 pl-2.5 -translate-x-12 group-hover:translate-x-0 ease-out duration-200" >
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                fill="none"
+                className="w-5 h-5 text-green-400"
+            >
+                <path
+                    d="M14 5l7 7m0 0l-7 7m7-7H3"
+                    stroke-width="2"
+                    stroke-linejoin="round"
+                    stroke-linecap="round"
+                ></path>
+            </svg>
+        </span>
+        <span
+            className="relative w-full text-left transition-colors duration-200 ease-in-out group-hover:text-white dark:group-hover:text-gray-200" >
+                {text}
+        </span>
+    </>)
+}

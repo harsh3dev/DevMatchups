@@ -13,7 +13,7 @@ interface PostsProps{
 }
 
 const Posts:React.FC<PostsProps> = ({title, url, logo, platform}) => {
-    const URL = (platform==='unstop' && `https://unstop.com/${url}`) || (platform==='devpost' && `https://${url}`) || (platform==='devfolio' && `https://${url}`) || '';
+    const URL = (platform==='unstop' && `https://unstop.com/${url}`) || (platform==='devpost' && `${url}`) || (platform==='devfolio' && `https://${url}`) || '';
     const Logo = (platform==='unstop' || platform==='devpost') ? (logo.startsWith('http') ? logo : 'https:' + logo) : logo;    
 
   return (
