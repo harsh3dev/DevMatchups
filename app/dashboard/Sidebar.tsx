@@ -42,7 +42,8 @@ const Sidebar = () => {
   };
   return (
     <div className='min-w-[350px] bg-[#ebf8fb] dark:bg-[#03070C] border border-gray-700/80 dark:border-gray-500/80  flex flex-col justify-center items-center '>
-        <Link href={`/`} className='text-3xl font-bold my-4 mt-8 mx-4 '>
+      <h1 className=' w-full p-2 bg-yellow-300 text-black  '>This page is still in development!</h1>
+        <Link href={`/`} className='text-3xl font-bold my-4 mx-4 '>
           DevMatchups
         </Link>
         <div className='w-full mx-4 my-2 flex justify-center items-center border border-l-0 dark:border-gray-100/30 border-gray-500 border-r-0 py-4 ' > <BreadcrumbComp /> </div>
