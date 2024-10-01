@@ -206,14 +206,19 @@ const Navbar = () => {
                                 <Separator className=' bg-text dark:bg-text mb-6 '  />
                         <div className=' w-full flex flex-col gap-2 items-center justify-center'>
                             <div className=' w-full flex items-center justify-center gap-2 '>
-                                <Button variant="outline" className=' flex justify-center items-center gap-2 w-full ' >
-                                    <IoLogoGithub />
-                                    Github
-                                </Button>
-                                <Button variant="outline" className=' flex justify-center items-center gap-2 w-full ' >
-                                    <MdEmail />
-                                    Support
-                                </Button>
+                                <Link href="https://github.com/harsh3dev/devmatchups">
+                                    <Button variant="outline" className=' flex justify-center items-center gap-2 w-full ' >
+                                        <IoLogoGithub />
+                                        Github
+                                    </Button>
+                                </Link>
+                                
+                                <Link href="mailto:devmatchups@gmail.com">
+                                    <Button variant="outline" className=' flex justify-center items-center gap-2 w-full ' >
+                                        <MdEmail />
+                                        Support
+                                    </Button>
+                                </Link>
                             </div>
 
                             { status==='authenticated' && session && 
