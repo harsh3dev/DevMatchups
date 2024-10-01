@@ -59,8 +59,6 @@ LinkedIn: [Yash Gupta](https://www.linkedin.com/in/yash-gupta-64956b246/), [Hars
 2. **Install dependencies**:
     ```bash
     npm install
-    # or
-    yarn install
     ```
 
 
@@ -71,7 +69,7 @@ First, run the development server:
 ```bash
 npm run dev
 # or
-yarn dev
+pnpm run dev
 # or
 pnpm dev
 # or
