@@ -89,9 +89,21 @@ export default function Footer() {
                     </Link>
                 </h1>
                 <span className=" flex justify-center items-center gap-5   text-xl group ">
-                    <Link target="_blank" href="/" className=" opacity-60 hover:opacity-100 " ><FaProductHunt /></Link>
-                    <Link target="_blank" href="/" className=" opacity-60 hover:opacity-100 " ><FaXTwitter /></Link>
-                    <Link target="_blank" href="/" className=" opacity-60 hover:opacity-100 " ><FaGithub /></Link>
+                    <Link href="https://www.producthunt.com/posts/devmatchups" passHref legacyBehavior>
+                        <a target="_blank" className="opacity-60 hover:opacity-100">
+                            <FaProductHunt />
+                        </a>
+                    </Link>
+                    <Link href="https://twitter.com/devmatchups" passHref legacyBehavior>
+                        <a target="_blank" className="opacity-60 hover:opacity-100">
+                            <FaXTwitter />
+                        </a>
+                    </Link>
+                    <Link href="https://github.com/harsh3dev/devmatchups" passHref legacyBehavior>
+                        <a target="_blank" className="opacity-60 hover:opacity-100">
+                            <FaGithub />
+                        </a>
+                    </Link>
                 </span>
             </div>
         </footer>
