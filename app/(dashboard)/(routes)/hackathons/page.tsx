@@ -70,7 +70,7 @@ const Page = () => {
     <div className='min-h-screen w-full text-black dark:bg-background bg-background dark:text-white mb-20 '>
       <div className='w-full mt-16 flex flex-col justify-start items-start gap-5'>
 
-        <div className=" md:ml-10 w-full flex justify-center items-center md:justify-start ">
+        <div className=" w-full flex justify-center items-center md:justify-start ">
           <div className="flex justify-center items-center md:items-start space-x-4 mx-auto w-full ">
             {platforms.map((platform) => (
               <motion.button
