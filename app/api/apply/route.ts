@@ -1,33 +1,73 @@
 import { NextResponse } from 'next/server';
 import { prisma } from '../../../lib/prisma';
+import aws from 'aws-sdk';
+
+const s3 = new aws.S3({
+  region: 'ap-south-1',
+  accessKeyId: process.env.ACCESS_KEY,
+  secretAccessKey: process.env.SECRET_ACCESS_KEY,
+});
 
 export async function POST(req: Request) {
+  const form = await req.formData();
+  const resume = form.get('resume') as File | null;
+  const linkedinUrl = form.get('linkedinUrl') as string | null;
+  const githubUrl = form.get('githubUrl') as string | null;
+  const resumeUrl = form.get('resumeUrl') as string | null;
+  const candidateId = form.get('candidateId') as string;
+  const postId = form.get('postId') as string;
+
+  let uploadResult: aws.S3.ManagedUpload.SendData | null = null;
+
   try {
-    
-    const idparam = await req.json();
-    console.log("idparam ",idparam);
-    const  id = idparam.id;
-    console.log("id ",id);
 
-   
-
-    console.log("incoming", id);
-
-    const hackathon = await prisma.hackathon.findUnique({
+    const existingApplication = await prisma.application.findUnique({
       where: {
-        id: id,
+        candidateId_postId: {
+          candidateId,
+          postId,
+        },
       },
     });
 
-    if (!hackathon) {
-      return NextResponse.json({ error: 'Hackathon not found' }, { status: 404 });
+    if (existingApplication) {
+      return NextResponse.json({ error: 'You have already applied for this position.' }, { status: 400 });
     }
 
+    if (resume) {
+      const arrayBuffer = await resume.arrayBuffer();
+      const buffer = Buffer.from(arrayBuffer); 
+      const uploadParams = {
+        Bucket: process.env.BUCKET_NAME as string,
+        Key: `resumes/${Date.now()}-${resume.name}`,
+        Body: buffer,
+        ContentType: resume.type,
+      };
 
-    
+      uploadResult = await s3.upload(uploadParams).promise();
+    }
 
-    return NextResponse.json({ hackathon: hackathon }, { status: 200 });
-  } catch (error: any) {
+    await prisma.user.update({
+      where: { id: candidateId },
+      data: {
+        linkedinUrl: linkedinUrl || null,
+        githubUrl: githubUrl || null,
+        resumeUrl: resumeUrl || (uploadResult ? uploadResult.Location : null),
+      },
+    });
+
+    const application = await prisma.application.create({
+      data: {
+        candidateId,
+        postId,
+        linkedinUrl: linkedinUrl || null,
+        githubUrl: githubUrl || null,
+        resumeUrl: uploadResult ? uploadResult.Location : resumeUrl || null,
+      },
+    });
+
+    return NextResponse.json({ application }, { status: 200 });
+  } catch (error) {
     console.error(error);
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
