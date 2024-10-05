@@ -93,10 +93,28 @@ export default function Page({ params }: { params: { id: string } }) {
 
         {
             loading ? (
-                <div className='--outerbox rounded-md border border-gray-700 w-full dark:border-gray-400 max-w-[90%] text-text dark:text-text my-14 p-10 bg-gradient-to-tr from-violet-300 via-violet-200 to-slate-100 dark:from-violet-600 dark:via-indigo-900 dark:to-slate-900 min-h-[25rem] min-w-[20rem] '>
-                    <div className='w-full h-full flex flex-col justify-center items-center mt-20 '>
-                        Loading Hackathon Data
-                        <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-primary"></div>
+                <div className="--outerbox my-14 w-full max-w-md mx-auto">
+                    <div className="bg-gradient-to-br from-indigo-900 to-purple-900 rounded-lg shadow-lg p-6 animate-pulse">
+                        <div className="flex justify-between items-center mb-4">
+                            <div className="h-6 bg-gray-300 rounded w-1/3"></div>
+                            <div className="flex space-x-2">
+                                <div className="w-8 h-6 bg-gray-300 rounded"></div>
+                                <div className="w-8 h-6 bg-gray-300 rounded"></div>
+                                <div className="w-24 h-6 bg-gray-300 rounded"></div>
+                            </div>
+                        </div>
+
+                        <div className="space-y-6 mb-4">
+                            <div className="h-6 bg-gray-300 rounded w-1/2"></div>
+                            <div className="h-6 bg-gray-300 rounded w-2/3"></div>
+                            <div className="h-6 bg-gray-300 rounded w-1/3"></div>
+                        </div>
+
+                        <div className="h-6 bg-gray-300 rounded w-1/4 mb-12"></div>
+
+                        <div className="h-48 bg-gray-300 rounded mb-6"></div>
+
+                        <div className="h-12 bg-white rounded"></div>
                     </div>
                 </div>
             )
