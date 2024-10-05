@@ -11,7 +11,7 @@ import ProductHunt from './ProductHunt';
 
 const Hero = () => {
 	return (
-		<div className='w-full h-[90vh] pt-20 relative flex flex-col justify-normal items-center gap-4 ' >
+		<div className='w-full min-h-[90vh] pt-20 relative flex flex-col justify-normal items-center gap-4 ' >
 			<AnimatedShinyTextDemo/>
 			<div className=' relative w-full h-full flex flex-col px-2 sm:px-0 justify-normal items-center gap-4 overflow-hidden z-[1] '>
 				<h1 className="bg-gradient-to-br dark:from-white from-[#6254f4] from-30% dark:to-white/40 to-[#056fcc]/40 bg-clip-text py-6  font-semibold leading-none tracking-tighter text-transparent text-balance text-4xl sm:text-5xl md:text-6xl lg:text-7xl translate-y-[-1rem] animate-fade [--animation-delay:500ms] text-center ">Build Your Dream <br className="hidden md:block"/>  <span className=' text-5xl sm:text-6xl md:text-7xl lg:text-8xl z-[1]  '>Hackathon Team</span></h1>
