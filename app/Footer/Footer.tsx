@@ -21,7 +21,7 @@ export default function Footer() {
                         </div>
                         <span className=" text-xl lg:text-3xl font-bold">Dev Matchups</span>
                     </Link>
-                    <p className="  text-wrap text-base font-medium py-2 ">Team up for success in every hackathon <br/> Build your dream hackathon team with DevMatchups!</p>
+                    <p className="  text-wrap text-base font-medium py-2 ">Team up for success in every hackathon <br /> Build your dream hackathon team with DevMatchups!</p>
                 </div>
                 <div className="flex sm:flex-wrap lg:flex-nowrap w-full md:w-fit md:px-5 sm:p-0 sm:justify-around lg:justify-between gap-5 sm:gap-20  lg:h-full " >
 
@@ -89,9 +89,9 @@ export default function Footer() {
                     </Link>
                 </h1>
                 <span className=" flex justify-center items-center gap-5   text-xl group ">
-                    <Link target="_blank" href="/" className=" opacity-60 hover:opacity-100 " ><FaProductHunt /></Link>
-                    <Link target="_blank" href="/" className=" opacity-60 hover:opacity-100 " ><FaXTwitter /></Link>
-                    <Link target="_blank" href="/" className=" opacity-60 hover:opacity-100 " ><FaGithub /></Link>
+                    <Link target="_blank" href="https://www.producthunt.com/posts/devmatchups" className=" opacity-60 hover:opacity-100 " ><FaProductHunt /></Link>
+                    <Link target="_blank" href="https://twitter.com/devmatchups" className=" opacity-60 hover:opacity-100 " ><FaXTwitter /></Link>
+                    <Link target="_blank" href="https://github.com/harsh3dev/devmatchups" className=" opacity-60 hover:opacity-100 " ><FaGithub /></Link>
                 </span>
             </div>
         </footer>
