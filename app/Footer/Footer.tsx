@@ -89,9 +89,9 @@ export default function Footer() {
                     </Link>
                 </h1>
                 <span className=" flex justify-center items-center gap-5   text-xl group ">
-                    <Link target="_blank" href="https://github.com/harsh3dev/devmatchups" className=" opacity-60 hover:opacity-100 " ><FaProductHunt /></Link>
+                    <Link target="_blank" href="https://www.producthunt.com/posts/devmatchups" className=" opacity-60 hover:opacity-100 " ><FaProductHunt /></Link>
                     <Link target="_blank" href="https://twitter.com/devmatchups" className=" opacity-60 hover:opacity-100 " ><FaXTwitter /></Link>
-                    <Link target="_blank" href="" className=" opacity-60 hover:opacity-100 " ><FaGithub /></Link>
+                    <Link target="_blank" href="https://github.com/harsh3dev/devmatchups" className=" opacity-60 hover:opacity-100 " ><FaGithub /></Link>
                 </span>
             </div>
         </footer>
