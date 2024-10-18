@@ -4,7 +4,9 @@ import { motion, AnimatePresence, useInView } from 'framer-motion'
 import { FiCode } from "react-icons/fi";
 import { IoTriangleSharp } from "react-icons/io5";
 import { IoFilter } from "react-icons/io5";
-import { GlobeDemo } from "./GlobeDemo";
+import Image from 'next/image';
+import globeimg from '@/app/assets/globe-img.gif';
+
 import { Search } from 'lucide-react';
 
 
@@ -99,7 +101,7 @@ const GlobeComponent = () => {
 
                 </div>
                 <div className=" relative grid place-items-center w-full min-h-[24rem] sm:max-md:mt-14 xl:m-0 sm:min-h-[28rem] lg:h-fit  ">
-                    <GlobeDemo />
+                    <Image src={globeimg}  alt="globe" width={400} height={400} layout="intrinsic" className=' ' />
                 </div>
             </div>
 

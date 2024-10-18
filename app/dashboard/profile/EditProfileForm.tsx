@@ -14,15 +14,15 @@ import { ScrollArea } from "@/components/ui/scroll-area"
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { toast } from '@/components/ui/use-toast';
+import axios from 'axios';
+import { toast } from 'react-toastify';
 
-type Inputs = Omit<UserState, 'loading' | 'error'>;
 
 const EditProfileForm = () => {
     const dispatch = useAppDispatch();
     const user = useAppSelector(selectUser);
 
-    const { register, handleSubmit, reset, formState: { errors, isSubmitting }, } = useForm<Inputs>({
+    const { register, handleSubmit, reset, formState: { errors, isSubmitting }, } = useForm<UserState>({
         defaultValues: user,
     });
 
@@ -30,11 +30,17 @@ const EditProfileForm = () => {
         reset(user);
     }, [user, reset]);
 
-    const onSubmit: SubmitHandler<Inputs> = (data) => {
-        toast({
-            title: "Profile Updated Succesfully successfully!"
-        })
+    const onSubmit: SubmitHandler<UserState> = async (data) => {
+        
         dispatch(setUser(data));
+        try {
+            const response = await axios.post('/api/user', data);
+            if(response.status === 200){
+                toast.success("Profile Updated Succesfully successfully!")
+            }
+        } catch (error) {
+            console.log(error);
+        }
     };
     return (
         <ScrollArea className=' max-w-full '>
@@ -58,14 +64,14 @@ const EditProfileForm = () => {
                             </svg>
                             <span className='ml-1 dark:text-gray-500 text-gray-700'>|</span>
                         </div>
-                        <Input placeholder='Enter GitHub URL' {...register('githubURL')} className=' pl-10 w-full rounded-lg bg-inputGray dark:bg-inputGray border border-secondary focus:outline focus:outline-primary focus:border-primary '/>
+                        <Input placeholder='Enter GitHub URL' {...register('githubUrl')} className=' pl-10 w-full rounded-lg bg-inputGray dark:bg-inputGray border border-secondary focus:outline focus:outline-primary focus:border-primary '/>
                     </div>
                     <div className=" w-full flex relative items-center ">
                         <div className="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none  ">
                             <FaLinkedin className=' w-[20px] h-[20px] ' />
                             <span className='ml-1 dark:text-gray-500 text-gray-700'>|</span>
                         </div>
-                        <Input placeholder='Enter LinkedIn URL' {...register('linkedinURL')} className=' pl-10 w-full rounded-lg bg-inputGray dark:bg-inputGray border border-secondary focus:outline focus:outline-primary focus:border-primary ' />
+                        <Input placeholder='Enter LinkedIn URL' {...register('linkedinUrl')} className=' pl-10 w-full rounded-lg bg-inputGray dark:bg-inputGray border border-secondary focus:outline focus:outline-primary focus:border-primary ' />
                     </div>
                 </div>
                 {/* Portfolio and Image */}
@@ -75,7 +81,7 @@ const EditProfileForm = () => {
                             <HiOutlineGlobeAlt className=' w-[20px] h-[20px] ' />
                             <span className='ml-1 dark:text-gray-500 text-gray-700'>|</span>
                         </div>
-                        <Input placeholder='Enter Portfolio Link' {...register('portfolio')} className=' pl-10 w-full rounded-lg bg-inputGray dark:bg-inputGray border border-secondary focus:outline focus:outline-primary focus:border-primary '/>
+                        <Input placeholder='Enter Portfolio Link' {...register('resumeUrl')} className=' pl-10 w-full rounded-lg bg-inputGray dark:bg-inputGray border border-secondary focus:outline focus:outline-primary focus:border-primary '/>
                     </div>
                     <div className=" w-full flex relative items-center">
                         <div className="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none  ">
@@ -103,10 +109,6 @@ const EditProfileForm = () => {
                     <div className='w-full'>
                         <Label className='text-sm'>Role</Label>
                         <Input {...register('role')} className=' rounded-lg bg-inputGray dark:bg-inputGray border border-secondary focus:outline focus:outline-primary focus:border-primary '/>
-                    </div>
-                    <div className='w-full'>
-                        <Label className='text-sm'>Experience</Label>
-                        <Input {...register('experience')} className='w-full rounded-lg bg-inputGray dark:bg-inputGray border border-secondary focus:outline focus:outline-primary focus:border-primary '/>
                     </div>
                 </div>
                 <div className=' w-full flex justify-center items-center gap-2 '>

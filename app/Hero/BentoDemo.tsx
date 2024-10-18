@@ -9,7 +9,7 @@ import {
 
 import { BentoCard, BentoGrid } from "@/components/magicui/bento-grid";
 import { AnimatePresence, motion } from "framer-motion";
-import { CanvasRevealEffect } from "@/components/ui/canvas-reveal-effect";
+// import { CanvasRevealEffect } from "@/components/ui/canvas-reveal-effect";
     
 const features = [
     {
@@ -20,12 +20,12 @@ const features = [
     cta: "Learn more",
     background: (<AnimatePresence>
             <div className="h-full w-full absolute inset-0">
-              <CanvasRevealEffect
+              {/* <CanvasRevealEffect
                 animationSpeed={3}
                 containerClassName="bg-gray-950/80"
                 colors={[[207, 250, 254]]}
                 dotSize={2}
-              />
+              /> */}
             </div>
           </AnimatePresence>),
     className: "lg:row-start-1 lg:row-end-3 lg:col-start-3 lg:col-end-5",
@@ -37,8 +37,8 @@ const features = [
     href: "/signup",
     cta: "Get started",
     background: (<AnimatePresence>
-            <div className="h-full w-full absolute inset-0">
-              <CanvasRevealEffect
+            <div className="h-1/2 w-1/2 absolute right-0 top-0  ">
+              {/* <CanvasRevealEffect
                 animationSpeed={3}
                 containerClassName="bg-cyan-500/80"
                 colors={[
@@ -46,7 +46,7 @@ const features = [
                   [255, 255, 255],
                 ]}
                 dotSize={2}
-              />
+              /> */}
             </div>
           </AnimatePresence>),
     className: "lg:col-start-1 lg:col-end-3 lg:row-start-1 lg:row-end-4",
@@ -59,7 +59,7 @@ const features = [
     cta: "Find teams",
     background: (<AnimatePresence>
             <div className="h-full w-full absolute inset-0">
-              <CanvasRevealEffect
+              {/* <CanvasRevealEffect
                 animationSpeed={3}
                 containerClassName="bg-emerald-600/80"
                 colors={[
@@ -67,7 +67,7 @@ const features = [
                     [232, 121, 249],
                   ]}
                 dotSize={2}
-              />
+              /> */}
             </div>
           </AnimatePresence>),
     className: "lg:col-start-1 lg:col-end-3 lg:row-start-4 lg:row-end-6",
@@ -81,12 +81,12 @@ const features = [
     cta: "Explore Hackathons",
     background: (<AnimatePresence>
             <div className="h-full w-full absolute inset-0">
-              <CanvasRevealEffect
+              {/* <CanvasRevealEffect
                 animationSpeed={3}
                 containerClassName="bg-sky-900/80"
                 colors={[[209, 250, 229]]}
                 dotSize={2}
-              />
+              /> */}
             </div>
           </AnimatePresence>),
     className: "lg:col-start-3 lg:col-end-5 lg:row-start-3 lg:row-end-6",

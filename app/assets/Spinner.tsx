@@ -7,7 +7,7 @@ type SpinnerProps = {
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
       fill="none"
-      className={className}  
+      className={` animate-spin text-text ${className}`}  
       stroke="currentColor"
     >
       <path d="M4.97498 12H7.89998" strokeWidth="1.5" strokeLinecap="round" />

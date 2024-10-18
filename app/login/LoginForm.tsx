@@ -73,7 +73,7 @@ export default function LoginForm() {
 					reset();
 					setError(res?.error);
 				}else {
-                    router.push("/dashboard");
+                    router.push(DEFAULT_LOGIN_REDIRECT);
                 }
 			})
 			.catch((err) => {

@@ -17,6 +17,8 @@ export async function POST(req: Request) {
   const candidateId = form.get('candidateId') as string;
   const postId = form.get('postId') as string;
 
+  console.log(resume?.type)
+
   let uploadResult: aws.S3.ManagedUpload.SendData | null = null;
 
   try {
@@ -35,6 +37,7 @@ export async function POST(req: Request) {
     }
 
     if (resume) {
+      console.log("resume type",resume.type);
       const arrayBuffer = await resume.arrayBuffer();
       const buffer = Buffer.from(arrayBuffer); 
       const uploadParams = {
@@ -50,9 +53,9 @@ export async function POST(req: Request) {
     await prisma.user.update({
       where: { id: candidateId },
       data: {
-        linkedinUrl: linkedinUrl || null,
-        githubUrl: githubUrl || null,
-        resumeUrl: resumeUrl || (uploadResult ? uploadResult.Location : null),
+        linkedinUrl: linkedinUrl || '',
+        githubUrl: githubUrl || '',
+        resumeUrl: (uploadResult ? uploadResult.Location : resumeUrl),
       },
     });
 

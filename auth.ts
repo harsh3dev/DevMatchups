@@ -3,7 +3,7 @@ import authConfig from "@/auth.config"
 import { PrismaAdapter } from "@auth/prisma-adapter"
 import { prisma } from "./lib/prisma";
 import { GetUserByEmail, GetUserById } from "./data/user";
-import { UserRole } from "@prisma/client";
+// import { UserRole } from "@prisma/client";
 import { User } from "./lib/types/User";
 
 
@@ -42,9 +42,9 @@ export const {
             if (session.user && token.sub) {
                 session.user.id = token.sub;
             }
-            if(token.role && session.user){
-                    session.user.role = token.role as UserRole;
-            }
+            // if(token.role && session.user){
+            //         session.user.role = token.role as UserRole;
+            // }
             return session;
         },      
 
@@ -58,7 +58,7 @@ export const {
                  return token;
             }
             // @ts-ignore
-            token.role=existinguser.role as UserRole; 
+            // token.role=existinguser.role as UserRole; 
             return token;
         }
     },

@@ -10,10 +10,6 @@ datasource db {
 }
 
 
-enum UserRole{
-    ADMIN
-    USER
-}
 
 model User {
   id           String         @id @default(cuid())
@@ -23,7 +19,8 @@ model User {
   emailVerified DateTime?
   image        String?
   password     String?
-  role         UserRole      @default(USER)
+  bio          String?
+  role         String?
   applications Application[]
   hackathons   Hackathon[]
   accounts     Account[]
@@ -32,6 +29,7 @@ model User {
   resumeUrl    String?  
   linkedinUrl  String?  
   githubUrl    String? 
+  skills       String[]
 }
 
 model Account {

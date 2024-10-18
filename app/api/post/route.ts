@@ -9,17 +9,17 @@ export async function POST(req: Request) {
     const body = await req.json();
     const session = await auth();
     console.log("incoming",body,session);
-    const validationResult = hackathonSchema.safeParse(body);
+    // const validationResult = hackathonSchema.safeParse(body);
     if(!session?.user.id){
        return NextResponse.json({ error: "Please login to post a hackathon" }, { status: 400 });
     }
-    if (!validationResult.success) {
-      const errorMessages = validationResult.error.errors.map(err => ({
-        field: err.path.join('.'),
-        message: err.message,
-      }));
-      return NextResponse.json({ errors: errorMessages }, { status: 400 });
-    }
+    // if (!validationResult.success) {
+    //   const errorMessages = validationResult.error.errors.map(err => ({
+    //     field: err.path.join('.'),
+    //     message: err.message,
+    //   }));
+    //   return NextResponse.json({ errors: errorMessages }, { status: 400 });
+    // }
 
     const {
       teamName,
@@ -34,7 +34,7 @@ export async function POST(req: Request) {
       location,
       description,
       userId,
-    } = validationResult.data;
+    } = body;
 
     const hackathon = await prisma.hackathon.create({
       data: {
