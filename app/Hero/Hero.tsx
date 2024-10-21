@@ -30,10 +30,10 @@ const Hero = () => {
 						</Button>
 					</Link>
 					<Link href={'/teams'} target='_blank' >					
-						<Button className=" group shadow-[0_4px_14px_0_rgb(0,0,0,10%)] hover:shadow-[0_6px_20px_rgba(93,93,93,23%)]  px-8 py-6 rounded-md text-gray-900 dark:text-gray-800 font-semibold text-lg bg-transparent border-2 dark:border-0 border-secondary dark:bg-[#f2f2f2] hover:bg-transparent transition duration-200 ease-linear flex justify-center items-center gap-1 ">
-							Find Teams
-							<FaSearch className=' text-sm '/>
-						</Button>
+					<Button className=" group shadow-[0_4px_14px_0_rgb(0,0,0,10%)] hover:shadow-[0_6px_20px_rgba(93,93,93,23%)] px-8 py-6 rounded-md text-gray-900 dark:text-gray-800 font-semibold text-lg bg-transparent border-2 dark:border-0 border-secondary dark:bg-[#f2f2f2] hover:bg-transparent transition duration-200 ease-linear flex justify-center items-center gap-1 ">
+      					Find Teams
+      					<FaSearch className='transform group-hover:translate-x-1 transition-transform duration-200 ease-linear text-sm'/>
+    				</Button>
 					</Link>
 				</div>
 
