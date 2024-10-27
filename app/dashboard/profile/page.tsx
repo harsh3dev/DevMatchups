@@ -19,6 +19,7 @@ import { fetchUser, selectUser, setUser } from '@/lib/store/features/userSlice/u
 import { useAppDispatch, useAppSelector } from '@/lib/store/hooks';
 import EditProfile from './EditProfile';
 import axios from 'axios';
+import UserAvatar from '@/app/Navbar/UserAvatar';
 
 
 
@@ -106,7 +107,7 @@ const Page = () => {
                         {/* Authenticated User UI */}
                         { !userData.loading && session &&
                         <div className='flex justify-center items-center gap-5'>
-                            <UserImage />
+                            <UserAvatar />
                             <div className=' h-full flex flex-col gap-2 items-start justify-normal lg:justify-start '>
                                 <h1 className=' text-base sm:text-xl md:text-2xl font-semibold text-text flex justify-center items-center gap-2 '> {userData.name}</h1>
                                 <h1 className=' text-base font-semibold text-text flex justify-center items-center gap-2 '> <MdOutlineAlternateEmail /> {userData.email}</h1>
