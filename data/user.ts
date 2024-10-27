@@ -13,7 +13,7 @@ export async function GetUserByEmail(email: string) {
       return user;
     } catch (error) {
       console.error(error);
-      throw new Error("An error occurred while fetching user by email");
+      // throw new Error("An error occurred while fetching user by email");
     }
 }
 

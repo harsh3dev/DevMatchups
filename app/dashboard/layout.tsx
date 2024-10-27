@@ -11,14 +11,13 @@ import Navbar from '../Navbar/Navbar';
 import Footer from '../Footer/Footer';
 
 
-
 const Layout =({ children }:{ children:React.ReactNode })=>{
     const {data : session, status: loading} = useSession();
     const dispatch = useAppDispatch();
 
     useEffect(() => {
         if (session?.user?.id) {
-        dispatch(fetchUser({ userId: session.user.id, email: session.user.email }));
+        dispatch(fetchUser({ userId: session.user.id, email: session.user.email as string }));
         }
     }, [dispatch, session]);
 

@@ -1,5 +1,3 @@
-import { UserRole } from "@prisma/client";
-
 
 export interface User {
     id?: string;
@@ -9,7 +7,7 @@ export interface User {
     emailVerified?: Date | null;
     image?: string | null;
     password?: string | null;
-    role?: UserRole;
+    role?: string;
     applications?: Application[];
     hackathons?: Hackathon[];
     accounts?: Account[];

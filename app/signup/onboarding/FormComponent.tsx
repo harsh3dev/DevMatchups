@@ -76,8 +76,8 @@ const FormComponent: React.FC = () => {
             console.log(user);
             setUserId(user?.id);
         }
-        getUser();
-    }, []);
+        if(email) getUser();
+    });
 
     return (
         <form onSubmit={handleSubmit(onSubmit)} className='w-full flex flex-col justify-between items-center gap-4 '>

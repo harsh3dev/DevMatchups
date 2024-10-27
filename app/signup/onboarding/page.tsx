@@ -1,4 +1,3 @@
-"use client"
 import Footer from '@/app/Footer/Footer'
 import Navbar from '@/app/Navbar/Navbar'
 import React from 'react'
@@ -17,7 +16,7 @@ const page = () => {
                     Just fill-up some necessary details!
                 </h1>
                 <hr className='text-text w-full my-4' />
-                <FormComponent/>
+                {/* <FormComponent/> */}
             </div>
         </div>
 
