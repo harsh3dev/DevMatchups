@@ -43,6 +43,7 @@ Please ensure your code adheres to our coding standards and includes appropriate
 
 ### Contact
 If you have any questions, suggestions, or feedback, feel free to reach out:
+Discord: @harsh3dev
 
 Email: yaahg342@gmail.com or harshpandey.tech@gmail.com <br/>
 LinkedIn: [Yash Gupta](https://www.linkedin.com/in/yash-gupta-64956b246/), [Harsh Pandey](https://www.linkedin.com/in/harsh3dev/)
