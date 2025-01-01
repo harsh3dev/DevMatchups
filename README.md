@@ -33,20 +33,20 @@ DevMatchups is a platform designed to connect developers and enthusiasts from al
 We welcome contributions from the community! To contribute:
 
 1. Fork the repository.
-2. Create a new branch (git checkout -b feature-branch).
+2. Create a new branch (`git checkout -b <branch-name>`).
 3. Make your changes.
-4. Commit your changes (git commit -m 'Add new feature').
-5. Push to the branch (git push origin feature-branch).
+4. Commit your changes (`git commit -m 'Commit message'`).
+5. Push to the branch (`git push origin branch-name`).
 6. Open a pull request.
 
 Please ensure your code adheres to our coding standards and includes appropriate tests.
 
 ### Contact
 If you have any questions, suggestions, or feedback, feel free to reach out:
-Discord: @harsh3dev
 
-Email: yaahg342@gmail.com or harshpandey.tech@gmail.com <br/>
-LinkedIn: [Yash Gupta](https://www.linkedin.com/in/yash-gupta-64956b246/), [Harsh Pandey](https://www.linkedin.com/in/harsh3dev/)
+Discord: @harsh3dev <br/>
+Email: harshpandey.tech@gmail.com or yaahg342@gmail.com<br/>
+LinkedIn: [Harsh Pandey](https://www.linkedin.com/in/harsh3dev/), [Yash Gupta](https://www.linkedin.com/in/yash-gupta-64956b246/)
 <hr/>
 
 ### Installation
