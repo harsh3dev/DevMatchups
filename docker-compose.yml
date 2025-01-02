@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - DATABASE_URL=postgresql://your_username:your_password@db:5432/your_database?schema=public
+    volumes:
+      - .:/app
+      - /app/node_modules
+    depends_on:
+      - db
+    command: /bin/sh -c "npm install && npx prisma generate && npm run start" # Ensure Prisma client is generated
+
+  db:
+    image: postgres:14-alpine
+    environment:
+      POSTGRES_USER: your_username
+      POSTGRES_PASSWORD: your_password
+      POSTGRES_DB: your_database
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
