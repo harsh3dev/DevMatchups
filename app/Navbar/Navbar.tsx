@@ -206,13 +206,13 @@ const Navbar = () => {
                                 <Separator className=' bg-text dark:bg-text mb-6 '  />
                         <div className=' w-full flex flex-col gap-2 items-center justify-center'>
                             <div className=' w-full flex items-center justify-center gap-2 '>
-                                <Link href="https://github.com/harsh3dev/DevMatchups" target="_blank" rel="noopener noreferrer">
+                                <Link href="/" target="_blank" rel="noopener noreferrer">
                                     <Button variant="outline" className=' flex justify-center items-center gap-2 w-full ' >
                                         <IoLogoGithub />
                                         Github
                                     </Button>
                                 </Link>
-                                <Link href="mailto:harshpandey.tech@gmail.com" target="_blank" rel="noopener noreferrer">
+                                <Link href="/">
                                     <Button variant="outline" className=' flex justify-center items-center gap-2 w-full ' >
                                         <MdEmail />
                                         Support

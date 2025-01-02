@@ -9,6 +9,8 @@ import { FaXTwitter } from "react-icons/fa6";
 import { FaProductHunt } from "react-icons/fa";
 
 import Logo from '@/app/assets/Devmatchups.svg'
+import SwocLogo from '@/app/assets/SWOC.png'
+import HacktoberfestLogo from '@/app/assets/Hacktoberfest.png'
 
 export default function Footer() {
     return (
@@ -28,8 +30,8 @@ export default function Footer() {
                 <div className=" flex flex-col justify-start items-start lg:h-full gap-4  ">
                         <h3 className=" text-base md:text-lg font-semibold ml-1 ">Supported by</h3>
                         <div className="flex gap-4">
-                            <Image src="https://www.socialwinterofcode.com/img/logo-2.png" alt="SWOC Logo" width={40} height={40} />
-                            <Image src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOZlh8NgUoArqNKUxE-vtN4jKXQZpuG3L_zw&s" alt="Hacktoberfest Logo" width={40} height={40} />
+                            <Image src={SwocLogo} alt="SWOC Logo" width={40} height={40} />
+                            <Image src={HacktoberfestLogo} alt="Hacktoberfest Logo" width={40} height={40} />
                         </div>
                     </div>
 
