@@ -25,6 +25,15 @@ export default function Footer() {
                 </div>
                 <div className="flex sm:flex-wrap lg:flex-nowrap w-full md:w-fit md:px-5 sm:p-0 sm:justify-around lg:justify-between gap-5 sm:gap-20  lg:h-full " >
 
+                <div className=" flex flex-col justify-start items-start lg:h-full gap-4  ">
+                        <h3 className=" text-base md:text-lg font-semibold ml-1 ">Supported by</h3>
+                        <div className="flex gap-4">
+                            <Image src="https://www.socialwinterofcode.com/img/logo-2.png" alt="SWOC Logo" width={40} height={40} />
+                            <Image src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOZlh8NgUoArqNKUxE-vtN4jKXQZpuG3L_zw&s" alt="Hacktoberfest Logo" width={40} height={40} />
+                        </div>
+                    </div>
+
+
                     <div className=" flex flex-col justify-start items-start lg:h-full gap-4  ">
                         <h3 className=" text-base md:text-lg font-semibold ml-1 ">Contribute</h3>
                         <ul className=" flex flex-col lg:justify-between items-start gap-2 text-gray-200 text-xs md:text-base ">
