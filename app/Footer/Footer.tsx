@@ -30,8 +30,8 @@ export default function Footer() {
                 <div className=" flex flex-col justify-start items-start lg:h-full gap-4  ">
                         <h3 className=" text-base md:text-lg font-semibold ml-1 ">Supported by</h3>
                         <div className="flex gap-4">
-                            <Image src={SwocLogo} alt="SWOC Logo" width={40} height={40} />
-                            <Image src={HacktoberfestLogo} alt="Hacktoberfest Logo" width={40} height={40} />
+                            <Image src={SwocLogo} alt="SWOC Logo" width={60} height={60} />
+                            <Image src={HacktoberfestLogo} alt="Hacktoberfest Logo" width={60} height={60} />
                         </div>
                     </div>
 
