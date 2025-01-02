@@ -27,7 +27,7 @@ export default function Footer() {
                 </div>
                 <div className="flex sm:flex-wrap lg:flex-nowrap w-full md:w-fit md:px-5 sm:p-0 sm:justify-around lg:justify-between gap-5 sm:gap-20  lg:h-full " >
 
-                <div className=" flex flex-col justify-start items-start lg:h-full gap-4  ">
+                <div className=" flex flex-col justify-start items-start lg:h-full gap-4 flex-nowrap text-nowrap  ">
                         <h3 className=" text-base md:text-lg font-semibold ml-1 ">Supported by</h3>
                         <div className="flex gap-4">
                             <Image src={SwocLogo} alt="SWOC Logo" width={60} height={60} />
