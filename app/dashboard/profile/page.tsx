@@ -160,16 +160,11 @@ const Page = () => {
                     </div>}
                 </div>
 
-                {/* Edit Profile and Github Connect Button */}
+                {/* Edit Profile */}
                     <div className=' hidden h-full sm:flex lg:flex-col justify-start items-start gap-4 ' >
                         <EditProfile className='' />
 
-                        { !userData.githubUrl &&
-                        <div className='  w-fit px-4 py-2 cursor-pointer font-semibold rounded-lg bg-gray-900 dark:bg-gray-100 text-white dark:text-black flex justify-center items-center gap-2  '>
-                            <FaGithub />
-                            <span>Connect Github</span>
-                        </div>
-                        }
+                        
                     </div>
             </div>
         </div>
