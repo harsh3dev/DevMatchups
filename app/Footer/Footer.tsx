@@ -9,6 +9,8 @@ import { FaXTwitter } from "react-icons/fa6";
 import { FaProductHunt } from "react-icons/fa";
 
 import Logo from '@/app/assets/Devmatchups.svg'
+import SwocLogo from '@/app/assets/SWOC.png'
+import HacktoberfestLogo from '@/app/assets/Hacktoberfest.png'
 
 export default function Footer() {
     return (
@@ -24,6 +26,15 @@ export default function Footer() {
                     <p className="  text-wrap text-base font-medium py-2 ">Team up for success in every hackathon <br/> Build your dream hackathon team with DevMatchups!</p>
                 </div>
                 <div className="flex sm:flex-wrap lg:flex-nowrap w-full md:w-fit md:px-5 sm:p-0 sm:justify-around lg:justify-between gap-5 sm:gap-20  lg:h-full " >
+
+                <div className=" flex flex-col justify-start items-start lg:h-full gap-4 flex-nowrap text-nowrap  ">
+                        <h3 className=" text-base md:text-lg font-semibold ml-1 ">Supported by</h3>
+                        <div className="flex gap-4">
+                            <Image src={SwocLogo} alt="SWOC Logo" width={60} height={60} />
+                            <Image src={HacktoberfestLogo} alt="Hacktoberfest Logo" width={60} height={60} />
+                        </div>
+                    </div>
+
 
                     <div className=" flex flex-col justify-start items-start lg:h-full gap-4  ">
                         <h3 className=" text-base md:text-lg font-semibold ml-1 ">Contribute</h3>
