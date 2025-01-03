@@ -64,11 +64,11 @@ const Sidebar = () => {
           <div className=' w-full flex items-center justify-center gap-2 '>
             <Button variant="outline" className=' flex justify-center items-center gap-2 w-full bg-gray-3 border-gray-500 dark:border-gray-800 ' >
               <IoLogoGithub />
-              Github
+              <a href="https://github.com/harsh3dev/DevMatchups" target="_blank" rel="noopener noreferrer">GitHub</a>
             </Button>
             <Button variant="outline" className=' flex justify-center items-center gap-2 w-full bg-gray-3 border-gray-500 dark:border-gray-800 ' >
               <MdEmail />
-              Support
+             <a href="mailto:harshpandey.tech@gmail.com" target="_blank" rel="noopener noreferrer">Support</a>
             </Button>
           </div>
           <Button onClick={handleLogout} variant="ghost" className=' w-full flex justify-center items-center gap-2 bg-transparent border border-gray-500 dark:border-gray-800 ' >
