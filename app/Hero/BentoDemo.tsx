@@ -19,7 +19,7 @@ const features = [
     href: "/login",
     cta: "Learn more",
     background: (<AnimatePresence>
-            <div className="h-full w-full absolute inset-0 ">
+            <div className="h-full w-full absolute inset-0">
               {/* <CanvasRevealEffect
                 animationSpeed={3}
                 containerClassName="bg-gray-950/80"
@@ -37,7 +37,7 @@ const features = [
     href: "/signup",
     cta: "Get started",
     background: (<AnimatePresence>
-            <div className="h-1/2 w-1/2 absolute right-0 top-0  ">
+            <div className="h-1/2 w-1/2 absolute right-0 top-0">
               {/* <CanvasRevealEffect
                 animationSpeed={3}
                 containerClassName="bg-cyan-500/80"
@@ -95,7 +95,7 @@ const features = [
 
 export async function BentoDemo() {
     return (
-    <BentoGrid className=" grid-cols-1 grid-rows-4 md:grid-rows-2 md:grid-cols-2 lg:grid-rows-6 lg:grid-cols-4 ">
+    <BentoGrid className=" grid-cols-1 grid-rows-4 md:grid-rows-2 md:grid-cols-2 lg:grid-rows-5 lg:grid-cols-4 ">
         {features.map((feature) => (
         <BentoCard key={feature.name} {...feature} />
         ))}
