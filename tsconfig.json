@@ -19,8 +19,9 @@
     ],
     "paths": {
       "@/*": ["./*"]
-    }
+    },
+    "types": ["jest", "@testing-library/jest-dom"]
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/(dashboard)/(routes)/teams/components/DrawerFilter.jsx", "app/(dashboard)/(routes)/teams/components/FiltersComponent.tsx"],
+  "include": [ "jest.config.ts","next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/(dashboard)/(routes)/teams/components/DrawerFilter.jsx", "app/(dashboard)/(routes)/teams/components/FiltersComponent.tsx"],
   "exclude": ["node_modules"]
 }
