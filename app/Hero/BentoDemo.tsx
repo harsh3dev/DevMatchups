@@ -19,7 +19,7 @@ const features = [
     href: "/login",
     cta: "Learn more",
     background: (<AnimatePresence>
-            <div className="h-full w-full absolute inset-0">
+            <div className="h-full w-full absolute inset-0 ">
               {/* <CanvasRevealEffect
                 animationSpeed={3}
                 containerClassName="bg-gray-950/80"
@@ -28,7 +28,7 @@ const features = [
               /> */}
             </div>
           </AnimatePresence>),
-    className: "lg:row-start-1 lg:row-end-3 lg:col-start-3 lg:col-end-5",
+    className: "lg:row-start-4 lg:row-end-6 lg:col-start-3 lg:col-end-5",
     },
     {
     Icon: InputIcon,
@@ -49,7 +49,7 @@ const features = [
               /> */}
             </div>
           </AnimatePresence>),
-    className: "lg:col-start-1 lg:col-end-3 lg:row-start-1 lg:row-end-4",
+    className: "lg:col-start-1 lg:col-end-3 lg:row-start-1 lg:row-end-3",
     },
     {
     Icon: GlobeIcon,
@@ -70,7 +70,7 @@ const features = [
               /> */}
             </div>
           </AnimatePresence>),
-    className: "lg:col-start-1 lg:col-end-3 lg:row-start-4 lg:row-end-6",
+    className: "lg:col-start-1 lg:col-end-3 lg:row-start-3 lg:row-end-6",
     },
     
     {
@@ -89,13 +89,13 @@ const features = [
               /> */}
             </div>
           </AnimatePresence>),
-    className: "lg:col-start-3 lg:col-end-5 lg:row-start-3 lg:row-end-6",
+    className: "lg:col-start-3 lg:col-end-5  lg:row-start-1 lg:row-end-4",
     },
 ];
 
 export async function BentoDemo() {
     return (
-    <BentoGrid className=" grid-cols-1 grid-rows-4 md:grid-rows-2 md:grid-cols-2 lg:grid-rows-5 lg:grid-cols-4 ">
+    <BentoGrid className=" grid-cols-1 grid-rows-4 md:grid-rows-2 md:grid-cols-2 lg:grid-rows-6 lg:grid-cols-4 ">
         {features.map((feature) => (
         <BentoCard key={feature.name} {...feature} />
         ))}
