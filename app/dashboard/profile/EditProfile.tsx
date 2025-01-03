@@ -21,7 +21,7 @@ const EditProfile:React.FC<PropInterface> = ({className}) => {
     return (
         <Dialog>
             <DialogTrigger asChild>
-                <div className={`w-fit px-4 py-2 cursor-pointer font-semibold rounded-lg bg-primary text-white flex justify-center items-center gap-2 text-xs sm:text-lg  ${className} `}>
+                <div className={`w-fit px-4 py-2 cursor-pointer font-semibold rounded-lg bg-primary text-white dark:text-gray-200 flex justify-center items-center gap-2 text-xs sm:text-lg  ${className} `}>
                     <MdModeEdit />
                     <span>Edit Profile</span>
                 </div>
