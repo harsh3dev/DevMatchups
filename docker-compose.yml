@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   app:
     build:
@@ -8,4 +6,30 @@ services:
     ports:
       - "3000:3000"
     env_file:
-      - .env
+      - .env.dev
+    volumes:
+      - .:/app
+      - /app/node_modules
+    command: sh -c "npx prisma migrate deploy && npm run dev"
+    depends_on:
+      - postgres-dev
+
+  postgres-dev:
+    image: postgres:latest
+    restart: always
+    ports:
+      - '5432:5432'
+    env_file:
+      - .env.dev
+    volumes:
+      - postgres-dev-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    profiles:
+      - dev
+
+volumes:
+  postgres-dev-data:
