@@ -7,7 +7,7 @@ import { apiAuthPrefix, authRoutes, DEFAULT_LOGIN_REDIRECT, publicRoutes } from 
 const { auth } = NextAuth(authConfig);
 
 export default auth(async (req) => {
-  console.log("middleware", req.auth);
+  
   const { nextUrl } = req;
   const isLoggedIn = !!req.auth;
   const isapiauthroute = nextUrl.pathname.startsWith(apiAuthPrefix);
