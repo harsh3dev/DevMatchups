@@ -28,7 +28,7 @@ const features = [
               /> */}
             </div>
           </AnimatePresence>),
-    className: "lg:row-start-1 lg:row-end-3 lg:col-start-3 lg:col-end-5",
+    className: "lg:row-start-4 lg:row-end-6 lg:col-start-3 lg:col-end-5",
     },
     {
     Icon: InputIcon,
@@ -37,7 +37,7 @@ const features = [
     href: "/signup",
     cta: "Get started",
     background: (<AnimatePresence>
-            <div className="h-1/2 w-1/2 absolute right-0 top-0  ">
+            <div className="h-1/2 w-1/2 absolute right-0 top-0">
               {/* <CanvasRevealEffect
                 animationSpeed={3}
                 containerClassName="bg-cyan-500/80"
@@ -49,7 +49,7 @@ const features = [
               /> */}
             </div>
           </AnimatePresence>),
-    className: "lg:col-start-1 lg:col-end-3 lg:row-start-1 lg:row-end-4",
+    className: "lg:col-start-1 lg:col-end-3 lg:row-start-1 lg:row-end-3",
     },
     {
     Icon: GlobeIcon,
@@ -70,7 +70,7 @@ const features = [
               /> */}
             </div>
           </AnimatePresence>),
-    className: "lg:col-start-1 lg:col-end-3 lg:row-start-4 lg:row-end-6",
+    className: "lg:col-start-1 lg:col-end-3 lg:row-start-3 lg:row-end-6",
     },
     
     {
@@ -89,7 +89,7 @@ const features = [
               /> */}
             </div>
           </AnimatePresence>),
-    className: "lg:col-start-3 lg:col-end-5 lg:row-start-3 lg:row-end-6",
+    className: "lg:col-start-3 lg:col-end-5  lg:row-start-1 lg:row-end-4",
     },
 ];
 

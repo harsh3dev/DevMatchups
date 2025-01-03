@@ -22,12 +22,15 @@ import {
     AvatarImage,
 } from "@/components/ui/avatar"
 import { Info } from "lucide-react";
+import { generateGravatarUrl } from "@/utils/getGravatarUrl";
 
 export function ProfileIcon() {
 
     const {data : session} = useSession();
 
-    const img = session?.user?.image ? session?.user?.image : `https://robohash.org/${session?.user?.name}`;
+    const img = session?.user?.image 
+        ? session.user.image 
+        : generateGravatarUrl(session?.user?.email as string);
 
     const handleLogout = async () => {
         await signOut({ callbackUrl: '/' });
