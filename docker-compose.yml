@@ -3,10 +3,11 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    restart: always
     ports:
       - "3000:3000"
     env_file:
-      - .env.dev
+      - .env
     volumes:
       - .:/app
       - /app/node_modules
@@ -20,7 +21,7 @@ services:
     ports:
       - '5432:5432'
     env_file:
-      - .env.dev
+      - .env
     volumes:
       - postgres-dev-data:/var/lib/postgresql/data
     healthcheck:
@@ -28,8 +29,7 @@ services:
       interval: 5s
       timeout: 5s
       retries: 5
-    profiles:
-      - dev
+
 
 volumes:
   postgres-dev-data:
