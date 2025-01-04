@@ -54,25 +54,31 @@ Thank you for considering contributing to DevMatchups We welcome all contributio
 
 2. **Build the Docker Image**
    ```bash
-      docker built image -t <image_name> .
+      docker-compose up -d
    ```
-
-3. **Run the Docker Containers**
-   ```bash
-      docker run -d --name my_container my_image
-   ```
-
-4. **Enter the Container**
+4. **Execute a command inside the Container**
    ```bash 
-      docker exec -it container_id bash
+      docker-compose exec -it <service_name> <command>
+   ```
 
 5. **List all the running containers**
    ```bash
-      sudo docker ps
+      docker-compose ps
    ```
 
 6. **Stop a running container**
-   ```bash
-      docker stop <container_id>
-   ```
 
+   *To stop a particular service*
+      ```bash
+         docker-compose stop <service_name>
+      ```
+
+   *To stop all services*
+      ```bash
+         docker-compose stop
+      ```
+
+7. **Remove all the running containers**
+   ```bash
+      docker-compose down
+   ```
