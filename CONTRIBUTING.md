@@ -47,3 +47,38 @@ Thank you for considering contributing to DevMatchups We welcome all contributio
    npm run dev
    ```
 4. Submit a Pull Request: Once you're done, open a pull request on the main repository.
+
+## Development Using Docker
+
+1. **Make sure Docker is installed in your system**
+
+2. **Build the Docker Image**
+   ```bash
+      docker-compose up -d
+   ```
+4. **Execute a command inside the Container**
+   ```bash 
+      docker-compose exec -it <service_name> <command>
+   ```
+
+5. **List all the running containers**
+   ```bash
+      docker-compose ps
+   ```
+
+6. **Stop a running container**
+
+   *To stop a particular service*
+      ```bash
+         docker-compose stop <service_name>
+      ```
+
+   *To stop all services*
+      ```bash
+         docker-compose stop
+      ```
+
+7. **Remove all the running containers**
+   ```bash
+      docker-compose down
+   ```
