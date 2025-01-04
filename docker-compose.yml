@@ -6,32 +6,14 @@ services:
     ports:
       - "3000:3000"
     env_file:
-      - .env.dev
-    volumes:
-      - .:/app
-      - /app/node_modules
-    command: sh -c "npx prisma migrate deploy && npm run dev"
-    depends_on:
-      - postgres-dev
-    profiles:
-      - dev
-
-  app-prod:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    ports:
-      - "3000:3000"
-    env_file:
       - .env
     volumes:
       - .:/app
       - /app/node_modules
-    command: sh -c "npx prisma migrate deploy && npm run start"
+    command: sh -c "npx prisma migrate dev && npm run dev"
     depends_on:
-      - postgres-prod
-    profiles:
-      - prod
+      postgres-dev:
+        condition: service_healthy
 
   postgres-dev:
     image: postgres:latest
@@ -39,34 +21,17 @@ services:
     ports:
       - '5432:5432'
     env_file:
-      - .env.dev
+      - .env
+    environment:
+      - POSTGRES_DB="dev"
     volumes:
       - postgres-dev-data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD", "pg_isready -U postgres"]
-      interval: 5s
+      test: [ "CMD", "pg_isready", "-q", "-U", "postgres" ]
+      interval: 15s
       timeout: 5s
       retries: 5
-    profiles:
-      - dev
-
-  postgres-prod:
-    image: postgres:latest
-    restart: always
-    ports:
-      - '5432:5432'
-    env_file:
-      - .env
-    healthcheck:
-      test: ["CMD", "pg_isready -U postgres"]
-      interval: 5s
-      timeout: 5s
-      retries: 5
-    volumes:
-      - postgres-prod-data:/var/lib/postgresql/data
-    profiles:
-      - prod
+      start_period: 5s
 
 volumes:
   postgres-dev-data:
-  postgres-prod-data:
