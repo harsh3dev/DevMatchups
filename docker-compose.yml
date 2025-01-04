@@ -1,3 +1,5 @@
+version: '3.8'
+
 services:
   app:
     build:
@@ -11,9 +13,10 @@ services:
     volumes:
       - .:/app
       - /app/node_modules
-    command: sh -c "npx prisma migrate deploy && npm run dev"
+    command: sh -c "npx prisma migrate dev && npm run dev"
     depends_on:
-      - postgres-dev
+      postgres-dev:
+        condition: service_healthy
 
   postgres-dev:
     image: postgres:latest
@@ -22,14 +25,16 @@ services:
       - '5432:5432'
     env_file:
       - .env
+    environment:
+      - POSTGRES_DB="dev"
     volumes:
       - postgres-dev-data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD", "pg_isready -U postgres"]
-      interval: 5s
+      test: [ "CMD", "pg_isready", "-q", "-U", "postgres" ]
+      interval: 15s
       timeout: 5s
       retries: 5
-
+      start_period: 5s
 
 volumes:
   postgres-dev-data:
