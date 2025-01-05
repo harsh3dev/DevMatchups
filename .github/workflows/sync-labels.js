@@ -3,7 +3,7 @@ const github = require("@actions/github");
 
 (async () => {
   try {
-    const token = process.env.GITHUB_TOKEN;
+    const token = process.env.PAT;
     const octokit = new Octokit({ auth: token });
 
     const { context } = github;
