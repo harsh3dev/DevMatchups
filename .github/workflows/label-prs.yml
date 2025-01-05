@@ -6,6 +6,7 @@ on:
       - opened
       - edited
       - synchronize
+
 permissions:
   issues: write
   pull-requests: write
@@ -28,13 +29,13 @@ jobs:
 
       - name: Sync Labels from Linked Issue
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.PAT }}
         run: |
           node <<EOF
           const { getInput, setFailed } = require('@actions/core');
           const { context, getOctokit } = require('@actions/github');
 
-          const token = process.env.GITHUB_TOKEN;
+          const token = process.env.PAT;
           const octokit = getOctokit(token);
 
           async function syncLabels() {
