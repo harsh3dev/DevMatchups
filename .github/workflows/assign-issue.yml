@@ -22,7 +22,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          node <<EOF
+          node -e "
           const { getInput, setFailed } = require('@actions/core');
           const { context, getOctokit } = require('@actions/github');
 
@@ -36,7 +36,7 @@ jobs:
             // Check if the comment contains /assign
             const commentBody = comment.body.trim();
             if (commentBody !== '/assign') {
-              console.log("Comment does not contain /assign. Skipping.");
+              console.log('Comment does not contain /assign. Skipping.');
               return;
             }
 
@@ -69,7 +69,7 @@ jobs:
                 owner,
                 repo,
                 issue_number: issue.number,
-                body: `This issue is already assigned to someone else.`,
+                body: 'This issue is already assigned to someone else.',
               });
               return;
             }
@@ -95,4 +95,4 @@ jobs:
             console.error(error);
             setFailed(error.message);
           });
-          EOF
+          "
