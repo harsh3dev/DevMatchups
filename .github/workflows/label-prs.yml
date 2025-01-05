@@ -1,83 +1,80 @@
-name: Sync Labels from Issues to PRs
+name: Sync Labels to PR
 
 on:
   pull_request:
-    types:
-      - opened
-      - edited
-      - synchronize
-
-permissions:
-  issues: write
-  pull-requests: write
+    types: [opened, edited, reopened, synchronize]
 
 jobs:
-  sync-labels:
+  sync_labels:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout repository
+      - name: Checkout code
         uses: actions/checkout@v3
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '16'
+          node-version: 16
 
-      - name: Install dependencies
-        run: npm install @actions/github @actions/core
-
-      - name: Sync Labels from Linked Issue
+      - name: Sync Labels
         env:
           GITHUB_TOKEN: ${{ secrets.PAT }}
         run: |
-          node <<EOF
-          const { getInput, setFailed } = require('@actions/core');
-          const { context, getOctokit } = require('@actions/github');
+          const { Octokit } = require("@octokit/rest");
+          const github = require("@actions/github");
 
-          const token = process.env.PAT;
-          const octokit = getOctokit(token);
+          const token = process.env.GITHUB_TOKEN;
+          const octokit = new Octokit({ auth: token });
 
-          async function syncLabels() {
-            const { pull_request } = context.payload;
+          (async () => {
+            const { context } = github;
+            const prNumber = context.payload.pull_request.number;
+            const repoOwner = context.repo.owner;
+            const repoName = context.repo.repo;
 
-            // Get PR body
-            const prBody = pull_request.body;
+            // Get linked issues in the PR body
+            const prBody = context.payload.pull_request.body || "";
+            const issueNumbers = [...prBody.matchAll(/#(\d+)/g)].map(match => match[1]);
 
-            // Match the issue number (e.g., "Fixes #123")
-            const issueRegex = /#(\d+)/;
-            const issueMatch = prBody.match(issueRegex);
-
-            if (!issueMatch) {
-              console.log("No linked issue found in the PR body.");
+            if (issueNumbers.length === 0) {
+              console.log("No linked issues found in the PR body.");
               return;
             }
 
-            const issueNumber = issueMatch[1];
-            const { owner, repo } = context.repo;
+            // Fetch labels from linked issues
+            let issueLabels = [];
+            for (const issueNumber of issueNumbers) {
+              try {
+                const issue = await octokit.issues.get({
+                  owner: repoOwner,
+                  repo: repoName,
+                  issue_number: issueNumber,
+                });
 
-            // Get labels from the linked issue
-            const { data: issue } = await octokit.rest.issues.get({
-              owner,
-              repo,
-              issue_number: issueNumber,
-            });
+                issueLabels = issueLabels.concat(issue.data.labels.map(label => label.name));
+              } catch (error) {
+                console.error(`Error fetching issue #${issueNumber}:`, error.message);
+              }
+            }
 
-            const issueLabels = issue.labels.map((label) => label.name);
+            // Remove duplicates
+            issueLabels = [...new Set(issueLabels)];
 
-            // Apply labels to the PR
-            await octokit.rest.issues.addLabels({
-              owner,
-              repo,
-              issue_number: pull_request.number,
-              labels: issueLabels,
-            });
+            if (issueLabels.length === 0) {
+              console.log("No labels to sync.");
+              return;
+            }
 
-            console.log(`Applied labels: ${issueLabels.join(", ")}`);
-          }
-
-          syncLabels().catch((error) => {
-            console.error(error);
-            setFailed(error.message);
-          });
-          EOF
+            // Add labels to the PR
+            try {
+              await octokit.issues.addLabels({
+                owner: repoOwner,
+                repo: repoName,
+                issue_number: prNumber,
+                labels: issueLabels,
+              });
+              console.log(`Labels synced to PR #${prNumber}:`, issueLabels);
+            } catch (error) {
+              console.error("Error adding labels to PR:", error.message);
+            }
+          })();
