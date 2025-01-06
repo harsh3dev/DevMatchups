@@ -3,11 +3,10 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-// import { Analytics } from "@vercel/analytics/react";
 import { ThemeProvider } from "@/components/theme-provider";
 import StoreProvider from "./StoreProvider";
 import { NextAuthProvider } from "./provider";
-import Script from 'next/script';
+import Analytics from "@/components/Analytics";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -46,20 +45,7 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <link rel="icon" href="/favicon.ico" />
-
-        {/* Google Analytics */}
-        <Script
-          src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
-          strategy="afterInteractive"
-        />
-        <Script id="google-analytics" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}');
-          `}
-        </Script>
+        <Analytics />
       </head>
       <body className="bg-background" cz-shortcut-listen="false">
         <ThemeProvider
@@ -70,7 +56,6 @@ export default function RootLayout({
           <NextAuthProvider>
             <StoreProvider>
               {children}
-              {/* <Analytics /> */}
             </StoreProvider>
           </NextAuthProvider>
           <ToastContainer />
