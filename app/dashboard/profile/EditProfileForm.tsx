@@ -117,8 +117,8 @@ const EditProfileForm = () => {
                     <Button disabled className="mt-4 w-full bg-primary dark:bg-secondary  hover:ring-2 ring-offset-1 text-white dark:text-white  ">
                         <ReloadIcon className="mr-2 h-4 w-4 animate-spin" /> Please wait
                     </Button> :
-                    <Button type="submit" className="mt-4 w-full bg-primary dark:bg-primary dark:hover:bg-slate-900/90 text-white dark:text-white " >
-                        Submit
+                    <Button type="submit" className="mt-4 w-full bg-primary dark:bg-primary hover:bg-slate-900/90 text-white dark:text-white">
+                    Submit
                     </Button>
                 }
                 </div>
