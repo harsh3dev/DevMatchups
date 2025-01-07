@@ -1,9 +1,6 @@
 
 <h1 align="center" id="title">Dev Matchups</h1>
 
-<!--<p align="center"><img src="https://socialify.git.ci/harsh3dev/DevMatchups/image?forks=1&amp;language=1&amp;name=1&amp;owner=1&amp;pattern=Plus&amp;stargazers=1&amp;theme=Dark" alt="project-image"></p>-->
-
-
 ![image](https://github.com/user-attachments/assets/d40b5116-242b-4235-bbdf-04bcea305a8f)
 
 ## Overview
