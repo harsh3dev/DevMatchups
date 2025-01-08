@@ -23,11 +23,11 @@ export default function Footer() {
                         </div>
                         <span className=" text-xl lg:text-3xl font-bold">Dev Matchups</span>
                     </Link>
-                    <p className="  text-wrap text-base font-medium py-2 ">Team up for success in every hackathon <br/> Build your dream hackathon team with DevMatchups!</p>
+                    <p className="  text-wrap text-base font-medium py-2 ">Team up for success in every hackathon <br /> Build your dream hackathon team with DevMatchups!</p>
                 </div>
                 <div className="flex sm:flex-wrap lg:flex-nowrap w-full md:w-fit md:px-5 sm:p-0 sm:justify-around lg:justify-between gap-5 sm:gap-20  lg:h-full " >
 
-                <div className=" flex flex-col justify-start items-start lg:h-full gap-4 flex-nowrap text-nowrap  ">
+                    <div className=" flex flex-col justify-start items-start lg:h-full gap-4 flex-nowrap text-nowrap  ">
                         <h3 className=" text-base md:text-lg font-semibold ml-1 ">Supported by</h3>
                         <div className="flex gap-4">
                             <Image src={SwocLogo} alt="SWOC Logo" width={60} height={60} />
@@ -40,15 +40,22 @@ export default function Footer() {
                         <h3 className=" text-base md:text-lg font-semibold ml-1 ">Contribute</h3>
                         <ul className=" flex flex-col lg:justify-between items-start gap-2 text-gray-200 text-xs md:text-base ">
                             <li>
-                                <Link target="_blank" className="flex justify-center items-center gap-2 text-text rounded-md p-1 group " href="https://github.com/harsh3dev/DevMatchups" >
-                                    {/* <FaGithub className=" w-5 h-5 " /> */}
+                                <Link
+                                    target="_blank"
+                                    className="flex flex-nowrap justify-center items-center gap-2 text-text rounded-md p-1 group whitespace-nowrap"
+                                    href="https://github.com/harsh3dev/DevMatchups"
+                                >
                                     Star on GitHub
-                                    <MdArrowOutward className="opacity-0 group-hover:opacity-100 transition-opacity duration-75 ease-linear " />
+                                    <MdArrowOutward className="opacity-0 group-hover:opacity-100 transition-opacity duration-75 ease-linear" />
                                 </Link>
                             </li>
+
                             <li>
-                                <Link target="_blank" className="flex justify-center items-center gap-2 rounded-md p-1 group text-pink-700 dark:text-pink-300 " href="https://github.com/sponsors/harsh3dev" >
-                                    {/* <SiGithubsponsors className=" w-5 h-5 " /> */}
+                                <Link
+                                    target="_blank"
+                                    className="flex flex-nowrap justify-center items-center gap-2 text-text rounded-md p-1 group whitespace-nowrap"
+                                    href="https://github.com/sponsors/harsh3dev" 
+                                >
                                     Sponsor on GitHub
                                     <MdArrowOutward className="opacity-0 group-hover:opacity-100 transition-opacity duration-75 ease-linear " />
                                 </Link>
@@ -100,9 +107,9 @@ export default function Footer() {
                     </Link>
                 </h1>
                 <span className=" flex justify-center items-center gap-5   text-xl group ">
-                    <Link target="_blank" href="/" className=" opacity-60 hover:opacity-100 " ><FaProductHunt /></Link>
-                    <Link target="_blank" href="/" className=" opacity-60 hover:opacity-100 " ><FaXTwitter /></Link>
-                    <Link target="_blank" href="/" className=" opacity-60 hover:opacity-100 " ><FaGithub /></Link>
+                    <Link target="_blank" href=" https://www.producthunt.com/posts/devmatchups" className=" opacity-60 hover:opacity-100 " ><FaProductHunt /></Link>
+                    <Link target="_blank" href=" https://twitter.com/devmatchups" className=" opacity-60 hover:opacity-100 " ><FaXTwitter /></Link>
+                    <Link target="_blank" href="https://github.com/harsh3dev/devmatchups" className=" opacity-60 hover:opacity-100 " ><FaGithub /></Link>
                 </span>
             </div>
         </footer>
