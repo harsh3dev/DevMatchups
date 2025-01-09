@@ -76,3 +76,8 @@ bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+
+<h3>Project Contributers: <h3>
+<a href="https://github.com/harsh3dev/DevMatchups/graphs/contributors">
+<img src="https://contributors-img.web.app/image?repo=harsh3dev/DevMatchups"/>
