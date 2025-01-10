@@ -1,0 +1,102 @@
+name: Issue Assignment Manager
+
+on:
+  issue_comment:
+    types:
+      - created
+
+jobs:
+  assign-issue:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: Create assignment script
+        run: |
+          cat > assign.js << 'EOL'
+          const github = require('@actions/github');
+          const core = require('@actions/core');
+
+          async function handleAssignCommand() {
+            try {
+              const token = process.env.GITHUB_TOKEN;
+              const octokit = github.getOctokit(token);
+              const context = github.context;
+              const { issue, comment } = context.payload;
+              const { owner, repo } = context.repo;
+
+              // Check if the comment contains /assign
+              const commentBody = comment.body.trim();
+              if (commentBody !== '/assign') {
+                console.log('Comment does not contain /assign. Skipping.');
+                return;
+              }
+
+              const commenter = comment.user.login;
+
+              // Fetch all open issues assigned to the commenter
+              const { data: issues } = await octokit.rest.issues.listForRepo({
+                owner,
+                repo,
+                state: 'open',
+                assignee: commenter,
+              });
+
+              if (issues.length > 0) {
+                console.log(`${commenter} is already assigned to an issue.`);
+                await octokit.rest.issues.createComment({
+                  owner,
+                  repo,
+                  issue_number: issue.number,
+                  body: `@${commenter}, you are already assigned to an issue. You can only work on one issue at a time.`,
+                });
+                return;
+              }
+
+              // Check if the issue is already assigned to someone
+              if (issue.assignees && issue.assignees.length > 0) {
+                console.log(`Issue #${issue.number} is already assigned.`);
+                await octokit.rest.issues.createComment({
+                  owner,
+                  repo,
+                  issue_number: issue.number,
+                  body: 'This issue is already assigned to someone else.',
+                });
+                return;
+              }
+
+              // Assign the issue to the commenter
+              await octokit.rest.issues.addAssignees({
+                owner,
+                repo,
+                issue_number: issue.number,
+                assignees: [commenter],
+              });
+
+              console.log(`Assigned issue #${issue.number} to @${commenter}.`);
+              await octokit.rest.issues.createComment({
+                owner,
+                repo,
+                issue_number: issue.number,
+                body: `@${commenter}, the issue has been assigned to you. Happy coding!`,
+              });
+            } catch (error) {
+              console.error(error);
+              core.setFailed(error.message);
+            }
+          }
+
+          handleAssignCommand();
+          EOL
+
+      - name: Install dependencies
+        run: npm install @actions/github @actions/core
+
+      - name: Handle /assign command
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node assign.js
