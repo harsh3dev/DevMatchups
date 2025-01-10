@@ -1,4 +1,4 @@
-"use server"
+"use server";
 
 import { signIn } from "@/auth";
 import { GetUserByEmail } from "@/data/user";
@@ -25,9 +25,17 @@ export async function LoginUser(values: z.infer<typeof LoginSchema>) {
     }
 
     if (!existingUser.emailVerified) {
-      const verificationToken = await generateVerificationToken(existingUser.email);
-      await sendVerificationEmail(verificationToken.email,verificationToken.token);
-      return { error: "Email not verified! Please check your email for verification instructions." };
+      const verificationToken = await generateVerificationToken(
+        existingUser.email,
+      );
+      await sendVerificationEmail(
+        verificationToken.email,
+        verificationToken.token,
+      );
+      return {
+        error:
+          "Email not verified! Please check your email for verification instructions.",
+      };
     }
 
     await signIn("credentials", {
@@ -35,7 +43,6 @@ export async function LoginUser(values: z.infer<typeof LoginSchema>) {
       password,
       redirectTo: DEFAULT_LOGIN_REDIRECT,
     });
-
   } catch (error) {
     if (error instanceof AuthError) {
       switch (error.type) {
