@@ -18,7 +18,6 @@ import { getSession } from 'next-auth/react';
 import { FormButton } from '@/components/ui/FormButton';
 import ErrorMessage from './ErrorMessage';
 import MultiSelect from './MultiSelect';
-import { toast } from 'react-toastify';
 
 export default function Form (){
     const {
@@ -91,15 +90,13 @@ export default function Form (){
             data.userId = session?.user.id;
             const response = await axios.post('/api/post', data);
             console.log('SUCCESS', response.data);
-            console.log('SUCCESS', data);
-            toast.success("Your team details have been submitted successfully!");            
+            console.log('SUCCESS', data);          
         } catch (error: any) {
             if (axios.isAxiosError(error)) {
                 console.error('Axios error:', error.response?.data);
             } else {
                 console.error('Unexpected error:', error);
             }
-            toast.error('Oops! Something went wrong. Please try again');
         }
         reset();
     };
