@@ -164,12 +164,12 @@ const Page = () => {
                     className="p-2 rounded-full px-4 border border-text flex justify-center items-center gap-2 dark:hover:bg-cyan-700/50 hover:bg-cyan-400/50 "
                   >
                     <HiOutlineGlobeAlt />
-                    <span className="sm:inline-block hidden">resumeUrl</span>
+                    <span className="sm:inline-block hidden">Website</span>
                   </Link>
                 ) : (
                   <div className="p-2 rounded-full px-4 border border-gray-700 dark:border-gray-400 flex justify-center items-center gap-2 text-gray-700 dark:text-gray-400 ">
                     <HiOutlineGlobeAlt />
-                    <span className="sm:inline-block hidden">resumeUrl</span>
+                    <span className="sm:inline-block hidden">Website</span>
                   </div>
                 )}
                 <EditProfile className="text-xs sm:hidden" />
