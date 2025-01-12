@@ -104,6 +104,7 @@ const EditProfileForm = () => {
               </svg>
               <span className="ml-1 dark:text-gray-500 text-gray-700">|</span>
             </div>
+            {/* github link*/}
             <Input
               placeholder="Enter GitHub URL"
               {...register("githubUrl")}
@@ -115,6 +116,7 @@ const EditProfileForm = () => {
               <FaLinkedin className=" w-[20px] h-[20px] " />
               <span className="ml-1 dark:text-gray-500 text-gray-700">|</span>
             </div>
+            {/* linkedin link*/}
             <Input
               placeholder="Enter LinkedIn URL"
               {...register("linkedinUrl")}
@@ -140,7 +142,9 @@ const EditProfileForm = () => {
               <FaImage className=" w-[20px] h-[20px] " />
               <span className="ml-1 dark:text-gray-500 text-gray-700">|</span>
             </div>
+            {/* Resume link */}
             <Input
+              placeholder="Enter Resume Link"
               {...register("image")}
               className=" truncate pl-10 w-full rounded-lg bg-inputGray dark:bg-inputGray border border-secondary focus:outline focus:outline-primary focus:border-primary "
             />
