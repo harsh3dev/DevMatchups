@@ -90,8 +90,7 @@ export default function Form (){
             data.userId = session?.user.id;
             const response = await axios.post('/api/post', data);
             console.log('SUCCESS', response.data);
-            console.log('SUCCESS', data);
-            
+            console.log('SUCCESS', data);          
         } catch (error: any) {
             if (axios.isAxiosError(error)) {
                 console.error('Axios error:', error.response?.data);
