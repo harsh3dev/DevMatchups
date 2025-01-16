@@ -35,10 +35,10 @@ const ProcessFlow = () => {
     return (
         <div className="w-full flex flex-col justify-normal items-center gap-4 mt-10 px-4 md:px-0 ">
             <div className=" text-left text-text w-full flex flex-col justify-normal items-start gap-4 my-8  ">
-                <h1 className=" text-2xl font-semibold ">
+                <h1 className="text-2xl font-semibold text-gray-900 dark:text-white/95">
                 How It Works?
                 </h1>
-                <p className=" text-base opacity-80 font-light ">
+                <p className="text-base text-gray-700 dark:text-gray-400 font-light ">
                 Our platform makes it simple to connect with skilled developers worldwide and join or create hackathon-ready teams. Whether you{"'"}re looking to collaborate on an exciting new project or find the perfect team for an upcoming hackathon, here{"'"}s how it works.
                 </p>
             </div>
