@@ -14,7 +14,7 @@ import HacktoberfestLogo from '@/app/assets/Hacktoberfest.png'
 
 export default function Footer() {
     return (
-        <footer className="w-full border border-t border-r-0 border-b-0 border-l-0 border-gray-500 text-text pt-[0.1rem] bg-background flex flex-col justify-center lg:justify-start items-center " >
+        <footer className="w-full border border-t border-r-0 border-b-0 border-l-0 border-gray-500 text-text pt-[0.1rem] bg-background flex flex-col justify-center lg:justify-start items-center " style="background-color: rgb(210 218 230 / 50%);" >
             <div className="w-full sm:w-[80%] sm:px-0 px-5 py-12 grid md:grid-cols-2 gap-6 place-items-center lg:place-items-start lg:justify-between ">
                 <div className="gap-5 flex flex-col lg:justify-between items-start h-full">
                     <Link href='/' className=" flex justify-center items-center gap-4 ">

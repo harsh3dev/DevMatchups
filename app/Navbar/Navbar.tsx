@@ -23,6 +23,7 @@ import { IoLogoGithub, IoMdLogOut } from 'react-icons/io'
 import { MdDashboard, MdEmail } from 'react-icons/md'
 
 import Logo from '@/app/assets/Devmatchups.svg'
+import { BentoCard } from '@/components/magicui/bento-grid'
 
 
 const Navbar = () => {
@@ -66,7 +67,7 @@ const Navbar = () => {
 
     return (
         <header className='w-full relative p-5 text-center '>
-            <div className=" fixed w-full z-20 top-0 start-0 border-b border-gray-200 dark:border-gray-600  backdrop-blur-xl ">
+            <div className=" fixed w-full z-20 top-0 start-0 border-b border-gray-200 dark:border-gray-600  backdrop-blur-xl  "  style="background-color: rgb(210 218 230 / 50%);">
                 <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
                     <Link href={"/"} className="flex items-center space-x-3 rtl:space-x-reverse" >
                         <div className=' w-10 h-10 grid place-items-center p-1 '>
