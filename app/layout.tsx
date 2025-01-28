@@ -6,6 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { ThemeProvider } from "@/components/theme-provider";
 import StoreProvider from "./StoreProvider";
 import { NextAuthProvider } from "./provider";
+import Analytics from "@/components/Analytics";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -41,12 +42,11 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
-
   return (
     <html lang="en">
       <head>
         <link rel="icon" href="/favicon.ico" />
+        <Analytics />
       </head>
       <body className="bg-background" cz-shortcut-listen="false" >
         <ThemeProvider
