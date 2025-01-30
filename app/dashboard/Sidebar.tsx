@@ -12,7 +12,6 @@ import { IoLogoGithub } from 'react-icons/io5';
 import { MdEmail } from 'react-icons/md';
 import { IoMdLogOut } from 'react-icons/io';
 
-import { ModeToggle } from '@/app/Navbar/ModeToggle'
 import { Button } from '@/components/ui/button';
 import { BreadcrumbComp } from '../Breadcrumb/BreadcrumbComp';
 import { Separator } from '@/components/ui/separator';
@@ -76,8 +75,6 @@ const Sidebar = () => {
             <IoMdLogOut />
           </Button>
         </div>
-
-        <ModeToggle/>
     </div>
   )
 }
