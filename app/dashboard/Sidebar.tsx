@@ -12,7 +12,6 @@ import { IoLogoGithub } from 'react-icons/io5';
 import { MdEmail } from 'react-icons/md';
 import { IoMdLogOut } from 'react-icons/io';
 
-import { ModeToggle } from '@/app/Navbar/ModeToggle'
 import { Button } from '@/components/ui/button';
 import { BreadcrumbComp } from '../Breadcrumb/BreadcrumbComp';
 import { Separator } from '@/components/ui/separator';
@@ -60,24 +59,20 @@ const Sidebar = () => {
         ))}
       </div>
       <Separator className=' dark:bg-gray-100/30 bg-gray-500 ' />
-      <div className=' w-full flex flex-col gap-2 items-center justify-center p-4 '>
-          <div className=' w-full flex items-center justify-center gap-2 '>
-            <Button variant="outline" className=' flex justify-center items-center gap-2 w-full bg-gray-3 border-gray-500 dark:border-gray-800 ' >
-              <IoLogoGithub />
-              <a href="https://github.com/harsh3dev/DevMatchups" target="_blank" rel="noopener noreferrer">GitHub</a>
-            </Button>
-            <Button variant="outline" className=' flex justify-center items-center gap-2 w-full bg-gray-3 border-gray-500 dark:border-gray-800 ' >
-              <MdEmail />
-             <a href="mailto:harshpandey.tech@gmail.com" target="_blank" rel="noopener noreferrer">Support</a>
-            </Button>
-          </div>
-          <Button onClick={handleLogout} variant="ghost" className=' w-full flex justify-center items-center gap-2 bg-transparent border border-gray-500 dark:border-gray-800 ' >
-            Logout
-            <IoMdLogOut />
-          </Button>
-        </div>
-
-        <ModeToggle/>
+      <div className=' w-full flex items-center justify-center gap-2 p-3.5'>
+        <Button variant="outline" className=' flex justify-center items-center gap-2 w-full bg-gray-3 border-gray-500 dark:border-gray-800 ' >
+          <IoLogoGithub />
+          <a href="https://github.com/harsh3dev/DevMatchups" target="_blank" rel="noopener noreferrer">GitHub</a>
+        </Button>
+        <Button variant="outline" className=' flex justify-center items-center gap-2 w-full bg-gray-3 border-gray-500 dark:border-gray-800 ' >
+          <MdEmail />
+          <a href="mailto:harshpandey.tech@gmail.com" target="_blank" rel="noopener noreferrer">Support</a>
+        </Button>
+      </div>
+      <Button onClick={handleLogout} variant="ghost" className=' w-[92%] flex justify-center items-center gap-2 bg-transparent border border-gray-500 dark:border-gray-800 mb-4' >
+        Logout
+        <IoMdLogOut />
+      </Button>
     </div>
   )
 }
