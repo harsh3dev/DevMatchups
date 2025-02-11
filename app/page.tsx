@@ -6,10 +6,11 @@ import GlobeComponent from "./Hero/GlobeComponent";
 import Faqs from "@/app/Hero/Faqs";
 import ProcessFlow from "./Hero/ProcessFlow";
 import FootCTA from "./Hero/FootCTA";
-
+import Script from 'next/script';
 
 export default function Home() {
 	return (
+		
 		<main className="flex min-h-screen flex-col items-center justify-start relative ">
 			<svg width="full" height="473" viewBox="0 0 1100 473" fill="none" xmlns="http://www.w3.org/2000/svg" className="-z-10 w-full absolute top-0 left-0 inset-0 opacity-70 invisible dark:visible " >
 				<g filter="url(#filter0_f_22_838)">
@@ -36,6 +37,15 @@ export default function Home() {
 			<Faqs/>
 			<FootCTA/>
 			<Footer/>
+			
 		</main>
+		
+		{/* Chatbot Script */}
+		<Script 
+		src="https://widget.cxgenie.ai/widget.js" 
+		data-aid="bea4a27d-4af0-465e-bca3-ffa4c7268c25"
+		data-lang="en"
+		strategy="lazyOnload"
+	/>
 	);
 }

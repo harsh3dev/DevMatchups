@@ -105,6 +105,7 @@ export default function Footer() {
                     <Link href={'https://www.linkedin.com/in/yash-gupta-64956b246/'} target="_blank" className="font-semibold hover:text-accent transition-all ease-linear scale-[0.2] " >
                         Yash Gupta
                     </Link>
+                    
                 </h1>
                 <span className=" flex justify-center items-center gap-5   text-xl group ">
                     <Link target="_blank" href=" https://www.producthunt.com/posts/devmatchups" className=" opacity-60 hover:opacity-100 " ><FaProductHunt /></Link>
