@@ -4,6 +4,7 @@ import devpost from '@/app/assets/devpost.svg'
 import devfolio from '@/app/assets/Devfolio.svg'
 import { LuExternalLink } from "react-icons/lu";
 import Image from 'next/image'
+import { motion } from 'framer-motion';
 
 interface PostsProps{
     title: string,
@@ -17,24 +18,36 @@ const Posts:React.FC<PostsProps> = ({title, url, logo, platform}) => {
     const Logo = (platform==='unstop' || platform==='devpost') ? (logo.startsWith('http') ? logo : 'https:' + logo) : logo;    
 
   return (
-    <a href={URL} target='_blank' className=' group min-w-[20vw] min-h-[20vh] px-5 py-4 flex flex-col justify-between items-start flex-wrap rounded-lg border border-gray-500 dark:border-gray-800 dark:backdrop-blur-xl transition-all ease-linear hover:border-accent hover:dark:border-accent dark:bg-gray-900/60 hover:dark:bg-blue-900/30 bg-sky-100/70 hover:bg-sky-300/40  '>
-        <div className='flex justify-between p-2 items-center w-full ' >
-            <h1 className='text-xl font-bold text-wrap '>
-                {title}
-            </h1>
-            <Image src={Logo} width={100} height={100} alt='logo-image' className=' ' />
+    <motion.a 
+      href={URL} 
+      target='_blank' 
+      className='group min-w-[20vw] min-h-[20vh] px-5 py-4 flex flex-col justify-between items-start flex-wrap rounded-lg border border-gray-500 dark:border-gray-800 dark:backdrop-blur-xl transition-all ease-in-out duration-500 hover:border-accent hover:shadow-xl hover:scale-110 hover:bg-gray-200 dark:hover:bg-gray-700'
+      whileHover={{ scale: 1.1, boxShadow: "0px 6px 15px rgba(0, 0, 0, 0.3)" }}
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+    >
+      <motion.div 
+        className='flex items-center space-x-3'
+        initial={{ opacity: 0, x: -20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.5, delay: 0.2 }}
+      >
+        <div className='relative w-10 h-10'>
+          <Image src={Logo} alt={platform} layout='fill' objectFit='contain' className='rounded-full' />
         </div>
-        <div className=' group flex justify-between p-2 items-center w-full ' >
-            {
-                platform==='unstop' && <Image src={unstop}  width={50} height={50} alt='logo-image' /> }
-                { platform==='devpost' && <Image src={devpost} width={50} height={50} alt='logo-image' /> }
-                { platform==='devfolio' && <Image src={devfolio} width={50} height={75} alt='logo-image' /> }
-
-            <span className=' group-hover:scale-[100%] hover:scale-[500%] '><LuExternalLink className=' group-hover:scale-[100%] hover:scale-[500%] ' /></span>
-            
-        </div>
-    </a>
+        <h3 className='text-lg font-semibold'>{title}</h3>
+      </motion.div>
+      <motion.div
+        className='opacity-0 group-hover:opacity-100 transition-opacity duration-300'
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.3, delay: 0.4 }}
+      >
+        <LuExternalLink size={20} />
+      </motion.div>
+    </motion.a>
   )
 }
 
-export default Posts
+export default Posts;
