@@ -50,7 +50,7 @@ const Page = () => {
         // console.log("devpost URL", res2.data.hackathon.hackathons[0].thumbnail_url);
         setDevposts(res2?.data?.hackathon?.hackathons);
         // console.log(res1?.data?.hackathon?.data?.data);
-        setUnstopPost(res1?.data?.hackathon?.data?.data);
+        setUnstopPost(res1?.data?.hackathon);
         setDevfolio(res3?.data?.hackathon?.hits.hits);
       } 
       catch (error) {

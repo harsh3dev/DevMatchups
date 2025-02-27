@@ -5,7 +5,8 @@ export async function GET(req: Request) {
   const devfolioURL = 'https://api.devfolio.co/api/search/hackathons'
   try {
     const response = await axios.post(devfolioURL, {
-        "type": "application_open"
+        "type": "application_open",
+        size: 20,
     });
 
     if (!response.data) {

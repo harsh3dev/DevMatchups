@@ -34,7 +34,12 @@ const Posts:React.FC<PostsProps> = ({title, url, logo, platform}) => {
         transition={{ duration: 0.5, delay: 0.2 }}
       >
         <div className='relative w-10 h-10'>
-          <Image src={Logo} alt={platform} layout='fill' objectFit='contain' className='rounded-full' />
+          <Image src={Logo !== null ? Logo : 
+            platform==='unstop' ? unstop : 
+            platform==='devpost' ? devpost : 
+            platform==='devfolio' ? devfolio : 
+            ''
+          } alt={platform} layout='fill' objectFit='contain' className='rounded-full' />
         </div>
         <h3 className='text-lg font-semibold'>{title}</h3>
       </motion.div>
