@@ -187,11 +187,25 @@ const Page = () => {
       <div className=" w-full h-full rounded-md p-5 border border-foreground dark:border-foreground  ">
         <div className=" w-full flex flex-col justify-between items-start gap-2 ">
           <div className="mb-4 w-full lg:max-w-[50%] ">
-            <h1 className=" text-lg md:text-3xl font-bold mb-5 text-gray-700 dark:text-gray-400 ">
+            <h1 className="text-lg md:text-3xl font-bold mb-5 text-gray-700 dark:text-gray-400 ">
               Your Skills
             </h1>
-            <div className=" w-full flex flex-wrap justify-around items-start gap-2 ">
-              {userData.skills}
+            <div className="w-full flex flex-wrap justify-start items-start gap-2 p-2 rounded-md">
+              {userData.skills && (typeof userData.skills === 'string' || Array.isArray(userData.skills)) ? (
+                (typeof userData.skills === 'string' ? userData.skills.split(",") : userData.skills).length > 0 ? (
+                  (typeof userData.skills === 'string' ? userData.skills.split(",") : userData.skills).map((skill, index) => {
+                    const formattedSkill = skill.trim();
+                    const capitalizedSkill = formattedSkill.charAt(0).toUpperCase() + formattedSkill.slice(1);
+                    return (
+                      <Capsule key={index} item={capitalizedSkill} />
+                    );
+                  })
+                ) : (
+                  <p className="text-gray-500 dark:text-gray-400">No skills available.</p>
+                )
+              ) : (
+                <p className="text-gray-500 dark:text-gray-400">No skills available.</p>
+              )}
             </div>
           </div>
           <div className="my-8 w-full lg:max-w-[70%]  ">
