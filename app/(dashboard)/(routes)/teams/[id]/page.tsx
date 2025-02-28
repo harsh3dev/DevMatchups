@@ -64,15 +64,14 @@ export default function Page({ params }: { params: { id: string } }) {
                 const userData = response.data.user;
                 setUserData(userData);
                 console.log("User data:", response.data);
-
+                setLinkedinUrl(userData?.linkedinUrl as string);
+                setGithubUrl(userData?.githubUrl as string);
+                setResumeUrl(userData?.resumeUrl as string);
             } catch (error) {
                 console.error("Error fetching user data:", error);
             }
         };
         fetchUserData();
-        setLinkedinUrl(userData?.linkedinUrl as string);
-        setGithubUrl(userData?.githubUrl as string);
-        setResumeUrl(userData?.resumeUrl as string);
     }, [session]);
     useEffect(()=>{
         if(isApplied)
