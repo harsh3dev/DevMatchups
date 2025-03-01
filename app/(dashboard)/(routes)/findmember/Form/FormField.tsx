@@ -19,7 +19,7 @@ export const FormField: React.FC<FormFieldProps> = ({
             <div className="w-full h-[50%] flex flex-col gap-2 ">
                 <Label htmlFor={label}>{label}</Label>
                 { type==='textarea' ? (<Textarea className={`dark:bg-gray-900 bg-gray-200 border-accent focus:border focus:border-b-2 ${type !== 'textarea' ? 'rounded-full' : 'rounded-md'}`} id={label} placeholder={placeholder} {...register(name, { valueAsNumber })} />) :
-                (<Input className={`dark:bg-gray-900 bg-gray-200 border-accent focus:border focus:border-b-2 ${type !== 'textarea' ? 'rounded-full' : 'rounded-md'}`} type={type} id={label} placeholder={placeholder} {...register(name, { valueAsNumber })} />)}
+                (<Input className={`dark:bg-gray-900 bg-gray-200 border-accent focus:border focus:border-b-2 ${type !== 'textarea' ? 'rounded-full' : 'rounded-md'}`} type={type} id={label} placeholder={placeholder} {...register(name, { valueAsNumber })} min={name === "memberCount" ? 1 : ""} max={name === "memberCount" ? 5 : ""} />)}
                 {error && <span className="error-message text-right flex justify-end items-center w-full text-sm mb-5 text-red-500 ">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4 -mt-px">
                         <path fill-rule="evenodd"
