@@ -19,6 +19,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import axios from "axios";
 import { toast } from "react-toastify";
+import useToggleForm from "@/hooks/useToggleForm";
 
 const formatSkillsData = (skills: string | string[]) => {
   if (typeof skills === "string") {
@@ -33,6 +34,7 @@ const formatSkillsData = (skills: string | string[]) => {
 const EditProfileForm = () => {
   const dispatch = useAppDispatch();
   const user = useAppSelector(selectUser);
+  const { isOpen,setIsOpen } = useToggleForm();
 
   const {
     register,
@@ -57,6 +59,8 @@ const EditProfileForm = () => {
       const response = await axios.post("/api/user", data);
       if (response.status === 200) {
         toast.success("Profile Updated Succesfully successfully!");
+        setIsOpen(false);
+        console.log(isOpen);
       }
     } catch (error) {
       console.log(error);

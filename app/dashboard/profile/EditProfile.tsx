@@ -11,6 +11,7 @@ import {
     DialogTrigger,
     } from "@/components/ui/dialog"
 import EditProfileForm from './EditProfileForm'
+import useToggleForm from '@/hooks/useToggleForm'
 
 
 interface PropInterface{
@@ -18,15 +19,16 @@ interface PropInterface{
 }
 
 const EditProfile:React.FC<PropInterface> = ({className}) => {
+    const { isOpen,setIsOpen } = useToggleForm();
     return (
-        <Dialog>
-            <DialogTrigger asChild>
+        <Dialog open={isOpen}>
+            <DialogTrigger asChild onClick={()=>setIsOpen(true)}>
                 <div className={`w-fit px-4 py-2 cursor-pointer font-semibold rounded-lg bg-gray-900 dark:bg-gray-100 text-white dark:text-black flex justify-center items-center gap-2 text-xs sm:text-lg  ${className} `}>
                     <MdModeEdit />
                     <span>Edit Profile</span>
                 </div>
             </DialogTrigger>
-            <DialogContent className="sm:max-w-[50vw] max-h-[90vh] ">
+            <DialogContent className="sm:max-w-[50vw] max-h-[90vh]" onClick={() => setIsOpen(false)}>
                 <DialogHeader>
                     <DialogTitle>Edit profile</DialogTitle>
                     <DialogDescription>
