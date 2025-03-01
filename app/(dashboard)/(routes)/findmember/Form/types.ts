@@ -8,7 +8,10 @@ export const UserSchema: ZodType<FormData> = z
     hackathonName: z.string().min(1, { message: "Hackathon name is required" }),
     regURL: z.string().url({ message: "Please enter a valid URL" }),
     hackathonMode: z.string().min(1, { message: "Hackathon mode is required" }),
-    memberCount: z.string().min(1, { message: "Member count must be at least 1" }),
+    memberCount: z.string()
+      .min(1, { message: "Member count must be at least 1" })
+      .max(5, { message: "Member count must be less than 5" })
+      .refine((val) => parseInt(val) >= 0, { message: "Member count must be a non-negative number" }),
     skills: z.array(z.string().min(1, { message: "Enter atleast 1 skill" })),
     role: z.string().min(1, { message: "Role is required" }),
     experience: z.string().min(1, { message: "Experience is required" }),
