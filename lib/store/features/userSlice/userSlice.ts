@@ -14,7 +14,7 @@ export interface UserState {
   applications: any[];
   hackathons: any[];
   accounts: any[];
-  skills: string[];
+  skills: string[] | string;
   resumeUrl: string | null;
   linkedinUrl: string | null;
   githubUrl: string | null;

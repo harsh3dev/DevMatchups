@@ -30,7 +30,7 @@ const formatSkillsData = (skills: string | string[]) => {
   return skills;
 };
 
-const EditProfileForm = () => {
+const EditProfileForm = ({ setIsOpen } : { setIsOpen:React.Dispatch<React.SetStateAction<boolean>>}) => {
   const dispatch = useAppDispatch();
   const user = useAppSelector(selectUser);
 
@@ -57,6 +57,7 @@ const EditProfileForm = () => {
       const response = await axios.post("/api/user", data);
       if (response.status === 200) {
         toast.success("Profile Updated Succesfully successfully!");
+        setIsOpen(false);
       }
     } catch (error) {
       console.log(error);
