@@ -7,6 +7,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import StoreProvider from "./StoreProvider";
 import { NextAuthProvider } from "./provider";
 import Analytics from "@/components/Analytics";
+import BackToTop from "./Hero/BackToTop";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -63,6 +64,7 @@ export default function RootLayout({
           <ToastContainer />
 
         </ThemeProvider>
+        <BackToTop />
       </body>
     </html>
   );
