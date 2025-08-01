@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { IoIosArrowRoundUp } from "react-icons/io";
+import { ArrowUp } from 'lucide-react';
 
 export default function BackToTop() {
 	const [showButton, setShowButton] = useState(false);
@@ -27,7 +27,7 @@ export default function BackToTop() {
 			className="fixed bottom-24 right-6 z-100 p-3 mr-6 mb-6 rounded-full bg-black border-2 border-blue-700 text-white hover:bg-blue-700 shadow-lg transition-colors duration-700"
 			aria-label="Back to top"
 		>
-			<IoIosArrowRoundUp className="w-7 h-7" />
+			<ArrowUp className="w-7 h-7" />
 		</button>
 	);
 }

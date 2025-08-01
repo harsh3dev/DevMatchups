@@ -62,9 +62,8 @@ export default function RootLayout({
             </StoreProvider>
           </NextAuthProvider>
           <ToastContainer />
-
+          <BackToTop />
         </ThemeProvider>
-        <BackToTop />
       </body>
     </html>
   );
