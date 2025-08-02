@@ -1,83 +1,172 @@
+<h1 align="center" id="title">🚀 DevMatchups</h1>
+<p align="center">
+  The ultimate platform to find teammates for hackathons — globally 🌍
+</p>
 
-<h1 align="center" id="title">Dev Matchups</h1>
+---
 
-![image](https://github.com/user-attachments/assets/d40b5116-242b-4235-bbdf-04bcea305a8f)
+## 📌 Overview
 
-## Overview
+**DevMatchups** is a web platform designed to connect developers, designers, and enthusiasts from around the world to form hackathon teams. Whether you're searching for teammates with complementary skills or exploring upcoming events, this platform makes collaboration easy and effective.
 
-DevMatchups is a platform designed to connect developers and enthusiasts from all around the world to form teams for hackathons. Whether you're looking for teammates with specific skills, or you want to join a team, this platform provides an easy way to collaborate and participate in hackathons.
+---
 
-## Features
+## ✨ Features
 
-- **User Registration and Authentication**: Sign up and log in to create teams.
-- **Profile Creation**: Create a detailed profile highlighting your skills, interests, and previous hackathon experiences.
-- **Team Formation**: Find and connect with other developers to form teams based on skills and interests.
-- **Hackathon Listings**: Browse upcoming hackathons and join events.
-- **Search and Filter**: Use advanced search and filter options to find team members with specific skills or interests.
-- **Match with Devs**: Match with highly skilled developers around the world.
+### 👤 User & Team Features
+- User registration and authentication  
+- Developer profile creation and management  
+- Team formation with matchmaking  
 
-## Tech Stack
+### 🎯 Hackathon Discovery
+- Explore upcoming hackathon listings  
+- Advanced filters and search options  
+- Personalized match recommendations  
 
-[![My Skills](https://skillicons.dev/icons?i=nextjs,ts,nodejs,tailwind,postgres,prisma,docker,redux,vercel,)](https://skillicons.dev)
-- **UI**: Shadcn UI, Aceternity UI, Tailwind CSS, Framer Motion
+### 💅 UI/UX Enhancements
+- Back-to-top button across all pages  
+- Integrated chatbot assistant  
+- Icon upgrades using Lucide React  
+- Redesigned headers for visual consistency  
 
-### Usage
-1. Sign up for an account.
-2. Create your profile, adding your skills, interests, and hackathon experiences.
-3. Browse hackathons to find events you're interested in.
-4. Search for team members using filters to find people with the skills you need.
-5. Join or create teams and start collaborating.
+---
 
-### Contributing
-We welcome contributions from the community! To contribute:
+## 🛠️ Tech Stack
 
-1. Fork the repository.
-2. Create a new branch (`git checkout -b <branch-name>`).
-3. Make your changes.
-4. Commit your changes (`git commit -m 'Commit message'`).
-5. Push to the branch (`git push origin branch-name`).
-6. Open a pull request.
+[![Tech Stack](https://skillicons.dev/icons?i=nextjs,ts,nodejs,tailwind,postgres,prisma,docker,redux,vercel)](https://skillicons.dev)
 
-Please ensure your code adheres to our coding standards and includes appropriate tests.
+- **UI Libraries:** Shadcn UI, Aceternity UI, Tailwind CSS, Framer Motion
 
-### Contact
-If you have any questions, suggestions, or feedback, feel free to reach out:
+---
 
-Discord: @harsh3dev <br/>
-Email: harshpandey.tech@gmail.com or yaahg342@gmail.com<br/>
-LinkedIn: [Harsh Pandey](https://www.linkedin.com/in/harsh3dev/), [Yash Gupta](https://www.linkedin.com/in/yash-gupta-64956b246/)
-<hr/>
+## 🚀 Getting Started
 
-### Installation
+### 🔄 Clone the Repository
 
-1. **Clone the repository**:
-   ```bash
-   git clone https://github.com/harsh3dev/DevMatchups
-   cd DevMatchups
+```bash
+git clone https://github.com/harsh3dev/DevMatchups.git
+cd DevMatchups
+````
 
-2. **Install dependencies**:
-    ```bash
-    npm install
-    ```
+### 📦 Install Dependencies
 
+```bash
+npm install
+# or
+pnpm install
+# or
+bun install
+```
 
-## Getting Started
+### 🐳 Run with Docker (optional)
 
-First, run the development server:
+```bash
+docker-compose up --build
+```
+
+### 🧪 Start the Development Server
 
 ```bash
 npm run dev
 # or
 pnpm run dev
 # or
-pnpm dev
-# or
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Visit `http://localhost:3000` in your browser.
+
+---
+
+## 🗂️ Project Structure
+
+* `app/` — Routing and main page structure
+* `components/` — Reusable UI components
+* `hooks/` — Custom React hooks
+* `lib/` — Utility libraries and helpers
+* `prisma/` — Database schema and migrations
+* `public/` — Static assets (images, icons, etc.)
+* `__tests__/` — Unit and integration tests
+* `.github/` — GitHub Actions and workflow configs
+* `Actions/` — CI/CD configurations
+
+---
+
+## 🤝 Contributing
+
+We welcome contributions! Here’s a quick guide to get started:
+
+```bash
+# Fork the repository
+
+# Create your feature branch
+git checkout -b feature/your-feature
+
+# Commit your changes
+git commit -m "Add: your feature"
+
+# Push to GitHub
+git push origin feature/your-feature
+```
+
+Then, open a pull request 🚀
+
+Please ensure your code adheres to the project style and includes appropriate test coverage. See [CONTRIBUTING.md](CONTRIBUTING.md) and [Code of Conduct](CodeOfConduct.md) for more info.
+
+---
+
+## 📬 Contact
+
+* **Discord:** `@harsh3dev`
+* **Email:** [harshpandey.tech@gmail.com](mailto:harshpandey.tech@gmail.com) | [yaahg342@gmail.com](mailto:yaahg342@gmail.com)
+* **LinkedIn:** [Harsh Pandey](https://www.linkedin.com/in/harsh3dev/) • [Yash Gupta](https://www.linkedin.com/in/yash-gupta-64956b246/)
+
+---
+
+## 👥 Project Contributors
+
+A huge thanks to all contributors who made DevMatchups possible:
+
+* [`@harsh3dev`](https://github.com/harsh3dev)
+* [`@Yashgupta9330`](https://github.com/Yashgupta9330)
+* [`@TheCoderAdi`](https://github.com/TheCoderAdi)
+* [`@aashitanegii`](https://github.com/aashitanegii)
+* [`@palakag29`](https://github.com/palakag29)
+* [`@Dutta2005`](https://github.com/Dutta2005)
+* [`@mynk8`](https://github.com/mynk8)
+* [`@theanuragg`](https://github.com/theanuragg)
+* [`@Wali05`](https://github.com/Wali05)
+* [`@Arisha2902`](https://github.com/Arisha2902)
+* [`@Hacker-smkg`](https://github.com/Hacker-smkg)
+* [`@ItsAbhinavM`](https://github.com/ItsAbhinavM)
+* [`@AnushkaChanda`](https://github.com/AnushkaChanda)
+* [`@souvikpramanikgit`](https://github.com/souvikpramanikgit)
+* [`@Suyash878`](https://github.com/Suyash878)
+* [`@Pranshu640`](https://github.com/Pranshu640)
+* [`@Harshvardhan-91`](https://github.com/Harshvardhan-91)
+* [`@GIRIRAJSHANKAR27`](https://github.com/GIRIRAJSHANKAR27)
+* [`@Mayur-Pagote`](https://github.com/Mayur-Pagote)
+* [`@Prashast4438`](https://github.com/Prashast4438)
+* [`@Ayushraj1605`](https://github.com/Ayushraj1605)
+* [`@Bishal-35`](https://github.com/Bishal-35)
+* [`@Abhigit-code`](https://github.com/Abhigit-code)
+* [`@5uhani`](https://github.com/5uhani)
+* [`@soham247`](https://github.com/soham247)
+* [`@akadeepesh`](https://github.com/akadeepesh)
+* [`@NidhiNayak08`](https://github.com/NidhiNayak08)
+
+---
+
+Built with ☕️, 💻, and plenty of caffeine.
+💡 *Pro tip: Your perfect team might be one pull request away.*
+
+---
+
+## 📝 License
+
+This project is licensed under the [MIT License](LICENSE).
+
+```
 
 
-<h3>Project Contributers: <h3>
-<a href="https://github.com/harsh3dev/DevMatchups/graphs/contributors">
-<img src="https://contributors-img.web.app/image?repo=harsh3dev/DevMatchups"/>
+```
