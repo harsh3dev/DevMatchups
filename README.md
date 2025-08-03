@@ -3,6 +3,12 @@
   The ultimate platform to find teammates for hackathons — globally 🌍
 </p>
 
+<p align="center">
+  <a href="https://gssoc.girlscript.tech/">
+    <img src="https://user-images.githubusercontent.com/92252895/257558544-590cfc18-b194-4940-8684-75d803fac85e.png" alt="GSSoC'25 Banner" width="80%" />
+  </a>
+</p>
+
 ---
 
 ## 📌 Overview
@@ -127,39 +133,9 @@ Please ensure your code adheres to the project style and includes appropriate te
 
 A huge thanks to all contributors who made DevMatchups possible:
 
-* [`@harsh3dev`](https://github.com/harsh3dev)
-* [`@Yashgupta9330`](https://github.com/Yashgupta9330)
-* [`@TheCoderAdi`](https://github.com/TheCoderAdi)
-* [`@aashitanegii`](https://github.com/aashitanegii)
-* [`@palakag29`](https://github.com/palakag29)
-* [`@Dutta2005`](https://github.com/Dutta2005)
-* [`@mynk8`](https://github.com/mynk8)
-* [`@theanuragg`](https://github.com/theanuragg)
-* [`@Wali05`](https://github.com/Wali05)
-* [`@Arisha2902`](https://github.com/Arisha2902)
-* [`@Hacker-smkg`](https://github.com/Hacker-smkg)
-* [`@ItsAbhinavM`](https://github.com/ItsAbhinavM)
-* [`@AnushkaChanda`](https://github.com/AnushkaChanda)
-* [`@souvikpramanikgit`](https://github.com/souvikpramanikgit)
-* [`@Suyash878`](https://github.com/Suyash878)
-* [`@Pranshu640`](https://github.com/Pranshu640)
-* [`@Harshvardhan-91`](https://github.com/Harshvardhan-91)
-* [`@GIRIRAJSHANKAR27`](https://github.com/GIRIRAJSHANKAR27)
-* [`@Mayur-Pagote`](https://github.com/Mayur-Pagote)
-* [`@Prashast4438`](https://github.com/Prashast4438)
-* [`@Ayushraj1605`](https://github.com/Ayushraj1605)
-* [`@Bishal-35`](https://github.com/Bishal-35)
-* [`@Abhigit-code`](https://github.com/Abhigit-code)
-* [`@5uhani`](https://github.com/5uhani)
-* [`@soham247`](https://github.com/soham247)
-* [`@akadeepesh`](https://github.com/akadeepesh)
-* [`@NidhiNayak08`](https://github.com/NidhiNayak08)
-
----
-
-Built with ☕️, 💻, and plenty of caffeine.
-💡 *Pro tip: Your perfect team might be one pull request away.*
-
+<h3>Project Contributers: <h3>
+<a href="https://github.com/harsh3dev/DevMatchups/graphs/contributors">
+<img src="https://contributors-img.web.app/image?repo=harsh3dev/DevMatchups"/>
 ---
 
 ## 📝 License
@@ -167,6 +143,8 @@ Built with ☕️, 💻, and plenty of caffeine.
 This project is licensed under the [MIT License](LICENSE).
 
 ```
+Built with ☕️, 💻, and plenty of caffeine.
+💡 *Pro tip: Your perfect team might be one pull request away.*
 
 
 ```
