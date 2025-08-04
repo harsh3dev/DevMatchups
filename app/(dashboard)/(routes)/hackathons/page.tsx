@@ -36,22 +36,36 @@ const Page = () => {
       setLoading(true);
       try {
 
-        const [res1, res2, res3] = await Promise.all([
+        const [unstopRes, devpostRes, devfolioRes] = await Promise.all([
           axios.get("/api/unstopHackathon"),
           axios.get("/api/devpostHackathon"),
           axios.get("/api/devfolioHackathon")
         ]);
-        // const res1 = await  axios.get("/api/unstopHackathon");
-        // const res2 = await axios.get("/api/devpostHackathon");
-        // const res3 = await axios.get("/api/devfolioHackathon");
-        // console.log("devpost", res2.data.hackathon.hackathons);
-        console.log("devfolio", res3.data.hackathon.hits.hits);
-        console.log("devfolio logo", res3.data.hackathon.hits.hits[0]._source.hackathon_setting.logo);
-        // console.log("devpost URL", res2.data.hackathon.hackathons[0].thumbnail_url);
-        setDevposts(res2?.data?.hackathon?.hackathons);
-        // console.log(res1?.data?.hackathon?.data?.data);
-        setUnstopPost(res1?.data?.hackathon);
-        setDevfolio(res3?.data?.hackathon?.hits.hits);
+
+
+        const unstopHackathons = unstopRes.data.hackathon.map((entry: any) => ({
+          ...entry,
+          mode: entry.event_type === 'VIRTUAL' ? 'Online' : entry.event_type === 'OFFLINE' ? 'Offline' : 'Hybrid'
+        }));
+
+        const devpostHackathons = devpostRes.data.hackathon.hackathons.map((entry: any) => ({
+          ...entry,
+          mode: entry.displayed_location.location?.includes('Online') ? 'Online' : 'Offline'
+        }));
+
+        const devfolioHackathons = devfolioRes.data.hackathon.hits.hits.map((entry: any) => ({
+          ...entry,
+          _source: {
+            ...entry._source,
+            mode: entry._source.apply_mode === 'both' ? 'Hybrid' : 
+                  entry._source.is_online ? 'Online' : 'Offline',
+            location: entry._source.location || entry._source.city || null
+          }
+        }));
+
+        setDevposts(devpostHackathons);
+        setUnstopPost(unstopHackathons);
+        setDevfolio(devfolioHackathons);
       } 
       catch (error) {
         console.error('Error fetching data:', error);
@@ -115,7 +129,16 @@ const Page = () => {
           selectedPlatform==="Unstop" &&
           <div className='w-full min-h-[50vh] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 flex-wrap px-10 '>
             {unstopPost && unstopPost.map && unstopPost.map((entry) => (
-              <Posts key={entry.id} title={entry.title} url={entry.public_url} logo={entry.logoUrl2} platform='unstop' />
+              <Posts 
+                key={entry.id} 
+                title={entry.title} 
+                url={entry.public_url} 
+                logo={entry.logoUrl2} 
+                platform='unstop'
+                mode={entry.region === "offline" ? "Offline" : entry.region === "online" ? "Online" : "Hybrid"}
+                location={entry.organisation.name}
+                status={entry.status}
+              />
             ))}
           </div>
           } 
@@ -125,7 +148,16 @@ const Page = () => {
           <div className='w-full min-h-[50vh] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 flex-wrap px-10 '>
             {
               devposts.map((entry:any)=>(
-                <Posts key={entry.id} title={entry.title} url={entry.url} logo={entry.thumbnail_url} platform='devpost' />
+                <Posts 
+                  key={entry.id} 
+                  title={entry.title} 
+                  url={entry.url} 
+                  logo={entry.thumbnail_url} 
+                  platform='devpost'
+                  mode={entry.mode}
+                  location={entry.displayed_location.location?.includes('Online') ? null : entry.displayed_location.location}
+                  status={entry.open_state === 'open' ? 'LIVE' : entry.open_state}
+                />
               ))
             }
           </div>
@@ -135,7 +167,16 @@ const Page = () => {
           <div className='w-full min-h-[50vh] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 flex-wrap px-10 '>
             {
               devfolio.map((entry:any)=>(
-                <Posts key={entry._source.name} title={entry._source.name} url={`${entry._source.slug}.devfolio.co`} logo={entry._source.hackathon_setting.logo} platform='devfolio' />
+                <Posts 
+                  key={entry._source.name} 
+                  title={entry._source.name} 
+                  url={`${entry._source.slug}.devfolio.co`} 
+                  logo={entry._source.hackathon_setting.logo} 
+                  platform='devfolio'
+                  mode={entry._source.is_online ? 'Online' : 'Offline'}
+                  location={entry._source.location}
+                  status={entry._source.status === 'publish' ? 'LIVE' : entry._source.status}
+                />
               ))
             }
           </div>

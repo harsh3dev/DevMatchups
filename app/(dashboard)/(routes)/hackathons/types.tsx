@@ -35,6 +35,8 @@ type BannerMobile = {
     title: string;
     public_url: string;
     logoUrl2: string;
+    mode?: string;
+    location?: string;
     banner_mobile: BannerMobile;
     end_date: string;
     festival: string | null;
