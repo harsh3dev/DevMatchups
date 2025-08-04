@@ -48,7 +48,7 @@ const Posts:React.FC<PostsProps> = ({title, url, logo, platform, mode, location,
       </motion.div>
       {(mode || location) && (
         <motion.div 
-          className='flex items-center gap-2 mt-2 text-sm text-gray-600 dark:text-gray-400'
+          className='flex flex-wrap gap-2 mt-2 text-sm text-gray-600 dark:text-gray-400'
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.3, delay: 0.3 }}
@@ -68,7 +68,7 @@ const Posts:React.FC<PostsProps> = ({title, url, logo, platform, mode, location,
             </span>
           )}
           {location && mode !== 'Online' && (
-            <span className='flex items-center gap-1'>
+                          <span className='flex items-center gap-1 w-full mt-1'>
               <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
                 <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
               </svg>
