@@ -78,10 +78,10 @@ useEffect(() => {
         </div>
       ) : (
         <div className="text-center text-slate-500 max-w-lg mx-auto mt-10 p-6">
-          <h3 className="text-xl font-semibold text-slate-800 mb-2">Hmm, that's a rare combo!</h3>
+          <h3 className="text-xl font-semibold text-slate-800 mb-2">Hmm, that&#39;s a rare combo!</h3>
           <p>
-            We couldn't find any hackathons that match all of your selected filters. 
-            Don't worry! Your next great project is likely just a click away. Try broadening your search.
+            We couldn&#39;t find any hackathons that match all of your selected filters. 
+            Don&#39;t worry! Your next great project is likely just a click away. Try broadening your search.
           </p>
         </div>
       )}
