@@ -68,18 +68,25 @@ useEffect(() => {
   return (
     <div className='w-full min-h-[50vh] grid sm:grid-cols-2 lg:grid-cols-3 gap-2 md:gap-4 flex-wrap '>
 
-      {loading && <Loading/> }
+      {loading ? (
+        <Loading />
+      ) : filteredPosts && filteredPosts.length > 0 ? (
+        <div className='w-full grid sm:grid-cols-2 lg:grid-cols-3 gap-2 md:gap-4'>
+          {filteredPosts.map((entry, index) => (
+            <PostCard entry={entry} key={index} />
+          ))}
+        </div>
+      ) : (
+        <div className="text-center text-slate-500 max-w-lg mx-auto mt-10 p-6">
+          <h3 className="text-xl font-semibold text-slate-800 mb-2">Hmm, that&#39;s a rare combo!</h3>
+          <p>
+            We couldn&#39;t find any hackathons that match all of your selected filters. 
+            Don&#39;t worry! Your next great project is likely just a click away. Try broadening your search.
+          </p>
+        </div>
+      )}
 
-      {/* {
-         mockData.map((entry, index)=>(
-            <PostCard entry={entry} key={index} />
-        ))
-      } */}
-      {
-        filteredPosts?.map((entry, index)=>(
-            <PostCard entry={entry} key={index} />
-        ))
-      }
+      
     </div>
   )
 }
