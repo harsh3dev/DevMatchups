@@ -31,7 +31,7 @@ model User {
   linkedinUrl  String?  
   githubUrl    String? 
   skills       String[]
-  favoriteHackathons UserFavoriteHackathon[]
+
   externalFavorites ExternalHackathonFavorite[]
 }
 
@@ -72,19 +72,10 @@ model Hackathon {
   updatedAt      DateTime     @updatedAt
   applications   Application[]
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-  favoritedBy    UserFavoriteHackathon[]
+
 }
 
-model UserFavoriteHackathon {
-  id          String    @id @default(cuid())
-  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId      String
-  hackathon   Hackathon @relation(fields: [hackathonId], references: [id], onDelete: Cascade)
-  hackathonId String
-  createdAt   DateTime  @default(now())
 
-  @@unique([userId, hackathonId])
-}
 
 model ExternalHackathonFavorite {
   id              String   @id @default(cuid())
