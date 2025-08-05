@@ -12,6 +12,10 @@ import { UnstopPost } from './types'
 import { Skeleton } from '@/components/ui/skeleton'
 import { motion } from "framer-motion"
 import { cn } from '@/lib/utils'
+import { FaStar } from 'react-icons/fa'
+import { useFavorites } from '@/app/hooks/use-favorites'
+import { useSession } from 'next-auth/react'
+import { useRouter } from 'next/navigation'
 
 
 const Page = () => {
@@ -19,8 +23,12 @@ const Page = () => {
   const [unstopPost, setUnstopPost] = useState<UnstopPost[]>([]);
   const [devposts, setDevposts] = useState([]);
   const [devfolio, setDevfolio] = useState([]);
+  const [favorites, setFavorites] = useState([]);
 
   const [selectedPlatform, setSelectedPlatform] = useState("Unstop")
+  const { loadExternalFavorites } = useFavorites();
+  const { data: session, status } = useSession();
+  const router = useRouter();
 
 
   const platforms = [
@@ -30,6 +38,15 @@ const Page = () => {
   ]
 
 
+
+  const fetchFavorites = async () => {
+    try {
+      const response = await axios.get("/api/external-favorites");
+      setFavorites(response.data);
+    } catch (error) {
+      console.error('Error fetching favorites:', error);
+    }
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -78,10 +95,60 @@ const Page = () => {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    if (selectedPlatform === "Favorites") {
+      fetchFavorites();
+    }
+  }, [selectedPlatform]);
+
+  // Function to refresh favorites when a hackathon is unfavorited
+  const refreshFavorites = () => {
+    if (selectedPlatform === "Favorites") {
+      fetchFavorites();
+    }
+  };
+
+  // Function to handle platform selection with auth check
+  const handlePlatformChange = (platformName: string) => {
+    if (platformName === "Favorites") {
+      if (status === "loading") return; // Wait for session to load
+      if (!session) {
+        router.push("/login");
+        return;
+      }
+    }
+    setSelectedPlatform(platformName);
+  };
+
+  // Function to handle favorites button click
+  const handleFavoritesClick = () => {
+    handlePlatformChange("Favorites");
+  };
+
 
 
   return (
-    <div className='min-h-screen w-full text-black dark:bg-background bg-background dark:text-white mb-20 '>
+    <div className='min-h-screen w-full text-black dark:bg-background bg-background dark:text-white mb-20 relative'>
+      {/* Top Right Favorites Button */}
+      <motion.button
+        onClick={handleFavoritesClick}
+        className={`fixed top-20 right-3 md:right-6 z-20 flex items-center transition-all duration-300 ${
+          selectedPlatform === "Favorites" 
+            ? 'bg-gradient-to-r from-yellow-400 to-yellow-500 text-black shadow-lg scale-105' 
+            : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-yellow-100 dark:hover:bg-yellow-900/30 hover:text-yellow-600 dark:hover:text-yellow-400'
+        } ${
+          'p-2 md:px-4 md:py-2 md:space-x-2 rounded-full'
+        }`}
+        whileHover={{ scale: selectedPlatform === "Favorites" ? 1.05 : 1.02 }}
+        whileTap={{ scale: 0.98 }}
+        title="Favorites"
+      >
+        <FaStar className={`w-4 h-4 ${
+          selectedPlatform === "Favorites" ? 'text-black' : 'text-yellow-500'
+        }`} />
+        <span className="text-sm font-medium hidden md:inline">Favorites</span>
+      </motion.button>
+
       <div className='w-full mt-16 flex flex-col justify-start items-start gap-5'>
 
         <div className=" w-full flex justify-center items-center md:justify-start ">
@@ -89,7 +156,7 @@ const Page = () => {
             {platforms.map((platform) => (
               <motion.button
                 key={platform.name}
-                onClick={() => setSelectedPlatform(platform.name)}
+                onClick={() => handlePlatformChange(platform.name)}
                 className={cn("flex items-center  space-x-2 px-6 py-3 rounded-lg transition-all duration-300 bg-white", 
                   selectedPlatform === platform.name
                     ? ' outline outline-offset-4 outline-primary dark:outline-offset-4 dark:outline-primary'
@@ -130,7 +197,8 @@ const Page = () => {
           <div className='w-full min-h-[50vh] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 flex-wrap px-10 '>
             {unstopPost && unstopPost.map && unstopPost.map((entry) => (
               <Posts 
-                key={entry.id} 
+                key={entry.id}
+                id={entry.id.toString()}
                 title={entry.title} 
                 url={entry.public_url} 
                 logo={entry.logoUrl2} 
@@ -149,7 +217,8 @@ const Page = () => {
             {
               devposts.map((entry:any)=>(
                 <Posts 
-                  key={entry.id} 
+                  key={entry.id}
+                  id={entry.id.toString()}
                   title={entry.title} 
                   url={entry.url} 
                   logo={entry.thumbnail_url} 
@@ -168,7 +237,8 @@ const Page = () => {
             {
               devfolio.map((entry:any)=>(
                 <Posts 
-                  key={entry._source.name} 
+                  key={entry._source.name}
+                  id={entry._source.name}
                   title={entry._source.name} 
                   url={`${entry._source.slug}.devfolio.co`} 
                   logo={entry._source.hackathon_setting.logo} 
@@ -179,6 +249,33 @@ const Page = () => {
                 />
               ))
             }
+          </div>
+        }
+        {
+          selectedPlatform==="Favorites" &&
+          <div className='w-full min-h-[50vh] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 px-10 '>
+            {favorites.length === 0 ? (
+              <div className="col-span-full text-center py-10">
+                <FaStar className="w-16 h-16 text-gray-400 mx-auto mb-4" />
+                <p className="text-lg text-gray-500">No favorite hackathons yet</p>
+                <p className="text-sm text-gray-400">Start favoriting hackathons by clicking the star icon!</p>
+              </div>
+            ) : (
+              favorites.map((entry: any) => (
+                <Posts 
+                  key={`${entry.platform}-${entry.externalId}`}
+                  id={entry.externalId}
+                  title={entry.title} 
+                  url={entry.url} 
+                  logo={entry.logo} 
+                  platform={entry.platform}
+                  mode={entry.mode}
+                  location={entry.location}
+                  status={entry.status}
+                  onFavoriteChange={refreshFavorites}
+                />
+              ))
+            )}
           </div>
         }
       </div>

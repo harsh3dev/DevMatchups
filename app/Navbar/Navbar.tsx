@@ -21,6 +21,7 @@ import { FaCodeBranch } from "react-icons/fa6";
 import { TbUserSearch } from "react-icons/tb";
 import { IoLogoGithub, IoMdLogOut } from 'react-icons/io'
 import { MdDashboard, MdEmail } from 'react-icons/md'
+import { FaStar } from 'react-icons/fa'
 
 import Logo from '@/app/assets/Devmatchups.svg'
 
@@ -42,6 +43,11 @@ const Navbar = () => {
             title: 'Explore Hackathons',
             icon: <GoCodescan className="h-5 w-5 text-muted-foreground transition-colors group-hover:text-primary" />,
             link: '/hackathons'
+        },
+        {
+            title: 'Favorites',
+            icon: <FaStar className="h-5 w-5 text-muted-foreground transition-colors group-hover:text-primary" />,
+            link: '/favorites'
         }
     ] as const;
     const navItems = [

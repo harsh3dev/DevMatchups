@@ -19,7 +19,7 @@ import { TbUserSearch } from 'react-icons/tb'
 import { FaCodeBranch } from 'react-icons/fa6'
 import { GoCodescan } from 'react-icons/go'
 import { RiEdit2Fill } from "react-icons/ri";
-import { FaCheckCircle } from "react-icons/fa";
+import { FaCheckCircle, FaStar } from "react-icons/fa";
 import { PiGitPullRequestBold } from "react-icons/pi";
 import { IoLogoGithub, IoMdLogOut } from 'react-icons/io'
 import { MdEmail } from 'react-icons/md'
@@ -44,6 +44,11 @@ const navLinks = [
         title: 'Explore Hackathons',
         icon: <GoCodescan className="h-5 w-5 text-muted-foreground transition-colors group-hover:text-primary" />,
         link: '/hackathons'
+    },
+    {
+        title: 'Favorites',
+        icon: <FaStar className="h-5 w-5 text-muted-foreground transition-colors group-hover:text-primary" />,
+        link: '/favorites'
     }
 ] as const;
 
