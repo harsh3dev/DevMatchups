@@ -11,6 +11,8 @@
 
 ---
 
+![CodeRabbit Pull Request Reviews](https://img.shields.io/coderabbit/prs/github/harsh3dev/DevMatchups?utm_source=oss&utm_medium=github&utm_campaign=harsh3dev%2FDevMatchups&labelColor=171717&color=FF570A&link=https%3A%2F%2Fcoderabbit.ai&label=CodeRabbit+Reviews)
+
 ## 📌 Overview
 
 **DevMatchups** is a web platform designed to connect developers, designers, and enthusiasts from around the world to form hackathon teams. Whether you're searching for teammates with complementary skills or exploring upcoming events, this platform makes collaboration easy and effective.
