@@ -1,7 +1,16 @@
 'use client';
 
-import { create } from "zustand";
-import axios from "axios";
+import { useCallback } from "react";
+import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
+import { 
+  selectFavorites, 
+  selectFavoriteIds, 
+  selectIsExternalFavorited,
+  loadExternalFavorites,
+  addExternalFavorite,
+  removeExternalFavorite,
+  toggleExternalFavorite
+} from "@/lib/store/features/favoritesSlice/favoritesSlice";
 import { toast } from "react-hot-toast";
 
 interface ExternalHackathon {
@@ -15,87 +24,63 @@ interface ExternalHackathon {
   status?: string;
 }
 
-interface FavoritesStore {
-  favoriteIds: string[];
-  addExternalFavorite: (hackathon: ExternalHackathon) => Promise<void>;
-  removeExternalFavorite: (externalId: string, platform: string) => Promise<void>;
-  toggleExternalFavorite: (hackathon: ExternalHackathon) => Promise<void>;
-  isExternalFavorited: (externalId: string, platform: string) => boolean;
-  loadExternalFavorites: () => Promise<void>;
-}
+export const useFavorites = () => {
+  const dispatch = useAppDispatch();
+  const favorites = useAppSelector(selectFavorites);
+  const favoriteIds = useAppSelector(selectFavoriteIds);
 
-export const useFavorites = create<FavoritesStore>((set, get) => ({
-  favoriteIds: [],
-
-  addExternalFavorite: async (hackathon: ExternalHackathon) => {
+  const handleAddExternalFavorite = useCallback(async (hackathon: ExternalHackathon) => {
     try {
-      await axios.post("/api/external-favorites", {
-        externalId: hackathon.id,
-        title: hackathon.title,
-        url: hackathon.url,
-        logo: hackathon.logo,
-        platform: hackathon.platform,
-        mode: hackathon.mode,
-        location: hackathon.location,
-        status: hackathon.status,
-      });
-      
-      const favoriteKey = `${hackathon.platform}-${hackathon.id}`;
-      set((state) => ({
-        favoriteIds: [...state.favoriteIds, favoriteKey],
-      }));
+      await dispatch(addExternalFavorite(hackathon)).unwrap();
       toast.success("Added to favorites!");
     } catch (error) {
       toast.error("Failed to add to favorites");
       console.error(error);
     }
-  },
+  }, [dispatch]);
 
-  removeExternalFavorite: async (externalId: string, platform: string) => {
+  const handleRemoveExternalFavorite = useCallback(async (externalId: string, platform: string) => {
     try {
-      await axios.post("/api/external-favorites", {
-        externalId,
-        platform,
-      });
-      
-      const favoriteKey = `${platform}-${externalId}`;
-      set((state) => ({
-        favoriteIds: state.favoriteIds.filter((id) => id !== favoriteKey),
-      }));
+      await dispatch(removeExternalFavorite({ externalId, platform })).unwrap();
       toast.success("Removed from favorites!");
     } catch (error) {
       toast.error("Failed to remove from favorites");
       console.error(error);
     }
-  },
+  }, [dispatch]);
 
-  toggleExternalFavorite: async (hackathon: ExternalHackathon) => {
-    const isFavorited = get().isExternalFavorited(hackathon.id, hackathon.platform);
-    if (isFavorited) {
-      await get().removeExternalFavorite(hackathon.id, hackathon.platform);
-    } else {
-      await get().addExternalFavorite(hackathon);
-    }
-    // Reload favorites to ensure consistency
-    await get().loadExternalFavorites();
-  },
-
-  isExternalFavorited: (externalId: string, platform: string) => {
-    const favoriteKey = `${platform}-${externalId}`;
-    return get().favoriteIds.includes(favoriteKey);
-  },
-
-  loadExternalFavorites: async () => {
+  const handleToggleExternalFavorite = useCallback(async (hackathon: ExternalHackathon) => {
     try {
-      const response = await axios.get("/api/external-favorites");
-      const favorites = response.data;
-      const favoriteKeys = favorites.map((fav: any) => `${fav.platform}-${fav.externalId}`);
-      set({
-        favoriteIds: favoriteKeys,
-      });
+      await dispatch(toggleExternalFavorite(hackathon)).unwrap();
     } catch (error) {
-      console.error("Failed to load favorites", error);
-      toast.error("Failed to load favorites");
+      toast.error("Failed to update favorites");
+      console.error(error);
     }
-  },
-}));
+  }, [dispatch]);
+
+  const handleLoadExternalFavorites = useCallback(async () => {
+    try {
+      await dispatch(loadExternalFavorites()).unwrap();
+    } catch (error) {
+      toast.error("Failed to load favorites");
+      console.error(error);
+    }
+  }, [dispatch]);
+
+  const isExternalFavorited = useCallback((externalId: string, platform: string) => {
+    const favoriteKey = `${platform}-${externalId}`;
+    return favoriteIds.includes(favoriteKey);
+  }, [favoriteIds]);
+
+  return {
+    favoriteIds,
+    favorites: favorites.favorites,
+    loading: favorites.loading,
+    error: favorites.error,
+    addExternalFavorite: handleAddExternalFavorite,
+    removeExternalFavorite: handleRemoveExternalFavorite,
+    toggleExternalFavorite: handleToggleExternalFavorite,
+    isExternalFavorited,
+    loadExternalFavorites: handleLoadExternalFavorites,
+  };
+};

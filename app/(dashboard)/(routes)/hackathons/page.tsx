@@ -1,5 +1,5 @@
 "use client"
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import Image from 'next/image'
 import unstop from '@/app/assets/unstop.png'
@@ -23,30 +23,23 @@ const Page = () => {
   const [unstopPost, setUnstopPost] = useState<UnstopPost[]>([]);
   const [devposts, setDevposts] = useState([]);
   const [devfolio, setDevfolio] = useState([]);
-  const [favorites, setFavorites] = useState([]);
-
   const [selectedPlatform, setSelectedPlatform] = useState("Unstop")
-  const { loadExternalFavorites } = useFavorites();
+  const { favorites: externalFavorites, loadExternalFavorites, loading: favoritesLoading } = useFavorites();
   const { data: session, status } = useSession();
   const router = useRouter();
 
+  // Memoize the favorites loading function to prevent unnecessary re-renders
+  const memoizedLoadFavorites = useCallback(() => {
+    if (session?.user?.id) {
+      loadExternalFavorites();
+    }
+  }, [session?.user?.id, loadExternalFavorites]);
 
   const platforms = [
     { name: "Unstop", logo: unstop },
     { name: "Devpost", logo: devpost },
     { name: "Devfolio", logo: devfolioImg },
   ]
-
-
-
-  const fetchFavorites = async () => {
-    try {
-      const response = await axios.get("/api/external-favorites");
-      setFavorites(response.data);
-    } catch (error) {
-      console.error('Error fetching favorites:', error);
-    }
-  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -93,20 +86,24 @@ const Page = () => {
     };
 
     fetchData();
-  }, []);
+    
+    // Load favorites if user is authenticated
+    memoizedLoadFavorites();
+  }, [memoizedLoadFavorites]);
 
+  // Load favorites only when switching to favorites tab
   useEffect(() => {
     if (selectedPlatform === "Favorites") {
-      fetchFavorites();
+      memoizedLoadFavorites();
     }
-  }, [selectedPlatform]);
+  }, [selectedPlatform, memoizedLoadFavorites]);
 
   // Function to refresh favorites when a hackathon is unfavorited
-  const refreshFavorites = () => {
+  const refreshFavorites = useCallback(() => {
     if (selectedPlatform === "Favorites") {
-      fetchFavorites();
+      loadExternalFavorites();
     }
-  };
+  }, [selectedPlatform, loadExternalFavorites]);
 
   // Function to handle platform selection with auth check
   const handlePlatformChange = (platformName: string) => {
@@ -254,14 +251,14 @@ const Page = () => {
         {
           selectedPlatform==="Favorites" &&
           <div className='w-full min-h-[50vh] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 px-10 '>
-            {favorites.length === 0 ? (
+            {externalFavorites.length === 0 ? (
               <div className="col-span-full text-center py-10">
                 <FaStar className="w-16 h-16 text-gray-400 mx-auto mb-4" />
                 <p className="text-lg text-gray-500">No favorite hackathons yet</p>
                 <p className="text-sm text-gray-400">Start favoriting hackathons by clicking the star icon!</p>
               </div>
             ) : (
-              favorites.map((entry: any) => (
+              externalFavorites.map((entry: any) => (
                 <Posts 
                   key={`${entry.platform}-${entry.externalId}`}
                   id={entry.externalId}

@@ -25,13 +25,9 @@ interface PostsProps {
 }
 
 const Posts:React.FC<PostsProps> = ({id, title, url, logo, platform, mode, location, status, onFavoriteChange}) => {
-    const { toggleExternalFavorite, isExternalFavorited, loadExternalFavorites } = useFavorites();
+    const { toggleExternalFavorite, isExternalFavorited } = useFavorites();
     const { data: session, status: sessionStatus } = useSession();
     const router = useRouter();
-
-    useEffect(() => {
-        loadExternalFavorites();
-    }, [loadExternalFavorites]);
 
     const handleFavoriteClick = async (e: React.MouseEvent) => {
         e.preventDefault();

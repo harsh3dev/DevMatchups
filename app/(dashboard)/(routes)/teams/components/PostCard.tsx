@@ -20,11 +20,7 @@ interface PostCardProps {
 
 
 const PostCard: React.FC<PostCardProps> = ({ entry, className }) => {
-  const { toggleExternalFavorite, isExternalFavorited, loadExternalFavorites } = useFavorites();
-
-  useEffect(() => {
-    loadExternalFavorites();
-  }, [loadExternalFavorites]);
+  const { toggleExternalFavorite, isExternalFavorited } = useFavorites();
 
   const handleFavoriteClick = (e: React.MouseEvent) => {
     e.preventDefault();
