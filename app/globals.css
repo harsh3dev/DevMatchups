@@ -39,6 +39,11 @@
     --bgActive: #ace2ff;
     --ellipse: #ffffff;
     --bgShapeColor: #0600b0;
+    
+    /* Scrollbar colors - light mode */
+    --scrollbar-track: #f1f1f1;
+    --scrollbar-thumb: rgba(102, 175, 240, 0.6);
+    --scrollbar-thumb-hover: rgba(21, 75, 121, 0.8);
   }
 
   .dark {
@@ -72,7 +77,44 @@
     --bgActive: #002a4071;
     --ellipse: #000000;
     --bgShapeColor: #5feaff;
+    
+    /* Scrollbar colors - dark mode */
+    --scrollbar-track: #111827;
+    --scrollbar-thumb: rgba(51, 157, 250, 0.6);
+    --scrollbar-thumb-hover: rgba(134, 187, 234, 0.8);
   }
+}
+
+/* Custom Scrollbar Styles */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+  border-radius: var(--radius);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: var(--radius);
+  transition: background 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover);
+}
+
+/* For Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+}
+
+/* For Edge and IE */
+body {
+  -ms-overflow-style: -ms-autohiding-scrollbar;
 }
 
 @layer components {
@@ -170,4 +212,11 @@ input{
   border-top: 1px solid hsl(var(--border));
   background-color: var(--background);
   border-radius: 50%;
+}
+
+/* Custom scrollable area utility class */
+.scrollable-area {
+  overflow-y: auto;
+  scrollbar-gutter: stable;
+  padding-right: 4px;
 }
