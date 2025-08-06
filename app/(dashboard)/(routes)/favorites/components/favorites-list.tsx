@@ -9,18 +9,9 @@ export const FavoritesList = () => {
   const { favoriteIds, loadExternalFavorites } = useFavorites();
 
   useEffect(() => {
-    const initializeFavorites = async () => {
-      try {
-        await loadExternalFavorites();
-      } catch (error) {
-        console.error("Failed to fetch favorites", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    initializeFavorites();
-  }, [loadExternalFavorites]);
+    // Don't load favorites here as they are loaded centrally in the main hackathons page
+    setLoading(false);
+  }, []);
 
   if (loading) {
     return <div>Loading...</div>;

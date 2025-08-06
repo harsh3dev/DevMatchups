@@ -28,19 +28,13 @@ const Page = () => {
   const { data: session, status } = useSession();
   const router = useRouter();
 
-  // Memoize the favorites loading function to prevent unnecessary re-renders
-  const memoizedLoadFavorites = useCallback(() => {
-    if (session?.user?.id) {
-      loadExternalFavorites();
-    }
-  }, [session?.user?.id, loadExternalFavorites]);
-
   const platforms = [
     { name: "Unstop", logo: unstop },
     { name: "Devpost", logo: devpost },
     { name: "Devfolio", logo: devfolioImg },
   ]
 
+  // Separate useEffect for hackathon data fetching (runs only once)
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
@@ -86,8 +80,17 @@ const Page = () => {
     };
 
     fetchData();
-    
-    // Load favorites if user is authenticated
+  }, []); // No dependencies - runs only once on mount
+
+  // Memoize the load favorites function to satisfy linter dependencies
+  const memoizedLoadFavorites = useCallback(() => {
+    if (session?.user?.id) {
+      loadExternalFavorites();
+    }
+  }, [session?.user?.id, loadExternalFavorites]);
+
+  // Separate useEffect for favorites loading (depends only on session)
+  useEffect(() => {
     memoizedLoadFavorites();
   }, [memoizedLoadFavorites]);
 

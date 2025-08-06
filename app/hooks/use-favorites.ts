@@ -11,7 +11,7 @@ import {
   removeExternalFavorite,
   toggleExternalFavorite
 } from "@/lib/store/features/favoritesSlice/favoritesSlice";
-import { toast } from "react-hot-toast";
+import { toast } from "react-toastify";
 
 interface ExternalHackathon {
   id: string;

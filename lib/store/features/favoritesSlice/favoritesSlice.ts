@@ -30,7 +30,14 @@ const initialState: FavoritesState = {
 // Async thunks
 export const loadExternalFavorites = createAsyncThunk(
   'favorites/loadExternalFavorites',
-  async (_, { rejectWithValue }) => {
+  async (_, { rejectWithValue, getState }) => {
+    const state = getState() as RootState;
+    
+    // Skip if already loading to prevent duplicate requests
+    if (state.favorites.loading) {
+      return rejectWithValue("Already loading favorites");
+    }
+    
     try {
       const response = await axios.get("/api/external-favorites");
       const favorites = response.data;
@@ -97,8 +104,7 @@ export const toggleExternalFavorite = createAsyncThunk(
       await dispatch(addExternalFavorite(hackathon));
     }
     
-    // Reload favorites to ensure consistency
-    await dispatch(loadExternalFavorites());
+    // Remove redundant loadExternalFavorites call - optimistic updates handle state
   }
 );
 
