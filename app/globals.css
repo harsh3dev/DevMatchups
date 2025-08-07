@@ -112,7 +112,7 @@
 
 /* For Edge and IE */
 body {
-  -ms-overflow-style: none;
+  -ms-overflow-style: auto;
   scrollbar-width: thin;
   scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
 }
