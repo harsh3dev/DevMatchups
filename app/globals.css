@@ -39,6 +39,10 @@
     --bgActive: #ace2ff;
     --ellipse: #ffffff;
     --bgShapeColor: #0600b0;
+    /* Scrollbar Colors - Light Mode */
+    --scrollbar-track: #f1f1f1;
+    --scrollbar-thumb: #66aff0;
+    --scrollbar-thumb-hover: #154b79;
   }
 
   .dark {
@@ -72,7 +76,45 @@
     --bgActive: #002a4071;
     --ellipse: #000000;
     --bgShapeColor: #5feaff;
+    /* Scrollbar Colors - Dark Mode */
+    --scrollbar-track: #111827;
+    --scrollbar-thumb: #0f5999;
+    --scrollbar-thumb-hover: #339dfa;
   }
+}
+
+/* Custom Scrollbar Styling */
+/* Webkit Browsers (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+  border-radius: var(--radius);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: var(--radius);
+  transition: background-color 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover);
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+}
+
+/* For Edge and IE */
+body {
+  -ms-overflow-style: none;
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
 }
 
 @layer components {
