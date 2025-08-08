@@ -17,7 +17,6 @@ export default ({
         Credentials({
         async authorize(credentials) {
           const validatedFields = LoginSchema.safeParse(credentials);
-          console.log("credentials",credentials);
           if (!validatedFields.success) {
             return null;
           }
@@ -33,9 +32,14 @@ export default ({
               console.error("Passwords do not match");
               return null;
             }
-  
-            console.log("User authenticated successfully:", user);
-            return user;
+            // Intentionally not logging user details to avoid PII in logs
+            const safeUser = {
+              id: user.id,
+              name: user.name ?? null,
+              email: user.email ?? null,
+              image: (user as any).image ?? null,
+            };
+            return safeUser;
           }
        
           return null;
