@@ -2,7 +2,6 @@ import type { NextAuthConfig } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import { GetUserByEmail } from "./data/user";
 import { LoginSchema } from "./validation";
-import bcrypt from "bcryptjs"
 import Github from "next-auth/providers/github"
 import Google from "next-auth/providers/google"
 export default ({
@@ -28,7 +27,7 @@ export default ({
             const user = await GetUserByEmail(email);
        
             if (!user || !user.password) return null;
-       
+            const { default: bcrypt } = await import("bcryptjs");
             const passwordsMatch = await bcrypt.compare(password, user.password);
             if (!passwordsMatch) {
               console.error("Passwords do not match");

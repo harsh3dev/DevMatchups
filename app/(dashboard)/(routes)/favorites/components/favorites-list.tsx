@@ -27,7 +27,7 @@ export const FavoritesList = () => {
 
   return (
     <div className="text-center mt-10">
-      <p className="text-muted-foreground">External favorite hackathons are displayed in the Hackathons page under the "Favorites" tab.</p>
+      <p className="text-muted-foreground">External favorite hackathons are displayed in the Hackathons page under the &quot;Favorites&quot; tab.</p>
     </div>
   );
 };
