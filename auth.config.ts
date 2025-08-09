@@ -2,7 +2,6 @@ import type { NextAuthConfig } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import { GetUserByEmail } from "./data/user";
 import { LoginSchema } from "./validation";
-import bcrypt from "bcryptjs"
 import Github from "next-auth/providers/github"
 import Google from "next-auth/providers/google"
 export default ({
@@ -18,7 +17,6 @@ export default ({
         Credentials({
         async authorize(credentials) {
           const validatedFields = LoginSchema.safeParse(credentials);
-          console.log("credentials",credentials);
           if (!validatedFields.success) {
             return null;
           }
@@ -28,15 +26,20 @@ export default ({
             const user = await GetUserByEmail(email);
        
             if (!user || !user.password) return null;
-       
+            const { default: bcrypt } = await import("bcryptjs");
             const passwordsMatch = await bcrypt.compare(password, user.password);
             if (!passwordsMatch) {
               console.error("Passwords do not match");
               return null;
             }
-  
-            console.log("User authenticated successfully:", user);
-            return user;
+            // Intentionally not logging user details to avoid PII in logs
+            const safeUser = {
+              id: user.id,
+              name: user.name ?? null,
+              email: user.email ?? null,
+              image: (user as any).image ?? null,
+            };
+            return safeUser;
           }
        
           return null;

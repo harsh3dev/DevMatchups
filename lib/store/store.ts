@@ -3,6 +3,7 @@ import authReducer from './features/authSlice/authSlice'
 import filterReducer from './features/filterSlice/filterSlice'
 import postReducer from './features/postSlice/postSlice'
 import userReducer from './features/userSlice/userSlice'
+import favoritesReducer from './features/favoritesSlice/favoritesSlice'
 
 export const makeStore = () => {
   return configureStore({
@@ -11,6 +12,7 @@ export const makeStore = () => {
         filter: filterReducer,
         post: postReducer,
         user: userReducer,
+        favorites: favoritesReducer,
     }
   })
 }

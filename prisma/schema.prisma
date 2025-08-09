@@ -31,6 +31,8 @@ model User {
   linkedinUrl  String?  
   githubUrl    String? 
   skills       String[]
+
+  externalFavorites ExternalHackathonFavorite[]
 }
 
 model Account {
@@ -70,6 +72,26 @@ model Hackathon {
   updatedAt      DateTime     @updatedAt
   applications   Application[]
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+}
+
+
+
+model ExternalHackathonFavorite {
+  id              String   @id @default(cuid())
+  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId          String
+  externalId      String   // ID from external API
+  title           String
+  url             String
+  logo            String?
+  platform        String   // 'unstop', 'devpost', 'devfolio'
+  mode            String?
+  location        String?
+  status          String?
+  createdAt       DateTime @default(now())
+
+  @@unique([userId, externalId, platform])
 }
 
 model Application {

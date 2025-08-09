@@ -6,7 +6,10 @@ import { Button } from '@/components/ui/button';
 import { IoLocationSharp } from "react-icons/io5";
 import { MdBugReport } from "react-icons/md";
 import { FaBusinessTime } from "react-icons/fa";
+import { FaRegStar, FaStar } from "react-icons/fa";
 import Link from 'next/link';
+import { useFavorites } from "@/app/hooks/use-favorites";
+import { useEffect } from "react";
 
 import { HackathonEntry } from '@/app/(dashboard)/(routes)/findmember/Form/types';
 
@@ -17,6 +20,23 @@ interface PostCardProps {
 
 
 const PostCard: React.FC<PostCardProps> = ({ entry, className }) => {
+  const { toggleExternalFavorite, isExternalFavorited } = useFavorites();
+
+  const handleFavoriteClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    const hackathon = {
+      id: entry.id.toString(),
+      title: entry.hackathonName,
+      url: entry.regURL,
+      logo: '',
+      platform: 'local',
+      mode: entry.hackathonMode,
+      location: entry.location,
+      status: '',
+    };
+    toggleExternalFavorite(hackathon);
+  };
+
   function timeDifference(givenTime: string): string {
     const now = new Date();
     const givenDate = new Date(givenTime);
@@ -43,9 +63,21 @@ const PostCard: React.FC<PostCardProps> = ({ entry, className }) => {
     <div className='min-w-[20vw] min-h-[20vh] px-5 py-4 flex flex-col justify-between items-start rounded-lg border border-gray-500 dark:border-gray-800 dark:backdrop-blur-xl transition-all ease-linear hover:border-accent hover:dark:border-accent dark:bg-gray-900/60 hover:dark:bg-blue-900/30 bg-sky-100/70 hover:bg-sky-300/40  '>      
       <div className='w-full flex flex-col justify-between items-start rounded-lg '>
         <div className=' w-full flex justify-between items-center'>
-          <h1 className='font-bold text-2xl ' >
-            {entry.hackathonName}
-          </h1>
+          <div className="flex items-center gap-2">
+            <h1 className='font-bold text-2xl' >
+              {entry.hackathonName}
+            </h1>
+            <button
+              onClick={handleFavoriteClick}
+              className="p-1 hover:scale-110 transition-transform"
+            >
+              {isExternalFavorited(entry.id.toString(), 'local') ? (
+                <FaStar className="w-6 h-6 text-yellow-500" />
+              ) : (
+                <FaRegStar className="w-6 h-6" />
+              )}
+            </button>
+          </div>
           <Capsule item={entry.hackathonMode} key={entry.hackathonMode} className='bg-green-700/80 dark:bg-green-300/50  text-white dark:text-black hover:bg-green-800/80 hover:dark:bg-green-600/80  ' />
         </div>
 
